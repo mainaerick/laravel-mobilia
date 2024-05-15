@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -21,6 +22,10 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('home', ProductController::class);
+    Route::resource('shop', ProductController::class);
+    Route::resource('about', ProductController::class);
+    Route::resource('contact', ProductController::class);
+    Route::get('/images/{filename}', [ImageController::class, 'show']);
 });
 
 Route::middleware('auth')->group(function () {

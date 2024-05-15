@@ -22,6 +22,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 10, 1000),
             'quantity' => $this->faker->numberBetween(1, 100),
             'category' => $this->faker->randomElement(['chairs', 'tables', 'sofas', 'beds']),
+            'room' => $this->faker->randomElement(['living', 'bedroom', 'dining']),
             'brand' => $this->faker->company,
             'material' => $this->faker->randomElement(['wood', 'metal', 'plastic']),
             'color' => $this->faker->colorName,

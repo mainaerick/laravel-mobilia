@@ -7,6 +7,7 @@ export interface Product {
     category: string;
     brand?: string | null;
     material?: string | null;
+    room:string;
     color?: string | null;
     dimensions?: { height: number; width: number; depth: number } | null;
     weight?: number | null;

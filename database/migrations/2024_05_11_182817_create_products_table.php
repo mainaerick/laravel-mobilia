@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->integer('quantity');
             $table->string('category');
+            $table->string('room');
             $table->string('brand')->nullable();
             $table->string('material')->nullable();
             $table->string('color')->nullable();
