@@ -19,11 +19,14 @@ const itemRender: PaginationProps["itemRender"] = (
 
 interface Props{
   handleChange:any
+  current:any
+  total:number
+  perPage:number
+  onShowSizeChange:any
 }
 
-const PaginationDiv: React.FC<Props> = ({handleChange}) =>{
-
-  return <Pagination total={500} itemRender={itemRender} onChange={handleChange} />
+const PaginationDiv: React.FC<Props> = ({current,handleChange,onShowSizeChange,total,perPage}) =>{
+  return <Pagination onShowSizeChange={onShowSizeChange}  current={current} pageSize={perPage} total={total} itemRender={itemRender} onChange={handleChange} />
 }
 
 

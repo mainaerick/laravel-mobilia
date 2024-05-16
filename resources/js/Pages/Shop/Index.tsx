@@ -13,7 +13,13 @@ import {
     Input,
     Select,
 } from "antd";
-import { FilterOutlined } from "@ant-design/icons";
+import {
+    FilterOutlined,
+    CrownOutlined,
+    CheckCircleOutlined,
+    TruckOutlined,
+    IssuesCloseOutlined,
+} from "@ant-design/icons";
 import Meta from "antd/es/card/Meta";
 import ProductCard from "@/Components/ProductCard";
 import PaginationDiv from "@/Components/PaginationDiv";
@@ -23,16 +29,12 @@ type Props = { auth: any; products: Pagination; queryParams: any };
 
 function Index({ auth, products, queryParams = null }: Props) {
     queryParams = queryParams || {};
+    const currentPage = products.current_page;
+    const totalNumber = products.total;
+    const perPage = products.per_page;
+    console.log(perPage);
     const productsData = products.data as Product[];
     const handleChangeSort = (name: string) => {
-        // if (name.includes("price")) {
-        //     name = "price";
-        //     if (name.includes("high")) {
-        //         queryParams.sort_direction = "asc";
-        //     } else {
-        //         queryParams.sort_direction = "desc";
-        //     }
-        // }
         if (name === queryParams.sort_field) {
             if (queryParams.sort_direction === "asc") {
                 queryParams.sort_direction = "desc";
@@ -50,11 +52,17 @@ function Index({ auth, products, queryParams = null }: Props) {
     };
 
     const handlePageChange = (e: any) => {
+        queryParams.page = e;
         router.get(route("shop.index"), queryParams);
+    };
+    const onShowSizeChange = (current: any, size: any) => {
+        console.log(size);
+        // queryParams.page = current;
+        queryParams.per_page = size;
     };
     return (
         <Authenticated user={auth}>
-            = {/* Hero */}
+            {/* Hero */}
             <div
                 style={{
                     position: "relative",
@@ -127,7 +135,7 @@ function Index({ auth, products, queryParams = null }: Props) {
                     </Col>
                     <Col span={12} style={{ width: "100%" }}>
                         <Row justify={"end"}>
-                            <Col span={8}>
+                            {/* <Col span={8}>
                                 <Flex
                                     gap={9}
                                     justify={"flex-end"}
@@ -140,7 +148,7 @@ function Index({ auth, products, queryParams = null }: Props) {
                                         <Input variant="borderless" />
                                     </div>
                                 </Flex>
-                            </Col>
+                            </Col> */}
                             <Col span={12}>
                                 <Flex
                                     gap={9}
@@ -186,6 +194,7 @@ function Index({ auth, products, queryParams = null }: Props) {
                     </Col>
                 </Row>
             </div>
+            {/* Shop */}
             <div
                 className={Dimensions.pagePaddingClass}
                 style={{ marginTop: "37px", marginBottom: "37px" }}
@@ -206,8 +215,100 @@ function Index({ auth, products, queryParams = null }: Props) {
                 </Row>
 
                 <Flex justify={"center"} style={{ marginTop: "37px" }}>
-                    <PaginationDiv handleChange={handlePageChange} />
+                    <PaginationDiv
+                        handleChange={handlePageChange}
+                        current={currentPage}
+                        total={totalNumber}
+                        perPage={perPage}
+                        onShowSizeChange={onShowSizeChange}
+                    />
                 </Flex>
+            </div>
+
+            <div
+                style={{
+                    height: "270px",
+                    marginBottom: "37px",
+                    background: Colors.secondary,
+                }}
+            >
+                <Row
+                    className={Dimensions.pagePaddingClass}
+                    style={{
+                        height: "270px",
+                    }}
+                    align={"middle"}
+                >
+                    <Col span={6}>
+                        <Flex style={{}} gap={8}>
+                            <Col>
+                                {" "}
+                                <CrownOutlined style={{ fontSize: 60 }} />
+                            </Col>
+                            <Col>
+                                <Flex vertical>
+                                    <Typography.Title level={4}>
+                                        High Quality
+                                    </Typography.Title>
+                                    <Typography.Paragraph>
+                                        crafted from top materials
+                                    </Typography.Paragraph>
+                                </Flex>
+                            </Col>
+                        </Flex>
+                    </Col>
+                    <Col span={6}>
+                        <Flex style={{}} gap={8}>
+                            <Col>
+                                <CheckCircleOutlined style={{ fontSize: 60 }} />
+                            </Col>
+                            <Col>
+                                <Flex vertical>
+                                    <Typography.Title level={4}>
+                                        Warranty Protection
+                                    </Typography.Title>
+                                    <Typography.Paragraph>
+                                        Over 2 years
+                                    </Typography.Paragraph>
+                                </Flex>
+                            </Col>
+                        </Flex>
+                    </Col>
+                    <Col span={6}>
+                        <Flex style={{}} gap={8}>
+                            <Col>
+                                <TruckOutlined style={{ fontSize: 60 }} />
+                            </Col>
+                            <Col>
+                                <Flex vertical>
+                                    <Typography.Title level={4}>
+                                        Free Shipping
+                                    </Typography.Title>
+                                    <Typography.Paragraph>
+                                        Order over 150 $
+                                    </Typography.Paragraph>
+                                </Flex>
+                            </Col>
+                        </Flex>
+                    </Col>
+                    <Col span={6}>
+                        <Flex style={{}} gap={8}>
+                            <Col>
+                                <IssuesCloseOutlined style={{ fontSize: 60 }} />
+                            </Col>
+                            <Col>
+                                <Flex vertical>
+                                    <Typography.Title level={4}>
+                                        24 / 7 Support
+                                    </Typography.Title>
+                                    <Typography.Paragraph>
+                                        Dedicated support
+                                    </Typography.Paragraph>
+                                </Flex>
+                            </Col>
+                        </Flex>
+                    </Col>
+                </Row>
             </div>
             <Footer />
         </Authenticated>

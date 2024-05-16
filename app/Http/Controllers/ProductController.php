@@ -17,9 +17,8 @@ class ProductController extends Controller
         $products = Product::all();
         $query = Product::query();
 
-        $currentPage = request("sort_field", 'created_at');
-
-        $sortField = request("sort_field", 'created_at');        
+        $per_page = request("per_page", 10);
+        $sortField = request("sort_field", 'created_at');
         $sortDirection = request("sort_direction", "desc");
 
         if(str_contains($sortField,'price')){
@@ -31,7 +30,7 @@ class ProductController extends Controller
                 $sortDirection="desc";
             }
         }
-        $products = $query->orderBy($sortField, $sortDirection)->paginate(10)
+        $products = $query->orderBy($sortField, $sortDirection)->paginate($per_page)
             ->onEachSide(1);
 
     //    dd($products);
