@@ -1,20 +1,49 @@
-export interface Product {
+interface Dimension {
+    depth: number;
+    width: number;
+    height: number;
+  }
+  
+  export interface Product {
     id: number;
     name: string;
     description: string;
-    price: number;
+    price: string;
     quantity: number;
     category: string;
-    brand?: string | null;
-    material?: string | null;
-    room:string;
-    color?: string | null;
-    dimensions?: { height: number; width: number; depth: number } | null;
-    weight?: number | null;
-    images?: string[] | null;
-    rating?: number | null;
-    reviews?: any[] | null; // Define the structure of reviews according to your requirements
+    room: string;
+    brand: string;
+    material: string;
+    color: string;
+    dimensions: Dimension;
+    weight: string;
+    images: string[];
+    rating: string;
+    reviews: string[];
     created_at: string;
     updated_at: string;
-}
+  }
+  
+  interface PaginationLink {
+    url: string | null;
+    label: string;
+    active: boolean;
+  }
+  
+  export interface Pagination {
+    current_page: number;
+    data: Product[];
+    first_page_url: string;
+    from: number;
+    last_page: number;
+    last_page_url: string;
+    links: PaginationLink[];
+    next_page_url: string | null;
+    path: string;
+    per_page: number;
+    prev_page_url: string | null;
+    to: number;
+    total: number;
+  }
+  
 

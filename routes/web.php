@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -21,7 +22,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::resource('home', ProductController::class);
+    Route::resource('home', HomeController::class);
     Route::resource('shop', ProductController::class);
     Route::resource('about', ProductController::class);
     Route::resource('contact', ProductController::class);

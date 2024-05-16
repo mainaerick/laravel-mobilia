@@ -15,8 +15,31 @@ class ProductController extends Controller
     public function index(): \Inertia\Response
     {
         $products = Product::all();
-//        dd($products);
-        return Inertia::render('Home/Index', ['products' => $products]);
+        $query = Product::query();
+
+        $currentPage = request("sort_field", 'created_at');
+
+        $sortField = request("sort_field", 'created_at');        
+        $sortDirection = request("sort_direction", "desc");
+
+        if(str_contains($sortField,'price')){
+            $sortField='price';
+            if(str_contains($sortField,'high')){
+                $sortDirection="asc";
+            }
+            else{
+                $sortDirection="desc";
+            }
+        }
+        $products = $query->orderBy($sortField, $sortDirection)->paginate(10)
+            ->onEachSide(1);
+
+    //    dd($products);
+return inertia('Shop/Index', [
+    "products" => $products,
+    'queryParams' => request()->query() ?: null,
+]);
+        // return Inertia::render('Shop/Index', ['products' => $products];
     }
 
     /**
