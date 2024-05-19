@@ -22,14 +22,16 @@ class Product extends Model
         'weight',
         'rating',
         'images',
-        'reviews'
+        'reviews',
+        'sizes',
+        'colors'
     ];
-
     protected $casts = [
         'dimensions' => 'array',
         'images' => 'array',
         'reviews' => 'array',
-
+        'sizes' => 'array',
+        'colors' => 'array',
     ];
 
 }

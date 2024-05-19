@@ -23,7 +23,7 @@ import {
 import Meta from "antd/es/card/Meta";
 import ProductCard from "@/Components/ProductCard";
 import PaginationDiv from "@/Components/PaginationDiv";
-import { router } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 
 type Props = { auth: any; products: Pagination; queryParams: any };
 
@@ -32,7 +32,6 @@ function Index({ auth, products, queryParams = null }: Props) {
     const currentPage = products.current_page;
     const totalNumber = products.total;
     const perPage = products.per_page;
-    console.log(perPage);
     const productsData = products.data as Product[];
     const handleChangeSort = (name: string) => {
         if (name === queryParams.sort_field) {
@@ -199,6 +198,7 @@ function Index({ auth, products, queryParams = null }: Props) {
                 className={Dimensions.pagePaddingClass}
                 style={{ marginTop: "37px", marginBottom: "37px" }}
             >
+                
                 <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                     {productsData &&
                         productsData?.map((product: Product, key) => {
@@ -208,7 +208,11 @@ function Index({ auth, products, queryParams = null }: Props) {
                                     span={6}
                                     style={{ marginBottom: "23px" }}
                                 >
-                                    <ProductCard product={product} />
+                                    <Link
+                                        href={route("shop.show", product.id)}
+                                    >
+                                        <ProductCard product={product} />
+                                    </Link>
                                 </Col>
                             );
                         })}

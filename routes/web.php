@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('about', ProductController::class);
     Route::resource('contact', ProductController::class);
     Route::get('/images/{filename}', [ImageController::class, 'show']);
+    Route::get('/shop/related/{id}', [ProductController::class, 'showRelated']);
 });
 
 Route::middleware('auth')->group(function () {
@@ -37,4 +38,4 @@ Route::middleware('auth')->group(function () {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

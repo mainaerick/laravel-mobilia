@@ -20,6 +20,8 @@ interface Dimension {
     images: string[];
     rating: string;
     reviews: string[];
+    colors:string[];
+    sizes:string[];
     created_at: string;
     updated_at: string;
   }
