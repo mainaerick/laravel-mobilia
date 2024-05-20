@@ -16,6 +16,9 @@ import {
     InputNumber,
     Tabs,
     TabsProps,
+    FormProps,
+    Form,
+    Input,
 } from "antd";
 import {
     CheckCircleOutlined,
@@ -31,18 +34,24 @@ import AdditionalInfo from "./Components/show/AdditionalInfo";
 import Reviews from "./Components/show/Reviews";
 import Footer from "@/Components/Footer";
 import ProductCard from "@/Components/ProductCard";
-import { Link, router } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 
 type Props = {
     product: { data: Product };
     auth: any;
     relatedProducts: { data: Product[] };
+    productCartItems?: [];
 };
-
-function Show({ auth, product, relatedProducts }: Props) {
+type AddToCartType = {
+    quantity: number;
+};
+function Show({ auth, product, relatedProducts, productCartItems }: Props) {
     const productData: Product = product.data;
     const relatedData = relatedProducts.data;
     const [selectedColor, setSelectedColor] = useState(productData.colors[0]);
+    const { flash }: any = usePage().props;
+
+    console.log(productCartItems)
     const items: TabsProps["items"] = [
         {
             key: "1",
@@ -64,6 +73,16 @@ function Show({ auth, product, relatedProducts }: Props) {
         const queryParams: any = {};
         queryParams.category = productData.category;
         router.get(route("shop.index"), queryParams);
+    };
+    const addToCart: FormProps<AddToCartType>["onFinish"] = (values) => {
+        if (values.quantity == undefined) {
+            values.quantity = 1;
+        }
+
+        router.post(route("cart.add"), {
+            product_id: productData.id,
+            quantity: values.quantity,
+        });
     };
     return (
         <Authenticated user={auth}>
@@ -97,7 +116,10 @@ function Show({ auth, product, relatedProducts }: Props) {
                 </Row>
             </div>
             {/* Product Details */}
-            <div className={Dimensions.pagePaddingClass} style={{marginTop:"18px"}}>
+            <div
+                className={Dimensions.pagePaddingClass}
+                style={{ marginTop: "18px" }}
+            >
                 <Row>
                     <Col span={12}>
                         <Flex gap={27}>
@@ -110,6 +132,7 @@ function Show({ auth, product, relatedProducts }: Props) {
                                     <img
                                         height={80}
                                         width={80}
+                                        // style={{width:"100%",}}
                                         src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
                                         alt=""
                                     />
@@ -147,7 +170,7 @@ function Show({ auth, product, relatedProducts }: Props) {
                                 ]}
                             >
                                 <Image
-                                    width={300}
+                                    width={"100%"}
                                     height={400}
                                     src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
                                 />
@@ -239,6 +262,7 @@ function Show({ auth, product, relatedProducts }: Props) {
                                         (color: string, key) => {
                                             return (
                                                 <Badge
+                                                    key={key}
                                                     count={
                                                         selectedColor ===
                                                         color ? (
@@ -270,31 +294,69 @@ function Show({ auth, product, relatedProducts }: Props) {
                                         },
                                     )}
                                 </Flex>
-
-                                <Flex gap={13} style={{marginTop:"13px"}}>
-                                    <InputNumber
-                                        size="large"
-                                        min={1}
-                                        max={productData.quantity}
-                                        keyboard={true}
-                                        defaultValue={1}
-                                        controls={{
-                                            upIcon: <PlusOutlined />,
-                                            downIcon: <MinusOutlined />,
-                                        }}
-                                    />
-
-                                    <Button shape="round" size="large">
-                                        Add To Cart
-                                    </Button>
-                                    <Button
-                                        shape="round"
-                                        size="large"
-                                        icon={<PlusOutlined />}
+                                <Form
+                                    name="addtocart"
+                                    labelCol={{ span: 8 }}
+                                    wrapperCol={{ span: 16 }}
+                                    // style={{ maxWidth: 600 }}
+                                    initialValues={{
+                                        quantity: productCartItems
+                                            ? productCartItems.length
+                                            : 1,
+                                    }}
+                                    onFinish={addToCart}
+                                    // onFinishFailed={onFinishFailed}
+                                    autoComplete="off"
+                                >
+                                    <Flex
+                                        gap={13}
+                                        style={{ marginTop: "13px" }}
                                     >
-                                        Compare
-                                    </Button>
-                                </Flex>
+                                        <Form.Item<AddToCartType>
+                                            name="quantity"
+                                            rules={[
+                                                {
+                                                    required: false,
+
+                                                    message:
+                                                        "Please input your username!",
+                                                },
+                                            ]}
+                                        >
+                                            <InputNumber
+                                                size="large"
+                                                min={1}
+                                                max={productData.quantity}
+                                                keyboard={true}
+                                                // defaultValue={1}
+                                                controls={{
+                                                    upIcon: <PlusOutlined />,
+                                                    downIcon: <MinusOutlined />,
+                                                }}
+                                            />
+                                        </Form.Item>
+
+                                        <Button
+                                            htmlType="submit"
+                                            shape="round"
+                                            size="large"
+                                            icon={
+                                                flash?.success && (
+                                                    <CheckCircleOutlined />
+                                                )
+                                            }
+                                        >
+                                            Add To Cart
+                                        </Button>
+                                        <Button
+                                            shape="round"
+                                            size="large"
+                                            icon={<PlusOutlined />}
+                                        >
+                                            Compare
+                                        </Button>
+                                    </Flex>
+                                </Form>
 
                                 <Divider
                                     style={{

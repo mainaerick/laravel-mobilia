@@ -44,4 +44,12 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+     /**
+     * Get the cart associated with the user.
+     */
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
 }

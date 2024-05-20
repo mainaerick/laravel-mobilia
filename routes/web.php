@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductController;
@@ -28,6 +29,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('contact', ProductController::class);
     Route::get('/images/{filename}', [ImageController::class, 'show']);
     Route::get('/shop/related/{id}', [ProductController::class, 'showRelated']);
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+
 });
 
 Route::middleware('auth')->group(function () {

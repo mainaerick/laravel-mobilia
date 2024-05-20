@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -70,16 +73,24 @@ class ProductController extends Controller
      */
     public function show(Product $shop)
     {
+        // product query
         $query = Product::query();
-        // if (request("name")) {
         $query->where("category", "like", "%" . $shop->category . "%");
         $query->where("id", "!=", $shop->id);
-        // dd($query);
-        // }ß
+        // cart query
+        // $queryCart = Cart::query();
+        // $queryCart->where("user_id", Auth::id());
+        // $cart = $queryCart->get();
+        $queryCartItems = CartItem::query();
+        $queryCartItems->where("product_id", $shop->id);
+        $productCartItems = $queryCartItems->get();
+        // dd($cartItems);
         $related_product = $query->paginate(4);
+
         return Inertia::render('Shop/Show', [
             'product' => new ProductResource($shop),
             'relatedProducts' => $related_product,
+            'productCartItems' => $productCartItems,
         ]);
     }
     /**
