@@ -3,7 +3,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { User } from "@/types";
 import {
     SearchOutlined,
@@ -13,7 +13,8 @@ import {
 } from "@ant-design/icons";
 import Footer from "@/Components/Footer";
 import { Colors, Dimensions } from "@/utils/Config";
-import { ConfigProvider } from "antd";
+import { Avatar, Badge, ConfigProvider, Flex } from "antd";
+import { relative } from "path";
 export default function Authenticated({
     user,
     header,
@@ -21,6 +22,9 @@ export default function Authenticated({
 }: PropsWithChildren<{ user: User; header?: ReactNode }>) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
+    const { props } = usePage();
+
+    console.log(props);
 
     return (
         <ConfigProvider
@@ -95,7 +99,7 @@ export default function Authenticated({
                                     <div className="ms-3 relative">
                                         <Dropdown>
                                             <Dropdown.Trigger>
-                                                <UserOutlined />
+                                                <UserOutlined style={{fontSize:"17px"}}/>
                                             </Dropdown.Trigger>
 
                                             <Dropdown.Content>
@@ -116,20 +120,31 @@ export default function Authenticated({
                                     </div>
                                 </div>
                                 <SearchOutlined
+                                style={{fontSize:"17px"}}
                                     className={
                                         "space-x-8 sm:-my-px sm:ms-10 sm:flex"
                                     }
                                 />
                                 <HeartOutlined
+                                style={{fontSize:"17px"}}
                                     className={
                                         "space-x-8 sm:-my-px sm:ms-10 sm:flex"
                                     }
                                 />
-                                <ShoppingCartOutlined
-                                    className={
-                                        "space-x-8 sm:-my-px sm:ms-10 sm:flex"
-                                    }
-                                />
+                                <Flex
+                                    vertical
+                                    align={"center"}
+                                    justify={"center"}
+                                    style={{ height: "100%" }}
+                                >
+                                    <Badge size="small" count={5}>
+                                        <ShoppingCartOutlined style={{fontSize:"17px"}}
+                                            className={
+                                                "space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                                            }
+                                        />{" "}
+                                    </Badge>
+                                </Flex>
                             </div>
                             <div className="-me-2 flex items-center sm:hidden">
                                 <button

@@ -17,12 +17,12 @@ class CartController extends Controller
 
 
         $user = $request->user();
-        dd($user);
+        // dd($user);
         $cart = $user->cart ?? Cart::create(['user_id' => $user->id]);
 
 
         $cart->items()->updateOrCreate(
-            ['produÏct_id' => $request->product_id],
+            ['product_id' => $request->product_id],
             ['quantity' => $request->quantity]
         );
 

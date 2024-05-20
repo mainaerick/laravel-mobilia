@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\UserRegistered;
+use App\Listeners\CreateCartForUser;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -9,9 +11,15 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
+    protected $listen = [
+        UserRegistered::class => [
+            CreateCartForUser::class,
+        ],
+    ];
     public function register(): void
     {
         //
+
     }
 
     /**

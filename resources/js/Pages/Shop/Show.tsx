@@ -40,7 +40,7 @@ type Props = {
     product: { data: Product };
     auth: any;
     relatedProducts: { data: Product[] };
-    productCartItems?: [];
+    productCartItems?: {quantity:number};
 };
 type AddToCartType = {
     quantity: number;
@@ -51,7 +51,7 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
     const [selectedColor, setSelectedColor] = useState(productData.colors[0]);
     const { flash }: any = usePage().props;
 
-    console.log(productCartItems)
+    console.log(productCartItems?.quantity)
     const items: TabsProps["items"] = [
         {
             key: "1",
@@ -115,350 +115,402 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                     </Col>
                 </Row>
             </div>
-            {/* Product Details */}
-            <div
-                className={Dimensions.pagePaddingClass}
-                style={{ marginTop: "18px" }}
-            >
-                <Row>
-                    <Col span={12}>
-                        <Flex gap={27}>
-                            <Flex
-                                gap={13}
-                                vertical
-                                style={{ height: 400, overflow: "auto" }}
-                            >
-                                <div>
-                                    <img
-                                        height={80}
-                                        width={80}
-                                        // style={{width:"100%",}}
-                                        src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
-                                        alt=""
-                                    />
-                                </div>
-                                <div>
-                                    <img
-                                        height={80}
-                                        width={80}
-                                        src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
-                                        alt=""
-                                    />
-                                </div>
-                                <div>
-                                    <img
-                                        height={80}
-                                        width={80}
-                                        src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
-                                        alt=""
-                                    />
-                                </div>
-                                <div>
-                                    <img
-                                        height={80}
-                                        width={80}
-                                        src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
-                                        alt=""
-                                    />
-                                </div>
-                            </Flex>
-                            <Image.PreviewGroup
-                                items={[
-                                    "https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp",
-                                    "https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp",
-                                    "https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp",
-                                ]}
-                            >
-                                <Image
-                                    width={"100%"}
-                                    height={400}
-                                    src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
-                                />
-                            </Image.PreviewGroup>
-                        </Flex>{" "}
-                    </Col>
-
-                    <Col offset={1} span={11} style={{ background: "" }}>
-                        <div>
-                            <Flex gap={19} vertical>
-                                <Typography.Title
-                                    level={1}
-                                    style={{ fontWeight: "normal", margin: 0 }}
-                                >
-                                    {productData.name}
-                                </Typography.Title>
-                                <Typography.Title
-                                    level={5}
-                                    style={{
-                                        color: Colors.textGrayColor,
-                                        margin: 0,
-                                    }}
-                                >
-                                    {`Ksh ${productData.price}`}
-                                </Typography.Title>
-                                <Flex gap={20}>
-                                    <Col>
-                                        {" "}
-                                        <Rate
-                                            disabled
-                                            allowHalf
-                                            defaultValue={parseFloat(
-                                                productData.rating,
-                                            )}
-                                        />
-                                    </Col>
-                                    <Col>
-                                        <Divider
-                                            type="vertical"
-                                            style={{
-                                                background: "black",
-                                                height: "100%",
-                                            }}
-                                        />
-                                    </Col>
-                                    <Col>{`${productData.reviews.length} Customer Review(s)`}</Col>
-                                </Flex>
-                                <Typography.Paragraph>
-                                    Setting the bar as one of the loudest
-                                    speakers in its class, the Kilburn is a
-                                    compact, stout-hearted hero with a
-                                    well-balanced audio which boasts a clear
-                                    midrange and extended highs for a sound.
-                                </Typography.Paragraph>
-                                <Typography.Text
-                                    style={{ color: Colors.textGrayColor }}
-                                >
-                                    Size
-                                </Typography.Text>
-
-                                <Radio.Group
-                                    defaultValue="a"
-                                    buttonStyle="solid"
-                                    style={{ gap: "13px" }}
-                                >
-                                    <Flex gap={13}>
-                                        {productData.sizes.map(
-                                            (size: string, key) => {
-                                                return (
-                                                    <Radio.Button
-                                                        key={key}
-                                                        value={size}
-                                                    >
-                                                        {size}
-                                                    </Radio.Button>
-                                                );
-                                            },
-                                        )}
-                                    </Flex>
-                                </Radio.Group>
-                                <Typography.Text
-                                    style={{ color: Colors.textGrayColor }}
-                                >
-                                    Color
-                                </Typography.Text>
-
-                                <Flex gap={13}>
-                                    {productData.colors.map(
-                                        (color: string, key) => {
-                                            return (
-                                                <Badge
-                                                    key={key}
-                                                    count={
-                                                        selectedColor ===
-                                                        color ? (
-                                                            <CheckCircleOutlined
-                                                                style={{
-                                                                    color: Colors.primary,
-                                                                }}
-                                                            />
-                                                        ) : (
-                                                            0
-                                                        )
-                                                    }
-                                                    showZero={false}
-                                                >
-                                                    <Button
-                                                        shape="circle"
-                                                        onClick={() =>
-                                                            colorSelected(color)
-                                                        }
-                                                        style={{
-                                                            backgroundColor:
-                                                                color,
-                                                            borderColor:
-                                                                Colors.primary,
-                                                        }}
-                                                    ></Button>
-                                                </Badge>
-                                            );
-                                        },
-                                    )}
-                                </Flex>
-                                <Form
-                                    name="addtocart"
-                                    labelCol={{ span: 8 }}
-                                    wrapperCol={{ span: 16 }}
-                                    // style={{ maxWidth: 600 }}
-                                    initialValues={{
-                                        quantity: productCartItems
-                                            ? productCartItems.length
-                                            : 1,
-                                    }}
-                                    onFinish={addToCart}
-                                    // onFinishFailed={onFinishFailed}
-                                    autoComplete="off"
-                                >
+            {productData && (
+                <>
+                    {/* Product Details */}
+                    <div
+                        className={Dimensions.pagePaddingClass}
+                        style={{ marginTop: "18px" }}
+                    >
+                        <Row>
+                            <Col span={12}>
+                                <Flex gap={27}>
                                     <Flex
                                         gap={13}
-                                        style={{ marginTop: "13px" }}
+                                        vertical
+                                        style={{
+                                            height: 400,
+                                            overflow: "auto",
+                                        }}
                                     >
-                                        <Form.Item<AddToCartType>
-                                            name="quantity"
-                                            rules={[
-                                                {
-                                                    required: false,
-
-                                                    message:
-                                                        "Please input your username!",
-                                                },
-                                            ]}
-                                        >
-                                            <InputNumber
-                                                size="large"
-                                                min={1}
-                                                max={productData.quantity}
-                                                keyboard={true}
-                                                // defaultValue={1}
-                                                controls={{
-                                                    upIcon: <PlusOutlined />,
-                                                    downIcon: <MinusOutlined />,
-                                                }}
+                                        <div>
+                                            <img
+                                                height={80}
+                                                width={80}
+                                                // style={{width:"100%",}}
+                                                src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
+                                                alt=""
                                             />
-                                        </Form.Item>
-
-                                        <Button
-                                            htmlType="submit"
-                                            shape="round"
-                                            size="large"
-                                            icon={
-                                                flash?.success && (
-                                                    <CheckCircleOutlined />
-                                                )
-                                            }
-                                        >
-                                            Add To Cart
-                                        </Button>
-                                        <Button
-                                            shape="round"
-                                            size="large"
-                                            icon={<PlusOutlined />}
-                                        >
-                                            Compare
-                                        </Button>
+                                        </div>
+                                        <div>
+                                            <img
+                                                height={80}
+                                                width={80}
+                                                src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div>
+                                            <img
+                                                height={80}
+                                                width={80}
+                                                src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div>
+                                            <img
+                                                height={80}
+                                                width={80}
+                                                src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
+                                                alt=""
+                                            />
+                                        </div>
                                     </Flex>
-                                </Form>
-
-                                <Divider
-                                    style={{
-                                        background: Colors.secondary,
-                                        height: "0.1px",
-                                    }}
-                                />
-
-                                <Flex gap={9}>
-                                    <Col>SKU</Col>
-                                    <Col>:</Col>
-                                    <Col>23323</Col>
-                                </Flex>
-                                <Flex gap={9}>
-                                    <Col>Category</Col>
-                                    <Col>:</Col>
-                                    <Col>{productData.category}</Col>
-                                </Flex>
-                                <Flex gap={9}>
-                                    <Col>Tags</Col>
-                                    <Col>:</Col>
-                                    <Col>Sofa,Chair,Home,Shop</Col>
-                                </Flex>
-                                <Flex gap={9} align={"middle"}>
-                                    <Col>Share</Col>
-                                    <Col>:</Col>
-                                    <Col>
-                                        <Flex gap={7}>
-                                            <FacebookOutlined
-                                                style={{ fontSize: "23px" }}
-                                            />
-                                            <LinkedinOutlined
-                                                style={{ fontSize: "23px" }}
-                                            />
-                                            <TwitterOutlined
-                                                style={{ fontSize: "23px" }}
-                                            />
-                                        </Flex>
-                                    </Col>
-                                </Flex>
-                            </Flex>
-                        </div>{" "}
-                    </Col>
-                </Row>
-            </div>
-
-            <Divider />
-
-            {/* Product More Info */}
-            <div
-                className={Dimensions.pagePaddingClass}
-                style={{ marginBottom: 18 }}
-            >
-                <Tabs defaultActiveKey="1" centered items={items} />
-            </div>
-            <Divider />
-
-            {/* Related Products */}
-            <div
-                className={Dimensions.pagePaddingClass}
-                style={{ marginBottom: 38 }}
-            >
-                <Flex
-                    align={"center"}
-                    justify={"center"}
-                    vertical={true}
-                    style={{ marginBottom: 18 }}
-                >
-                    <Typography.Title level={3}>
-                        Related Products
-                    </Typography.Title>
-                </Flex>
-                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                    {relatedData.map((relatedProd, key) => {
-                        return (
-                            <Col span={6} key={key}>
-                                <Link href={route("shop.show", relatedProd.id)}>
-                                    <ProductCard product={relatedProd} />
-                                </Link>
+                                    <Image.PreviewGroup
+                                        items={[
+                                            "https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp",
+                                            "https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp",
+                                            "https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp",
+                                        ]}
+                                    >
+                                        <Image
+                                            width={"100%"}
+                                            height={400}
+                                            src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
+                                        />
+                                    </Image.PreviewGroup>
+                                </Flex>{" "}
                             </Col>
-                        );
-                    })}
-                </Row>
 
-                <Flex
-                    justify={"center"}
-                    style={{ marginBottom: 38, marginTop: 28 }}
-                >
-                    <Button
-                        style={{
-                            borderRadius: 0,
-                            borderColor: Colors.primary,
-                            color: Colors.textButtonColor,
-                            fontWeight: "bold",
-                        }}
-                        className={"ps-12 pe-12"}
-                        onClick={() => showMoreRelated(productData.id)}
+                            <Col
+                                offset={1}
+                                span={11}
+                                style={{ background: "" }}
+                            >
+                                <div>
+                                    <Flex gap={19} vertical>
+                                        <Typography.Title
+                                            level={1}
+                                            style={{
+                                                fontWeight: "normal",
+                                                margin: 0,
+                                            }}
+                                        >
+                                            {productData.name}
+                                        </Typography.Title>
+                                        <Typography.Title
+                                            level={5}
+                                            style={{
+                                                color: Colors.textGrayColor,
+                                                margin: 0,
+                                            }}
+                                        >
+                                            {`Ksh ${productData.price}`}
+                                        </Typography.Title>
+                                        <Flex gap={20}>
+                                            <Col>
+                                                {" "}
+                                                <Rate
+                                                    disabled
+                                                    allowHalf
+                                                    defaultValue={parseFloat(
+                                                        productData.rating,
+                                                    )}
+                                                />
+                                            </Col>
+                                            <Col>
+                                                <Divider
+                                                    type="vertical"
+                                                    style={{
+                                                        background: "black",
+                                                        height: "100%",
+                                                    }}
+                                                />
+                                            </Col>
+                                            <Col>{`${productData.reviews.length} Customer Review(s)`}</Col>
+                                        </Flex>
+                                        <Typography.Paragraph>
+                                            Setting the bar as one of the
+                                            loudest speakers in its class, the
+                                            Kilburn is a compact, stout-hearted
+                                            hero with a well-balanced audio
+                                            which boasts a clear midrange and
+                                            extended highs for a sound.
+                                        </Typography.Paragraph>
+                                        {productData?.sizes && (
+                                            <>
+                                                <Typography.Text
+                                                    style={{
+                                                        color: Colors.textGrayColor,
+                                                    }}
+                                                >
+                                                    Size
+                                                </Typography.Text>
+
+                                                <Radio.Group
+                                                    defaultValue="a"
+                                                    buttonStyle="solid"
+                                                    style={{ gap: "13px" }}
+                                                >
+                                                    <Flex gap={13}>
+                                                        {productData?.sizes?.map(
+                                                            (
+                                                                size: string,
+                                                                key,
+                                                            ) => {
+                                                                return (
+                                                                    <Radio.Button
+                                                                        key={
+                                                                            key
+                                                                        }
+                                                                        value={
+                                                                            size
+                                                                        }
+                                                                    >
+                                                                        {size}
+                                                                    </Radio.Button>
+                                                                );
+                                                            },
+                                                        )}
+                                                    </Flex>
+                                                </Radio.Group>
+                                            </>
+                                        )}
+
+                                        <Typography.Text
+                                            style={{
+                                                color: Colors.textGrayColor,
+                                            }}
+                                        >
+                                            Color
+                                        </Typography.Text>
+
+                                        <Flex gap={13}>
+                                            {productData.colors.map(
+                                                (color: string, key) => {
+                                                    return (
+                                                        <Badge
+                                                            key={key}
+                                                            count={
+                                                                selectedColor ===
+                                                                color ? (
+                                                                    <CheckCircleOutlined
+                                                                        style={{
+                                                                            color: Colors.primary,
+                                                                        }}
+                                                                    />
+                                                                ) : (
+                                                                    0
+                                                                )
+                                                            }
+                                                            showZero={false}
+                                                        >
+                                                            <Button
+                                                                shape="circle"
+                                                                onClick={() =>
+                                                                    colorSelected(
+                                                                        color,
+                                                                    )
+                                                                }
+                                                                style={{
+                                                                    backgroundColor:
+                                                                        color,
+                                                                    borderColor:
+                                                                        Colors.primary,
+                                                                }}
+                                                            ></Button>
+                                                        </Badge>
+                                                    );
+                                                },
+                                            )}
+                                        </Flex>
+                                        <Form
+                                            name="addtocart"
+                                            labelCol={{ span: 8 }}
+                                            wrapperCol={{ span: 16 }}
+                                            // style={{ maxWidth: 600 }}
+                                            initialValues={{
+                                                quantity: productCartItems
+                                                    ? productCartItems.quantity
+                                                    : 1,
+                                            }}
+                                            onFinish={addToCart}
+                                            // onFinishFailed={onFinishFailed}
+                                            autoComplete="off"
+                                        >
+                                            <Flex
+                                                gap={13}
+                                                style={{ marginTop: "13px" }}
+                                            >
+                                                <Form.Item<AddToCartType>
+                                                    name="quantity"
+                                                    rules={[
+                                                        {
+                                                            required: false,
+
+                                                            message:
+                                                                "Please input your username!",
+                                                        },
+                                                    ]}
+                                                >
+                                                    <InputNumber
+                                                        size="large"
+                                                        min={1}
+                                                        max={
+                                                            productData.quantity
+                                                        }
+                                                        keyboard={true}
+                                                        // defaultValue={1}
+                                                        controls={{
+                                                            upIcon: (
+                                                                <PlusOutlined />
+                                                            ),
+                                                            downIcon: (
+                                                                <MinusOutlined />
+                                                            ),
+                                                        }}
+                                                    />
+                                                </Form.Item>
+
+                                                <Button
+                                                    htmlType="submit"
+                                                    shape="round"
+                                                    size="large"
+                                                    icon={
+                                                        flash?.success && (
+                                                            <CheckCircleOutlined />
+                                                        )
+                                                    }
+                                                >
+                                                    Add To Cart
+                                                </Button>
+                                                <Button
+                                                    shape="round"
+                                                    size="large"
+                                                    icon={<PlusOutlined />}
+                                                >
+                                                    Compare
+                                                </Button>
+                                            </Flex>
+                                        </Form>
+
+                                        <Divider
+                                            style={{
+                                                background: Colors.secondary,
+                                                height: "0.1px",
+                                            }}
+                                        />
+
+                                        <Flex gap={9}>
+                                            <Col>SKU</Col>
+                                            <Col>:</Col>
+                                            <Col>23323</Col>
+                                        </Flex>
+                                        <Flex gap={9}>
+                                            <Col>Category</Col>
+                                            <Col>:</Col>
+                                            <Col>{productData.category}</Col>
+                                        </Flex>
+                                        <Flex gap={9}>
+                                            <Col>Tags</Col>
+                                            <Col>:</Col>
+                                            <Col>Sofa,Chair,Home,Shop</Col>
+                                        </Flex>
+                                        <Flex gap={9} align={"middle"}>
+                                            <Col>Share</Col>
+                                            <Col>:</Col>
+                                            <Col>
+                                                <Flex gap={7}>
+                                                    <FacebookOutlined
+                                                        style={{
+                                                            fontSize: "23px",
+                                                        }}
+                                                    />
+                                                    <LinkedinOutlined
+                                                        style={{
+                                                            fontSize: "23px",
+                                                        }}
+                                                    />
+                                                    <TwitterOutlined
+                                                        style={{
+                                                            fontSize: "23px",
+                                                        }}
+                                                    />
+                                                </Flex>
+                                            </Col>
+                                        </Flex>
+                                    </Flex>
+                                </div>{" "}
+                            </Col>
+                        </Row>
+                    </div>
+
+                    <Divider />
+
+                    {/* Product More Info */}
+                    <div
+                        className={Dimensions.pagePaddingClass}
+                        style={{ marginBottom: 18 }}
                     >
-                        Show More
-                    </Button>
-                </Flex>
-            </div>
+                        <Tabs defaultActiveKey="1" centered items={items} />
+                    </div>
+                    <Divider />
+
+                    {/* Related Products */}
+                    <div
+                        className={Dimensions.pagePaddingClass}
+                        style={{ marginBottom: 38 }}
+                    >
+                        <Flex
+                            align={"center"}
+                            justify={"center"}
+                            vertical={true}
+                            style={{ marginBottom: 18 }}
+                        >
+                            <Typography.Title level={3}>
+                                Related Products
+                            </Typography.Title>
+                        </Flex>
+                        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                            {relatedData.map((relatedProd, key) => {
+                                return (
+                                    <Col span={6} key={key}>
+                                        <Link
+                                            href={route(
+                                                "shop.show",
+                                                relatedProd.id,
+                                            )}
+                                        >
+                                            <ProductCard
+                                                product={relatedProd}
+                                            />
+                                        </Link>
+                                    </Col>
+                                );
+                            })}
+                        </Row>
+
+                        <Flex
+                            justify={"center"}
+                            style={{ marginBottom: 38, marginTop: 28 }}
+                        >
+                            <Button
+                                style={{
+                                    borderRadius: 0,
+                                    borderColor: Colors.primary,
+                                    color: Colors.textButtonColor,
+                                    fontWeight: "bold",
+                                }}
+                                className={"ps-12 pe-12"}
+                                onClick={() => showMoreRelated(productData.id)}
+                            >
+                                Show More
+                            </Button>
+                        </Flex>
+                    </div>
+                </>
+            )}
 
             <Footer />
         </Authenticated>

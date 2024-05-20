@@ -81,9 +81,12 @@ class ProductController extends Controller
         // $queryCart = Cart::query();
         // $queryCart->where("user_id", Auth::id());
         // $cart = $queryCart->get();
+
+        // Available cart items
+
         $queryCartItems = CartItem::query();
         $queryCartItems->where("product_id", $shop->id);
-        $productCartItems = $queryCartItems->get();
+        $productCartItems = $queryCartItems->get("quantity")[0];
         // dd($cartItems);
         $related_product = $query->paginate(4);
 

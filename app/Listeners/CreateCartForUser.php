@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Models\Cart;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -20,6 +21,6 @@ class CreateCartForUser
      */
     public function handle(object $event): void
     {
-        //
+        Cart::create(['user_id' => $event->user->id]);
     }
 }
