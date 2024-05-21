@@ -8,7 +8,7 @@ type Props = { };
 function Footer({ }: Props) {
     return (
         <>
-            <Divider />
+            <Divider style={{marginTop:"0"}} /> 
             <div className={Dimensions.pagePaddingClass}>
                 <div
                     style={{

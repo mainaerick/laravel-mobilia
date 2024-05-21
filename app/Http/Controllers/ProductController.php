@@ -86,14 +86,11 @@ class ProductController extends Controller
 
         $queryCartItems = CartItem::query();
         $queryCartItems->where("product_id", $shop->id);
-        $productCartItems = $queryCartItems->get("quantity")[0];
-        // dd($cartItems);
         $related_product = $query->paginate(4);
 
         return Inertia::render('Shop/Show', [
             'product' => new ProductResource($shop),
             'relatedProducts' => $related_product,
-            'productCartItems' => $productCartItems,
         ]);
     }
     /**

@@ -30,6 +30,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/images/{filename}', [ImageController::class, 'show']);
     Route::get('/shop/related/{id}', [ProductController::class, 'showRelated']);
     Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::delete('/cart/{id}', [CartController::class, 'removeItem'])->name('cart.removeItem');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 });
 

@@ -15,6 +15,8 @@ import Footer from "@/Components/Footer";
 import { Colors, Dimensions } from "@/utils/Config";
 import { Avatar, Badge, ConfigProvider, Flex } from "antd";
 import { relative } from "path";
+import CartItems from "@/Components/CartItems";
+import { CartItem } from "@/Core/_Models";
 export default function Authenticated({
     user,
     header,
@@ -22,10 +24,15 @@ export default function Authenticated({
 }: PropsWithChildren<{ user: User; header?: ReactNode }>) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
+    const [open, setOpen] = useState(false);
+
     const { props } = usePage();
-
-    console.log(props);
-
+    const showDrawer = () => {
+        setOpen(true);
+    };
+    const onClose = () => {
+        setOpen(false);
+    };
     return (
         <ConfigProvider
             theme={{
@@ -99,7 +106,9 @@ export default function Authenticated({
                                     <div className="ms-3 relative">
                                         <Dropdown>
                                             <Dropdown.Trigger>
-                                                <UserOutlined style={{fontSize:"17px"}}/>
+                                                <UserOutlined
+                                                    style={{ fontSize: "17px" }}
+                                                />
                                             </Dropdown.Trigger>
 
                                             <Dropdown.Content>
@@ -120,13 +129,13 @@ export default function Authenticated({
                                     </div>
                                 </div>
                                 <SearchOutlined
-                                style={{fontSize:"17px"}}
+                                    style={{ fontSize: "17px" }}
                                     className={
                                         "space-x-8 sm:-my-px sm:ms-10 sm:flex"
                                     }
                                 />
                                 <HeartOutlined
-                                style={{fontSize:"17px"}}
+                                    style={{ fontSize: "17px" }}
                                     className={
                                         "space-x-8 sm:-my-px sm:ms-10 sm:flex"
                                     }
@@ -137,11 +146,20 @@ export default function Authenticated({
                                     justify={"center"}
                                     style={{ height: "100%" }}
                                 >
-                                    <Badge size="small" count={5}>
-                                        <ShoppingCartOutlined style={{fontSize:"17px"}}
+                                    <Badge
+                                        size="small"
+                                        count={
+                                            props.cartQuantity
+                                                ? (props.cartQuantity as any)
+                                                : 0
+                                        }
+                                    >
+                                        <ShoppingCartOutlined
+                                            style={{ fontSize: "17px" }}
                                             className={
                                                 "space-x-8 sm:-my-px sm:ms-10 sm:flex"
                                             }
+                                            onClick={showDrawer}
                                         />{" "}
                                     </Badge>
                                 </Flex>
@@ -228,6 +246,11 @@ export default function Authenticated({
                             </div>
                         </div>
                     </div>
+                    <CartItems
+                        cartItems={props.cartItems as CartItem[]}
+                        open={open}
+                        onClose={onClose}
+                    />
                 </nav>
                 {header && (
                     <header className="bg-white dark:bg-gray-800 shadow">

@@ -13,17 +13,13 @@ import {
     Input,
     Select,
 } from "antd";
-import {
-    FilterOutlined,
-    CrownOutlined,
-    CheckCircleOutlined,
-    TruckOutlined,
-    IssuesCloseOutlined,
-} from "@ant-design/icons";
+import { FilterOutlined } from "@ant-design/icons";
 import Meta from "antd/es/card/Meta";
 import ProductCard from "@/Components/ProductCard";
 import PaginationDiv from "@/Components/PaginationDiv";
 import { Link, router } from "@inertiajs/react";
+import Hero from "@/Components/Hero";
+import ShopInfo from "@/Components/ShopInfo";
 
 type Props = { auth: any; products: Pagination; queryParams: any };
 
@@ -62,50 +58,7 @@ function Index({ auth, products, queryParams = null }: Props) {
     return (
         <Authenticated user={auth}>
             {/* Hero */}
-            <div
-                style={{
-                    position: "relative",
-                    height: "300px",
-                    width: "100%",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                    backgroundImage: `url("/images/home_hero.png")`,
-                    marginBottom: "",
-                }}
-            >
-                <div
-                    style={{
-                        position: "absolute",
-                        top: "30%",
-                        left: "50%",
-                        // right: "50%",
-                    }}
-                >
-                    <Flex
-                        vertical
-                        align={"center"}
-                        justify={"center"}
-                        // style={{
-                        //     padding: "37px 13px 13px 13px",
-                        // }}
-                    >
-                        <Typography.Title
-                            level={1}
-                            style={{
-                                textAlign: "center",
-                                color: Colors.textBlackColor,
-                                width: "100%",
-                                fontWeight: "normal",
-                            }}
-                        >
-                            Shop
-                        </Typography.Title>
-
-                        <Typography.Text>{"Home>Shop"}</Typography.Text>
-                    </Flex>
-                </div>
-            </div>
+            <Hero whichRoute={"Home>Shop"} title={"Shop"} />
             {/* Tool Bar Div */}
             <div style={{ background: Colors.secondary, height: "100px " }}>
                 <Row
@@ -198,7 +151,6 @@ function Index({ auth, products, queryParams = null }: Props) {
                 className={Dimensions.pagePaddingClass}
                 style={{ marginTop: "37px", marginBottom: "37px" }}
             >
-                
                 <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                     {productsData &&
                         productsData?.map((product: Product, key) => {
@@ -208,9 +160,7 @@ function Index({ auth, products, queryParams = null }: Props) {
                                     span={6}
                                     style={{ marginBottom: "23px" }}
                                 >
-                                    <Link
-                                        href={route("shop.show", product.id)}
-                                    >
+                                    <Link href={route("shop.show", product.id)}>
                                         <ProductCard product={product} />
                                     </Link>
                                 </Col>
@@ -229,91 +179,8 @@ function Index({ auth, products, queryParams = null }: Props) {
                 </Flex>
             </div>
 
-            <div
-                style={{
-                    height: "270px",
-                    marginBottom: "37px",
-                    background: Colors.secondary,
-                }}
-            >
-                <Row
-                    className={Dimensions.pagePaddingClass}
-                    style={{
-                        height: "270px",
-                    }}
-                    align={"middle"}
-                >
-                    <Col span={6}>
-                        <Flex style={{}} gap={8}>
-                            <Col>
-                                {" "}
-                                <CrownOutlined style={{ fontSize: 60 }} />
-                            </Col>
-                            <Col>
-                                <Flex vertical>
-                                    <Typography.Title level={4}>
-                                        High Quality
-                                    </Typography.Title>
-                                    <Typography.Paragraph>
-                                        crafted from top materials
-                                    </Typography.Paragraph>
-                                </Flex>
-                            </Col>
-                        </Flex>
-                    </Col>
-                    <Col span={6}>
-                        <Flex style={{}} gap={8}>
-                            <Col>
-                                <CheckCircleOutlined style={{ fontSize: 60 }} />
-                            </Col>
-                            <Col>
-                                <Flex vertical>
-                                    <Typography.Title level={4}>
-                                        Warranty Protection
-                                    </Typography.Title>
-                                    <Typography.Paragraph>
-                                        Over 2 years
-                                    </Typography.Paragraph>
-                                </Flex>
-                            </Col>
-                        </Flex>
-                    </Col>
-                    <Col span={6}>
-                        <Flex style={{}} gap={8}>
-                            <Col>
-                                <TruckOutlined style={{ fontSize: 60 }} />
-                            </Col>
-                            <Col>
-                                <Flex vertical>
-                                    <Typography.Title level={4}>
-                                        Free Shipping
-                                    </Typography.Title>
-                                    <Typography.Paragraph>
-                                        Order over 150 $
-                                    </Typography.Paragraph>
-                                </Flex>
-                            </Col>
-                        </Flex>
-                    </Col>
-                    <Col span={6}>
-                        <Flex style={{}} gap={8}>
-                            <Col>
-                                <IssuesCloseOutlined style={{ fontSize: 60 }} />
-                            </Col>
-                            <Col>
-                                <Flex vertical>
-                                    <Typography.Title level={4}>
-                                        24 / 7 Support
-                                    </Typography.Title>
-                                    <Typography.Paragraph>
-                                        Dedicated support
-                                    </Typography.Paragraph>
-                                </Flex>
-                            </Col>
-                        </Flex>
-                    </Col>
-                </Row>
-            </div>
+            {/* Shop Details */}
+            <ShopInfo />
             <Footer />
         </Authenticated>
     );

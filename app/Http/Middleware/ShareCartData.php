@@ -20,8 +20,10 @@ class ShareCartData
         if (Auth::check()) {
             $cart = Auth::user()->cart;
             $cartQuantity = $cart ? $cart->items->sum('quantity') : 0;
+            $cartItems = $cart ? $cart->items()->with('product')->get() : collect();
 
             Inertia::share('cartQuantity', $cartQuantity);
+            Inertia::share('cartItems', $cartItems);
         }
 
         return $next($request);
