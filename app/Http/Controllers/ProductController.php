@@ -27,7 +27,6 @@ class ProductController extends Controller
         $sortDirection = request("sort_direction", "desc");
         $category = request("category");
 
-
         if (str_contains($sortField, 'price')) {
             $sortField = 'price';
             if (str_contains($sortField, 'high')) {

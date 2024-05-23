@@ -27,7 +27,7 @@ type Props = { auth: any };
 function Index({ auth }: Props) {
     const { props } = usePage();
     const items = props?.cartItems as CartItem[];
-    const [subTotal, setSubTotal] = useState(0);
+    const [subTotal, setSubTotal] = useState<string>("0");
     const handleRemoveItem = (id: number) => {
         router.delete(route("cart.removeItem", id), {
             onSuccess: () => {
@@ -78,12 +78,12 @@ function Index({ auth }: Props) {
             title: "Action",
             key: "action",
             render: (_, record) => (
-                <Link>
-                    <DeleteFilled
-                        onClick={() => handleRemoveItem(record.id)}
-                        style={{ fontSize: "23px" }}
-                    />
-                </Link>
+                // <Link>
+                <DeleteFilled
+                    onClick={() => handleRemoveItem(record.id)}
+                    style={{ fontSize: "23px", color: Colors.primary }}
+                />
+                // </Link>
             ),
         },
     ];
@@ -94,7 +94,8 @@ function Index({ auth }: Props) {
             items.map((item) => {
                 total = parseFloat(item.product.price) * item.quantity;
             });
-            setSubTotal(total);
+
+            setSubTotal(Number.parseFloat(total.toString()).toFixed(2));
         }
     }, [items]);
     return (
@@ -103,9 +104,9 @@ function Index({ auth }: Props) {
 
             <div
                 className={Dimensions.pagePaddingClass}
-                style={{ margin: "48px 0" }}
+                style={{ marginTop: "48px", marginBottom: "48px" }}
             >
-                <Row gutter={32}>
+                <Row gutter={16}>
                     <Col span={16}>
                         <ConfigProvider
                             theme={{
@@ -155,13 +156,15 @@ function Index({ auth }: Props) {
                                 </Col>
                             </Row>
 
-                            <Button
-                                block
-                                size="large"
-                                style={{ borderRadius: "5px" }}
-                            >
-                                Checkout
-                            </Button>
+                            <Link href="checkout">
+                                <Button
+                                    block
+                                    size="large"
+                                    style={{ borderRadius: "5px" }}
+                                >
+                                    Checkout
+                                </Button>
+                            </Link>
                         </Flex>
                     </Col>
                 </Row>

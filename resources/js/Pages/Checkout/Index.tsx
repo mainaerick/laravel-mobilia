@@ -1,0 +1,201 @@
+import Hero from "@/Components/Hero";
+import Authenticated from "@/Layouts/AuthenticatedLayout";
+import { Dimensions } from "@/utils/Config";
+import {
+    Button,
+    Col,
+    Flex,
+    Form,
+    Input,
+    Row,
+    Table,
+    TableProps,
+    Typography,
+} from "antd";
+import React, { useEffect, useState } from "react";
+import FormInput from "./Components/FormInput";
+import { usePage } from "@inertiajs/react";
+import { CartItem, Product } from "@/Core/_Models";
+
+type Props = { auth: any };
+const layout = {
+    labelCol: { span: 24 },
+    wrapperCol: { span: 24 },
+};
+function Index({ auth }: Props) {
+    const [form] = Form.useForm();
+    const { props } = usePage();
+    const items = props?.cartItems as CartItem[];
+    const [subTotal, setSubTotal] = useState<string>("0");
+
+    const columns: TableProps<CartItem>["columns"] = [
+        {
+            title: "Product",
+            dataIndex: "product",
+            key: "id",
+            render: (_, record) => (
+                <Typography.Text>{`${record.product.name} x ${record.quantity}`}</Typography.Text>
+            ),
+        },
+        {
+            title: <Flex justify={"end"}>Subtotal</Flex>,
+            // dataIndex: "product",
+            key: "id",
+            render: (_, record) => {
+                let subtotal =
+                    record.quantity * parseFloat(record.product.price);
+
+                return (
+                    <Flex justify={"end"}>
+                        <Typography.Text>{`${Number.parseFloat(subtotal.toString()).toFixed(2)}`}</Typography.Text>
+                    </Flex>
+                );
+            },
+        },
+    ];
+    const onFinish = (values: any) => {
+        console.log(values);
+    };
+    const onReset = () => {
+        form.resetFields();
+    };
+    useEffect(() => {
+        if (items) {
+            let total = 0;
+            items.map((item) => {
+                total = parseFloat(item.product.price) * item.quantity;
+            });
+
+            setSubTotal(Number.parseFloat(total.toString()).toFixed(2));
+        }
+    }, [items]);
+    return (
+        <Authenticated user={auth}>
+            <Hero whichRoute={"Shop>Checkout"} title={"Checkout"} />
+
+            <div
+                className={Dimensions.pagePaddingClass}
+                style={{ marginTop: "48px", marginBottom: "48px" }}
+            >
+                <Flex vertical>
+                    <Typography.Title level={3}>
+                        Billing details
+                    </Typography.Title>
+
+                    <Form
+                        {...layout}
+                        form={form}
+                        name="control-hooks"
+                        onFinish={onFinish}
+                        // style={{ maxWidth: 600 }}
+                    >
+                        <Row gutter={12}>
+                            <Col span={12}>
+                                <Row gutter={16}>
+                                    <Col span={12}>
+                                        {" "}
+                                        <FormInput
+                                            name={"firstname"}
+                                            label={"First Name"}
+                                            required={true}
+                                        />
+                                    </Col>
+                                    <Col span={12}>
+                                        <FormInput
+                                            name={"lastname"}
+                                            label={"Last Name"}
+                                            required={true}
+                                        />
+                                    </Col>
+                                </Row>
+
+                                <FormInput
+                                    name={"email"}
+                                    label={"Email Address"}
+                                    type="email"
+                                    required={true}
+                                />
+
+                                <FormInput
+                                    name={"phone"}
+                                    label={"Phone"}
+                                    type="phone"
+                                    required={true}
+                                />
+
+                                <FormInput
+                                    name={"town"}
+                                    label={"Town/City"}
+                                    required={true}
+                                />
+
+                                <FormInput
+                                    name={"address"}
+                                    label={"Address"}
+                                    required={true}
+                                />
+
+                                <FormInput
+                                    name={"delivery_det"}
+                                    label={"Delivery Details"}
+                                    required={true}
+                                />
+                            </Col>
+
+                            <Col span={12}>
+                                <Table
+                                    columns={columns}
+                                    dataSource={items}
+                                    pagination={false}
+                                    footer={() => {
+                                        return (
+                                            <Row justify={"space-between"}>
+                                                <Col span={12}>
+                                                    <Typography.Title level={4}>
+                                                        Total
+                                                    </Typography.Title>
+                                                </Col>
+                                                <Col span={12}>
+                                                    <Flex
+                                                        align="end"
+                                                        justify={"end"}
+                                                    >
+                                                        <Typography.Title
+                                                            level={4}
+                                                        >
+                                                            {subTotal}
+                                                        </Typography.Title>
+                                                    </Flex>
+                                                </Col>
+                                            </Row>
+                                        );
+                                    }}
+                                />
+
+                                <Flex
+                                    justify="center"
+                                    style={{ marginTop: "13px" }}
+                                >
+                                    <Button
+                                        htmlType="submit"
+                                        block
+                                        style={{
+                                            marginLeft: "30%",
+                                            marginRight: "30%",
+                                            borderRadius: "15px",
+                                        }}
+                                        size="large"
+                                    >
+                                        Place Order
+                                    </Button>
+                                </Flex>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Flex>
+            </div>
+        </Authenticated>
+    );
+}
+
+export default Index;
