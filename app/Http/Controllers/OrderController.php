@@ -16,7 +16,7 @@ class OrderController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $orders = Order::with(1)->paginate(10);
+        $orders = Order::with('user')->paginate(10);
         return Inertia::render('Orders/Index', [
             'orders' => OrderResource::collection($orders),
         ]);
