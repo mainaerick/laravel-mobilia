@@ -7,6 +7,7 @@ import {
     Flex,
     Form,
     Input,
+    Radio,
     Row,
     Table,
     TableProps,
@@ -14,8 +15,8 @@ import {
 } from "antd";
 import React, { useEffect, useState } from "react";
 import FormInput from "./Components/FormInput";
-import { usePage } from "@inertiajs/react";
-import { CartItem, Product } from "@/Core/_Models";
+import { router, useForm, usePage } from "@inertiajs/react";
+import { CartItem, Order, Product } from "@/Core/_Models";
 
 type Props = { auth: any };
 const layout = {
@@ -24,9 +25,29 @@ const layout = {
 };
 function Index({ auth }: Props) {
     const [form] = Form.useForm();
+
     const { props } = usePage();
     const items = props?.cartItems as CartItem[];
     const [subTotal, setSubTotal] = useState<string>("0");
+    const intialdata = {
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: "",
+        town: "",
+        address: "",
+        delivery_det: "",
+        total_amount: "",
+        status: "pending",
+        shipping_address: "",
+        billing_address: "",
+        payment_method: "",
+        payment_status: "pending",
+        shipping_method: "",
+        shipping_cost: "20",
+        items: items,
+        notes: "",
+    };
 
     const columns: TableProps<CartItem>["columns"] = [
         {
@@ -53,8 +74,20 @@ function Index({ auth }: Props) {
             },
         },
     ];
-    const onFinish = (values: any) => {
-        console.log(values);
+    const onFinish = (values: Order) => {
+        values.totalAmount = Number.parseFloat(subTotal);
+        values.items = [];
+        items.map((item) => {
+            values.items?.push({
+                productId: item.product_id,
+                name: item.product.name,
+                quantity: item.quantity,
+                price: Number.parseFloat(item.product.price),
+            });
+        });
+        const newOrder = { ...intialdata, ...values };
+        console.log(newOrder);
+        router.post(route("orders.store"));
     };
     const onReset = () => {
         form.resetFields();
@@ -85,6 +118,7 @@ function Index({ auth }: Props) {
                     <Form
                         {...layout}
                         form={form}
+                        initialValues={intialdata}
                         name="control-hooks"
                         onFinish={onFinish}
                         // style={{ maxWidth: 600 }}
@@ -172,6 +206,24 @@ function Index({ auth }: Props) {
                                     }}
                                 />
 
+                                <Typography.Title
+                                    level={4}
+                                    style={{ marginTop: "17px" }}
+                                >
+                                    Payment Method
+                                </Typography.Title>
+
+                                <Form.Item name={"payment_method"}>
+                                    <Radio.Group>
+                                        <Radio defaultChecked value="mpesa">
+                                            {" "}
+                                            Mpesa{" "}
+                                        </Radio>
+                                        <Radio value="payondelivery">
+                                            Pay On Delivery{" "}
+                                        </Radio>
+                                    </Radio.Group>
+                                </Form.Item>
                                 <Flex
                                     justify="center"
                                     style={{ marginTop: "13px" }}

@@ -58,3 +58,34 @@ interface Dimension {
     updated_at: string;
     product: Product;
 }
+
+export interface OrderItem {
+  productId: number;
+  name: string;
+  quantity: number;
+  price: number;
+}
+
+export interface Order {
+  id?: number;
+  userId?: number | null;
+  firstname: string;
+  lastname: string;
+  email: string;
+  phone: string;
+  town: string;
+  address: string;
+  deliveryDetails: string;
+  totalAmount: number;
+  status: string;
+  shippingAddress: string;
+  billingAddress?: string | null;
+  paymentMethod: string;
+  paymentStatus: string;
+  shippingMethod?: string | null;
+  shippingCost?: number | null;
+  items: OrderItem[];
+  notes?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
+}

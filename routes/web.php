@@ -34,6 +34,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/cart/{id}', [CartController::class, 'removeItem'])->name('cart.removeItem');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
 
 });
 
