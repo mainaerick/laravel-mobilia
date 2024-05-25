@@ -12,23 +12,29 @@ import {
     Table,
     TableProps,
     Typography,
+    message,
 } from "antd";
 import React, { useEffect, useState } from "react";
 import FormInput from "./Components/FormInput";
 import { router, useForm, usePage } from "@inertiajs/react";
 import { CartItem, Order, Product } from "@/Core/_Models";
 
-type Props = { auth: any };
+type Props = { auth: any; errors: any };
 const layout = {
     labelCol: { span: 24 },
     wrapperCol: { span: 24 },
 };
-function Index({ auth }: Props) {
+function Index({ auth, errors }: Props) {
     const [form] = Form.useForm();
+
+    // console.log(errors);
+
 
     const { props } = usePage();
     const items = props?.cartItems as CartItem[];
     const [subTotal, setSubTotal] = useState<string>("0");
+    const [loading, setLoading] = useState<boolean>(false);
+
     const intialdata = {
         firstname: "",
         lastname: "",
@@ -74,8 +80,26 @@ function Index({ auth }: Props) {
             },
         },
     ];
+
+    useEffect(() => {
+        if (errors) {
+            const errorValues: [] =
+                errors &&
+                Object.keys(errors).map(function (key) {
+                    return errors[key];
+                });
+            console.log(errorValues);
+            errorValues.map((errorValue) => {
+                message.error(errorValue, 5);
+            });
+        } else if (errors) {
+        }
+    }, [errors]);
+
     const onFinish = (values: Order) => {
-        values.totalAmount = Number.parseFloat(subTotal);
+        values.total_amount = Number.parseFloat(subTotal);
+        values.shipping_address = values.delivery_det;
+        setLoading(true);
         values.items = [];
         items.map((item) => {
             values.items?.push({
@@ -86,8 +110,13 @@ function Index({ auth }: Props) {
             });
         });
         const newOrder = { ...intialdata, ...values };
-        console.log(newOrder);
-        router.post(route("orders.store"));
+        const newOrderWithJSONItems = {
+            ...newOrder,
+            items: JSON.stringify(newOrder.items),
+        };
+        console.log(newOrderWithJSONItems);
+        router.post(route("orders.store", newOrderWithJSONItems));
+        setLoading(false);
     };
     const onReset = () => {
         form.resetFields();
@@ -104,6 +133,7 @@ function Index({ auth }: Props) {
     }, [items]);
     return (
         <Authenticated user={auth}>
+
             <Hero whichRoute={"Shop>Checkout"} title={"Checkout"} />
 
             <div
@@ -231,6 +261,7 @@ function Index({ auth }: Props) {
                                     <Button
                                         htmlType="submit"
                                         block
+                                        loading={loading}
                                         style={{
                                             marginLeft: "30%",
                                             marginRight: "30%",

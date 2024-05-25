@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Http\Resources\OrderResource;
+use App\Models\CartItem;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class OrderController extends Controller
@@ -16,6 +18,7 @@ class OrderController extends Controller
     public function index()
     {
         $user = auth()->user();
+        // $orders = Order::all();
         $orders = Order::with('user')->paginate(10);
         return Inertia::render('Orders/Index', [
             'orders' => OrderResource::collection($orders),
@@ -35,6 +38,7 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
+
         $validated = $request->validate([
             'firstname' => 'required|string',
             'lastname' => 'required|string',
@@ -51,13 +55,24 @@ class OrderController extends Controller
             'payment_status' => 'required|string',
             'shipping_method' => 'nullable|string',
             'shipping_cost' => 'nullable|numeric',
-            'items' => 'required|json',
+            'items' => 'required|string',
             'notes' => 'nullable|string',
         ]);
 
-        $order = Order::create($validated);
 
-        return redirect()->route('orders.index')->with('success', 'Order created successfully');
+        $validated["items"] = json_decode($request->items, true);
+
+        $order = Order::create($validated);
+        if ($order) {
+            // Delete the cart items in  with the order
+            $user = auth()->user();
+            $cart = $user->cart;
+            CartItem::where('cart_id', $cart->id)->delete();
+
+            return redirect()->route('orders.index')->with('success', 'Order created successfully');
+        }
+        return redirect()->route('checkout.create')->with('error', 'Failed to create order');
+        // return redirect()->route('orders.index')->with('success', 'Order created successfully');
 
     }
 

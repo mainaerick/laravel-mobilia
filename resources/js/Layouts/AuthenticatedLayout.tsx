@@ -13,7 +13,7 @@ import {
 } from "@ant-design/icons";
 import Footer from "@/Components/Footer";
 import { Colors, Dimensions } from "@/utils/Config";
-import { Avatar, Badge, ConfigProvider, Flex } from "antd";
+import { Avatar, Badge, ConfigProvider, Flex, message } from "antd";
 import { relative } from "path";
 import CartItems from "@/Components/CartItems";
 import { CartItem } from "@/Core/_Models";
@@ -25,6 +25,7 @@ export default function Authenticated({
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
     const [open, setOpen] = useState(false);
+    const [messageApi, contextHolder] = message.useMessage();
 
     const { props } = usePage();
     const showDrawer = () => {
@@ -45,6 +46,8 @@ export default function Authenticated({
                 },
             }}
         >
+            {contextHolder}
+
             <div className="min-h-screen bg-white dark:bg-gray-900">
                 <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
                     <div className={Dimensions.pagePaddingClass}>

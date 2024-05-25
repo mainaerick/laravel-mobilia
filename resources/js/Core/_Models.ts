@@ -2,9 +2,9 @@ interface Dimension {
     depth: number;
     width: number;
     height: number;
-  }
-  
-  export interface Product {
+}
+
+export interface Product {
     id: number;
     name: string;
     description: string;
@@ -20,19 +20,19 @@ interface Dimension {
     images: string[];
     rating: string;
     reviews: string[];
-    colors:string[];
-    sizes:string[];
+    colors: string[];
+    sizes: string[];
     created_at: string;
     updated_at: string;
-  }
-  
-  interface PaginationLink {
+}
+
+interface PaginationLink {
     url: string | null;
     label: string;
     active: boolean;
-  }
-  
-  export interface Pagination {
+}
+
+export interface Pagination {
     current_page: number;
     data: Product[];
     first_page_url: string;
@@ -46,10 +46,9 @@ interface Dimension {
     prev_page_url: string | null;
     to: number;
     total: number;
-  }
-  
+}
 
-  export interface CartItem {
+export interface CartItem {
     id: number;
     cart_id: number;
     product_id: number;
@@ -60,32 +59,32 @@ interface Dimension {
 }
 
 export interface OrderItem {
-  productId: number;
-  name: string;
-  quantity: number;
-  price: number;
+    productId: number;
+    name: string;
+    quantity: number;
+    price: number;
 }
 
 export interface Order {
-  id?: number;
-  userId?: number | null;
-  firstname: string;
-  lastname: string;
-  email: string;
-  phone: string;
-  town: string;
-  address: string;
-  deliveryDetails: string;
-  totalAmount: number;
-  status: string;
-  shippingAddress: string;
-  billingAddress?: string | null;
-  paymentMethod: string;
-  paymentStatus: string;
-  shippingMethod?: string | null;
-  shippingCost?: number | null;
-  items: OrderItem[];
-  notes?: string | null;
-  createdAt?: string;
-  updatedAt?: string;
+    id?: number; // Optional since it may not be set initially
+    userId?: number | null; // Optional to accommodate guest users
+    firstname: string;
+    lastname: string;
+    email: string;
+    phone: string;
+    town: string;
+    address: string;
+    delivery_det: string;
+    total_amount: number; // Assuming it's a string to match your example
+    status: string;
+    shipping_address: string;
+    billing_address: string;
+    payment_method: string;
+    payment_status: string;
+    shipping_method: string;
+    shipping_cost: string; // Assuming it's a string to match your example
+    items: OrderItem[];
+    notes: string;
+    createdAt?: string; // Optional for timestamps
+    updatedAt?: string; // Optional for timestamps
 }

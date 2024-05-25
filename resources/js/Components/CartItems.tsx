@@ -108,13 +108,13 @@ function CartItems({ cartItems, open, onClose }: Props) {
                                 </Link>
                             </Col>
                             <Col>
-                                <Link href={""}>
+                                <Link href={"checkout"}>
                                     <Button shape="round">Checkout</Button>
                                 </Link>
                             </Col>
                             <Col>
                                 <Link href={""}>
-                                    <Button shape="round">Comaprison</Button>
+                                    <Button shape="round">Comparison</Button>
                                 </Link>
                             </Col>
                         </Row>
