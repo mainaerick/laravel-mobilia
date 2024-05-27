@@ -40,7 +40,7 @@ type Props = {
     product: { data: Product };
     auth: any;
     relatedProducts: { data: Product[] };
-    productCartItems?: {quantity:number};
+    productCartItems?: { quantity: number };
 };
 type AddToCartType = {
     quantity: number;
@@ -51,7 +51,6 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
     const [selectedColor, setSelectedColor] = useState(productData.colors[0]);
     const { flash }: any = usePage().props;
 
-    console.log(productCartItems?.quantity)
     const items: TabsProps["items"] = [
         {
             key: "1",
@@ -97,7 +96,7 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                     <Col span={12}>
                         <Flex align={"center"} style={{ height: "30px" }}>
                             <Typography.Text type="secondary">
-                                {"Home > Shop > "}
+                                {"Home > Shop "}
                             </Typography.Text>
                             <Divider
                                 type="vertical"
@@ -123,7 +122,13 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                         style={{ marginTop: "18px" }}
                     >
                         <Row>
-                            <Col span={12}>
+                            <Col
+                                sm={{ span: 24 }}
+                                md={{ span: 12 }}
+                                lg={{ span: 12 }}
+                                xl={{ span: 12 }}
+                                style={{ width: "100%" }}
+                            >
                                 <Flex gap={27}>
                                     <Flex
                                         gap={13}
@@ -133,60 +138,46 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                                             overflow: "auto",
                                         }}
                                     >
-                                        <div>
-                                            <img
-                                                height={80}
-                                                width={80}
-                                                // style={{width:"100%",}}
-                                                src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
-                                                alt=""
-                                            />
-                                        </div>
-                                        <div>
-                                            <img
-                                                height={80}
-                                                width={80}
-                                                src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
-                                                alt=""
-                                            />
-                                        </div>
-                                        <div>
-                                            <img
-                                                height={80}
-                                                width={80}
-                                                src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
-                                                alt=""
-                                            />
-                                        </div>
-                                        <div>
-                                            <img
-                                                height={80}
-                                                width={80}
-                                                src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
-                                                alt=""
-                                            />
-                                        </div>
+                                        {productData?.images
+                                            .map((i) => "/" + i)
+                                            .map((item, key) => {
+                                                return (
+                                                    <div key={key}>
+                                                        <Image
+                                                            height={100}
+                                                            width={100}
+                                                            preview={false}
+                                                            // style={{width:"100%",}}
+                                                            src={item}
+                                                            alt=""
+                                                        />
+                                                    </div>
+                                                );
+                                            })}
                                     </Flex>
                                     <Image.PreviewGroup
-                                        items={[
-                                            "https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp",
-                                            "https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp",
-                                            "https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp",
-                                        ]}
+                                        items={productData?.images.map(
+                                            (i) => "/" + i,
+                                        )}
                                     >
                                         <Image
                                             width={"100%"}
                                             height={400}
-                                            src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
+                                            src={`/${productData?.images[0]}`}
                                         />
                                     </Image.PreviewGroup>
                                 </Flex>{" "}
                             </Col>
 
                             <Col
-                                offset={1}
-                                span={11}
-                                style={{ background: "" }}
+                                // offset={1}
+                                // span={11}
+                                xs={{ span: 24 }}
+                                sm={{ span: 24 }}
+                                md={{ span: 11, offset: 1 }}
+                                lg={{ span: 11, offset: 1 }}
+                                xl={{ span: 11, offset: 1 }}
+                                style={{ width: "100%" }}
                             >
                                 <div>
                                     <Flex gap={19} vertical>
@@ -475,7 +466,16 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                             {relatedData.map((relatedProd, key) => {
                                 return (
-                                    <Col span={6} key={key}>
+                                    <Col
+                                        // span={6}
+                                        xs={{ span: 12 }}
+                                        sm={{ span: 12 }}
+                                        md={{ span: 8 }}
+                                        lg={{ span: 6 }}
+                                        xl={{ span: 6 }}
+                                        key={key}
+                                        style={{ marginBottom: "17px" }}
+                                    >
                                         <Link
                                             href={route(
                                                 "shop.show",

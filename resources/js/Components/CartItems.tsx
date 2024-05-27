@@ -108,7 +108,7 @@ function CartItems({ cartItems, open, onClose }: Props) {
                                 </Link>
                             </Col>
                             <Col>
-                                <Link href={"checkout"}>
+                                <Link href={"/checkout"}>
                                     <Button shape="round">Checkout</Button>
                                 </Link>
                             </Col>

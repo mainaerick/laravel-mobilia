@@ -107,7 +107,14 @@ function Index({ auth }: Props) {
                 style={{ marginTop: "48px", marginBottom: "48px" }}
             >
                 <Row gutter={16}>
-                    <Col span={16}>
+                    <Col
+                        //  span={16}
+                        xs={{ span: 24 }}
+                        sm={{ span: 24 }}
+                        md={{ span: 8 }}
+                        lg={{ span: 6 }}
+                        xl={{ span: 6 }}
+                    >
                         <ConfigProvider
                             theme={{
                                 components: {
@@ -124,7 +131,15 @@ function Index({ auth }: Props) {
                             />
                         </ConfigProvider>
                     </Col>
-                    <Col span={8} style={{}}>
+                    <Col
+                        //  span={8}
+                        xs={{ span: 24 }}
+                        sm={{ span: 24 }}
+                        md={{ span: 8 }}
+                        lg={{ span: 8 }}
+                        xl={{ span: 8 }}
+                        style={{}}
+                    >
                         <Flex
                             vertical
                             align={"center"}

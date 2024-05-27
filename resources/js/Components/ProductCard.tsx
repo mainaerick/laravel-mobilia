@@ -1,6 +1,6 @@
 import { Product } from "@/Core/_Models";
 import { Colors } from "@/utils/Config";
-import { Flex, Button, Card, Typography } from "antd";
+import { Flex, Button, Card, Typography, Image } from "antd";
 import Meta from "antd/es/card/Meta";
 import React from "react";
 import {
@@ -8,9 +8,9 @@ import {
     SwapOutlined,
     ShareAltOutlined,
 } from "@ant-design/icons";
-type Props = {product:Product};
+type Props = { product: Product };
 
-function ProductCard({product}: Props) {
+function ProductCard({ product }: Props) {
     return (
         <div className="flex items-center justify-center ">
             <div className="overflow-hidden  cursor-pointer rounded-xl relative group">
@@ -61,12 +61,21 @@ function ProductCard({product}: Props) {
                     }}
                     className="object-cover h-full w-full aspect-square  transition duration-300"
                     cover={
-                        <img
-                            alt="example"
+                        <Image
+                            alt="it"
                             style={{
                                 height: "320px",
+                                width:"320px"
                             }}
-                            src={product?.images && (product?.images[0] as any)}
+                            // src={"images/bedroom/pexels-pixabay-164595.jpg"}
+                            placeholder={
+                                <Image
+                                    preview={false}
+                                    src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200"
+                                    width={320}
+                                />
+                            }
+                            src={product?.images && (`/${product?.images[0]}` as any)}
                         />
                     }
                 >

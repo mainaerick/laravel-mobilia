@@ -29,6 +29,7 @@ function Index({ auth, products, queryParams = null }: Props) {
     const totalNumber = products.total;
     const perPage = products.per_page;
     const productsData = products.data as Product[];
+    console.log(productsData)
     const handleChangeSort = (name: string) => {
         if (name === queryParams.sort_field) {
             if (queryParams.sort_direction === "asc") {
@@ -67,8 +68,15 @@ function Index({ auth, products, queryParams = null }: Props) {
                     align={"middle"}
                     className={Dimensions.pagePaddingClass}
                 >
-                    <Col span={12}>
-                        <Flex align={"center"} style={{ height: "30px" }}>
+                    <Col
+                        // span={12}
+                        sm={{ span: 24 }}
+                        md={{ span: 12 }}
+                        lg={{ span: 12 }}
+                        xl={{ span: 12 }}
+                        style={{ width: "100%" }}
+                    >
+                        {/* <Flex  align={"center"} justify="sm-end xl-start"  style={{ height: "30px", }}>
                             <div>
                                 <FilterOutlined /> Filter
                             </div>
@@ -83,28 +91,28 @@ function Index({ auth, products, queryParams = null }: Props) {
                             <Typography.Text>
                                 {"Showing 1-16 of 32 results"}
                             </Typography.Text>
-                        </Flex>
+                        </Flex> */}
                     </Col>
-                    <Col span={12} style={{ width: "100%" }}>
+                    <Col
+                        // span={12}
+                        sm={{ span: 24 }}
+                        md={{ span: 12 }}
+                        lg={{ span: 12 }}
+                        xl={{ span: 12 }}
+                        style={{ width: "100%" }}
+                    >
                         <Row justify={"end"}>
-                            {/* <Col span={8}>
+                            <Col
+                                // span={12}
+                                xs={{ span: 24 }}
+                                sm={{ span: 24 }}
+                                md={{ span: 24 }}
+                                lg={{ span: 12 }}
+                                xl={{ span: 12 }}
+                            >
                                 <Flex
                                     gap={9}
-                                    justify={"flex-end"}
-                                    align={"center"}
-                                >
-                                    <div>
-                                        <Typography.Text>Show</Typography.Text>
-                                    </div>
-                                    <div style={{ width: "50px", border: 0 }}>
-                                        <Input variant="borderless" />
-                                    </div>
-                                </Flex>
-                            </Col> */}
-                            <Col span={12}>
-                                <Flex
-                                    gap={9}
-                                    justify={"center"}
+                                    justify={"end"}
                                     align={"center"}
                                 >
                                     <div>
@@ -157,7 +165,12 @@ function Index({ auth, products, queryParams = null }: Props) {
                             return (
                                 <Col
                                     key={key}
-                                    span={6}
+                                    // span={6}
+                                    xs={{ span: 12 }}
+                                    sm={{ span: 12 }}
+                                    md={{ span: 8 }}
+                                    lg={{ span: 6 }}
+                                    xl={{ span: 6 }}
                                     style={{ marginBottom: "23px" }}
                                 >
                                     <Link href={route("shop.show", product.id)}>

@@ -25,12 +25,21 @@ function ShopInfo({}: Props) {
                 align={"middle"}
             >
                 <Col span={6}>
-                    <Flex style={{}} gap={8}>
-                        <Col>
-                            {" "}
+                    <Row style={{}}>
+                        <Col
+                            sm={{ span: 24 }}
+                            md={{ span: 12 }}
+                            lg={{ span: 12 }}
+                            xl={{ span: 12 }}
+                        >
                             <CrownOutlined style={{ fontSize: 60 }} />
                         </Col>
-                        <Col>
+                        <Col
+                            sm={{ span: 24 }}
+                            md={{ span: 12 }}
+                            lg={{ span: 12 }}
+                            xl={{ span: 12 }}
+                        >
                             <Flex vertical>
                                 <Typography.Title level={4}>
                                     High Quality
@@ -40,14 +49,24 @@ function ShopInfo({}: Props) {
                                 </Typography.Paragraph>
                             </Flex>
                         </Col>
-                    </Flex>
+                    </Row>
                 </Col>
                 <Col span={6}>
-                    <Flex style={{}} gap={8}>
-                        <Col>
+                    <Row style={{}}>
+                        <Col
+                            sm={{ span: 24 }}
+                            md={{ span: 12 }}
+                            lg={{ span: 12 }}
+                            xl={{ span: 12 }}
+                        >
                             <CheckCircleOutlined style={{ fontSize: 60 }} />
                         </Col>
-                        <Col>
+                        <Col
+                            sm={{ span: 24 }}
+                            md={{ span: 12 }}
+                            lg={{ span: 12 }}
+                            xl={{ span: 12 }}
+                        >
                             <Flex vertical>
                                 <Typography.Title level={4}>
                                     Warranty Protection
@@ -57,31 +76,51 @@ function ShopInfo({}: Props) {
                                 </Typography.Paragraph>
                             </Flex>
                         </Col>
-                    </Flex>
+                    </Row>
                 </Col>
                 <Col span={6}>
-                    <Flex style={{}} gap={8}>
-                        <Col>
+                    <Row style={{}}>
+                        <Col
+                            sm={{ span: 24 }}
+                            md={{ span: 12 }}
+                            lg={{ span: 12 }}
+                            xl={{ span: 12 }}
+                        >
                             <TruckOutlined style={{ fontSize: 60 }} />
                         </Col>
-                        <Col>
+                        <Col
+                            sm={{ span: 24 }}
+                            md={{ span: 12 }}
+                            lg={{ span: 12 }}
+                            xl={{ span: 12 }}
+                        >
                             <Flex vertical>
                                 <Typography.Title level={4}>
                                     Free Shipping
                                 </Typography.Title>
                                 <Typography.Paragraph>
-                                    Order over 150 $
+                                    Order over Ksh 15000
                                 </Typography.Paragraph>
                             </Flex>
                         </Col>
-                    </Flex>
+                    </Row>
                 </Col>
                 <Col span={6}>
-                    <Flex style={{}} gap={8}>
-                        <Col>
+                    <Row style={{}}>
+                        <Col
+                            sm={{ span: 24 }}
+                            md={{ span: 12 }}
+                            lg={{ span: 12 }}
+                            xl={{ span: 12 }}
+                        >
                             <IssuesCloseOutlined style={{ fontSize: 60 }} />
                         </Col>
-                        <Col>
+                        <Col
+                            sm={{ span: 24 }}
+                            md={{ span: 12 }}
+                            lg={{ span: 12 }}
+                            xl={{ span: 12 }}
+                        >
                             <Flex vertical>
                                 <Typography.Title level={4}>
                                     24 / 7 Support
@@ -91,7 +130,7 @@ function ShopInfo({}: Props) {
                                 </Typography.Paragraph>
                             </Flex>
                         </Col>
-                    </Flex>
+                    </Row>
                 </Col>
             </Row>
         </div>

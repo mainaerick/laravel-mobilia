@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -28,7 +29,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('shop', ProductController::class);
     Route::resource('about', ProductController::class);
     Route::resource('contact', ProductController::class);
-    Route::get('/images/{filename}', [ImageController::class, 'show']);
+    Route::get('/images/{path}', function ($path) {
+        $path = 'public/images/' . $path;
+        
+        // Validate the path to prevent directory traversal attacks
+        if (str_contains($path, '..')) {
+            abort(403);
+        }
+    
+        if (Storage::exists($path)) {
+            return response()->file(storage_path('app/' . $path));
+        } else {
+            abort(404);
+        }
+    })->where('path', '.*');
     Route::get('/shop/related/{id}', [ProductController::class, 'showRelated']);
     Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
     Route::delete('/cart/{id}', [CartController::class, 'removeItem'])->name('cart.removeItem');

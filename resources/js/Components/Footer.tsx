@@ -3,12 +3,12 @@ import { Row, Col, Flex, Typography, Input, Button, Divider } from "antd";
 import React from "react";
 import { Link } from "react-alice-carousel";
 
-type Props = { };
+type Props = {};
 
-function Footer({ }: Props) {
+function Footer({}: Props) {
     return (
         <>
-            <Divider style={{marginTop:"0"}} /> 
+            <Divider style={{ marginTop: "0" }} />
             <div className={Dimensions.pagePaddingClass}>
                 <div
                     style={{
@@ -17,7 +17,7 @@ function Footer({ }: Props) {
                     }}
                 >
                     <Row
-                        gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
+                        // gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
                         align={"top"}
                     >
                         <Col span={8}>
@@ -110,14 +110,28 @@ function Footer({ }: Props) {
                                         >
                                             NewsLetter
                                         </Typography.Text>
-                                        <Flex gap={9} align={"flex-end"}>
-                                            <Input placeholder="Enter our email address" />
-                                            <Button type="text">
-                                                <Typography.Text strong>
-                                                    Subscribe
-                                                </Typography.Text>
-                                            </Button>
-                                        </Flex>
+                                        <Row>
+                                            <Col
+                                                sm={{ span: 24 }}
+                                                md={{ span: 12 }}
+                                                lg={{ span: 12 }}
+                                                xl={{ span: 12 }}
+                                            >
+                                                <Input placeholder="Enter our email address" />
+                                            </Col>
+                                            <Col
+                                                sm={{ span: 24 }}
+                                                md={{ span: 12 }}
+                                                lg={{ span: 12 }}
+                                                xl={{ span: 12 }}
+                                            >
+                                                <Button type="text">
+                                                    <Typography.Text strong>
+                                                        Subscribe
+                                                    </Typography.Text>
+                                                </Button>
+                                            </Col>
+                                        </Row>
                                     </Flex>
                                 </Col>
                             </Row>

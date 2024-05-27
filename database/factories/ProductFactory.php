@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
@@ -16,26 +17,30 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $category = $this->faker->randomElement(['chairs', 'tables', 'sofas', 'beds']);
+        $room = $this->faker->randomElement(['living', 'bedroom', 'dining']);
+        $category = $this->faker->randomElement($room == "dining" ? ['tables',] : ($room === "living" ? ['chairs', 'sofas',] : ($room === "bedroom" ? ['beds'] : null)));
+
+        $livingimages = Storage::disk('public')->files("images/living");
+        $diningimages = Storage::disk('public')->files("images/dining");
+        $bedroomimages = Storage::disk('public')->files("images/bedroom");
+
+        $fakedining = [$this->faker->randomElement($diningimages),$this->faker->randomElement($diningimages),$this->faker->randomElement($diningimages),$this->faker->randomElement($diningimages)];
+        $fakebedroom = [$this->faker->randomElement($bedroomimages),$this->faker->randomElement($bedroomimages),$this->faker->randomElement($bedroomimages),$this->faker->randomElement($bedroomimages)];
+        $fakeliving = [$this->faker->randomElement($livingimages),$this->faker->randomElement($livingimages),$this->faker->randomElement($livingimages),$this->faker->randomElement($livingimages)];
         return [
             'name' => $this->faker->unique()->word,
             'description' => $this->faker->sentence,
             'price' => $this->faker->randomFloat(2, 10, 1000),
             'quantity' => $this->faker->numberBetween(1, 100),
             'category' => $category,
-            'room' => $this->faker->randomElement(['living', 'bedroom', 'dining']),
+            'room' => $room,
             'brand' => $this->faker->company,
             'material' => $this->faker->randomElement(['wood', 'metal', 'plastic']),
             'color' => $this->faker->colorName,
             'dimensions' => ['height' => $this->faker->numberBetween(50, 200), 'width' => $this->faker->numberBetween(50, 200), 'depth' => $this->faker->numberBetween(50, 200)],
             'weight' => $this->faker->randomFloat(2, 1, 100),
             'rating' => $this->faker->randomFloat(2, 0, 5),
-            'images' => [
-                fake()->imageUrl(),
-                fake()->imageUrl(),
-                fake()->imageUrl(),
-                fake()->imageUrl(),
-            ],
+            'images' => $room === "dining" ? $fakedining: ($room === "bedroom" ? $fakebedroom : ($room === "living" ? $fakeliving : null)),
             'reviews' => [
                 fake()->sentence,
                 fake()->sentence,

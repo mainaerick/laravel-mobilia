@@ -1,18 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Product } from "@/Core/_Models";
-import {
-    Card,
-    Carousel,
-    Col,
-    Flex,
-    Row,
-    Typography,
-    Image,
-    Button,
-    Divider,
-    Input,
-} from "antd";
+import { Card, Carousel, Col, Flex, Row, Typography, Button } from "antd";
 import Meta from "antd/es/card/Meta";
 import {
     HeartOutlined,
@@ -78,13 +67,14 @@ const Index: React.FC<Props> = ({ auth, products }) => {
                 }}
             >
                 <div
-                    style={{
-                        position: "absolute",
-                        top: "30%",
-                        left: "50%",
-                        right: "5%",
-                        height: "100px",
-                    }}
+                    className="absolute sm:bottom-0 sm:right-0  lg:top-[30%] lg:left-[50%] lg:right-[5%] "
+                    // style={{
+                    //     // position: "absolute",
+                    //     top: "30%",
+                    //     left: "50%",
+                    //     right: "5%",
+                    //     height: "100px",
+                    // }}
                 >
                     <Card
                         style={{
@@ -223,7 +213,12 @@ const Index: React.FC<Props> = ({ auth, products }) => {
                             return (
                                 <Col
                                     key={key}
-                                    span={6}
+                                    // span={6}
+                                    xs={{ span: 12 }}
+                                    sm={{ span: 12 }}
+                                    md={{ span: 8 }}
+                                    lg={{ span: 6 }}
+                                    xl={{ span: 6 }}
                                     style={{ marginBottom: "23px" }}
                                 >
                                     <ProductCard product={product} />
@@ -267,11 +262,19 @@ const Index: React.FC<Props> = ({ auth, products }) => {
                     }}
                 >
                     <Row
+                    // className="lg:h-600"
                         style={{ height: "600px" }}
                         justify={"center"}
                         align={"middle"}
                     >
-                        <Col span={6}>
+                        <Col
+                            // span={6}
+                            xs={{ span: 12 }}
+                            sm={{ span: 12 }}
+                            md={{ span: 8 }}
+                            lg={{ span: 6 }}
+                            xl={{ span: 6 }}
+                        >
                             <Flex vertical={true}>
                                 <Typography.Title level={3}>
                                     50+ Beautiful rooms inspiration{" "}

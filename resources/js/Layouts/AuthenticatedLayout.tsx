@@ -131,6 +131,7 @@ export default function Authenticated({
                                         </Dropdown>
                                     </div>
                                 </div>
+                                {/* <Flex gap={37}> */}
                                 <SearchOutlined
                                     style={{ fontSize: "17px" }}
                                     className={
@@ -166,6 +167,7 @@ export default function Authenticated({
                                         />{" "}
                                     </Badge>
                                 </Flex>
+                                {/* </Flex> */}
                             </div>
                             <div className="-me-2 flex items-center sm:hidden">
                                 <button
@@ -222,6 +224,30 @@ export default function Authenticated({
                                 active={route().current("dashboard")}
                             >
                                 Dashboard
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("home.index")}
+                                active={route().current("home.index")}
+                            >
+                                Home
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("shop.index")}
+                                active={route().current("shop.index")}
+                            >
+                                Shop
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("about.index")}
+                                active={route().current("about")}
+                            >
+                                About
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("contact.index")}
+                                active={route().current("contact")}
+                            >
+                                Contact
                             </ResponsiveNavLink>
                         </div>
 

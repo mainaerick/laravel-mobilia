@@ -29,7 +29,6 @@ function Index({ auth, errors }: Props) {
 
     // console.log(errors);
 
-
     const { props } = usePage();
     const items = props?.cartItems as CartItem[];
     const [subTotal, setSubTotal] = useState<string>("0");
@@ -133,7 +132,6 @@ function Index({ auth, errors }: Props) {
     }, [items]);
     return (
         <Authenticated user={auth}>
-
             <Hero whichRoute={"Shop>Checkout"} title={"Checkout"} />
 
             <div
@@ -154,7 +152,14 @@ function Index({ auth, errors }: Props) {
                         // style={{ maxWidth: 600 }}
                     >
                         <Row gutter={12}>
-                            <Col span={12}>
+                            <Col
+                                // span={12}
+                                xs={{ span: 24 }}
+                                sm={{ span: 24 }}
+                                md={{ span: 12 }}
+                                lg={{ span: 12 }}
+                                xl={{ span: 12 }}
+                            >
                                 <Row gutter={16}>
                                     <Col span={12}>
                                         {" "}
@@ -206,7 +211,15 @@ function Index({ auth, errors }: Props) {
                                 />
                             </Col>
 
-                            <Col span={12}>
+                            <Col
+                                // span={12}
+                                xs={{ span: 24 }}
+                                sm={{ span: 24 }}
+                                md={{ span: 8 }}
+                                lg={{ span: 12}}
+                                xl={{ span: 12 }}
+                                style={{width:"100%",}}
+                            >
                                 <Table
                                     columns={columns}
                                     dataSource={items}
