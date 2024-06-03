@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
@@ -31,12 +32,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('contact', ProductController::class);
     Route::get('/images/{path}', function ($path) {
         $path = 'public/images/' . $path;
-        
+
         // Validate the path to prevent directory traversal attacks
         if (str_contains($path, '..')) {
             abort(403);
         }
-    
+
         if (Storage::exists($path)) {
             return response()->file(storage_path('app/' . $path));
         } else {
@@ -53,7 +54,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 });
-
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Route::resource('admin_', AdminController::class);
+    Route::get('admin_', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('admin_/products', [AdminController::class, 'products_index'])->name('admin.product_index');
+    Route::get('admin_/product/{id}', [AdminController::class, 'product_show'])->name('admin.product_show');
+    Route::delete('admin_/product', [AdminController::class, 'product_destroy'])->name('admin.product_destroy');
+    Route::patch('admin_/product', [AdminController::class, 'product_update'])->name('admin.product_update');
+    Route::post('admin_/product', [AdminController::class, 'product_store'])->name('admin.product_store');
+});
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

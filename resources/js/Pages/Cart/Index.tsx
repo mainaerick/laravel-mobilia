@@ -111,9 +111,9 @@ function Index({ auth }: Props) {
                         //  span={16}
                         xs={{ span: 24 }}
                         sm={{ span: 24 }}
-                        md={{ span: 8 }}
-                        lg={{ span: 6 }}
-                        xl={{ span: 6 }}
+                        md={{ span: 12 }}
+                        lg={{ span: 12 }}
+                        xl={{ span: 12 }}
                     >
                         <ConfigProvider
                             theme={{
@@ -135,9 +135,9 @@ function Index({ auth }: Props) {
                         //  span={8}
                         xs={{ span: 24 }}
                         sm={{ span: 24 }}
-                        md={{ span: 8 }}
-                        lg={{ span: 8 }}
-                        xl={{ span: 8 }}
+                        md={{ span: 12 }}
+                        lg={{ span: 12 }}
+                        xl={{ span: 12 }}
                         style={{}}
                     >
                         <Flex
