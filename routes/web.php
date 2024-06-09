@@ -60,8 +60,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('admin_/products', [AdminController::class, 'products_index'])->name('admin.product_index');
     Route::get('admin_/product/{id}', [AdminController::class, 'product_show'])->name('admin.product_show');
     Route::delete('admin_/product', [AdminController::class, 'product_destroy'])->name('admin.product_destroy');
-    Route::patch('admin_/product', [AdminController::class, 'product_update'])->name('admin.product_update');
+    Route::put('admin_/product/{id}', [AdminController::class, 'product_update'])->name('admin.product_update');
     Route::post('admin_/product', [AdminController::class, 'product_store'])->name('admin.product_store');
+    // Route::post('admin_/add_product', [AdminController::class, 'product_store'])->name('admin.product_store');
+
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

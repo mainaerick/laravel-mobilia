@@ -57,14 +57,19 @@ const sideBarNode = (
     icon?: any,
     children?: any,
 ) => {
-    return getItem(<Link href={link}>{label}</Link>, link, icon, children);
+    return getItem(
+        <Link href={"/admin_/" + link}>{label}</Link>,
+        link,
+        icon,
+        children,
+    );
 };
 const items: MenuItem[] = [
     sideBarNode("dashboard", "Dashboard", <PieChartOutlined />),
     sideBarNode("catalog", "Catalog", <UserOutlined />, [
         sideBarNode("products", "Products"),
-        sideBarNode("categories", "Categories"),
         sideBarNode("add_product", "Add Product"),
+        sideBarNode("categories", "Categories"),
         sideBarNode("edit_product", "Edit Product"),
         sideBarNode("add_category", "Add Category"),
         sideBarNode("edit_category", "Edit Category"),

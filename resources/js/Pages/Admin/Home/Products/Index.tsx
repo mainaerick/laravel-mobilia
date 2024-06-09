@@ -320,14 +320,18 @@ function Index({ auth, products }: Props) {
             width: 150,
             fixed: "right",
             render: (item) => {
-               return <Space>
-                    <Typography.Link>
-                        <Link href={route("admin.product_show", item.id)}>Edit</Link>
-                    </Typography.Link>
-                    <Typography.Link>
-                        <Link href="">Delete</Link>
-                    </Typography.Link>
-                </Space>
+                return (
+                    <Space>
+                        <Typography.Link>
+                            <Link href={route("admin.product_show", item.id)}>
+                                Edit
+                            </Link>
+                        </Typography.Link>
+                        <Typography.Link>
+                            <Link href="">Delete</Link>
+                        </Typography.Link>
+                    </Space>
+                );
             },
         },
     ];

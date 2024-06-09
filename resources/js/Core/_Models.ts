@@ -22,6 +22,7 @@ export interface Product {
     reviews: string[];
     colors: string[];
     sizes: string[];
+    newimages:any[]
     created_at: string;
     updated_at: string;
 }
@@ -88,6 +89,3 @@ export interface Order {
     createdAt?: string; // Optional for timestamps
     updatedAt?: string; // Optional for timestamps
 }
-
-
-

@@ -22,6 +22,7 @@ class ProductResource extends JsonResource
             'quantity' => $this->quantity,
             'category' => $this->category,
             'brand' => $this->brand,
+            'room' => $this->room,
             'material' => $this->material,
             'color' => $this->color,
             'dimensions' => $this->dimensions,
@@ -29,11 +30,11 @@ class ProductResource extends JsonResource
             'images' => $this->images,
             'rating' => $this->rating,
             'reviews' => $this->reviews,
-            'sizes'=>$this->sizes,
-            'colors'=>$this->colors,
+            'sizes' => $this->sizes,
+            'colors' => $this->colors,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            
+
         ];
         // return parent::toArray($request);
     }
