@@ -56,12 +56,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 Route::middleware(['auth', 'verified'])->group(function () {
     // Route::resource('admin_', AdminController::class);
-    Route::get('admin_', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('admin_/products', [AdminController::class, 'products_index'])->name('admin.product_index');
-    Route::get('admin_/product/{id}', [AdminController::class, 'product_show'])->name('admin.product_show');
-    Route::delete('admin_/product', [AdminController::class, 'product_destroy'])->name('admin.product_destroy');
-    Route::put('admin_/product/{id}', [AdminController::class, 'product_update'])->name('admin.product_update');
-    Route::post('admin_/product', [AdminController::class, 'product_store'])->name('admin.product_store');
+    Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('admin/products', [ProductController::class, 'admin_index'])->name('admin.products');
+    Route::get('admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
+    Route::get('admin/product/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
+    Route::delete('admin/product/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
+    Route::put('admin/product/{id}', [ProductController::class, 'update'])->name('admin.product.update');
+    Route::post('admin/product', [ProductController::class, 'store'])->name('admin.product.store');
+
     // Route::post('admin_/add_product', [AdminController::class, 'product_store'])->name('admin.product_store');
 
 });

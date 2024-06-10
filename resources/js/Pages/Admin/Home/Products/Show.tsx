@@ -51,7 +51,7 @@ function Show({ auth, product }: Props) {
 
     const onFinish = (values: any) => {
         console.log(data);
-        post(route("admin.product_update", { id: data.id }), {
+        post(route("admin.product.update", { id: data.id }), {
             onSuccess: () => {
                 messageApi.open({
                     type: "success",

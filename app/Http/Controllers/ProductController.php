@@ -8,7 +8,8 @@ use App\Http\Resources\ProductResource;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -51,7 +52,40 @@ class ProductController extends Controller
         ]);
         // return Inertia::render('Shop/Index', ['products' => $products];
     }
+    public function admin_index()
+    {
+        $products = Product::all();
+        $query = Product::query();
 
+
+        $per_page = request("per_page", 10);
+        $sortField = request("sort_field", 'created_at');
+        $sortDirection = request("sort_direction", "desc");
+        $category = request("category");
+
+        if (str_contains($sortField, 'price')) {
+            $sortField = 'price';
+            if (str_contains($sortField, 'high')) {
+                $sortDirection = "asc";
+            } else {
+                $sortDirection = "desc";
+            }
+        }
+
+        if ($category) {
+            $query->where("category", "like", "%" . $category . "%");
+        }
+        $products = $query->orderBy($sortField, $sortDirection)->paginate($per_page)
+            ->onEachSide(1);
+
+
+        //    dd($products);
+        return inertia('Admin/Home/Products/Index', [
+            "products" => $products,
+            'queryParams' => request()->query() ?: null,
+        ]);
+
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -113,9 +147,16 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+
+        $query = Product::query();
+
+        return Inertia::render('Admin/Home/Products/Show', [
+            'product' => new ProductResource($product),
+        ]);
     }
 
     /**
@@ -125,7 +166,6 @@ class ProductController extends Controller
     {
 
         $product = Product::findOrFail($id);
-        // dd($request);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -160,10 +200,10 @@ class ProductController extends Controller
 
 
         }
-        $product->images = $images;
+        $validated["images"] = $images;
 
-        $product->save($validated);
-
+        // dd($validated);
+        $product->update($validated);
     }
 
     /**

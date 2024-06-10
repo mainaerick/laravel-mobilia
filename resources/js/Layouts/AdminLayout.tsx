@@ -58,36 +58,36 @@ const sideBarNode = (
     children?: any,
 ) => {
     return getItem(
-        <Link href={"/admin_/" + link}>{label}</Link>,
+        <Link href={link==="#"?"#": route(link)}>{label}</Link>,
         link,
         icon,
         children,
     );
 };
 const items: MenuItem[] = [
-    sideBarNode("dashboard", "Dashboard", <PieChartOutlined />),
-    sideBarNode("catalog", "Catalog", <UserOutlined />, [
-        sideBarNode("products", "Products"),
-        sideBarNode("add_product", "Add Product"),
-        sideBarNode("categories", "Categories"),
-        sideBarNode("edit_product", "Edit Product"),
-        sideBarNode("add_category", "Add Category"),
-        sideBarNode("edit_category", "Edit Category"),
+    sideBarNode("#", "Dashboard", <PieChartOutlined />),
+    sideBarNode("#", "Catalog", <UserOutlined />, [
+        sideBarNode("admin.products", "Products"),
+        sideBarNode("admin.products.create", "Add Product"),
+        sideBarNode("#", "Categories"),
+        sideBarNode("#", "Edit Product"),
+        sideBarNode("#", "Add Category"),
+        sideBarNode("#", "Edit Category"),
     ]),
-    sideBarNode("sales", "Sales", <DesktopOutlined />, [
-        sideBarNode("order_listing", "Order Listing"),
-        sideBarNode("add_order", "Add Order"),
-        sideBarNode("edit_order", "Edit Order"),
+    sideBarNode("#", "Sales", <DesktopOutlined />, [
+        sideBarNode("#", "Order Listing"),
+        sideBarNode("#", "Add Order"),
+        sideBarNode("#", "Edit Order"),
     ]),
-    sideBarNode("customers", "Customers", <UserOutlined />, [
-        sideBarNode("customer_listing", "Customer Listing"),
+    sideBarNode("#", "Customers", <UserOutlined />, [
+        sideBarNode("#", "Customer Listing"),
     ]),
-    sideBarNode("reports", "Reports", <FileOutlined />, [
-        sideBarNode("product_viewed", "Product Viewed"),
-        sideBarNode("sales", "Sales"),
-        sideBarNode("returns", "Returns"),
-        sideBarNode("orders", "Customer Orders"),
-        sideBarNode("shipping", "Shipping"),
+    sideBarNode("#", "Reports", <FileOutlined />, [
+        sideBarNode("#", "Product Viewed"),
+        sideBarNode("#", "Sales"),
+        sideBarNode("#", "Returns"),
+        sideBarNode("#", "Customer Orders"),
+        sideBarNode("#", "Shipping"),
     ]),
 ];
 const { Header, Content, Footer, Sider } = Layout;

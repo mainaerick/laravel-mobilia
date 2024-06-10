@@ -323,7 +323,7 @@ function Index({ auth, products }: Props) {
                 return (
                     <Space>
                         <Typography.Link>
-                            <Link href={route("admin.product_show", item.id)}>
+                            <Link href={route("admin.product.edit", item.id)}>
                                 Edit
                             </Link>
                         </Typography.Link>
