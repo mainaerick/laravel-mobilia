@@ -91,7 +91,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+
+        return inertia("Admin/Home/Products/Create");
     }
 
     /**
@@ -99,7 +100,22 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $data = $request->validated();
+        $images = [];
+
+        if ($request->hasFile('newimages')) {
+            foreach ($request->file('newimages') as $image) {
+
+                $path = $image->store('images/products', 'public');
+                $images[] = $path;
+
+            }
+
+
+        }
+        $data["images"] = $images;
+        // dd($data);
+        Product::create($data);
     }
 
     /**

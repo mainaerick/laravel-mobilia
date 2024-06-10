@@ -5,10 +5,10 @@ interface Dimension {
 }
 
 export interface Product {
-    id: number;
+    id?: number;
     name: string;
     description: string;
-    price: string;
+    price: number;
     quantity: number;
     category: string;
     room: string;
@@ -18,14 +18,37 @@ export interface Product {
     dimensions: Dimension;
     weight: string;
     images: string[];
-    rating: string;
+    rating: number;
     reviews: string[];
     colors: string[];
     sizes: string[];
-    newimages:any[]
-    created_at: string;
-    updated_at: string;
+    newimages?: any[];
+    created_at?: string;
+    updated_at?: string;
 }
+
+export const ProductData: Product = {
+    name: "ad",
+    description: "ad",
+    price: 200,
+    quantity: 2,
+    category: "as",
+    room: "bedroom",
+    brand: "ad",
+    material: "as",
+    color: "brown",
+    dimensions: {
+        depth: Number.parseInt("2"),
+        width: Number.parseInt("2"),
+        height: Number.parseInt("2"),
+    },
+    weight: "12",
+    images: [],
+    rating: 2,
+    reviews: ["ewe"],
+    colors: ["brown"],
+    sizes: ["3 seater"],
+};
 
 interface PaginationLink {
     url: string | null;

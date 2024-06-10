@@ -82,7 +82,23 @@ function Show({ auth, product }: Props) {
             [field]: value,
         });
     };
+    const handleFileChange = ({ fileList }: { fileList: UploadFile[] }) => {
+        const cleanImageArray = fileList
+            .map((file) => file.originFileObj)
+            .filter(Boolean);
+        const stringImagesArray: any = fileList
+            .map((file) => !file.originFileObj && file.name)
+            .filter(Boolean);
 
+        // setData("images",stringImagesArray)
+
+        if (stringImagesArray.length > 0) {
+            setData("images", stringImagesArray);
+        }
+        if (cleanImageArray.length > 0) {
+            setData("newimages", cleanImageArray);
+        }
+    };
     return (
         <AuthenticatedAdmin user={auth}>
             {contextHolder}
@@ -92,6 +108,7 @@ function Show({ auth, product }: Props) {
                 setData={setData}
                 fileList={fileList}
                 loading={loading}
+                handleFileChange={handleFileChange}
             />
         </AuthenticatedAdmin>
     );

@@ -19,6 +19,7 @@ class Product extends Model
         'material',
         'color',
         'dimensions',
+        'room',
         'weight',
         'rating',
         'images',

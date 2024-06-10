@@ -20,32 +20,24 @@ type Props = {
     setData: any;
     fileList: any;
     loading: boolean;
+    handleFileChange: (values: any) => void;
 };
 
-function ProductForm({ data, onFinish, setData, fileList, loading }: Props) {
+function ProductForm({
+    data,
+    onFinish,
+    setData,
+    fileList,
+    loading,
+    handleFileChange,
+}: Props) {
     const handleDimensionChange = (field: string, value: any) => {
         setData("dimensions", {
             ...data.dimensions,
             [field]: value,
         });
     };
-    const handleFileChange = ({ fileList }: { fileList: UploadFile[] }) => {
-        const cleanImageArray = fileList
-            .map((file) => file.originFileObj)
-            .filter(Boolean);
-        const stringImagesArray: any = fileList
-            .map((file) => !file.originFileObj && file.name)
-            .filter(Boolean);
 
-        // setData("images",stringImagesArray)
-
-        if (stringImagesArray.length > 0) {
-            setData("images", stringImagesArray);
-        }
-        if (cleanImageArray.length > 0) {
-            setData("newimages", cleanImageArray);
-        }
-    };
     return (
         <Form
             layout="vertical"
@@ -272,7 +264,7 @@ function ProductForm({ data, onFinish, setData, fileList, loading }: Props) {
                         />
                     </Form.Item>
 
-                    {fileList.length > 0 && (
+                    {
                         <Form.Item
                             name="images"
                             label="Images"
@@ -296,7 +288,7 @@ function ProductForm({ data, onFinish, setData, fileList, loading }: Props) {
                                 </Button>
                             </Upload>
                         </Form.Item>
-                    )}
+                    }
 
                     <Form.Item
                         name="rating"
