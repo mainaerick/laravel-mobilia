@@ -1,56 +1,25 @@
-import React, { useRef, useState } from "react";
-import { SearchOutlined } from "@ant-design/icons";
-import type { InputRef, TableColumnsType, TableColumnType } from "antd";
-import { Button, Input, Space, Table, Typography } from "antd";
-import type { FilterDropdownProps } from "antd/es/table/interface";
-import Highlighter from "react-highlight-words";
+import { Category, Product } from "@/Core/_Models";
 import AuthenticatedAdmin from "@/Layouts/AdminLayout";
-import { Pagination, Product } from "@/Core/_Models";
+import {
+    Button,
+    Input,
+    InputRef,
+    Space,
+    Table,
+    TableColumnType,
+    TableColumnsType,
+    Typography,
+} from "antd";
+import React, { useRef, useState } from "react";
 import { Link } from "react-alice-carousel";
+import Highlighter from "react-highlight-words";
+import { SearchOutlined } from "@ant-design/icons";
+import { FilterDropdownProps } from "antd/es/table/interface";
 
-interface DataType {
-    key: string;
-    name: string;
-    age: number;
-    address: string;
-}
+type Props = { auth: any; categories: any };
+type DataIndex = keyof Category;
 
-type DataIndex = keyof Product;
-
-// const data: DataType[] = [
-//     {
-//         key: "1",
-//         name: "John Brown",
-//         age: 32,
-//         address: "New York No. 1 Lake Park",
-//     },
-//     {
-//         key: "2",
-//         name: "Joe Black",
-//         age: 42,
-//         address: "London No. 1 Lake Park",
-//     },
-//     {
-//         key: "3",
-//         name: "Jim Green",
-//         age: 32,
-//         address: "Sydney No. 1 Lake Park",
-//     },
-//     {
-//         key: "4",
-//         name: "Jim Red",
-//         age: 32,
-//         address: "London No. 2 Lake Park",
-//     },
-// ];
-
-interface Props {
-    auth: any;
-    products: Pagination;
-}
-function Index({ auth, products }: Props) {
-    const data = products.data as Product[];
-    console.log(data);
+function Index({ auth, categories }: Props) {
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
     const searchInput = useRef<InputRef>(null);
@@ -69,10 +38,9 @@ function Index({ auth, products }: Props) {
         clearFilters();
         setSearchText("");
     };
-
     const getColumnSearchProps = (
         dataIndex: DataIndex,
-    ): TableColumnType<Product> => ({
+    ): TableColumnType<Category> => ({
         filterDropdown: ({
             setSelectedKeys,
             selectedKeys,
@@ -150,7 +118,7 @@ function Index({ auth, products }: Props) {
                 style={{ color: filtered ? "#1677ff" : undefined }}
             />
         ),
-        onFilter: (value, record: any) =>
+        onFilter: (value, record) =>
             record[dataIndex]
                 .toString()
                 .toLowerCase()
@@ -198,107 +166,51 @@ function Index({ auth, products }: Props) {
     //     },
     // ];
 
-    const columns: TableColumnsType<Product> = [
+    const columns: TableColumnsType<Category> = [
         {
             title: "Name",
             dataIndex: "name",
             key: "name",
-            width: "15%",
+            // width: "15%",
             ...getColumnSearchProps("name"),
         },
         {
-            title: "Description",
-            dataIndex: "description",
-            key: "description",
-            width: "25%",
-            ...getColumnSearchProps("description"),
+            title: "Colors",
+            dataIndex: "colors",
+            key: "colors",
+            render: (colors: []) => {
+                return colors.map((color, key) => {
+                    return (
+                        <span key={key}>
+                            {`${color}  ${key !== colors.length - 1 ? "," : ""}`}
+                        </span>
+                    );
+                });
+            },
+            // width: "15%",
+            // ...getColumnSearchProps("colors"),
         },
         {
-            title: "Price",
-            dataIndex: "price",
-            key: "price",
-            width: "10%",
-            ...getColumnSearchProps("price"),
-            sorter: (a: any, b: any) =>
-                parseFloat(a.price) - parseFloat(b.price),
-            sortDirections: ["descend", "ascend"],
+            title: "Materials",
+            dataIndex: "materials",
+            key: "materials",
+            render: (materials: []) => {
+                return materials.map((material, key) => {
+                    return (
+                        <span key={key}>
+                            {`${material}  ${key !== materials.length - 1 ? "," : ""}`}
+                        </span>
+                    );
+                });
+            },
+            // width: "15%",
+            // ...getColumnSearchProps("colors"),
         },
-        {
-            title: "Quantity",
-            dataIndex: "quantity",
-            key: "quantity",
-            width: "10%",
-            ...getColumnSearchProps("quantity"),
-            sorter: (a, b) => a.quantity - b.quantity,
-            sortDirections: ["descend", "ascend"],
-        },
-        {
-            title: "Category",
-            dataIndex: "category",
-            key: "category",
-            width: "10%",
-            ...getColumnSearchProps("category"),
-        },
-        {
-            title: "Room",
-            dataIndex: "room",
-            key: "room",
-            width: "10%",
-            ...getColumnSearchProps("room"),
-        },
-        {
-            title: "Brand",
-            dataIndex: "brand",
-            key: "brand",
-            width: "10%",
-            ...getColumnSearchProps("brand"),
-        },
-        // {
-        //     title: "Material",
-        //     dataIndex: "material",
-        //     key: "material",
-        //     width: "10%",
-        //     ...getColumnSearchProps("material"),
-        // },
-        // {
-        //     title: "Color",
-        //     dataIndex: "color",
-        //     key: "color",
-        //     width: "10%",
-        //     ...getColumnSearchProps("color"),
-        // },
-        // {
-        //     title: "Dimensions (Depth x Width x Height)",
-        //     key: "dimensions",
-        //     width: "15%",
-        //     render: (_, record) =>
-        //         `${record.dimensions.depth} x ${record.dimensions.width} x ${record.dimensions.height}`,
-        //     sorter: (a, b) => a.dimensions.depth - b.dimensions.depth,
-        //     sortDirections: ["descend", "ascend"],
-        // },
-        // {
-        //     title: "Weight",
-        //     dataIndex: "weight",
-        //     key: "weight",
-        //     width: "10%",
-        //     ...getColumnSearchProps("weight"),
-        //     sorter: (a, b) => parseFloat(a.weight) - parseFloat(b.weight),
-        //     sortDirections: ["descend", "ascend"],
-        // },
-        // {
-        //     title: "Rating",
-        //     dataIndex: "rating",
-        //     key: "rating",
-        //     width: "10%",
-        //     ...getColumnSearchProps("rating"),
-        //     sorter: (a, b) => parseFloat(a.rating) - parseFloat(b.rating),
-        //     sortDirections: ["descend", "ascend"],
-        // },
         {
             title: "Created At",
             dataIndex: "created_at",
             key: "created_at",
-            width: "15%",
+            // width: "15%",
             ...getColumnSearchProps("created_at"),
             sorter: (a: any, b: any) =>
                 new Date(a.created_at).getTime() -
@@ -309,7 +221,7 @@ function Index({ auth, products }: Props) {
             title: "Updated At",
             dataIndex: "updated_at",
             key: "updated_at",
-            width: "15%",
+            // width: "15%",
             ...getColumnSearchProps("updated_at"),
             sorter: (a: any, b: any) =>
                 new Date(a.updated_at).getTime() -
@@ -320,11 +232,11 @@ function Index({ auth, products }: Props) {
             title: "Action",
             width: 150,
             fixed: "right",
-            render: (item) => {
+            render: (item: any) => {
                 return (
                     <Space>
                         <Typography.Link>
-                            <Link href={route("admin.product.edit", item.id)}>
+                            <Link href={route("admin.category.edit", item.id)}>
                                 Edit
                             </Link>
                         </Typography.Link>
@@ -336,11 +248,10 @@ function Index({ auth, products }: Props) {
             },
         },
     ];
-
     return (
         <AuthenticatedAdmin user={auth}>
             <div style={{ width: "100%" }}>
-                <Table columns={columns} dataSource={data} />
+                <Table columns={columns} dataSource={categories} />
             </div>
         </AuthenticatedAdmin>
     );

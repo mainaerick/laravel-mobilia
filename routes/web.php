@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OrderController;
@@ -63,6 +64,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('admin/product/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
     Route::put('admin/product/{id}', [ProductController::class, 'update'])->name('admin.product.update');
     Route::post('admin/product', [ProductController::class, 'store'])->name('admin.product.store');
+    Route::get('admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
+    Route::get('admin/category/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+    Route::put('admin/category/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
+
 
     // Route::post('admin_/add_product', [AdminController::class, 'product_store'])->name('admin.product_store');
 

@@ -28,26 +28,26 @@ export interface Product {
 }
 
 export const ProductData: Product = {
-    name: "ad",
-    description: "ad",
-    price: 200,
-    quantity: 2,
-    category: "as",
-    room: "bedroom",
-    brand: "ad",
-    material: "as",
-    color: "brown",
+    name: "",
+    description: "",
+    price: Number.parseInt(""),
+    quantity: Number.parseInt(""),
+    category: "",
+    room: "",
+    brand: "",
+    material: "",
+    color: "",
     dimensions: {
-        depth: Number.parseInt("2"),
-        width: Number.parseInt("2"),
-        height: Number.parseInt("2"),
+        depth: Number.parseInt(""),
+        width: Number.parseInt(""),
+        height: Number.parseInt(""),
     },
-    weight: "12",
+    weight: "",
     images: [],
-    rating: 2,
-    reviews: ["ewe"],
-    colors: ["brown"],
-    sizes: ["3 seater"],
+    rating: Number.parseInt(""),
+    reviews: [],
+    colors: [],
+    sizes: [],
 };
 
 interface PaginationLink {
@@ -111,4 +111,14 @@ export interface Order {
     notes: string;
     createdAt?: string; // Optional for timestamps
     updatedAt?: string; // Optional for timestamps
+}
+
+export interface Category {
+    id: number;
+    name: string;
+    materials: [];
+    colors: [];
+    sizes: [];
+    created_at: string;
+    updated_at: string;
 }
