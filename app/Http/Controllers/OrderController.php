@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Http\Resources\AdminOrderResource;
 use App\Http\Resources\OrderResource;
 use App\Models\CartItem;
 use App\Models\Order;
@@ -24,15 +25,29 @@ class OrderController extends Controller
             'orders' => OrderResource::collection($orders),
         ]);
     }
+    public function admin_index()
+    {
+        $user = auth()->user();
+        // $orders = Order::all();
+        $orders = Order::with('user')->paginate(10);
+        return Inertia::render('Admin/Home/Orders/Index', [
+            'orders' => AdminOrderResource::collection($orders),
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return inertia('Checkout/Index', [
+        return inertia('Admin/Home/Orders/Create', [
         ]);
     }
 
+    public function checkout()
+    {
+        return inertia('Checkout/Index', [
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      */

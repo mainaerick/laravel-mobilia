@@ -58,8 +58,8 @@ const sideBarNode = (
     children?: any,
 ) => {
     return getItem(
-        <Link href={link==="#"?"#": route(link)}>{label}</Link>,
-        link,
+        <Link href={link === "#" ? "#" : route(link)}>{label}</Link>,
+        label,
         icon,
         children,
     );
@@ -69,15 +69,12 @@ const items: MenuItem[] = [
     sideBarNode("#", "Catalog", <UserOutlined />, [
         sideBarNode("admin.products", "Products"),
         sideBarNode("admin.products.create", "Add Product"),
-        sideBarNode("#", "Categories"),
-        sideBarNode("#", "Edit Product"),
-        sideBarNode("#", "Add Category"),
-        sideBarNode("#", "Edit Category"),
+        sideBarNode("admin.categories", "Categories"),
+        sideBarNode("admin.categories.create", "Add Category"),
     ]),
     sideBarNode("#", "Sales", <DesktopOutlined />, [
-        sideBarNode("#", "Order Listing"),
-        sideBarNode("#", "Add Order"),
-        sideBarNode("#", "Edit Order"),
+        sideBarNode("admin.orders", "Order Listing"),
+        sideBarNode("admin.orders.create", "Add Order"),
     ]),
     sideBarNode("#", "Customers", <UserOutlined />, [
         sideBarNode("#", "Customer Listing"),

@@ -49,7 +49,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
     Route::delete('/cart/{id}', [CartController::class, 'removeItem'])->name('cart.removeItem');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
+    Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout.create');
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 
@@ -64,10 +64,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('admin/product/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
     Route::put('admin/product/{id}', [ProductController::class, 'update'])->name('admin.product.update');
     Route::post('admin/product', [ProductController::class, 'store'])->name('admin.product.store');
+    // admin categories
     Route::get('admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
+    Route::get('admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
     Route::get('admin/category/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
     Route::put('admin/category/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
-
+    Route::post('admin/category', [CategoryController::class, 'store'])->name('admin.category.store');
+    Route::delete('admin/category/{id}', [CategoryController::class, 'destroy'])->name('admin.category.destroy');
+    // Admin Orders
+    Route::get('admin/orders', [OrderController::class, 'admin_index'])->name('admin.orders');
+    Route::get('admin/orders/create', [OrderController::class, 'create'])->name('admin.orders.create');
+    Route::get('admin/order/{id}', [OrderController::class, 'edit'])->name('admin.order.edit');
+    Route::put('admin/order/{id}', [OrderController::class, 'update'])->name('admin.order.update');
+    Route::post('admin/order', [OrderController::class, 'store'])->name('admin.order.store');
+    Route::delete('admin/order/{id}', [OrderController::class, 'destroy'])->name('admin.order.destroy');
 
     // Route::post('admin_/add_product', [AdminController::class, 'product_store'])->name('admin.product_store');
 

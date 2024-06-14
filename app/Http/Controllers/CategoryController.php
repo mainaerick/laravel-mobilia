@@ -29,7 +29,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return inertia("Admin/Home/Categories/Create");
+
     }
 
     /**
@@ -37,7 +38,10 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        // dd($data);
+        Category::create($data);
     }
 
     /**
@@ -77,12 +81,16 @@ class CategoryController extends Controller
         // dd($validated);
         $category->update($validated);
     }
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $name = $category->name;
+        $category->delete();
+
+        return to_route('admin.categories')
+            ->with('message', "Category \"$name\" was deleted");
     }
 }

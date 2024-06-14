@@ -114,11 +114,17 @@ export interface Order {
 }
 
 export interface Category {
-    id: number;
+    id?: number;
     name: string;
     materials: [];
     colors: [];
     sizes: [];
-    created_at: string;
-    updated_at: string;
+    created_at?: string;
+    updated_at?: string;
 }
+export const CategoryData: Category = {
+    name: "",
+    materials: [],
+    colors: [],
+    sizes: [],
+};

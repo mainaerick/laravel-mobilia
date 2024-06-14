@@ -1,28 +1,28 @@
-import { Category, Product } from "@/Core/_Models";
+import { Category, Order } from "@/Core/_Models";
 import AuthenticatedAdmin from "@/Layouts/AdminLayout";
+import { router } from "@inertiajs/react";
 import {
-    Button,
-    Input,
+    message,
     InputRef,
-    Space,
-    Table,
     TableColumnType,
+    Input,
+    Space,
+    Button,
     TableColumnsType,
     Typography,
-    message,
+    Table,
 } from "antd";
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-alice-carousel";
+import { FilterDropdownProps } from "antd/es/table/interface";
+import React, { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
-import { FilterDropdownProps } from "antd/es/table/interface";
-import { router, usePage } from "@inertiajs/react";
 
-type Props = { auth: any; categories: any; flash: { message: string | null } };
-type DataIndex = keyof Category;
+type Props = { auth: any; orders: any };
+type DataIndex = keyof Order;
 
-function Index({ auth, categories, flash }: Props) {
-    console.log(categories);
+function Index({ auth, orders }: Props) {
+    const ordersData = orders.data as Order[];
+    console.log(ordersData);
     const [messageApi, contextHolder] = message.useMessage();
 
     const [searchText, setSearchText] = useState("");
@@ -45,7 +45,7 @@ function Index({ auth, categories, flash }: Props) {
     };
     const getColumnSearchProps = (
         dataIndex: DataIndex,
-    ): TableColumnType<Category> => ({
+    ): TableColumnType<Order> => ({
         filterDropdown: ({
             setSelectedKeys,
             selectedKeys,
@@ -146,68 +146,128 @@ function Index({ auth, categories, flash }: Props) {
             ),
     });
 
-    const columns: TableColumnsType<Category> = [
+    const columns: TableColumnsType<Order> = [
         {
-            title: "Name",
-            dataIndex: "name",
-            key: "name",
+            title: "Firstname",
+            dataIndex: "firstname",
+            key: "firstname",
             // width: "15%",
-            ...getColumnSearchProps("name"),
+            ...getColumnSearchProps("firstname"),
         },
         {
-            title: "Colors",
-            dataIndex: "colors",
-            key: "colors",
-            render: (colors: []) => {
-                return colors.map((color, key) => {
-                    return (
-                        <span key={key}>
-                            {`${color}  ${key !== colors.length - 1 ? "," : ""}`}
-                        </span>
-                    );
-                });
-            },
+            title: "Lastname",
+            dataIndex: "lastname",
+            key: "lastname",
             // width: "15%",
-            // ...getColumnSearchProps("colors"),
+            ...getColumnSearchProps("lastname"),
         },
         {
-            title: "Materials",
-            dataIndex: "materials",
-            key: "materials",
-            render: (materials: []) => {
-                return materials.map((material, key) => {
-                    return (
-                        <span key={key}>
-                            {`${material}  ${key !== materials.length - 1 ? "," : ""}`}
-                        </span>
-                    );
-                });
-            },
+            title: "Email",
+            dataIndex: "email",
+            key: "email",
             // width: "15%",
-            // ...getColumnSearchProps("colors"),
+            ...getColumnSearchProps("email"),
         },
         {
-            title: "Created At",
-            dataIndex: "created_at",
-            key: "created_at",
+            title: "Phone",
+            dataIndex: "phone",
+            key: "phone",
             // width: "15%",
-            ...getColumnSearchProps("created_at"),
-            sorter: (a: any, b: any) =>
-                new Date(a.created_at).getTime() -
-                new Date(b.created_at).getTime(),
-            sortDirections: ["descend", "ascend"],
+            ...getColumnSearchProps("phone"),
         },
+        // {
+        //     title: "Email",
+        //     dataIndex: "town",
+        //     key: "town",
+        //     // width: "15%",
+        //     ...getColumnSearchProps("town"),
+        // },
+        // {
+        //     title: "Email",
+        //     dataIndex: "address",
+        //     key: "address",
+        //     // width: "15%",
+        //     ...getColumnSearchProps("address"),
+        // },
+        // {
+        //     title: "Email",
+        //     dataIndex: "delivery_det",
+        //     key: "delivery_det",
+        //     // width: "15%",
+        //     ...getColumnSearchProps("delivery_det"),
+        // },
+        // {
+        //     title: "Email",
+        //     dataIndex: "total_amount",
+        //     key: "total_amount",
+        //     // width: "15%",
+        //     ...getColumnSearchProps("total_amount"),
+        // },
         {
-            title: "Updated At",
-            dataIndex: "updated_at",
-            key: "updated_at",
+            title: "Status",
+            dataIndex: "status",
+            key: "status",
             // width: "15%",
-            ...getColumnSearchProps("updated_at"),
-            sorter: (a: any, b: any) =>
-                new Date(a.updated_at).getTime() -
-                new Date(b.updated_at).getTime(),
-            sortDirections: ["descend", "ascend"],
+            ...getColumnSearchProps("status"),
         },
+        // {
+        //     title: "Email",
+        //     dataIndex: "shipping_address",
+        //     key: "shipping_address",
+        //     // width: "15%",
+        //     ...getColumnSearchProps("shipping_address"),
+        // },
+        // {
+        //     title: "Email",
+        //     dataIndex: "billing_address",
+        //     key: "billing_address",
+        //     // width: "15%",
+        //     ...getColumnSearchProps("billing_address"),
+        // },
+        // {
+        //     title: "Email",
+        //     dataIndex: "payment_method",
+        //     key: "payment_method",
+        //     // width: "15%",
+        //     ...getColumnSearchProps("payment_method"),
+        // },
+        {
+            title: "Payment Status",
+            dataIndex: "payment_status",
+            key: "payment_status",
+            // width: "15%",
+            ...getColumnSearchProps("payment_status"),
+        },
+        // {
+        //     title: "Email",
+        //     dataIndex: "shipping_method",
+        //     key: "shipping_method",
+        //     // width: "15%",
+        //     ...getColumnSearchProps("shipping_method"),
+        // },
+
+        // {
+        //     title: "Created At",
+        //     dataIndex: "created_at",
+        //     key: "created_at",
+        //     // width: "15%",
+        //     ...getColumnSearchProps("created_at"),
+        //     sorter: (a: any, b: any) =>
+        //         new Date(a.created_at).getTime() -
+        //         new Date(b.created_at).getTime(),
+        //     sortDirections: ["descend", "ascend"],
+        // },
+        // {
+        //     title: "Updated At",
+        //     dataIndex: "updated_at",
+        //     key: "updated_at",
+        //     // width: "15%",
+        //     ...getColumnSearchProps("updated_at"),
+        //     sorter: (a: any, b: any) =>
+        //         new Date(a.updated_at).getTime() -
+        //         new Date(b.updated_at).getTime(),
+        //     sortDirections: ["descend", "ascend"],
+        // },
         {
             title: "Action",
             width: 150,
@@ -251,22 +311,10 @@ function Index({ auth, categories, flash }: Props) {
             },
         },
     ];
-
-    useEffect(() => {
-        if (flash.message) {
-            messageApi.open({
-                type: "info",
-                content: "Category deleted",
-            });
-        }
-    }, [flash.message]);
-
     return (
         <AuthenticatedAdmin user={auth}>
-            {contextHolder}
-
             <div style={{ width: "100%" }}>
-                <Table columns={columns} dataSource={categories} />
+                <Table columns={columns} dataSource={ordersData} />
             </div>
         </AuthenticatedAdmin>
     );
