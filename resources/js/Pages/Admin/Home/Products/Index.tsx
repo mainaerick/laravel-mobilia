@@ -1,12 +1,16 @@
 import React, { useRef, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import type { InputRef, TableColumnsType, TableColumnType } from "antd";
-import { Button, Input, Space, Table, Typography } from "antd";
+import { Button, ConfigProvider, Input, Space, Table, Typography } from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
 import Highlighter from "react-highlight-words";
 import AuthenticatedAdmin from "@/Layouts/AdminLayout";
 import { Pagination, Product } from "@/Core/_Models";
 import { Link } from "react-alice-carousel";
+import { Colors } from "@/utils/Config";
+import TableComponent from "@/Components/TableComponent";
+import TableAction from "@/Components/TableAction";
+import { router } from "@inertiajs/react";
 
 interface DataType {
     key: string;
@@ -322,16 +326,12 @@ function Index({ auth, products }: Props) {
             fixed: "right",
             render: (item) => {
                 return (
-                    <Space>
-                        <Typography.Link>
-                            <Link href={route("admin.product.edit", item.id)}>
-                                Edit
-                            </Link>
-                        </Typography.Link>
-                        <Typography.Link>
-                            <Link href="">Delete</Link>
-                        </Typography.Link>
-                    </Space>
+                    <TableAction
+                        deleteFunc={() => {}}
+                        editFunc={() => {
+                            router.get(route("admin.product.edit", item.id));
+                        }}
+                    />
                 );
             },
         },
@@ -340,7 +340,22 @@ function Index({ auth, products }: Props) {
     return (
         <AuthenticatedAdmin user={auth}>
             <div style={{ width: "100%" }}>
-                <Table columns={columns} dataSource={data} />
+                <ConfigProvider
+                    theme={{
+                        components: {
+                            Table: {
+                                headerBg: Colors.secondary,
+                            },
+                        },
+                    }}
+                >
+                    <TableComponent
+                        items={data}
+                        pagination={undefined}
+                        columns={columns}
+                    />
+                    {/* <Table columns={columns} dataSource={data} /> */}
+                </ConfigProvider>
             </div>
         </AuthenticatedAdmin>
     );

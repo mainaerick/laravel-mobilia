@@ -1,38 +1,28 @@
-import { Category, Order } from "@/Core/_Models";
+import TableComponent from "@/Components/TableComponent";
+import { User } from "@/Core/_Models";
 import AuthenticatedAdmin from "@/Layouts/AdminLayout";
-import { router } from "@inertiajs/react";
 import {
-    message,
-    InputRef,
-    TableColumnType,
-    Input,
-    Space,
     Button,
+    Input,
+    InputRef,
+    Space,
+    TableColumnType,
     TableColumnsType,
-    Typography,
-    Table,
-    Flex,
-    TableProps,
 } from "antd";
 import { FilterDropdownProps } from "antd/es/table/interface";
 import React, { useRef, useState } from "react";
+import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import {
-    SearchOutlined,
-    DeleteOutlined,
-    EditOutlined,
-} from "@ant-design/icons";
-import TableComponent from "@/Components/TableComponent";
 import TableAction from "@/Components/TableAction";
+import { router } from "@inertiajs/react";
 
-type Props = { auth: any; orders: any };
-type DataIndex = keyof Order;
+type Props = {
+    auth: any;
+    users: any;
+};
+type DataIndex = keyof User;
 
-function Index({ auth, orders }: Props) {
-    const ordersData = orders.data as Order[];
-    console.log(ordersData);
-    const [messageApi, contextHolder] = message.useMessage();
-
+function Index({ auth, users }: Props) {
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
     const searchInput = useRef<InputRef>(null);
@@ -51,9 +41,10 @@ function Index({ auth, orders }: Props) {
         clearFilters();
         setSearchText("");
     };
+
     const getColumnSearchProps = (
         dataIndex: DataIndex,
-    ): TableColumnType<Order> => ({
+    ): TableColumnType<User> => ({
         filterDropdown: ({
             setSelectedKeys,
             selectedKeys,
@@ -153,73 +144,29 @@ function Index({ auth, orders }: Props) {
                 text
             ),
     });
-
-    const columns: TableProps<Order>["columns"] = [
+    const columns: TableColumnsType<User> = [
         {
-            title: "Total Amount",
-            dataIndex: "total_amount",
-            key: "total_amount",
-            render: (total_amount: string) => (
-                <Typography.Text>{total_amount}</Typography.Text>
-            ),
-        },
-        {
-            title: "Date Added",
-            dataIndex: "created_at",
-            key: "created_at",
+            title: "Name",
+            dataIndex: "name",
+            key: "name",
             width: "15%",
-            render: (created_at: string) => (
-                <Typography.Text>
-                    {new Date(created_at).toLocaleDateString()}
-                </Typography.Text>
-            ),
-        },
-
-        {
-            title: "Firstname",
-            dataIndex: "firstname",
-            key: "firstname",
-            // width: "15%",
-            ...getColumnSearchProps("firstname"),
-        },
-        {
-            title: "Lastname",
-            dataIndex: "lastname",
-            key: "lastname",
-            // width: "15%",
-            ...getColumnSearchProps("lastname"),
+            ...getColumnSearchProps("name"),
         },
         {
             title: "Email",
             dataIndex: "email",
             key: "email",
-            // width: "15%",
+            width: "15%",
             ...getColumnSearchProps("email"),
         },
         {
-            title: "Phone",
-            dataIndex: "phone",
-            key: "phone",
-            // width: "15%",
-            ...getColumnSearchProps("phone"),
-        },
-        {
-            title: "Status",
-            dataIndex: "status",
-            key: "status",
-            render: (status: string) => (
-                <Typography.Text>{status}</Typography.Text>
-            ),
+            title: "Created Date",
+            dataIndex: "created_at",
+            key: "created_at",
+            width: "15%",
+            ...getColumnSearchProps("created_at"),
         },
 
-        {
-            title: "Payment Status",
-            dataIndex: "payment_status",
-            key: "payment_status",
-            render: (payment_status: string) => (
-                <Typography.Text>{payment_status}</Typography.Text>
-            ),
-        },
         {
             title: "Action",
             width: "5%",
@@ -228,26 +175,24 @@ function Index({ auth, orders }: Props) {
                 return (
                     <TableAction
                         deleteFunc={() => {
-                            router.delete(route("order.destroy", item.id));
+                            router.delete(route("admin.user.destroy", item.id));
                         }}
                         editFunc={() => {
-                            router.get(route("order.edit", item.id));
+                            router.get(route("admin.user.edit", item.id));
                         }}
                     />
                 );
             },
         },
     ];
+    console.log(users);
     return (
         <AuthenticatedAdmin user={auth}>
-            <div style={{ width: "100%" }}>
-                <TableComponent
-                    items={ordersData}
-                    pagination={undefined}
-                    columns={columns}
-                />
-                {/* <Table columns={columns} dataSource={ordersData} /> */}
-            </div>
+            <TableComponent
+                items={users}
+                pagination={undefined}
+                columns={columns}
+            />
         </AuthenticatedAdmin>
     );
 }

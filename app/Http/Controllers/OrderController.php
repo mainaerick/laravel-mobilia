@@ -8,6 +8,8 @@ use App\Http\Resources\AdminOrderResource;
 use App\Http\Resources\OrderResource;
 use App\Models\CartItem;
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -29,7 +31,7 @@ class OrderController extends Controller
     {
         $user = auth()->user();
         // $orders = Order::all();
-        $orders = Order::with('user')->paginate(10);
+        $orders = Order::all();
         return Inertia::render('Admin/Home/Orders/Index', [
             'orders' => AdminOrderResource::collection($orders),
         ]);
@@ -77,10 +79,12 @@ class OrderController extends Controller
 
         $validated["items"] = json_decode($request->items, true);
 
+        $user = auth()->user();
+        $validated["user_id"] = $user->id;
+
         $order = Order::create($validated);
         if ($order) {
             // Delete the cart items in  with the order
-            $user = auth()->user();
             $cart = $user->cart;
             CartItem::where('cart_id', $cart->id)->delete();
 
@@ -97,32 +101,67 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $order = Order::with('user')->findOrFail($order);
+
         return Inertia::render('Orders/Show', [
             'order' => new OrderResource($order),
         ]);
     }
-
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Order $order)
+    public function edit($id)
     {
-        //
+        $order = Order::findOrFail($id);
+
+        $user = User::findOrFail(($order->user_id));
+        $cart = $user->cart;
+        $cartItems = $cart ? $cart->items() : collect();
+
+        $items = [];
+
+        // dd(json_decode($order->items, true));
+        foreach ($order->items as $item) {
+
+            $product = Product::findOrFail($item["productId"]);
+            $items[] = $product;
+
+
+        }
+
+
+        // dd($items);
+
+        return Inertia::render('Admin/Home/Orders/Show', [
+            'order' => new OrderResource($order),
+            'items' => $items
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update(UpdateOrderRequest $request, $id)
     {
-        //
+
+        $order = Order::findOrFail($id);
+
+        $validated = $request->validated();
+
+        // dd($validated);
+
+        $order->update($validated);
+
+        return redirect()->back()->with('message', "Order was updated");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Order $order)
+    public function destroy($id)
     {
-        //
+        $order = Order::findOrFail($id);
+        $order->delete();
+
+        return redirect()->back()->with('message', "Order was deleted");
     }
 }

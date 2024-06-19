@@ -6,6 +6,7 @@ use App\Http\Resources\ProductResource;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 use function Laravel\Prompts\error;
@@ -17,6 +18,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+
         return inertia('Admin/Home/Index', [
             // "products" => $products,
             // 'queryParams' => request()->query() ?: null,

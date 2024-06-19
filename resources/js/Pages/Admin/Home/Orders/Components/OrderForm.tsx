@@ -1,393 +1,273 @@
-import { Order } from "@/Core/_Models";
-import { Button, Form, Input, InputNumber } from "antd";
-import React from "react";
+// import { CartItem, Order } from "@/Core/_Models";
+// import FormInput from "@/Pages/Checkout/Components/FormInput";
+// import { usePage, router } from "@inertiajs/react";
+// import {
+//     Button,
+//     Col,
+//     Flex,
+//     Form,
+//     Input,
+//     InputNumber,
+//     Radio,
+//     Row,
+//     Table,
+//     TableProps,
+//     Typography,
+//     message,
+// } from "antd";
+// import form from "antd/es/form";
+// import layout from "antd/es/layout";
+// import React, { useEffect, useState } from "react";
 
-type Props = {
-    data: Order;
-    onFinish: (values: any) => void;
-    setData: any;
-    loading: boolean;
-};
+// type Props = {
+//     data: Order;
+//     onFinish: (values: any) => void;
+//     setData: any;
+//     loading: boolean;
+// };
 
-function OrderForm({ data, onFinish, setData, loading }: Props) {
-    return (
-        <Form
-            layout="vertical"
-            initialValues={data}
-            name="order-form"
-            onFinish={onFinish}
-        >
-            <Form.Item
-                name="firstname"
-                label="First Name"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the first name!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("firstname", e.target.value)}
-                    value={data.firstname}
-                />
-            </Form.Item>
+// function OrderForm({ data, onFinish, setData, loading }: Props) {
+//     const [form] = Form.useForm();
 
-            <Form.Item
-                name="lastname"
-                label="Last Name"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the last name!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("lastname", e.target.value)}
-                    value={data.lastname}
-                />
-            </Form.Item>
+//     // console.log(errors);
 
-            <Form.Item
-                name="email"
-                label="Email"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the email!",
-                        type: "email",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("email", e.target.value)}
-                    value={data.email}
-                />
-            </Form.Item>
+//     const { props } = usePage();
+//     const items = props?.cartItems as CartItem[];
+//     const [subTotal, setSubTotal] = useState<string>("0");
+//     const [setLoading] = useState<boolean>(false);
 
-            <Form.Item
-                name="phone"
-                label="Phone"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the phone number!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("phone", e.target.value)}
-                    value={data.phone}
-                />
-            </Form.Item>
+//     const intialdata = {
+//         firstname: "",
+//         lastname: "",
+//         email: "",
+//         phone: "",
+//         town: "",
+//         address: "",
+//         delivery_det: "",
+//         total_amount: "",
+//         status: "pending",
+//         shipping_address: "",
+//         billing_address: "",
+//         payment_method: "",
+//         payment_status: "pending",
+//         shipping_method: "",
+//         shipping_cost: "20",
+//         items: items,
+//         notes: "",
+//     };
 
-            <Form.Item
-                name="town"
-                label="Town"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the town!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("town", e.target.value)}
-                    value={data.town}
-                />
-            </Form.Item>
+//     const columns: TableProps<CartItem>["columns"] = [
+//         {
+//             title: "Product",
+//             dataIndex: "product",
+//             key: "id",
+//             render: (_, record) => (
+//                 <Typography.Text>{`${record.product.name} x ${record.quantity}`}</Typography.Text>
+//             ),
+//         },
+//         {
+//             title: <Flex justify={"end"}>Subtotal</Flex>,
+//             // dataIndex: "product",
+//             key: "id",
+//             render: (_, record) => {
+//                 let subtotal =
+//                     record.quantity * parseFloat(record.product.price);
 
-            <Form.Item
-                name="address"
-                label="Address"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the address!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("address", e.target.value)}
-                    value={data.address}
-                />
-            </Form.Item>
+//                 return (
+//                     <Flex justify={"end"}>
+//                         <Typography.Text>{`${Number.parseFloat(subtotal.toString()).toFixed(2)}`}</Typography.Text>
+//                     </Flex>
+//                 );
+//             },
+//         },
+//     ];
 
-            <Form.Item
-                name="delivery_det"
-                label="Delivery Details"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the delivery details!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("delivery_det", e.target.value)}
-                    value={data.delivery_det}
-                />
-            </Form.Item>
+//     useEffect(() => {
+//         if (errors) {
+//             const errorValues: [] =
+//                 errors &&
+//                 Object.keys(errors).map(function (key) {
+//                     return errors[key];
+//                 });
+//             console.log(errorValues);
+//             errorValues.map((errorValue) => {
+//                 message.error(errorValue, 5);
+//             });
+//         } else if (errors) {
+//         }
+//     }, [errors]);
 
-            <Form.Item
-                name="total_amount"
-                label="Total Amount"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the total amount!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("total_amount", e.target.value)}
-                    value={data.total_amount}
-                />
-            </Form.Item>
+//     const onFinish = (values: Order) => {
+//         values.total_amount = Number.parseFloat(subTotal);
+//         values.shipping_address = values.delivery_det;
+//         setLoading(true);
+//         values.items = [];
+//         items.map((item) => {
+//             values.items?.push({
+//                 productId: item.product_id,
+//                 name: item.product.name,
+//                 quantity: item.quantity,
+//                 price: Number.parseFloat(item.product.price),
+//             });
+//         });
+//         const newOrder = { ...intialdata, ...values };
+//         const newOrderWithJSONItems = {
+//             ...newOrder,
+//             items: JSON.stringify(newOrder.items),
+//         };
+//         console.log(newOrderWithJSONItems);
+//         router.post(route("orders.store", newOrderWithJSONItems));
+//         setLoading(false);
+//     };
+//     const onReset = () => {
+//         form.resetFields();
+//     };
+//     useEffect(() => {
+//         if (items) {
+//             let total = 0;
+//             items.map((item) => {
+//                 total = parseFloat(item.product.price) * item.quantity;
+//             });
 
-            <Form.Item
-                name="status"
-                label="Status"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the status!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("status", e.target.value)}
-                    value={data.status}
-                />
-            </Form.Item>
+//             setSubTotal(Number.parseFloat(total.toString()).toFixed(2));
+//         }
+//     }, [items]);
+//     return (
+//         <Form
+//             {...layout}
+//             form={form}
+//             initialValues={intialdata}
+//             name="control-hooks"
+//             onFinish={onFinish}
+//             // style={{ maxWidth: 600 }}
+//         >
+//             <Row gutter={12}>
+//                 <Col
+//                     // span={12}
+//                     xs={{ span: 24 }}
+//                     sm={{ span: 24 }}
+//                     md={{ span: 12 }}
+//                     lg={{ span: 12 }}
+//                     xl={{ span: 12 }}
+//                 >
+//                     <Row gutter={16}>
+//                         <Col span={12}>
+//                             {" "}
+//                             <FormInput
+//                                 name={"firstname"}
+//                                 label={"First Name"}
+//                                 required={true}
+//                             />
+//                         </Col>
+//                         <Col span={12}>
+//                             <FormInput
+//                                 name={"lastname"}
+//                                 label={"Last Name"}
+//                                 required={true}
+//                             />
+//                         </Col>
+//                     </Row>
 
-            <Form.Item
-                name="shipping_address"
-                label="Shipping Address"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the shipping address!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) =>
-                        setData("shipping_address", e.target.value)
-                    }
-                    value={data.shipping_address}
-                />
-            </Form.Item>
+//                     <FormInput
+//                         name={"email"}
+//                         label={"Email Address"}
+//                         type="email"
+//                         required={true}
+//                     />
 
-            <Form.Item
-                name="billing_address"
-                label="Billing Address"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the billing address!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("billing_address", e.target.value)}
-                    value={data.billing_address}
-                />
-            </Form.Item>
+//                     <FormInput
+//                         name={"phone"}
+//                         label={"Phone"}
+//                         type="phone"
+//                         required={true}
+//                     />
 
-            <Form.Item
-                name="payment_method"
-                label="Payment Method"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the payment method!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("payment_method", e.target.value)}
-                    value={data.payment_method}
-                />
-            </Form.Item>
+//                     <FormInput
+//                         name={"town"}
+//                         label={"Town/City"}
+//                         required={true}
+//                     />
 
-            <Form.Item
-                name="payment_status"
-                label="Payment Status"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the payment status!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("payment_status", e.target.value)}
-                    value={data.payment_status}
-                />
-            </Form.Item>
+//                     <FormInput
+//                         name={"address"}
+//                         label={"Address"}
+//                         required={true}
+//                     />
 
-            <Form.Item
-                name="shipping_method"
-                label="Shipping Method"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the shipping method!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("shipping_method", e.target.value)}
-                    value={data.shipping_method}
-                />
-            </Form.Item>
+//                     <FormInput
+//                         name={"delivery_det"}
+//                         label={"Delivery Details"}
+//                         required={true}
+//                     />
+//                 </Col>
 
-            <Form.Item
-                name="shipping_cost"
-                label="Shipping Cost"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input the shipping cost!",
-                    },
-                ]}
-            >
-                <Input
-                    onChange={(e) => setData("shipping_cost", e.target.value)}
-                    value={data.shipping_cost}
-                />
-            </Form.Item>
+//                 <Col
+//                     // span={12}
+//                     xs={{ span: 24 }}
+//                     sm={{ span: 24 }}
+//                     md={{ span: 8 }}
+//                     lg={{ span: 12 }}
+//                     xl={{ span: 12 }}
+//                     style={{ width: "100%" }}
+//                 >
+//                     <Table
+//                         columns={columns}
+//                         dataSource={items}
+//                         pagination={false}
+//                         footer={() => {
+//                             return (
+//                                 <Row justify={"space-between"}>
+//                                     <Col span={12}>
+//                                         <Typography.Title level={4}>
+//                                             Total
+//                                         </Typography.Title>
+//                                     </Col>
+//                                     <Col span={12}>
+//                                         <Flex align="end" justify={"end"}>
+//                                             <Typography.Title level={4}>
+//                                                 {subTotal}
+//                                             </Typography.Title>
+//                                         </Flex>
+//                                     </Col>
+//                                 </Row>
+//                             );
+//                         }}
+//                     />
 
-            <Form.List name="items">
-                {(fields, { add, remove }) => (
-                    <>
-                        {fields.map(({ key, name, fieldKey, ...restField }) => (
-                            <div key={key} style={{ marginBottom: 8 }}>
-                                <Form.Item
-                                    {...restField}
-                                    name={[name, "productId"]}
-                                    // fieldKey={[fieldKey, "productId"]}
-                                    label="Product ID"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message:
-                                                "Please input the product ID!",
-                                        },
-                                    ]}
-                                >
-                                    <InputNumber
-                                        onChange={(value) =>
-                                            setData(
-                                                `items[${name}].productId`,
-                                                value,
-                                            )
-                                        }
-                                        value={data.items[name]?.productId}
-                                    />
-                                </Form.Item>
-                                <Form.Item
-                                    {...restField}
-                                    name={[name, "name"]}
-                                    // fieldKey={[fieldKey, "name"]}
-                                    label="Product Name"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message:
-                                                "Please input the product name!",
-                                        },
-                                    ]}
-                                >
-                                    <Input
-                                        onChange={(e) =>
-                                            setData(
-                                                `items[${name}].name`,
-                                                e.target.value,
-                                            )
-                                        }
-                                        value={data.items[name]?.name}
-                                    />
-                                </Form.Item>
-                                <Form.Item
-                                    {...restField}
-                                    name={[name, "quantity"]}
-                                    // fieldKey={[fieldKey, "quantity"]}
-                                    label="Quantity"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message:
-                                                "Please input the quantity!",
-                                        },
-                                    ]}
-                                >
-                                    <InputNumber
-                                        onChange={(value) =>
-                                            setData(
-                                                `items[${name}].quantity`,
-                                                value,
-                                            )
-                                        }
-                                        value={data.items[name]?.quantity}
-                                    />
-                                </Form.Item>
-                                <Form.Item
-                                    {...restField}
-                                    name={[name, "price"]}
-                                    // fieldKey={[fieldKey, "price"]}
-                                    label="Price"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: "Please input the price!",
-                                        },
-                                    ]}
-                                >
-                                    <InputNumber
-                                        onChange={(value) =>
-                                            setData(
-                                                `items[${name}].price`,
-                                                value,
-                                            )
-                                        }
-                                        value={data.items[name]?.price}
-                                    />
-                                </Form.Item>
-                                <Button
-                                    type="text"
-                                    onClick={() => remove(name)}
-                                >
-                                    Remove Item
-                                </Button>
-                            </div>
-                        ))}
-                        <Button
-                            type="dashed"
-                            // onClick={() => add(initialOrderItem)}
-                        >
-                            Add Item
-                        </Button>
-                    </>
-                )}
-            </Form.List>
+//                     <Typography.Title level={4} style={{ marginTop: "17px" }}>
+//                         Payment Method
+//                     </Typography.Title>
 
-            <Form.Item name="notes" label="Notes">
-                <Input.TextArea
-                    onChange={(e) => setData("notes", e.target.value)}
-                    value={data.notes}
-                />
-            </Form.Item>
+//                     <Form.Item name={"payment_method"}>
+//                         <Radio.Group>
+//                             <Radio defaultChecked value="mpesa">
+//                                 {" "}
+//                                 Mpesa{" "}
+//                             </Radio>
+//                             <Radio value="payondelivery">
+//                                 Pay On Delivery{" "}
+//                             </Radio>
+//                         </Radio.Group>
+//                     </Form.Item>
+//                     <Flex justify="center" style={{ marginTop: "13px" }}>
+//                         <Button
+//                             htmlType="submit"
+//                             block
+//                             loading={loading}
+//                             style={{
+//                                 marginLeft: "30%",
+//                                 marginRight: "30%",
+//                                 borderRadius: "15px",
+//                             }}
+//                             size="large"
+//                         >
+//                             Place Order
+//                         </Button>
+//                     </Flex>
+//                 </Col>
+//             </Row>
+//         </Form>
+//     );
+// }
 
-            <Form.Item>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
-            </Form.Item>
-        </Form>
-    );
-}
-
-export default OrderForm;
+// export default OrderForm;

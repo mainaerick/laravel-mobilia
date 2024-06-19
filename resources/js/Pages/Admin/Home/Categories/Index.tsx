@@ -2,6 +2,7 @@ import { Category, Product } from "@/Core/_Models";
 import AuthenticatedAdmin from "@/Layouts/AdminLayout";
 import {
     Button,
+    ConfigProvider,
     Input,
     InputRef,
     Space,
@@ -17,6 +18,9 @@ import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 import { FilterDropdownProps } from "antd/es/table/interface";
 import { router, usePage } from "@inertiajs/react";
+import { Colors } from "@/utils/Config";
+import TableComponent from "@/Components/TableComponent";
+import TableAction from "@/Components/TableAction";
 
 type Props = { auth: any; categories: any; flash: { message: string | null } };
 type DataIndex = keyof Category;
@@ -215,37 +219,18 @@ function Index({ auth, categories, flash }: Props) {
             render: (item: any) => {
                 return (
                     <Space>
-                        <Typography.Link>
-                            {/* <Link href={route("admin.category.edit", item.id)}>
-                                Edit
-                            </Link> */}
-                            <Button
-                                onClick={() => {
-                                    router.get(
-                                        route("admin.category.edit", item.id),
-                                    );
-                                }}
-                                // href={}
-                            >
-                                Edit
-                            </Button>
-                        </Typography.Link>
-                        <Typography.Link>
-                            <Button
-                                danger
-                                onClick={() => {
-                                    router.delete(
-                                        route(
-                                            "admin.category.destroy",
-                                            item.id,
-                                        ),
-                                    );
-                                }}
-                                // href={}
-                            >
-                                Delete
-                            </Button>
-                        </Typography.Link>
+                        <TableAction
+                            deleteFunc={() => {
+                                router.delete(
+                                    route("admin.category.destroy", item.id),
+                                );
+                            }}
+                            editFunc={() => {
+                                router.get(
+                                    route("admin.category.edit", item.id),
+                                );
+                            }}
+                        />
                     </Space>
                 );
             },
@@ -266,7 +251,21 @@ function Index({ auth, categories, flash }: Props) {
             {contextHolder}
 
             <div style={{ width: "100%" }}>
-                <Table columns={columns} dataSource={categories} />
+                <ConfigProvider
+                    theme={{
+                        components: {
+                            Table: {
+                                headerBg: Colors.secondary,
+                            },
+                        },
+                    }}
+                >
+                    <TableComponent
+                        items={categories}
+                        pagination={undefined}
+                        columns={columns}
+                    />
+                </ConfigProvider>
             </div>
         </AuthenticatedAdmin>
     );

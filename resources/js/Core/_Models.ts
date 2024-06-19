@@ -77,8 +77,8 @@ export interface CartItem {
     cart_id: number;
     product_id: number;
     quantity: number;
-    created_at: string;
-    updated_at: string;
+    created_at?: string;
+    updated_at?: string;
     product: Product;
 }
 
@@ -112,7 +112,25 @@ export interface Order {
     createdAt?: string; // Optional for timestamps
     updatedAt?: string; // Optional for timestamps
 }
-
+export const InitialOrder = {
+    firstname: "",
+    lastname: "",
+    email: "",
+    phone: "",
+    town: "",
+    address: "",
+    delivery_det: "",
+    total_amount: 0,
+    status: "pending",
+    shipping_address: "",
+    billing_address: "",
+    payment_method: "",
+    payment_status: "pending",
+    shipping_method: "",
+    shipping_cost: "20",
+    items: [],
+    notes: "",
+};
 export interface Category {
     id?: number;
     name: string;
@@ -128,3 +146,12 @@ export const CategoryData: Category = {
     colors: [],
     sizes: [],
 };
+
+export interface User {
+    id: number;
+    name: string;
+    email: string;
+    email_verified_at: string;
+    created_at: string;
+    updated_at: string;
+}

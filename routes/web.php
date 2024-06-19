@@ -8,6 +8,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -52,10 +53,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout.create');
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-
-
+    Route::put('/order/{id}', [OrderController::class, 'update'])->name('order.update');
+    Route::delete('/order/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
+    Route::get('/order/{id}', [OrderController::class, 'edit'])->name('order.edit');
 });
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:Admin'])->group(function () {
     // Route::resource('admin_', AdminController::class);
     Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('admin/products', [ProductController::class, 'admin_index'])->name('admin.products');
@@ -74,13 +76,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Admin Orders
     Route::get('admin/orders', [OrderController::class, 'admin_index'])->name('admin.orders');
     Route::get('admin/orders/create', [OrderController::class, 'create'])->name('admin.orders.create');
-    Route::get('admin/order/{id}', [OrderController::class, 'edit'])->name('admin.order.edit');
-    Route::put('admin/order/{id}', [OrderController::class, 'update'])->name('admin.order.update');
     Route::post('admin/order', [OrderController::class, 'store'])->name('admin.order.store');
-    Route::delete('admin/order/{id}', [OrderController::class, 'destroy'])->name('admin.order.destroy');
-
+    // Admin Users
+    Route::get('admin/users/customers', [UserController::class, 'customers_index'])->name('admin.users.customers');
+    Route::get('admin/users', [UserController::class, 'admins'])->name('admin.users');
+    Route::get('admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
+    Route::get('admin/user/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
+    Route::put('admin/user/{id}', [UserController::class, 'update'])->name('admin.user.update');
+    Route::post('admin/user', [UserController::class, 'store'])->name('admin.user.store');
+    Route::delete('admin/user/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
     // Route::post('admin_/add_product', [AdminController::class, 'product_store'])->name('admin.product_store');
-
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

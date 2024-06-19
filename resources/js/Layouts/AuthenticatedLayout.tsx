@@ -34,6 +34,7 @@ export default function Authenticated({
     const onClose = () => {
         setOpen(false);
     };
+    console.log(props)
     return (
         <ConfigProvider
             theme={{

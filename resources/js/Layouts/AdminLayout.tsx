@@ -1,4 +1,4 @@
-import { useState, PropsWithChildren, ReactNode } from "react";
+import { useState, PropsWithChildren, ReactNode, useEffect } from "react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
@@ -77,7 +77,7 @@ const items: MenuItem[] = [
         sideBarNode("admin.orders.create", "Add Order"),
     ]),
     sideBarNode("#", "Customers", <UserOutlined />, [
-        sideBarNode("#", "Customer Listing"),
+        sideBarNode("admin.users.customers", "Customer Listing"),
     ]),
     sideBarNode("#", "Reports", <FileOutlined />, [
         sideBarNode("#", "Product Viewed"),
@@ -102,6 +102,7 @@ export default function AuthenticatedAdmin({
     const [messageApi, contextHolder] = message.useMessage();
 
     const { props } = usePage();
+
     const showDrawer = () => {
         setOpen(true);
     };
@@ -111,6 +112,13 @@ export default function AuthenticatedAdmin({
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
+    useEffect(() => {
+        const flash = props?.flash as any;
+        if (flash.message as any) {
+            message.success(flash?.message, 2.5);
+        }
+    }, [props?.flash]);
+
     return (
         <ConfigProvider
             theme={{
