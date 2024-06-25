@@ -1,12 +1,10 @@
 import { Colors } from "@/utils/Config";
 import { Flex, Typography } from "antd";
-import React from "react";
+import React, { ReactNode } from "react";
 
-type Props = { title: string; whichRoute: string };
+type Props = { title: string; whichRoute: ReactNode };
 
 function Hero({ title, whichRoute }: Props) {
-
-    
     return (
         <div
             style={{
@@ -48,7 +46,7 @@ function Hero({ title, whichRoute }: Props) {
                         {title}
                     </Typography.Title>
 
-                    <Typography.Text>{whichRoute}</Typography.Text>
+                    {whichRoute}
                 </Flex>
             </div>
         </div>

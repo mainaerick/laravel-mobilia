@@ -42,7 +42,6 @@ function Index({ auth, products, queryParams = null }: Props) {
             queryParams.sort_direction = "asc";
         }
 
-        console.log(queryParams);
 
         router.get(route("shop.index"), queryParams);
     };
@@ -166,7 +165,7 @@ function Index({ auth, products, queryParams = null }: Props) {
                                 <Col
                                     key={key}
                                     // span={6}
-                                    xs={{ span: 12 }}
+                                    xs={{ span: 24 }}
                                     sm={{ span: 12 }}
                                     md={{ span: 8 }}
                                     lg={{ span: 6 }}

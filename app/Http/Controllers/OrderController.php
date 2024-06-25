@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class OrderController extends Controller
@@ -34,6 +35,23 @@ class OrderController extends Controller
         $orders = Order::all();
         return Inertia::render('Admin/Home/Orders/Index', [
             'orders' => AdminOrderResource::collection($orders),
+        ]);
+    }
+    public function sales_index()
+    {
+        $sales = Order::select(
+            DB::raw('DATE(created_at) as date'),
+            DB::raw('COUNT(id) as no_orders'),
+            DB::raw('SUM(total_amount) as total_amount'),
+            DB::raw('SUM(total_amount * 0.1) as tax'), // Assuming tax is 10%
+            // DB::raw('SUM((SELECT SUM(quantity) FROM order_items WHERE order_items.order_id = orders.id)) as products_sold')
+        )
+            ->groupBy(DB::raw('DATE(created_at)'))
+            ->orderBy('date', 'desc')
+            ->get();
+
+        return Inertia::render('Admin/Home/Reports/SalesReport', [
+            'sales' => $sales
         ]);
     }
     /**
@@ -72,12 +90,12 @@ class OrderController extends Controller
             'payment_status' => 'required|string',
             'shipping_method' => 'nullable|string',
             'shipping_cost' => 'nullable|numeric',
-            'items' => 'required|string',
+            'items' => 'required|array',
             'notes' => 'nullable|string',
         ]);
 
 
-        $validated["items"] = json_decode($request->items, true);
+        // $validated["items"] = json_decode($request->items, true);
 
         $user = auth()->user();
         $validated["user_id"] = $user->id;

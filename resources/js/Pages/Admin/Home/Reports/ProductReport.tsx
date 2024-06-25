@@ -1,37 +1,29 @@
-import { Category, Order } from "@/Core/_Models";
+import TableAction from "@/Components/TableAction";
+import TableComponent from "@/Components/TableComponent";
+import { Product } from "@/Core/_Models";
 import AuthenticatedAdmin from "@/Layouts/AdminLayout";
 import { router } from "@inertiajs/react";
 import {
-    message,
-    InputRef,
-    TableColumnType,
-    Input,
-    Space,
     Button,
-    TableColumnsType,
-    Typography,
-    Table,
     Flex,
-    TableProps,
+    Input,
+    InputRef,
+    Rate,
+    Space,
+    TableColumnType,
+    TableColumnsType,
 } from "antd";
 import { FilterDropdownProps } from "antd/es/table/interface";
 import React, { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
-import {
-    SearchOutlined,
-    DeleteOutlined,
-    EditOutlined,
-} from "@ant-design/icons";
-import TableComponent from "@/Components/TableComponent";
-import TableAction from "@/Components/TableAction";
+import { SearchOutlined } from "@ant-design/icons";
 
-type Props = { auth: any; orders: any };
-type DataIndex = keyof Order;
+type Props = { auth: any; products: any };
+type DataIndex = keyof Product;
 
-function Index({ auth, orders }: Props) {
-    const ordersData = orders.data as Order[];
-    const [messageApi, contextHolder] = message.useMessage();
-
+function ProductReport({ auth, products }: Props) {
+    const producs_data = products.data as Product[];
+    console.log(producs_data);
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
     const searchInput = useRef<InputRef>(null);
@@ -50,9 +42,10 @@ function Index({ auth, orders }: Props) {
         clearFilters();
         setSearchText("");
     };
+
     const getColumnSearchProps = (
         dataIndex: DataIndex,
-    ): TableColumnType<Order> => ({
+    ): TableColumnType<Product> => ({
         filterDropdown: ({
             setSelectedKeys,
             selectedKeys,
@@ -152,89 +145,51 @@ function Index({ auth, orders }: Props) {
                 text
             ),
     });
-
-    const columns: TableProps<Order>["columns"] = [
+    const columns: TableColumnsType<Product> = [
         {
-            title: "Total Amount",
-            dataIndex: "total_amount",
-            key: "total_amount",
-            render: (total_amount: string) => (
-                <Typography.Text>{total_amount}</Typography.Text>
-            ),
-        },
-        {
-            title: "Date Added",
-            dataIndex: "created_at",
-            key: "created_at",
+            title: "Name",
+            dataIndex: "name",
+            key: "name",
             width: "15%",
-            render: (created_at: string) => (
-                <Typography.Text>
-                    {new Date(created_at).toLocaleDateString()}
-                </Typography.Text>
+            ...getColumnSearchProps("name"),
+        },
+        {
+            title: "Id",
+            dataIndex: "id",
+            key: "id",
+            width: "25%",
+            ...getColumnSearchProps("id"),
+            responsive: ["md"],
+        },
+        {
+            title: "Rating",
+            dataIndex: "rating",
+            key: "rating",
+            // width: "125px ",
+            render: (item) => (
+                <Flex>
+                    <Rate disabled defaultValue={item} />
+                </Flex>
             ),
-        },
-
-        {
-            title: "Firstname",
-            dataIndex: "firstname",
-            key: "firstname",
-            // width: "15%",
-            ...getColumnSearchProps("firstname"),
+            responsive: ["md"],
         },
         {
-            title: "Lastname",
-            dataIndex: "lastname",
-            key: "lastname",
-            // width: "15%",
-            ...getColumnSearchProps("lastname"),
+            title: "Price",
+            dataIndex: "price",
+            key: "price",
+            width: "10%",
+            ...getColumnSearchProps("price"),
+            sorter: (a, b) => a.quantity - b.quantity,
+            sortDirections: ["descend", "ascend"],
+            responsive: ["md"],
         },
         {
-            title: "Email",
-            dataIndex: "email",
-            key: "email",
-            // width: "15%",
-            ...getColumnSearchProps("email"),
-        },
-        {
-            title: "Phone",
-            dataIndex: "phone",
-            key: "phone",
-            // width: "15%",
-            ...getColumnSearchProps("phone"),
-        },
-        {
-            title: "Status",
-            dataIndex: "status",
-            key: "status",
-            render: (status: string) => (
-                <Typography.Text>{status}</Typography.Text>
-            ),
-        },
-
-        {
-            title: "Payment Status",
-            dataIndex: "payment_status",
-            key: "payment_status",
-            render: (payment_status: string) => (
-                <Typography.Text>{payment_status}</Typography.Text>
-            ),
-        },
-        {
-            title: "Action",
-            width: "5%",
-            fixed: "right",
-            render: (item: any) => {
-                return (
-                    <TableAction
-                        deleteFunc={() => {
-                            router.delete(route("order.destroy", item.id));
-                        }}
-                        editFunc={() => {
-                            router.get(route("order.edit", item.id));
-                        }}
-                    />
-                );
-            },
+            title: "Viewed",
+            dataIndex: "viewed",
+            key: "viewed",
+            width: "10%",
+            ...getColumnSearchProps("category"),
+            responsive: ["md"],
         },
     ];
     return (
@@ -242,20 +197,17 @@ function Index({ auth, orders }: Props) {
             user={auth}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Order Listing
+                    Product Report
                 </h2>
             }
         >
-            <div style={{ width: "100%" }}>
-                <TableComponent
-                    items={ordersData}
-                    pagination={undefined}
-                    columns={columns}
-                />
-                {/* <Table columns={columns} dataSource={ordersData} /> */}
-            </div>
+            <TableComponent
+                items={producs_data}
+                pagination={undefined}
+                columns={columns}
+            />
         </AuthenticatedAdmin>
     );
 }
 
-export default Index;
+export default ProductReport;

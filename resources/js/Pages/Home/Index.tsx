@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import AliceCarousel, { EventObject } from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import { Colors, Dimensions } from "@/utils/Config";
 import Footer from "@/Components/Footer";
 import ProductCard from "@/Components/ProductCard";
@@ -146,17 +146,26 @@ const Index: React.FC<Props> = ({ auth, products }) => {
 
                 <Row gutter={16}>
                     <Col span={8}>
-                        <Card
-                            style={{ marginBottom: 10 }}
-                            styles={{ body: { padding: 0 } }}
-                            cover={
-                                <img
-                                    src={`/images/dining.png`}
-                                    alt={"dining"}
-                                />
-                            }
-                        ></Card>
-
+                        <div
+                            className="overflow-hidden  cursor-pointer rounded-xl relative group"
+                            onClick={() => {
+                                let queryParams = { category: "" };
+                                const category = "dining";
+                                queryParams.category = category;
+                                router.get(route("shop.index"), queryParams);
+                            }}
+                        >
+                            <Card
+                                style={{ marginBottom: 10 }}
+                                styles={{ body: { padding: 0 } }}
+                                cover={
+                                    <img
+                                        src={`/images/dining.png`}
+                                        alt={"dining"}
+                                    />
+                                }
+                            ></Card>
+                        </div>
                         <Row align={"middle"} justify={"center"}>
                             <Typography.Title level={5}>
                                 Dining
@@ -164,13 +173,26 @@ const Index: React.FC<Props> = ({ auth, products }) => {
                         </Row>
                     </Col>
                     <Col span={8}>
-                        <Card
-                            style={{ marginBottom: 10 }}
-                            styles={{ body: { padding: 0 } }}
-                            cover={
-                                <img alt="example" src={"images/living.png"} />
-                            }
-                        ></Card>
+                        <div
+                            className="overflow-hidden  cursor-pointer rounded-xl relative group"
+                            onClick={() => {
+                                let queryParams = { category: "" };
+                                const category = "living";
+                                queryParams.category = category;
+                                router.get(route("shop.index"), queryParams);
+                            }}
+                        >
+                            <Card
+                                style={{ marginBottom: 10 }}
+                                styles={{ body: { padding: 0 } }}
+                                cover={
+                                    <img
+                                        alt="example"
+                                        src={"images/living.png"}
+                                    />
+                                }
+                            ></Card>
+                        </div>
                         <Row align={"middle"} justify={"center"}>
                             <Typography.Title level={5}>
                                 Living
@@ -178,13 +200,26 @@ const Index: React.FC<Props> = ({ auth, products }) => {
                         </Row>
                     </Col>
                     <Col span={8}>
-                        <Card
-                            style={{ marginBottom: 10 }}
-                            styles={{ body: { padding: 0 } }}
-                            cover={
-                                <img alt="example" src={"images/bedroom.png"} />
-                            }
-                        ></Card>
+                        <div
+                            className="overflow-hidden  cursor-pointer rounded-xl relative group"
+                            onClick={() => {
+                                let queryParams = { category: "" };
+                                const category = "bedroom";
+                                queryParams.category = category;
+                                router.get(route("shop.index"), queryParams);
+                            }}
+                        >
+                            <Card
+                                style={{ marginBottom: 10 }}
+                                styles={{ body: { padding: 0 } }}
+                                cover={
+                                    <img
+                                        alt="example"
+                                        src={"images/bedroom.png"}
+                                    />
+                                }
+                            ></Card>
+                        </div>
                         <Row align={"middle"} justify={"center"}>
                             <Typography.Title level={5}>
                                 Bedroom
@@ -214,7 +249,7 @@ const Index: React.FC<Props> = ({ auth, products }) => {
                                 <Col
                                     key={key}
                                     // span={6}
-                                    xs={{ span: 12 }}
+                                    xs={{ span: 24 }}
                                     sm={{ span: 12 }}
                                     md={{ span: 8 }}
                                     lg={{ span: 6 }}
@@ -262,7 +297,7 @@ const Index: React.FC<Props> = ({ auth, products }) => {
                     }}
                 >
                     <Row
-                    // className="lg:h-600"
+                        // className="lg:h-600"
                         style={{ height: "600px" }}
                         justify={"center"}
                         align={"middle"}

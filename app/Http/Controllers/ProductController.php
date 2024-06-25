@@ -15,7 +15,7 @@ use Inertia\Inertia;
 
 class ProductController extends Controller
 {
-   
+
     /**
      * Display a listing of the resource.
      */
@@ -39,8 +39,9 @@ class ProductController extends Controller
             }
         }
 
+        
         if ($category) {
-            $query->where("category", "like", "%" . $category . "%");
+            $query->where("room", "like", "%" . $category . "%");
         }
         $products = $query->orderBy($sortField, $sortDirection)->paginate($per_page)
             ->onEachSide(1);
@@ -82,6 +83,40 @@ class ProductController extends Controller
 
         //    dd($products);
         return inertia('Admin/Home/Products/Index', [
+            "products" => $products,
+            'queryParams' => request()->query() ?: null,
+        ]);
+
+    }
+    public function report_index()
+    {
+        $products = Product::all();
+        $query = Product::query();
+
+
+        $per_page = request("per_page", 10);
+        $sortField = request("sort_field", 'created_at');
+        $sortDirection = request("sort_direction", "desc");
+        $category = request("category");
+
+        if (str_contains($sortField, 'price')) {
+            $sortField = 'price';
+            if (str_contains($sortField, 'high')) {
+                $sortDirection = "asc";
+            } else {
+                $sortDirection = "desc";
+            }
+        }
+
+        if ($category) {
+            $query->where("category", "like", "%" . $category . "%");
+        }
+        $products = $query->orderBy($sortField, $sortDirection)->paginate($per_page)
+            ->onEachSide(1);
+
+
+        //    dd($products);
+        return inertia('Admin/Home/Reports/ProductReport', [
             "products" => $products,
             'queryParams' => request()->query() ?: null,
         ]);

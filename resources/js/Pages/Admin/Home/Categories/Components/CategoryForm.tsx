@@ -94,7 +94,7 @@ function CategoryForm({ data, onFinish, setData, loading }: Props) {
             <Button
                 type="primary"
                 htmlType="submit"
-                // block
+                block 
                 loading={loading}
                 style={{ borderRadius: "15px" }}
                 size="large"

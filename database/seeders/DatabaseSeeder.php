@@ -55,6 +55,21 @@ class DatabaseSeeder extends Seeder
 
         $admin->assignRole([$role->id]);
 
+        for ($i = 0; $i < 20; $i++) {
+            $user = User::create([
+                'name' => "User{$i}",
+                'email' => "user{$i}@example.com",
+                'password' => Hash::make('password'),
+                'remember_token' => Str::random(10),
+                'email_verified_at' => now(),
+            ]);
+            $role = Role::updateOrCreate(['name' => 'User']);
+
+            $permissions = Permission::pluck('id', 'id')->all();
+            $role->syncPermissions($permissions);
+            $user->assignRole([$role->id]);
+        }
+
         // Create a regular user
         // $user = User::create([
         //     'name' => 'Eric',

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class ProfileController extends Controller
 {
@@ -23,12 +25,14 @@ class ProfileController extends Controller
             'status' => session('status'),
         ]);
     }
+    
 
     /**
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {

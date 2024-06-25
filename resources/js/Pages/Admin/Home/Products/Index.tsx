@@ -208,6 +208,7 @@ function Index({ auth, products }: Props) {
             dataIndex: "name",
             key: "name",
             width: "15%",
+
             ...getColumnSearchProps("name"),
         },
         {
@@ -215,6 +216,8 @@ function Index({ auth, products }: Props) {
             dataIndex: "description",
             key: "description",
             width: "25%",
+            responsive: ["md"],
+
             ...getColumnSearchProps("description"),
         },
         {
@@ -226,6 +229,7 @@ function Index({ auth, products }: Props) {
             sorter: (a: any, b: any) =>
                 parseFloat(a.price) - parseFloat(b.price),
             sortDirections: ["descend", "ascend"],
+            responsive: ["md"],
         },
         {
             title: "Quantity",
@@ -235,6 +239,7 @@ function Index({ auth, products }: Props) {
             ...getColumnSearchProps("quantity"),
             sorter: (a, b) => a.quantity - b.quantity,
             sortDirections: ["descend", "ascend"],
+            responsive: ["md"],
         },
         {
             title: "Category",
@@ -242,6 +247,7 @@ function Index({ auth, products }: Props) {
             key: "category",
             width: "10%",
             ...getColumnSearchProps("category"),
+            responsive: ["md"],
         },
         {
             title: "Room",
@@ -249,6 +255,7 @@ function Index({ auth, products }: Props) {
             key: "room",
             width: "10%",
             ...getColumnSearchProps("room"),
+            responsive: ["md"],
         },
         {
             title: "Brand",
@@ -256,6 +263,7 @@ function Index({ auth, products }: Props) {
             key: "brand",
             width: "10%",
             ...getColumnSearchProps("brand"),
+            responsive: ["md"],
         },
         // {
         //     title: "Material",
@@ -308,6 +316,7 @@ function Index({ auth, products }: Props) {
                 new Date(a.created_at).getTime() -
                 new Date(b.created_at).getTime(),
             sortDirections: ["descend", "ascend"],
+            responsive: ["md"],
         },
         {
             title: "Updated At",
@@ -319,10 +328,11 @@ function Index({ auth, products }: Props) {
                 new Date(a.updated_at).getTime() -
                 new Date(b.updated_at).getTime(),
             sortDirections: ["descend", "ascend"],
+            responsive: ["md"],
         },
         {
             title: "Action",
-            width: 150,
+            width: "15%",
             fixed: "right",
             render: (item) => {
                 return (
@@ -338,7 +348,14 @@ function Index({ auth, products }: Props) {
     ];
 
     return (
-        <AuthenticatedAdmin user={auth}>
+        <AuthenticatedAdmin
+            user={auth}
+            header={
+                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                    Products Listing
+                </h2>
+            }
+        >
             <div style={{ width: "100%" }}>
                 <ConfigProvider
                     theme={{

@@ -171,6 +171,8 @@ function Index({ auth, categories, flash }: Props) {
                     );
                 });
             },
+            responsive: ["md"],
+
             // width: "15%",
             // ...getColumnSearchProps("colors"),
         },
@@ -187,6 +189,8 @@ function Index({ auth, categories, flash }: Props) {
                     );
                 });
             },
+            responsive: ["md"],
+
             // width: "15%",
             // ...getColumnSearchProps("colors"),
         },
@@ -200,6 +204,8 @@ function Index({ auth, categories, flash }: Props) {
                 new Date(a.created_at).getTime() -
                 new Date(b.created_at).getTime(),
             sortDirections: ["descend", "ascend"],
+            responsive: ["md"],
+
         },
         {
             title: "Updated At",
@@ -211,10 +217,12 @@ function Index({ auth, categories, flash }: Props) {
                 new Date(a.updated_at).getTime() -
                 new Date(b.updated_at).getTime(),
             sortDirections: ["descend", "ascend"],
+            responsive: ["md"],
+
         },
         {
             title: "Action",
-            width: 150,
+            width: "15%",
             fixed: "right",
             render: (item: any) => {
                 return (
@@ -247,7 +255,14 @@ function Index({ auth, categories, flash }: Props) {
     }, [flash.message]);
 
     return (
-        <AuthenticatedAdmin user={auth}>
+        <AuthenticatedAdmin
+            user={auth}
+            header={
+                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                    Category Listing
+                </h2>
+            }
+        >
             {contextHolder}
 
             <div style={{ width: "100%" }}>

@@ -66,7 +66,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->group(function () {
     Route::delete('admin/product/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
     Route::put('admin/product/{id}', [ProductController::class, 'update'])->name('admin.product.update');
     Route::post('admin/product', [ProductController::class, 'store'])->name('admin.product.store');
-    // admin categories
+    // Admin categories
     Route::get('admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
     Route::get('admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
     Route::get('admin/category/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
@@ -85,8 +85,17 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->group(function () {
     Route::put('admin/user/{id}', [UserController::class, 'update'])->name('admin.user.update');
     Route::post('admin/user', [UserController::class, 'store'])->name('admin.user.store');
     Route::delete('admin/user/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
+    Route::post('admain/email/verification-notification/{id}', [UserController::class, 'verify_user_email'])
+        ->middleware('throttle:6,1')
+        ->name('admin.verification.send');
+
+    // Admin reports
+    Route::get('admin/products/report', [ProductController::class, 'report_index'])->name('admin.products.report');
+    Route::get('admin/sales/report', [OrderController::class, 'sales_index'])->name('admin.sales.report');
+
     // Route::post('admin_/add_product', [AdminController::class, 'product_store'])->name('admin.product_store');
 });
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

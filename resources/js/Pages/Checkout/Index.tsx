@@ -2,6 +2,7 @@ import Hero from "@/Components/Hero";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Dimensions } from "@/utils/Config";
 import {
+    Breadcrumb,
     Button,
     Col,
     Flex,
@@ -29,7 +30,15 @@ function Index({ auth, errors }: Props) {
 
     return (
         <Authenticated user={auth}>
-            <Hero whichRoute={"Shop>Checkout"} title={"Checkout"} />
+            <Hero
+                whichRoute={
+                    <Breadcrumb style={{ margin: "16px 0" }}>
+                        <Breadcrumb.Item>Shop</Breadcrumb.Item>
+                        <Breadcrumb.Item>Checkout</Breadcrumb.Item>
+                    </Breadcrumb>
+                }
+                title={"Checkout"}
+            />
 
             <div
                 className={Dimensions.pagePaddingClass}

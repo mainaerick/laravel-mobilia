@@ -40,7 +40,7 @@ function CartItems({ cartItems, open, onClose }: Props) {
 
     return (
         <Drawer
-            title="Shoppng Cart"
+            title="Shopping Cart"
             closable={false}
             onClose={onClose}
             open={open}

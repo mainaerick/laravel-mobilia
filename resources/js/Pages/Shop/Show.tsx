@@ -19,6 +19,7 @@ import {
     FormProps,
     Form,
     Input,
+    Breadcrumb,
 } from "antd";
 import {
     CheckCircleOutlined,
@@ -95,7 +96,7 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                 >
                     <Col span={12}>
                         <Flex align={"center"} style={{ height: "30px" }}>
-                            <Typography.Text type="secondary">
+                            {/* <Typography.Text type="secondary">
                                 {"Home > Shop "}
                             </Typography.Text>
                             <Divider
@@ -106,7 +107,14 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                                     margin: "0 23px",
                                 }}
                             />
-                            <Typography.Text>{" Sofa"}</Typography.Text>
+                            <Typography.Text>{" Sofa"}</Typography.Text> */}
+                            <Breadcrumb style={{ margin: "16px 0" }}>
+                                <Breadcrumb.Item>Home</Breadcrumb.Item>
+                                <Breadcrumb.Item>Shop</Breadcrumb.Item>
+                                <Breadcrumb.Item>
+                                    {productData.name}
+                                </Breadcrumb.Item>
+                            </Breadcrumb>
                         </Flex>
                     </Col>
                     <Col span={12} style={{ width: "100%" }}>
@@ -206,7 +214,7 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                                                     disabled
                                                     allowHalf
                                                     defaultValue={parseFloat(
-                                                        productData.rating,
+                                                        productData.rating.toString(),
                                                     )}
                                                 />
                                             </Col>
@@ -503,7 +511,9 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                                     fontWeight: "bold",
                                 }}
                                 className={"ps-12 pe-12"}
-                                onClick={() => showMoreRelated(productData.id)}
+                                onClick={() =>
+                                    showMoreRelated(productData.id as any)
+                                }
                             >
                                 Show More
                             </Button>

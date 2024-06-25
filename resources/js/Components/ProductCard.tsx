@@ -8,6 +8,7 @@ import {
     SwapOutlined,
     ShareAltOutlined,
 } from "@ant-design/icons";
+import { router } from "@inertiajs/react";
 type Props = { product: Product };
 
 function ProductCard({ product }: Props) {
@@ -31,6 +32,13 @@ function ProductCard({ product }: Props) {
                                 color: Colors.textButtonColor,
                             }}
                             className="font-bold ps-23 pe-23"
+                            onClick={() => {
+                                console.log(product.id)
+                                router.post(route("cart.add"), {
+                                    product_id: product.id,
+                                    quantity: 1,
+                                });
+                            }}
                         >
                             Add to cart
                         </Button>
@@ -65,7 +73,7 @@ function ProductCard({ product }: Props) {
                             alt="it"
                             style={{
                                 height: "320px",
-                                width:"320px"
+                                width: "320px",
                             }}
                             // src={"images/bedroom/pexels-pixabay-164595.jpg"}
                             placeholder={
@@ -75,7 +83,10 @@ function ProductCard({ product }: Props) {
                                     width={320}
                                 />
                             }
-                            src={product?.images && (`/${product?.images[0]}` as any)}
+                            src={
+                                product?.images &&
+                                (`/${product?.images[0]}` as any)
+                            }
                         />
                     }
                 >

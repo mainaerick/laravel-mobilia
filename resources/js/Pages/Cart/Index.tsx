@@ -15,6 +15,7 @@ import {
     Col,
     ConfigProvider,
     Button,
+    Breadcrumb,
 } from "antd";
 import React, { useEffect, useState } from "react";
 
@@ -100,7 +101,15 @@ function Index({ auth }: Props) {
     }, [items]);
     return (
         <Authenticated user={auth.user}>
-            <Hero whichRoute={"Home>Cart"} title={"Cart"} />
+            <Hero
+                whichRoute={
+                    <Breadcrumb style={{ margin: "16px 0" }}>
+                        <Breadcrumb.Item>Shop</Breadcrumb.Item>
+                        <Breadcrumb.Item>Cart</Breadcrumb.Item>
+                    </Breadcrumb>
+                }
+                title={"Cart"}
+            />
 
             <div
                 className={Dimensions.pagePaddingClass}

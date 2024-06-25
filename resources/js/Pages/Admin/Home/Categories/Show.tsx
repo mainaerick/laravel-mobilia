@@ -45,7 +45,12 @@ function Show({ auth, category }: Props) {
         });
     };
     return (
-        <AuthenticatedAdmin user={auth}>
+        <AuthenticatedAdmin user={auth}
+        header={
+            <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                Category
+            </h2>
+        }>
             {contextHolder}
             <CategoryForm
                 data={data}

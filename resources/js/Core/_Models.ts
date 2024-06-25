@@ -155,3 +155,10 @@ export interface User {
     created_at: string;
     updated_at: string;
 }
+
+export interface Sale {
+    date: string;
+    no_orders: number;
+    tax: string;
+    total_amount: string;
+}

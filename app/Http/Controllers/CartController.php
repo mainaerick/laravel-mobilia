@@ -27,13 +27,14 @@ class CartController extends Controller
 
 
         $user = $request->user();
-        // dd($user);
         $cart = $user->cart ?? Cart::create(['user_id' => $user->id]);
+        $cartItem = CartItem::where('product_id', $request->product_id)->firstOrFail();
+        // dd($cartItem);
 
 
         $cart->items()->updateOrCreate(
             ['product_id' => $request->product_id],
-            ['quantity' => $request->quantity]
+            ['quantity' => $cartItem->quantity += $request->quantity]
         );
 
         return redirect()->back()->with('success', 'Product added to cart');

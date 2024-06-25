@@ -77,11 +77,13 @@ const items: MenuItem[] = [
         sideBarNode("admin.orders.create", "Add Order"),
     ]),
     sideBarNode("#", "Customers", <UserOutlined />, [
-        sideBarNode("admin.users.customers", "Customer Listing"),
+        sideBarNode("admin.users.customers", "User Listing"),
+        sideBarNode("admin.users.create", "Create User"),
     ]),
+
     sideBarNode("#", "Reports", <FileOutlined />, [
-        sideBarNode("#", "Product Viewed"),
-        sideBarNode("#", "Sales"),
+        sideBarNode("admin.products.report", "Product Viewed"),
+        sideBarNode("admin.sales.report", "Sales"),
         sideBarNode("#", "Returns"),
         sideBarNode("#", "Customer Orders"),
         sideBarNode("#", "Shipping"),
@@ -132,25 +134,18 @@ export default function AuthenticatedAdmin({
             }}
         >
             {contextHolder}
-            <Layout hasSider className="min-h-screen bg-white dark:bg-gray-900">
+            <Layout>
                 <Sider
                     theme={"light"}
                     breakpoint="lg"
                     collapsedWidth="0"
                     onBreakpoint={(broken) => {
-                        console.log(broken);
+                        // console.log(broken);
                     }}
                     // collapsible
                     collapsed={collapsed}
                     onCollapse={(value) => setCollapsed(value)}
-                    // style={{
-                    //     overflow: "auto",
-                    //     height: "100vh",
-                    //     position: "fixed",
-                    //     left: 0,
-                    //     top: 0,
-                    //     bottom: 0,
-                    // }}
+                    // trigger={null}
                 >
                     <div className="flex">
                         <div className="shrink-0 flex items-center">
@@ -182,7 +177,8 @@ export default function AuthenticatedAdmin({
                         <div className={Dimensions.pagePaddingClass}>
                             <div className="flex justify-between h-16">
                                 {/*Logo div*/}
-                                <div></div>
+                                <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+
                                 <div className={"flex justify-between"}>
                                     {/*User Div*/}
                                     <div className="hidden sm:flex sm:items-center space-x-8 sm:-my-px sm:ms-10">
@@ -215,42 +211,7 @@ export default function AuthenticatedAdmin({
                                             </Dropdown>
                                         </div>
                                     </div>
-                                    {/* <Flex gap={37}> */}
-                                    {/* <SearchOutlined
-                                    style={{ fontSize: "17px" }}
-                                    className={
-                                        "space-x-8 sm:-my-px sm:ms-10 sm:flex"
-                                    }
-                                />
-                                <HeartOutlined
-                                    style={{ fontSize: "17px" }}
-                                    className={
-                                        "space-x-8 sm:-my-px sm:ms-10 sm:flex"
-                                    }
-                                /> */}
-                                    <Flex
-                                        vertical
-                                        align={"center"}
-                                        justify={"center"}
-                                        style={{ height: "100%" }}
-                                    >
-                                        <Badge
-                                            size="small"
-                                            count={
-                                                props.cartQuantity
-                                                    ? (props.cartQuantity as any)
-                                                    : 0
-                                            }
-                                        >
-                                            <ShoppingCartOutlined
-                                                style={{ fontSize: "17px" }}
-                                                className={
-                                                    "space-x-8 sm:-my-px sm:ms-10 sm:flex"
-                                                }
-                                                onClick={showDrawer}
-                                            />{" "}
-                                        </Badge>
-                                    </Flex>
+
                                     {/* </Flex> */}
                                 </div>
                                 <div className="-me-2 flex items-center sm:hidden">
@@ -330,15 +291,20 @@ export default function AuthenticatedAdmin({
                                 </div>
                             </div>
                         </div>
-                        <CartItems
-                            cartItems={props.cartItems as CartItem[]}
-                            open={open}
-                            onClose={onClose}
-                        />
                     </nav>
-
+                    <Header
+                        style={{ padding: 0, background: colorBgContainer }}
+                    ></Header>
+                    {header && (
+                        <header className="bg-white dark:bg-gray-800 shadow">
+                            <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                                {header}
+                            </div>
+                        </header>
+                    )}
                     <Content style={{ margin: "24px 16px 0" }}>
                         <div
+                            className=""
                             style={{
                                 padding: 24,
                                 minHeight: "600",
@@ -353,14 +319,6 @@ export default function AuthenticatedAdmin({
                         Ant Design ©{new Date().getFullYear()} Created by a dev
                     </Footer>
                 </Layout>
-
-                {header && (
-                    <header className="bg-white dark:bg-gray-800 shadow">
-                        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                            {header}
-                        </div>
-                    </header>
-                )}
             </Layout>
         </ConfigProvider>
     );

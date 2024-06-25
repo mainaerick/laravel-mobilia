@@ -1,28 +1,26 @@
-import TableComponent from "@/Components/TableComponent";
-import { User } from "@/Core/_Models";
+import { Sale } from "@/Core/_Models";
 import AuthenticatedAdmin from "@/Layouts/AdminLayout";
 import {
-    Button,
-    Input,
     InputRef,
-    Space,
     TableColumnType,
+    Input,
+    Space,
+    Button,
     TableColumnsType,
+    Flex,
+    Rate,
 } from "antd";
 import { FilterDropdownProps } from "antd/es/table/interface";
 import React, { useRef, useState } from "react";
-import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import TableAction from "@/Components/TableAction";
-import { router } from "@inertiajs/react";
+import { SearchOutlined } from "@ant-design/icons";
+import TableComponent from "@/Components/TableComponent";
 
-type Props = {
-    auth: any;
-    users: any;
-};
-type DataIndex = keyof User;
+type Props = { auth: any; sales: any };
+type DataIndex = keyof Sale;
 
-function Index({ auth, users }: Props) {
+function SalesReport({ auth, sales }: Props) {
+    console.log(sales);
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
     const searchInput = useRef<InputRef>(null);
@@ -44,7 +42,7 @@ function Index({ auth, users }: Props) {
 
     const getColumnSearchProps = (
         dataIndex: DataIndex,
-    ): TableColumnType<User> => ({
+    ): TableColumnType<Sale> => ({
         filterDropdown: ({
             setSelectedKeys,
             selectedKeys,
@@ -144,52 +142,58 @@ function Index({ auth, users }: Props) {
                 text
             ),
     });
-    const columns: TableColumnsType<User> = [
+    const columns: TableColumnsType<Sale> = [
         {
-            title: "Name",
-            dataIndex: "name",
-            key: "name",
+            title: "Date",
+            dataIndex: "date",
+            key: "date",
             width: "15%",
-            ...getColumnSearchProps("name"),
-        },
-        {
-            title: "Email",
-            dataIndex: "email",
-            key: "email",
-            width: "15%",
-            ...getColumnSearchProps("email"),
-        },
-        {
-            title: "Created Date",
-            dataIndex: "created_at",
-            key: "created_at",
-            width: "15%",
-            ...getColumnSearchProps("created_at"),
+            ...getColumnSearchProps("date"),
+            sorter: (a, b) =>
+                new Date(a.date).getTime() - new Date(b.date).getTime(),
+            sortDirections: ["descend", "ascend"],
         },
 
         {
-            title: "Action",
-            width: "5%",
-            fixed: "right",
-            render: (item: any) => {
-                return (
-                    <TableAction
-                        deleteFunc={() => {
-                            router.delete(route("admin.user.destroy", item.id));
-                        }}
-                        editFunc={() => {
-                            router.get(route("admin.user.edit", item.id));
-                        }}
-                    />
-                );
-            },
+            title: "No of Orders",
+            dataIndex: "no_orders",
+            key: "no_orders",
+            width: "25%",
+            ...getColumnSearchProps("no_orders"),
+            sorter: (a, b) => a.no_orders - b.no_orders,
+            sortDirections: ["descend", "ascend"],
+            // responsive: ["md"],
+        },
+        {
+            title: "Tax",
+            dataIndex: "tax",
+            key: "tax",
+            width: "25%",
+            ...getColumnSearchProps("tax"),
+            sortDirections: ["descend", "ascend"],
+            responsive: ["md"],
+        },
+        {
+            title: "Total Amount",
+            dataIndex: "total_amount",
+            key: "total_amount",
+            width: "25%",
+            ...getColumnSearchProps("total_amount"),
+            sortDirections: ["descend", "ascend"],
+            // responsive: ["md"],
         },
     ];
-    console.log(users);
     return (
-        <AuthenticatedAdmin user={auth}>
+        <AuthenticatedAdmin
+            user={auth}
+            header={
+                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                    Sales Report
+                </h2>
+            }
+        >
             <TableComponent
-                items={users}
+                items={sales}
                 pagination={undefined}
                 columns={columns}
             />
@@ -197,4 +201,4 @@ function Index({ auth, users }: Props) {
     );
 }
 
-export default Index;
+export default SalesReport;
