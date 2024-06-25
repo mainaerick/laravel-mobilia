@@ -1,7 +1,15 @@
 import React, { useRef, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import type { InputRef, TableColumnsType, TableColumnType } from "antd";
-import { Button, ConfigProvider, Input, Space, Table, Typography } from "antd";
+import {
+    Button,
+    ConfigProvider,
+    Flex,
+    Input,
+    Space,
+    Table,
+    Typography,
+} from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
 import Highlighter from "react-highlight-words";
 import AuthenticatedAdmin from "@/Layouts/AdminLayout";
@@ -356,23 +364,13 @@ function Index({ auth, products }: Props) {
                 </h2>
             }
         >
-            <div style={{ width: "100%" }}>
-                <ConfigProvider
-                    theme={{
-                        components: {
-                            Table: {
-                                headerBg: Colors.secondary,
-                            },
-                        },
-                    }}
-                >
-                    <TableComponent
-                        items={data}
-                        pagination={undefined}
-                        columns={columns}
-                    />
-                    {/* <Table columns={columns} dataSource={data} /> */}
-                </ConfigProvider>
+            <div style={{ width: "100%" ,}}>
+                <TableComponent
+                    items={data}
+                    pagination={undefined}
+                    columns={columns}
+                />
+                {/* <Table columns={columns} dataSource={data} /> */}
             </div>
         </AuthenticatedAdmin>
     );

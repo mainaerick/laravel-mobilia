@@ -12,6 +12,7 @@ import {
     Divider,
     Input,
     Select,
+    Breadcrumb,
 } from "antd";
 import { FilterOutlined } from "@ant-design/icons";
 import Meta from "antd/es/card/Meta";
@@ -29,7 +30,7 @@ function Index({ auth, products, queryParams = null }: Props) {
     const totalNumber = products.total;
     const perPage = products.per_page;
     const productsData = products.data as Product[];
-    console.log(productsData)
+    console.log(productsData);
     const handleChangeSort = (name: string) => {
         if (name === queryParams.sort_field) {
             if (queryParams.sort_direction === "asc") {
@@ -41,7 +42,6 @@ function Index({ auth, products, queryParams = null }: Props) {
             queryParams.sort_field = name;
             queryParams.sort_direction = "asc";
         }
-
 
         router.get(route("shop.index"), queryParams);
     };
@@ -58,7 +58,15 @@ function Index({ auth, products, queryParams = null }: Props) {
     return (
         <Authenticated user={auth}>
             {/* Hero */}
-            <Hero whichRoute={"Home>Shop"} title={"Shop"} />
+            <Hero
+                whichRoute={
+                    <Breadcrumb style={{ margin: "16px 0" }}>
+                        <Breadcrumb.Item>Home</Breadcrumb.Item>
+                        <Breadcrumb.Item>Shop</Breadcrumb.Item>
+                    </Breadcrumb>
+                }
+                title={"Shop"}
+            />
             {/* Tool Bar Div */}
             <div style={{ background: Colors.secondary, height: "100px " }}>
                 <Row
@@ -109,11 +117,7 @@ function Index({ auth, products, queryParams = null }: Props) {
                                 lg={{ span: 12 }}
                                 xl={{ span: 12 }}
                             >
-                                <Flex
-                                    gap={9}
-                                    justify={"end"}
-                                    align={"center"}
-                                >
+                                <Flex gap={9} justify={"end"} align={"center"}>
                                     <div>
                                         <Typography.Text>
                                             Sort By

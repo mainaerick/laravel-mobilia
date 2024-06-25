@@ -33,13 +33,7 @@ type Props = {
 };
 type DataIndex = keyof Order;
 
-function TableComponent({
-    items,
-    pagination,
-    columns,
-    footer,
-}: Props) {
-   
+function TableComponent({ items, pagination, columns, footer }: Props) {
     return (
         <ConfigProvider
             theme={{
@@ -50,12 +44,15 @@ function TableComponent({
                 },
             }}
         >
-            <Table
-                columns={columns}
-                dataSource={items}
-                pagination={pagination}
-                footer={footer}
-            />
+            <div>
+                <Table
+                    columns={columns}
+                    dataSource={items}
+                    pagination={pagination}
+                    footer={footer}
+                    scroll={{ y: "400px" }}
+                />
+            </div>
         </ConfigProvider>
     );
 }

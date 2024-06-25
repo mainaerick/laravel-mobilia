@@ -9,12 +9,15 @@ import {
     TableColumnsType,
     Flex,
     Rate,
+    Row,
+    Col,
 } from "antd";
 import { FilterDropdownProps } from "antd/es/table/interface";
 import React, { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 import TableComponent from "@/Components/TableComponent";
+import ExcelExport from "./Components/ExportButton";
 
 type Props = { auth: any; sales: any };
 type DataIndex = keyof Sale;
@@ -187,9 +190,21 @@ function SalesReport({ auth, sales }: Props) {
         <AuthenticatedAdmin
             user={auth}
             header={
-                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Sales Report
-                </h2>
+                <Row justify={"space-between"}>
+                    <Col>
+                        <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                            Sales Report
+                        </h2>
+                    </Col>
+                    <Col>
+                        <div>
+                            <ExcelExport
+                                data={sales}
+                                fileName={"Sales Report"}
+                            />
+                        </div>
+                    </Col>
+                </Row>
             }
         >
             <TableComponent

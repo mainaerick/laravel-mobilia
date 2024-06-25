@@ -5,10 +5,12 @@ import AuthenticatedAdmin from "@/Layouts/AdminLayout";
 import { router } from "@inertiajs/react";
 import {
     Button,
+    Col,
     Flex,
     Input,
     InputRef,
     Rate,
+    Row,
     Space,
     TableColumnType,
     TableColumnsType,
@@ -17,6 +19,7 @@ import { FilterDropdownProps } from "antd/es/table/interface";
 import React, { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
+import ExcelExport from "./Components/ExportButton";
 
 type Props = { auth: any; products: any };
 type DataIndex = keyof Product;
@@ -196,9 +199,21 @@ function ProductReport({ auth, products }: Props) {
         <AuthenticatedAdmin
             user={auth}
             header={
-                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Product Report
-                </h2>
+                <Row justify={"space-between"}>
+                    <Col>
+                        <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                            Product Report
+                        </h2>
+                    </Col>
+                    <Col>
+                        <div>
+                            <ExcelExport
+                                data={producs_data}
+                                fileName={"Product Report"}
+                            />
+                        </div>
+                    </Col>
+                </Row>
             }
         >
             <TableComponent

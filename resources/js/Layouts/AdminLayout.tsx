@@ -25,6 +25,7 @@ import {
     Layout,
     Menu,
     MenuProps,
+    Row,
     message,
     theme,
 } from "antd";
@@ -147,21 +148,22 @@ export default function AuthenticatedAdmin({
                     onCollapse={(value) => setCollapsed(value)}
                     // trigger={null}
                 >
-                    <div className="flex">
-                        <div className="shrink-0 flex items-center">
-                            <Link href="/">
-                                <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                            </Link>
+                    <Flex
+                        className={Dimensions.pagePaddingClass}
+                        align={"center"}
+                        justify={"start"}
+                    >
+                        <div className="h-16">
+                            {" "}
+                            <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                         </div>
-                        <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            <NavLink
-                                href={route("dashboard")}
-                                active={route().current("dashboard")}
-                            >
-                                Mobilia
-                            </NavLink>
-                        </div>
-                    </div>
+                        <NavLink
+                            href={route("dashboard")}
+                            active={route().current("dashboard")}
+                        >
+                            Mobilia
+                        </NavLink>
+                    </Flex>
 
                     <Menu
                         theme="light"
@@ -177,8 +179,9 @@ export default function AuthenticatedAdmin({
                         <div className={Dimensions.pagePaddingClass}>
                             <div className="flex justify-between h-16">
                                 {/*Logo div*/}
-                                <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-
+                                <div className="flex items-center ">
+                                    {/* <App licationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" /> */}
+                                </div>
                                 <div className={"flex justify-between"}>
                                     {/*User Div*/}
                                     <div className="hidden sm:flex sm:items-center space-x-8 sm:-my-px sm:ms-10">
@@ -211,7 +214,6 @@ export default function AuthenticatedAdmin({
                                             </Dropdown>
                                         </div>
                                     </div>
-
                                     {/* </Flex> */}
                                 </div>
                                 <div className="-me-2 flex items-center sm:hidden">
@@ -292,9 +294,7 @@ export default function AuthenticatedAdmin({
                             </div>
                         </div>
                     </nav>
-                    <Header
-                        style={{ padding: 0, background: colorBgContainer }}
-                    ></Header>
+
                     {header && (
                         <header className="bg-white dark:bg-gray-800 shadow">
                             <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -302,12 +302,12 @@ export default function AuthenticatedAdmin({
                             </div>
                         </header>
                     )}
-                    <Content style={{ margin: "24px 16px 0" }}>
+                    <Content style={{ height: "600px", margin: "24px 16px 0" }}>
                         <div
                             className=""
                             style={{
                                 padding: 24,
-                                minHeight: "600",
+                                minHeight: "600px",
                                 background: colorBgContainer,
                                 borderRadius: borderRadiusLG,
                             }}
