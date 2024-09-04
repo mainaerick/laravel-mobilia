@@ -78,7 +78,7 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
         if (values.quantity == undefined) {
             values.quantity = 1;
         }
-
+        
         router.post(route("cart.add"), {
             product_id: productData.id,
             quantity: values.quantity,
@@ -339,7 +339,7 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                                             autoComplete="off"
                                         >
                                             <Flex
-                                                gap={13}
+                                                gap={6}
                                                 style={{ marginTop: "13px" }}
                                             >
                                                 <Form.Item<AddToCartType>
@@ -354,7 +354,7 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                                                     ]}
                                                 >
                                                     <InputNumber
-                                                        size="large"
+                                                        size="middle"
                                                         min={1}
                                                         max={
                                                             productData.quantity
@@ -375,7 +375,7 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                                                 <Button
                                                     htmlType="submit"
                                                     shape="round"
-                                                    size="large"
+                                                    size="middle"
                                                     icon={
                                                         flash?.success && (
                                                             <CheckCircleOutlined />
@@ -386,7 +386,7 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                                                 </Button>
                                                 <Button
                                                     shape="round"
-                                                    size="large"
+                                                    size="middle"
                                                     icon={<PlusOutlined />}
                                                 >
                                                     Compare

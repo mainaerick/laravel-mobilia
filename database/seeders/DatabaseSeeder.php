@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Auth\Events\Registered;
 
 class DatabaseSeeder extends Seeder
 {
@@ -55,6 +56,7 @@ class DatabaseSeeder extends Seeder
 
         $admin->assignRole([$role->id]);
 
+        event(new Registered($admin));
         for ($i = 0; $i < 20; $i++) {
             $user = User::create([
                 'name' => "User{$i}",
@@ -64,10 +66,10 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]);
             $role = Role::updateOrCreate(['name' => 'User']);
-
             $permissions = Permission::pluck('id', 'id')->all();
             $role->syncPermissions($permissions);
             $user->assignRole([$role->id]);
+            event(new Registered($user));
         }
 
         // Create a regular user

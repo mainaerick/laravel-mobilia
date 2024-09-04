@@ -11,6 +11,7 @@ function Hero({ title, whichRoute }: Props) {
                 position: "relative",
                 height: "300px",
                 width: "100%",
+                textAlign:"left",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
@@ -20,10 +21,9 @@ function Hero({ title, whichRoute }: Props) {
         >
             <div
                 style={{
-                    position: "absolute",
-                    top: "30%",
-                    left: "50%",
-                    // right: "50%",
+                    display:"flex",
+                    justifyContent:"center",
+                    height:"300px"
                 }}
             >
                 <Flex

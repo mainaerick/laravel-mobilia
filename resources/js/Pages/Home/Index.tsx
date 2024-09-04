@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Product } from "@/Core/_Models";
-import { Card, Carousel, Col, Flex, Row, Typography, Button } from "antd";
+import { Card, Carousel, Col, Flex, Row, Typography, Button, Image } from "antd";
 import Meta from "antd/es/card/Meta";
 import {
     HeartOutlined,
@@ -26,19 +26,19 @@ const Index: React.FC<Props> = ({ auth, products }) => {
     const items: any = [
         <img
             className="pr-2"
-            src="images/bedroom.png"
+            src="images/bedroom.jpg"
             onDragStart={handleDragStart}
             role="presentation"
         />,
         <img
             className="pr-2 pt-0 pb-0"
-            src="images/bedroom.png"
+            src="images/bedroom.jpg"
             onDragStart={handleDragStart}
             role="presentation"
         />,
         <img
             className="pr-2"
-            src="images/bedroom.png"
+            src="images/bedroom.jpg"
             onDragStart={handleDragStart}
             role="presentation"
         />,
@@ -68,13 +68,13 @@ const Index: React.FC<Props> = ({ auth, products }) => {
             >
                 <div
                     className="absolute sm:bottom-0 sm:right-0  lg:top-[30%] lg:left-[50%] lg:right-[5%] "
-                    // style={{
-                    //     // position: "absolute",
-                    //     top: "30%",
-                    //     left: "50%",
-                    //     right: "5%",
-                    //     height: "100px",
-                    // }}
+                // style={{
+                //     // position: "absolute",
+                //     top: "30%",
+                //     left: "50%",
+                //     right: "5%",
+                //     height: "100px",
+                // }}
                 >
                     <Card
                         style={{
@@ -159,9 +159,29 @@ const Index: React.FC<Props> = ({ auth, products }) => {
                                 style={{ marginBottom: 10 }}
                                 styles={{ body: { padding: 0 } }}
                                 cover={
-                                    <img
-                                        src={`/images/dining.png`}
-                                        alt={"dining"}
+                                    // <img
+                                    //     src={`/images/dining.jpg`}
+                                    //     alt={"dining"}
+                                    // />
+                                    <Image
+                                        alt="it"
+                                        style={{
+                                            height: "320px",
+                                            width: "420px",
+                                            objectFit: "cover"
+
+                                        }}
+                                        // src={"images/bedroom/pexels-pixabay-164595.jpg"}
+                                        placeholder={
+                                            <Image
+                                                preview={false}
+                                                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200"
+                                                width={320}
+                                            />
+                                        }
+                                        src={
+                                            `/images/dining.jpg`
+                                        }
                                     />
                                 }
                             ></Card>
@@ -186,9 +206,33 @@ const Index: React.FC<Props> = ({ auth, products }) => {
                                 style={{ marginBottom: 10 }}
                                 styles={{ body: { padding: 0 } }}
                                 cover={
-                                    <img
-                                        alt="example"
-                                        src={"images/living.png"}
+                                    // <img
+                                    //     alt="example"
+                                    //     src={"images/living.jpg"}
+                                    //     style={{
+                                    //         height: "320px",
+                                    //         width: "320px",
+                                    //     }}
+                                    // />
+                                    <Image
+                                        alt="it"
+                                        style={{
+                                            height: "320px",
+                                            width: "420px",
+                                            objectFit: "cover"
+
+                                        }}
+                                        // src={"images/bedroom/pexels-pixabay-164595.jpg"}
+                                        placeholder={
+                                            <Image
+                                                preview={false}
+                                                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200"
+                                                width={320}
+                                            />
+                                        }
+                                        src={
+                                            "images/living.jpg"
+                                        }
                                     />
                                 }
                             ></Card>
@@ -213,9 +257,34 @@ const Index: React.FC<Props> = ({ auth, products }) => {
                                 style={{ marginBottom: 10 }}
                                 styles={{ body: { padding: 0 } }}
                                 cover={
-                                    <img
-                                        alt="example"
-                                        src={"images/bedroom.png"}
+
+                                    // <img
+                                    //     alt="example"
+                                    //     src={"images/bedroom.jpg"}
+                                    //     style={{
+                                    //         height: "320px",
+                                    //         width: "320px",
+                                    //     }}
+                                    // />
+                                    <Image
+                                        alt="it"
+                                        style={{
+                                            height: "320px",
+                                            width: "420px",
+                                            objectFit: "cover"
+
+                                        }}
+                                        // src={"images/bedroom/pexels-pixabay-164595.jpg"}
+                                        placeholder={
+                                            <Image
+                                                preview={false}
+                                                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200"
+                                                width={320}
+                                            />
+                                        }
+                                        src={
+                                            "images/bedroom.jpg"
+                                        }
                                     />
                                 }
                             ></Card>

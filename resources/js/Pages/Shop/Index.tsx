@@ -83,22 +83,7 @@ function Index({ auth, products, queryParams = null }: Props) {
                         xl={{ span: 12 }}
                         style={{ width: "100%" }}
                     >
-                        {/* <Flex  align={"center"} justify="sm-end xl-start"  style={{ height: "30px", }}>
-                            <div>
-                                <FilterOutlined /> Filter
-                            </div>
-                            <Divider
-                                type="vertical"
-                                style={{
-                                    background: "black",
-                                    height: "100%",
-                                    margin: "0 23px",
-                                }}
-                            />
-                            <Typography.Text>
-                                {"Showing 1-16 of 32 results"}
-                            </Typography.Text>
-                        </Flex> */}
+
                     </Col>
                     <Col
                         // span={12}
@@ -125,7 +110,7 @@ function Index({ auth, products, queryParams = null }: Props) {
                                     </div>
                                     <div style={{ width: "200px" }}>
                                         <Select
-                                            size="large"
+                                            size="middle"
                                             defaultValue={
                                                 queryParams.sort_field
                                             }

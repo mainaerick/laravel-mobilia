@@ -25,13 +25,15 @@ class CartController extends Controller
         //     'quantity' => 'required|integer|min=1',
         // ]);
 
-
         $user = $request->user();
+        
+
         $cart = $user->cart ?? Cart::create(['user_id' => $user->id]);
-        $cartItem = CartItem::where('product_id', $request->product_id)->firstOrFail();
-        // dd($cartItem);
-
-
+        
+        $cartItem = CartItem::where('product_id', $request->product_id)->first();
+        if(!$cartItem){
+            $cartItem = CartItem::create(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'quantity'=>0]);
+        }
         $cart->items()->updateOrCreate(
             ['product_id' => $request->product_id],
             ['quantity' => $cartItem->quantity += $request->quantity]

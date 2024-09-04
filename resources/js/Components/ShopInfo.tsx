@@ -1,5 +1,5 @@
 import { Colors, Dimensions } from "@/utils/Config";
-import { Row, Col, Flex, Typography } from "antd";
+import { Row, Col, Flex, Typography, Divider } from "antd";
 import React from "react";
 import {
     CrownOutlined,
@@ -9,30 +9,32 @@ import {
 } from "@ant-design/icons";
 type Props = {};
 
-function ShopInfo({}: Props) {
+function ShopInfo({ }: Props) {
     return (
         <div
             style={{
-                height: "270px",
+                height: "370px",
                 background: Colors.secondary,
             }}
         >
             <Row
                 className={Dimensions.pagePaddingClass}
                 style={{
-                    height: "270px",
+                    height: "370px",
                 }}
                 align={"middle"}
             >
-                <Col span={6}>
-                    <Row style={{}}>
+                <Col sm={{ span: 24 }} md={{ span: 12 }}
+                    lg={{ span: 6 }}
+                    xl={{ span: 6 }}>
+                    <Row align={"middle"} gutter={12} justify={"start"}>
                         <Col
                             sm={{ span: 24 }}
                             md={{ span: 12 }}
                             lg={{ span: 12 }}
                             xl={{ span: 12 }}
                         >
-                            <CrownOutlined style={{ fontSize: 60 }} />
+                            <CrownOutlined style={{ fontSize: 40 }} />
                         </Col>
                         <Col
                             sm={{ span: 24 }}
@@ -41,25 +43,29 @@ function ShopInfo({}: Props) {
                             xl={{ span: 12 }}
                         >
                             <Flex vertical>
-                                <Typography.Title level={4}>
+                                <Typography.Title level={5}>
                                     High Quality
                                 </Typography.Title>
-                                <Typography.Paragraph>
+                                <Typography.Paragraph >
                                     crafted from top materials
                                 </Typography.Paragraph>
                             </Flex>
                         </Col>
                     </Row>
+                    
                 </Col>
-                <Col span={6}>
-                    <Row style={{}}>
+                
+                <Col sm={{ span: 24 }} md={{ span: 12 }}
+                    lg={{ span: 6 }}
+                    xl={{ span: 6 }}>
+                    <Row align={"middle"} gutter={12} justify={"space-between"}>
                         <Col
                             sm={{ span: 24 }}
                             md={{ span: 12 }}
                             lg={{ span: 12 }}
                             xl={{ span: 12 }}
                         >
-                            <CheckCircleOutlined style={{ fontSize: 60 }} />
+                            <CheckCircleOutlined style={{ fontSize: 40 }} />
                         </Col>
                         <Col
                             sm={{ span: 24 }}
@@ -68,7 +74,7 @@ function ShopInfo({}: Props) {
                             xl={{ span: 12 }}
                         >
                             <Flex vertical>
-                                <Typography.Title level={4}>
+                                <Typography.Title level={5}>
                                     Warranty Protection
                                 </Typography.Title>
                                 <Typography.Paragraph>
@@ -78,15 +84,17 @@ function ShopInfo({}: Props) {
                         </Col>
                     </Row>
                 </Col>
-                <Col span={6}>
-                    <Row style={{}}>
+                <Col sm={{ span: 24 }} md={{ span: 12 }}
+                    lg={{ span: 6 }}
+                    xl={{ span: 6 }}>
+                    <Row align={"middle"} gutter={12} justify={"space-between"}>
                         <Col
                             sm={{ span: 24 }}
                             md={{ span: 12 }}
                             lg={{ span: 12 }}
                             xl={{ span: 12 }}
                         >
-                            <TruckOutlined style={{ fontSize: 60 }} />
+                            <TruckOutlined style={{ fontSize: 40 }} />
                         </Col>
                         <Col
                             sm={{ span: 24 }}
@@ -95,7 +103,7 @@ function ShopInfo({}: Props) {
                             xl={{ span: 12 }}
                         >
                             <Flex vertical>
-                                <Typography.Title level={4}>
+                                <Typography.Title level={5}>
                                     Free Shipping
                                 </Typography.Title>
                                 <Typography.Paragraph>
@@ -105,15 +113,17 @@ function ShopInfo({}: Props) {
                         </Col>
                     </Row>
                 </Col>
-                <Col span={6}>
-                    <Row style={{}}>
+                <Col sm={{ span: 24 }} md={{ span: 12 }}
+                    lg={{ span: 6 }}
+                    xl={{ span: 6 }}>
+                    <Row align={"middle"} gutter={12} justify={"space-between"}>
                         <Col
                             sm={{ span: 24 }}
                             md={{ span: 12 }}
                             lg={{ span: 12 }}
                             xl={{ span: 12 }}
                         >
-                            <IssuesCloseOutlined style={{ fontSize: 60 }} />
+                            <IssuesCloseOutlined style={{ fontSize: 40 }} />
                         </Col>
                         <Col
                             sm={{ span: 24 }}
@@ -122,7 +132,7 @@ function ShopInfo({}: Props) {
                             xl={{ span: 12 }}
                         >
                             <Flex vertical>
-                                <Typography.Title level={4}>
+                                <Typography.Title level={5}>
                                     24 / 7 Support
                                 </Typography.Title>
                                 <Typography.Paragraph>

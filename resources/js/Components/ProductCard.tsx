@@ -108,7 +108,7 @@ function ProductCard({ product }: Props) {
                         }
                     />
                 </Card>
-                {/*<img src={"/images/dining.png"}/>*/}
+                {/*<img src={"/images/living.jpg"}/>*/}
             </div>
         </div>
     );

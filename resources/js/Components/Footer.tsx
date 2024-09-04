@@ -5,7 +5,7 @@ import { Link } from "react-alice-carousel";
 
 type Props = {};
 
-function Footer({}: Props) {
+function Footer({ }: Props) {
     return (
         <>
             <Divider style={{ marginTop: "0" }} />
@@ -20,7 +20,11 @@ function Footer({}: Props) {
                         // gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
                         align={"top"}
                     >
-                        <Col span={8}>
+                        <Col xs={{ span: 24 }}
+                            sm={{ span: 24 }}
+                            md={{ span: 6 }}
+                            lg={{ span: 6 }}
+                            xl={{ span: 6 }}>
                             <Row>
                                 <Col span={12}>
                                     <Flex gap={50} vertical>
@@ -39,7 +43,11 @@ function Footer({}: Props) {
                                 </Col>
                             </Row>
                         </Col>
-                        <Col span={16}>
+                        <Col xs={{ span: 24 }}
+                            sm={{ span: 24 }}
+                            md={{ span: 18 }}
+                            lg={{ span: 18 }}
+                            xl={{ span: 18 }}>
                             <Row>
                                 <Col span={8}>
                                     <Flex vertical gap={50}>
@@ -110,7 +118,7 @@ function Footer({}: Props) {
                                         >
                                             NewsLetter
                                         </Typography.Text>
-                                        <Row>
+                                        <Row align={"middle"} justify={"start"}>
                                             <Col
                                                 sm={{ span: 24 }}
                                                 md={{ span: 12 }}
