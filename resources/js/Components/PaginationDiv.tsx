@@ -1,7 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import type { PaginationProps } from "antd";
 import { Pagination } from "antd";
-import { useNavigate } from "react-router-dom";
 
 const itemRender: PaginationProps["itemRender"] = (
     _,

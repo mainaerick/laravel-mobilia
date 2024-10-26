@@ -32,7 +32,7 @@ function CartItems({ cartItems, open, onClose }: Props) {
         if (cartItems) {
             let total = 0;
             cartItems.map((item) => {
-                total = parseFloat(item.product.price) * item.quantity;
+                total = parseFloat(item.product.price.toString()) * item.quantity;
             });
             setSubTotal(total);
         }

@@ -70,7 +70,7 @@ function Index({ auth }: Props) {
             render: (_, record) => (
                 <Space size="middle">
                     <Typography.Text>
-                        {record.quantity * parseFloat(record.product.price)}
+                        {record.quantity * parseFloat(record.product.price.toString())}
                     </Typography.Text>
                 </Space>
             ),
@@ -93,7 +93,7 @@ function Index({ auth }: Props) {
         if (items) {
             let total = 0;
             items.map((item) => {
-                total = parseFloat(item.product.price) * item.quantity;
+                total = parseFloat(item.product.price.toString()) * item.quantity;
             });
 
             setSubTotal(Number.parseFloat(total.toString()).toFixed(2));
