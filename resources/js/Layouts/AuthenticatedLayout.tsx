@@ -34,7 +34,6 @@ export default function Authenticated({
     const onClose = () => {
         setOpen(false);
     };
-    console.log(props);
     return (
         <ConfigProvider
             theme={{
@@ -119,8 +118,8 @@ export default function Authenticated({
                                                         }}
                                                     />
                                                 </Dropdown.Trigger>
+                                                {user ? <Dropdown.Content>
 
-                                                <Dropdown.Content>
                                                     <Dropdown.Link
                                                         href={route(
                                                             "profile.edit",
@@ -135,7 +134,22 @@ export default function Authenticated({
                                                     >
                                                         Log Out
                                                     </Dropdown.Link>
-                                                </Dropdown.Content>
+                                                </Dropdown.Content> : <Dropdown.Content>
+
+                                                    <Dropdown.Link
+                                                        href={route('login')}
+                                                    >
+                                                        Login
+                                                    </Dropdown.Link>
+                                                    <Dropdown.Link
+                                                        href={route('register')}
+                                                        
+                                                        
+                                                    >
+                                                        Register
+                                                    </Dropdown.Link>
+                                                </Dropdown.Content>}
+
                                             </Dropdown>
                                         </div>
                                     </div>
@@ -265,7 +279,7 @@ export default function Authenticated({
                         </div>
 
                         <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-                            <div className="px-4">
+                            {user ? <><div className="px-4">
                                 <div className="font-medium text-base text-gray-800 dark:text-gray-200">
                                     {user.name}
                                 </div>
@@ -274,18 +288,20 @@ export default function Authenticated({
                                 </div>
                             </div>
 
-                            <div className="mt-3 space-y-1">
-                                <ResponsiveNavLink href={route("profile.edit")}>
-                                    Profile
-                                </ResponsiveNavLink>
-                                <ResponsiveNavLink
-                                    method="post"
-                                    href={route("logout")}
-                                    as="button"
-                                >
-                                    Log Out
-                                </ResponsiveNavLink>
-                            </div>
+                                <div className="mt-3 space-y-1">
+                                    <ResponsiveNavLink href={route("profile.edit")}>
+                                        Profile
+                                    </ResponsiveNavLink>
+                                    <ResponsiveNavLink
+                                        method="post"
+                                        href={route("logout")}
+                                        as="button"
+                                    >
+                                        Log Out
+                                    </ResponsiveNavLink>
+                                </div></> : <>
+                            </>}
+
                         </div>
                     </div>
                     <CartItems

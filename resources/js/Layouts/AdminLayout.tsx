@@ -42,7 +42,7 @@ function getItem(
     label: React.ReactNode,
     key: React.Key,
     icon?: React.ReactNode,
-    children?: MenuItem[],
+    children?: MenuItem[]
 ): MenuItem {
     return {
         key,
@@ -56,13 +56,13 @@ const sideBarNode = (
     link: string,
     label: string,
     icon?: any,
-    children?: any,
+    children?: any
 ) => {
     return getItem(
         <Link href={link === "#" ? "#" : route(link)}>{label}</Link>,
         label,
         icon,
-        children,
+        children
     );
 };
 const items: MenuItem[] = [
@@ -88,6 +88,9 @@ const items: MenuItem[] = [
         sideBarNode("#", "Returns"),
         sideBarNode("#", "Customer Orders"),
         sideBarNode("#", "Shipping"),
+    ]),
+    sideBarNode("#", "Settings", <FileOutlined />, [
+        sideBarNode("#", "Homepage"),
     ]),
 ];
 const { Header, Content, Footer, Sider } = Layout;
@@ -198,7 +201,7 @@ export default function AuthenticatedAdmin({
                                                 <Dropdown.Content>
                                                     <Dropdown.Link
                                                         href={route(
-                                                            "profile.edit",
+                                                            "profile.edit"
                                                         )}
                                                     >
                                                         Profile
@@ -221,7 +224,7 @@ export default function AuthenticatedAdmin({
                                         onClick={() =>
                                             setShowingNavigationDropdown(
                                                 (previousState) =>
-                                                    !previousState,
+                                                    !previousState
                                             )
                                         }
                                         className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
