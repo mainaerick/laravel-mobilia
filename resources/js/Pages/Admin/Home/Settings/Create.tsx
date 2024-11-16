@@ -5,11 +5,13 @@ import AuthenticatedAdmin from "@/Layouts/AdminLayout";
 type Props = {}
 type Color = GetProp<ColorPickerProps, 'value'>;
 const  Create: React.FC<Props> = ({auth,settings,success }) => {
-    console.log(settings)
     const [messageApi, contextHolder] = message.useMessage();
     const { data, setData, post, errors }:any = useForm({
         hero_image: null,
         logo: null,
+        living:null,
+        dining:null,
+        bedroom:null,
         primary_color: settings.primary_color || '#ffffff',
         secondary_color: settings.secondary_color || '#000000',
     });
@@ -26,7 +28,7 @@ const  Create: React.FC<Props> = ({auth,settings,success }) => {
                 console.log(e)
                 messageApi.open({
                     type: "error",
-                    content: "An error occurred",
+                    content: "An error occurred "+e.hero_image+" "+e.logo,
                 });
             },});
 
@@ -66,7 +68,36 @@ const  Create: React.FC<Props> = ({auth,settings,success }) => {
                   <Button>Upload Logo</Button>
               </Upload>
           </Form.Item>
-
+          <Form.Item label="Dining">
+              <Upload
+                  beforeUpload={(file) => {
+                      setData('dining', file);
+                      return false;
+                  }}
+              >
+                  <Button>Upload Dining</Button>
+              </Upload>
+          </Form.Item>
+          <Form.Item label="Bedroom">
+              <Upload
+                  beforeUpload={(file) => {
+                      setData('bedroom', file);
+                      return false;
+                  }}
+              >
+                  <Button>Upload Bedroom</Button>
+              </Upload>
+          </Form.Item>
+          <Form.Item label="Living">
+              <Upload
+                  beforeUpload={(file) => {
+                      setData('living', file);
+                      return false;
+                  }}
+              >
+                  <Button>Upload Living</Button>
+              </Upload>
+          </Form.Item>
           <Form.Item label="Primary Color">
               <ColorPicker
                   value={data.primary_color}
@@ -80,7 +111,27 @@ const  Create: React.FC<Props> = ({auth,settings,success }) => {
                   onChange={(value) => setData('secondary_color', value.toHexString())}
               />
           </Form.Item>
-
+          {settings.inspiration_images &&
+              JSON.parse(settings.inspiration_images).map((img, index) => (
+                  <div key={index} style={{ marginBottom: '10px' }}>
+                      <img
+                          src={`${img}`}
+                          alt={`Inspiration ${index + 1}`}
+                          style={{ maxWidth: '150px', marginRight: '10px' }}
+                      />
+                  </div>
+              ))}
+          <Upload
+              listType="picture"
+              multiple
+              beforeUpload={(file) => {
+                  const files = data.inspiration_images || [];
+                  setData('inspiration_images', [...files, file]);
+                  return false;
+              }}
+          >
+              <Button>Add Inspiration Images</Button>
+          </Upload>
           <Form.Item>
               <Button type="primary" htmlType="submit">
                   Save Settings

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Product } from "@/Core/_Models";
 import { Card, Col, Flex, Row, Typography, Button, Image } from "antd";
 
@@ -10,37 +10,42 @@ import Footer from "@/Components/Footer";
 import ProductCard from "@/Components/ProductCard";
 interface Props {
     products: Product[];
+    settings:any
 }
 
-const HomeDetails: React.FC<Props> = ({products }) => {
+const HomeDetails: React.FC<Props> = ({products,settings }) => {
+    const [inspirationImages,setInspirationImages] = useState([])
     const pagePadding = "0 48px";
 
     const handleDragStart = (e: any) => e.preventDefault();
-    const items: any = [
-        <img
-            className="pr-2"
-            src="images/bedroom.jpg"
-            onDragStart={handleDragStart}
-            role="presentation"
-        />,
-        <img
-            className="pr-2 pt-0 pb-0"
-            src="images/bedroom.jpg"
-            onDragStart={handleDragStart}
-            role="presentation"
-        />,
-        <img
-            className="pr-2"
-            src="images/bedroom.jpg"
-            onDragStart={handleDragStart}
-            role="presentation"
-        />,
-    ];
+
 
     const handleCorChanged = (e: EventObject) => {
         // setCurrentCarouselItem(e.item);
-        console.log(e);
     };
+
+    useEffect(() => {
+        const inspirationImages = settings.inspiration_images
+            ? JSON.parse(settings.inspiration_images)
+            : [];
+        const items: any =inspirationImages? inspirationImages.map((value,key) => {return <img
+            className="pr-2"
+            key={key}
+            src={value}
+            style={{
+                // height: "auto",
+
+                maxHeight:"500px",
+
+                width: "auto",
+                margin:"auto"
+            }}
+            onDragStart={handleDragStart}
+            role="presentation"
+        />}):[]
+
+        setInspirationImages(items)
+    }, [settings]);
     // @ts-ignore
     // @ts-ignore
     // @ts-ignore
@@ -54,7 +59,7 @@ const HomeDetails: React.FC<Props> = ({products }) => {
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
-                    backgroundImage: `url("/images/home_hero.png")`,
+                    backgroundImage: `url("${settings.hero_image}")`,
                     marginBottom: "",
                 }}
             >
@@ -157,6 +162,7 @@ const HomeDetails: React.FC<Props> = ({products }) => {
                                     // />
                                     <Image
                                         alt="it"
+                                        preview={false}
                                         style={{
                                             height: "320px",
                                             width: "420px",
@@ -172,7 +178,7 @@ const HomeDetails: React.FC<Props> = ({products }) => {
                                             />
                                         }
                                         src={
-                                            `/images/dining.jpg`
+                                            `${settings.dining}`
                                         }
                                     />
                                 }
@@ -208,6 +214,7 @@ const HomeDetails: React.FC<Props> = ({products }) => {
                                     // />
                                     <Image
                                         alt="it"
+                                        preview={false}
                                         style={{
                                             height: "320px",
                                             width: "420px",
@@ -223,7 +230,7 @@ const HomeDetails: React.FC<Props> = ({products }) => {
                                             />
                                         }
                                         src={
-                                            "images/living.jpg"
+                                            `${settings.living}`
                                         }
                                     />
                                 }
@@ -260,10 +267,12 @@ const HomeDetails: React.FC<Props> = ({products }) => {
                                     // />
                                     <Image
                                         alt="it"
+                                        preview={false}
+
                                         style={{
                                             height: "320px",
                                             width: "420px",
-                                            objectFit: "cover"
+                                            objectFit: "cover",
 
                                         }}
                                         // src={"images/bedroom/pexels-pixabay-164595.jpg"}
@@ -275,7 +284,7 @@ const HomeDetails: React.FC<Props> = ({products }) => {
                                             />
                                         }
                                         src={
-                                            "images/bedroom.jpg"
+                                            `${settings.bedroom}`
                                         }
                                     />
                                 }
@@ -359,30 +368,31 @@ const HomeDetails: React.FC<Props> = ({products }) => {
                 >
                     <Row
                         // className="lg:h-600"
-                        style={{ height: "600px" }}
+                        style={{ height: "100%" }}
                         justify={"center"}
                         align={"middle"}
                     >
                         <Col
                             // span={6}
-                            xs={{ span: 12 }}
-                            sm={{ span: 12 }}
+                            xs={{ span: 22 }}
+                            sm={{ span: 22 }}
                             md={{ span: 8 }}
                             lg={{ span: 6 }}
                             xl={{ span: 6 }}
                         >
                             <Flex vertical={true}>
-                                <Typography.Title level={3}>
+                                <Typography.Title level={3} style={{textAlign: "center",}}>
                                     50+ Beautiful rooms inspiration{" "}
                                 </Typography.Title>
                                 <Typography.Paragraph
                                     color={Colors.textSubtitleColor}
+                                    style={{textAlign: "center",}}
                                 >
                                     Our designer already made a lot of beautiful
                                     prototype of rooms that inspire you
                                 </Typography.Paragraph>
 
-                                <div>
+                                <div style={{textAlign: "center",}}>
                                     <Button
                                         style={{
                                             marginTop: 13,
@@ -397,16 +407,24 @@ const HomeDetails: React.FC<Props> = ({products }) => {
                                 </div>
                             </Flex>
                         </Col>
-                        <Col span={18} style={{}}>
-                            <AliceCarousel
-                                onSlideChanged={handleCorChanged}
-                                disableButtonsControls
-                                autoHeight
-                                autoWidth
-                                // infinite
-                                mouseTracking
-                                items={items}
-                            />
+                        <Col span={18} style={{height:"100%", overflow: "hidden",}}>
+                            {
+                                inspirationImages && <AliceCarousel
+                                    onSlideChanged={handleCorChanged}
+                                    disableButtonsControls
+                                    autoHeight={false}
+                                    autoWidth
+                                    // infinite
+                                    mouseTracking
+                                    items={inspirationImages}
+                                    responsive={{
+                                        0: { items: 1 }, // Number of items at different breakpoints
+                                        768: { items: 2 },
+                                        1024: { items: 3 },
+                                    }}
+                                />
+                            }
+
                         </Col>
                     </Row>
                 </div>

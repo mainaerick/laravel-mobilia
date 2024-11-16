@@ -15,40 +15,40 @@ function Hero({ title, whichRoute }: Props) {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
-                backgroundImage: `url("/images/home_hero.png")`,
+                backgroundImage: `url("/images/settings/hero_image.png")`,
                 marginBottom: "",
             }}
         >
-            <div
-                style={{
-                    display:"flex",
-                    justifyContent:"center",
-                    height:"300px"
-                }}
-            >
-                <Flex
-                    vertical
-                    align={"center"}
-                    justify={"center"}
-                    // style={{
-                    //     padding: "37px 13px 13px 13px",
-                    // }}
-                >
-                    <Typography.Title
-                        level={1}
-                        style={{
-                            textAlign: "center",
-                            color: Colors.textBlackColor,
-                            width: "100%",
-                            fontWeight: "normal",
-                        }}
-                    >
-                        {title}
-                    </Typography.Title>
+            {/*<div*/}
+            {/*    style={{*/}
+            {/*        display:"flex",*/}
+            {/*        justifyContent:"center",*/}
+            {/*        height:"300px"*/}
+            {/*    }}*/}
+            {/*>*/}
+            {/*    <Flex*/}
+            {/*        vertical*/}
+            {/*        align={"center"}*/}
+            {/*        justify={"center"}*/}
+            {/*        // style={{*/}
+            {/*        //     padding: "37px 13px 13px 13px",*/}
+            {/*        // }}*/}
+            {/*    >*/}
+            {/*        <Typography.Title*/}
+            {/*            level={1}*/}
+            {/*            style={{*/}
+            {/*                textAlign: "center",*/}
+            {/*                color: Colors.textBlackColor,*/}
+            {/*                width: "100%",*/}
+            {/*                fontWeight: "normal",*/}
+            {/*            }}*/}
+            {/*        >*/}
+            {/*            {title}*/}
+            {/*        </Typography.Title>*/}
 
-                    {whichRoute}
-                </Flex>
-            </div>
+            {/*        {whichRoute}*/}
+            {/*    </Flex>*/}
+            {/*</div>*/}
         </div>
     );
 }

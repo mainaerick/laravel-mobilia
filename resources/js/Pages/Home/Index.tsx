@@ -9,12 +9,13 @@ interface Props {
     products: Product[];
 }
 
-const Index: React.FC<Props> = ({ auth, products }) => {
+const Index: React.FC<Props> = ({ auth, products,settings }) => {
 
+    console.log(settings)
     return (
 
         <Authenticated user={auth.user}>
-            <HomeDetails products={products} />
+            <HomeDetails products={products}  settings={settings}/>
 
         </Authenticated>
 

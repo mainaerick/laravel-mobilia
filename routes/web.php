@@ -16,12 +16,13 @@ use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Home/Index', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return redirect('/home');
+//    return Inertia::render('Home/Index', [
+//        'canLogin' => Route::has('login'),
+//        'canRegister' => Route::has('register'),
+//        'laravelVersion' => Application::VERSION,
+//        'phpVersion' => PHP_VERSION,
+//    ]);
 });
 
 Route::get('/dashboard', function () {
@@ -86,7 +87,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->group(function () {
     Route::put('admin/user/{id}', [UserController::class, 'update'])->name('admin.user.update');
     Route::post('admin/user', [UserController::class, 'store'])->name('admin.user.store');
     Route::delete('admin/user/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
-    Route::post('admain/email/verification-notification/{id}', [UserController::class, 'verify_user_email'])
+    Route::post('admin/email/verification-notification/{id}', [UserController::class, 'verify_user_email'])
         ->middleware('throttle:6,1')
         ->name('admin.verification.send');
 
