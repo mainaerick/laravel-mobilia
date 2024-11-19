@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Resources\OrderResource;
+use App\Models\Order;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,13 +22,14 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
+        $orders = Order::with('user')->paginate(10);
+
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'orders' => OrderResource::collection($orders),
         ]);
     }
-    
-
     /**
      * Update the user's profile information.
      */

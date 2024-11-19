@@ -37,7 +37,11 @@ function ProductCard({ product }: Props) {
                                 router.post(route("cart.add"), {
                                     product_id: product.id,
                                     quantity: 1,
-                                });
+                                },{
+                                        preserveScroll: true, // Keep the scroll position
+                                        preserveState: true, // Prevent state from resetting
+                                    }
+                                );
                             }}
                         >
                             Add to cart

@@ -1,40 +1,35 @@
-import { Category, Order } from "@/Core/_Models";
-import AuthenticatedAdmin from "@/Layouts/AdminLayout";
-import { router } from "@inertiajs/react";
+import {PageProps} from "@/types";
+import {Colors, Dimensions} from "@/utils/Config";
 import {
-    message,
-    InputRef,
-    TableColumnType,
-    Input,
-    Space,
     Button,
-    TableColumnsType,
-    Typography,
-    Table,
+    Col,
+    ConfigProvider,
     Flex,
+    Row,
+    Space,
+    Table,
     TableProps,
+    Typography,
+    message,
+    Image, InputRef, TableColumnType, Input,
 } from "antd";
-import { FilterDropdownProps } from "antd/es/table/interface";
-import React, { useRef, useState } from "react";
-import Highlighter from "react-highlight-words";
+import {router} from "@inertiajs/react";
+import {Order} from "@/Core/_Models";
+import TableComponent from "@/Components/TableComponent";
+import TableAction from "@/Components/TableAction";
+import {useRef, useState} from "react";
+import {FilterDropdownProps} from "antd/es/table/interface";
 import {
     SearchOutlined,
     DeleteOutlined,
     EditOutlined,
 } from "@ant-design/icons";
-import TableComponent from "@/Components/TableComponent";
-import TableAction from "@/Components/TableAction";
-
-type Props = { auth: any; orders: any };
 type DataIndex = keyof Order;
-
-function Index({ auth, orders }: Props) {
-    const ordersData = orders.data as Order[];
-    const [messageApi, contextHolder] = message.useMessage();
+export default function OrdersTable({items,pagination,setClickedOrder }: PageProps<{ items: any, pagination?: boolean,setClickedOrder:(id:number)=>void }>) {
 
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
-    const searchInput = useRef<InputRef|any>();
+    const searchInput = useRef<InputRef|any>(null);
 
     const handleSearch = (
         selectedKeys: string[],
@@ -54,12 +49,12 @@ function Index({ auth, orders }: Props) {
         dataIndex: DataIndex,
     ): TableColumnType<Order> => ({
         filterDropdown: ({
-            setSelectedKeys,
-            selectedKeys,
-            confirm,
-            clearFilters,
-            close,
-        }) => (
+                             setSelectedKeys,
+                             selectedKeys,
+                             confirm,
+                             clearFilters,
+                             close,
+                         }) => (
             <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
                 <Input
                     ref={searchInput}
@@ -152,12 +147,12 @@ function Index({ auth, orders }: Props) {
                 text
             ),
     });
-
     const columns: TableProps<Order>["columns"] = [
         {
             title: "Total Amount",
             dataIndex: "total_amount",
             key: "total_amount",
+            width: "15%",
             render: (total_amount: string) => (
                 <Typography.Text>{total_amount}</Typography.Text>
             ),
@@ -178,6 +173,7 @@ function Index({ auth, orders }: Props) {
             title: "Firstname",
             dataIndex: "firstname",
             key: "firstname",
+            responsive: ["md"],
             // width: "15%",
             ...getColumnSearchProps("firstname"),
         },
@@ -185,6 +181,7 @@ function Index({ auth, orders }: Props) {
             title: "Lastname",
             dataIndex: "lastname",
             key: "lastname",
+            responsive: ["md"],
             // width: "15%",
             ...getColumnSearchProps("lastname"),
         },
@@ -192,6 +189,7 @@ function Index({ auth, orders }: Props) {
             title: "Email",
             dataIndex: "email",
             key: "email",
+            responsive: ["md"],
             // width: "15%",
             ...getColumnSearchProps("email"),
         },
@@ -199,6 +197,7 @@ function Index({ auth, orders }: Props) {
             title: "Phone",
             dataIndex: "phone",
             key: "phone",
+            responsive: ["md"],
             // width: "15%",
             ...getColumnSearchProps("phone"),
         },
@@ -206,6 +205,7 @@ function Index({ auth, orders }: Props) {
             title: "Status",
             dataIndex: "status",
             key: "status",
+            responsive: ["md"],
             render: (status: string) => (
                 <Typography.Text>{status}</Typography.Text>
             ),
@@ -215,13 +215,14 @@ function Index({ auth, orders }: Props) {
             title: "Payment Status",
             dataIndex: "payment_status",
             key: "payment_status",
+            responsive: ["md"],
             render: (payment_status: string) => (
                 <Typography.Text>{payment_status}</Typography.Text>
             ),
         },
         {
             title: "Action",
-            width: "5%",
+            width: "15%",
             fixed: "right",
             render: (item: any) => {
                 return (
@@ -230,32 +231,24 @@ function Index({ auth, orders }: Props) {
                             router.delete(route("order.destroy", item.id));
                         }}
                         editFunc={() => {
-                            router.get(route("order.edit", item.id));
+                            setClickedOrder(item.id)
+                            // router.get(route("order.edit", item.id));
                         }}
                     />
                 );
             },
         },
     ];
-    return (
-        <AuthenticatedAdmin
-            user={auth}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Order Listing
-                </h2>
-            }
-        >
-            <div style={{ width: "100%" }}>
-                <TableComponent
-                    items={ordersData}
-                    pagination={undefined}
-                    columns={columns}
-                />
-                {/* <Table columns={columns} dataSource={ordersData} /> */}
-            </div>
-        </AuthenticatedAdmin>
-    );
-}
 
-export default Index;
+    return (
+        <div style={{width: "100%"}}>
+            <TableComponent
+                items={items}
+                pagination={undefined}
+                columns={columns}
+            />
+            {/* <Table columns={columns} dataSource={ordersData} /> */}
+        </div>
+    )
+
+}

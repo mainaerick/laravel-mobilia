@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { router, usePage } from "@inertiajs/react";
 import Footer from "@/Components/Footer";
+import OrdersTable from "@/Pages/Orders/Components/OrdersTable";
 
 type Props = { auth: any; orders: any; success: any };
 
@@ -29,7 +30,6 @@ function Index({ auth, orders, success }: Props) {
 
     orders = orders.data;
     const items = orders as Order[];
-    console.log(props);
     const [subTotal, setSubTotal] = useState<string>("0");
     useEffect(() => {
         if (success) {
@@ -55,7 +55,7 @@ function Index({ auth, orders, success }: Props) {
             >
                 <Row gutter={16}>
                     <Col span={24}>
-                        {/* <OrdersTable items={items} pagination={false} /> */}
+                         <OrdersTable items={items} pagination={false} />
                     </Col>
                 </Row>
             </div>
