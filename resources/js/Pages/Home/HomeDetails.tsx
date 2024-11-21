@@ -33,7 +33,6 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
             key={key}
             src={value}
             style={{
-                // height: "auto",
 
                 maxHeight:"500px",
 

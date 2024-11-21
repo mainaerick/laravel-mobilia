@@ -1,5 +1,5 @@
 import { Colors, Dimensions } from "@/utils/Config";
-import { Row, Col, Flex, Typography, Input, Button, Divider } from "antd";
+import {Row, Col, Flex, Typography, Input, Button, Divider, Space} from "antd";
 import React from "react";
 import { Link } from "react-alice-carousel";
 
@@ -27,7 +27,7 @@ function Footer({ }: Props) {
                             xl={{ span: 6 }}>
                             <Row>
                                 <Col span={12}>
-                                    <Flex gap={50} vertical>
+                                    <Flex gap={20} vertical>
                                         <Typography.Title level={5}>
                                             Mobilia
                                         </Typography.Title>
@@ -47,10 +47,10 @@ function Footer({ }: Props) {
                             sm={{ span: 24 }}
                             md={{ span: 18 }}
                             lg={{ span: 18 }}
-                            xl={{ span: 18 }}>
+                            xl={{ span: 18 }} >
                             <Row>
-                                <Col span={8}>
-                                    <Flex vertical gap={50}>
+                                <Col span={8} style={{marginBottom:"50px"}}>
+                                    <Flex vertical gap={20}>
                                         <Typography.Text
                                             style={{
                                                 color: Colors.textGrayColor,
@@ -82,8 +82,8 @@ function Footer({ }: Props) {
                                     </Flex>
                                 </Col>
 
-                                <Col span={6}>
-                                    <Flex vertical gap={50}>
+                                <Col span={8}>
+                                    <Flex vertical gap={20}>
                                         <Typography.Text
                                             style={{
                                                 color: Colors.textGrayColor,
@@ -109,8 +109,14 @@ function Footer({ }: Props) {
                                         </Link>
                                     </Flex>
                                 </Col>
-                                <Col span={10}>
-                                    <Flex vertical gap={50}>
+
+
+                                <Col xs={{ span: 24 }}
+                                     sm={{ span: 24 }}
+                                     md={{ span: 8 }}
+                                     lg={{ span: 8 }}
+                                     xl={{ span: 8 }}>
+                                    <Flex vertical gap={20}>
                                         <Typography.Text
                                             style={{
                                                 color: Colors.textGrayColor,

@@ -6,7 +6,7 @@ import {Head, usePage} from '@inertiajs/react';
 import { PageProps } from '@/types';
 import type { MenuProps } from 'antd';
 import {Col, Form, Menu, Row} from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import {InboxOutlined, UserOutlined} from '@ant-design/icons';
 import {useState} from "react";
 import {Dimensions} from "@/utils/Config";
 import ShopInfo from "@/Components/ShopInfo";
@@ -19,12 +19,12 @@ const navitems: MenuItem[] = [
     {
         label: 'Account',
         key: 'account',
-        icon: <MailOutlined />,
+        icon: <UserOutlined />,
     },
     {
         label: 'Orders',
         key: 'orders',
-        icon: <MailOutlined />,
+        icon: <InboxOutlined />,
     },
 ]
 export default function Edit({ auth, mustVerifyEmail,orders, status }: PageProps<{auth:any, mustVerifyEmail: boolean, status?: string }>) {
@@ -85,13 +85,13 @@ export default function Edit({ auth, mustVerifyEmail,orders, status }: PageProps
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Profile</h2>}
+            // header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Profile</h2>}
         >
             <Head title="Account" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={navitems} />
+                    <Menu onClick={onClick} style={{width: "100%"}} selectedKeys={[current]} mode="horizontal" items={navitems} />
                     {current === "orders" ? <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                         <div
                             className={Dimensions.pagePaddingClass}
