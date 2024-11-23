@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\Setting;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -20,4 +21,6 @@ class HomeController extends Controller
 
         return Inertia::render('Home/Index', ['products' => $products,'settings' => $settings,]);
     }
+
+
 }

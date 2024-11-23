@@ -12,7 +12,7 @@ import {
     Divider,
     Input,
     Select,
-    Breadcrumb,
+    Breadcrumb, Empty,
 } from "antd";
 import { FilterOutlined } from "@ant-design/icons";
 import Meta from "antd/es/card/Meta";
@@ -29,8 +29,7 @@ function Index({ auth, products, queryParams = null }: Props) {
     const currentPage = products.current_page;
     const totalNumber = products.total;
     const perPage = products.per_page;
-    const productsData = products.data as Product[];
-    console.log(productsData);
+    const productsData = products.data?products.data as Product[]:products as Product[]
     const handleChangeSort = (name: string) => {
         if (name === queryParams.sort_field) {
             if (queryParams.sort_direction === "asc") {
@@ -143,33 +142,33 @@ function Index({ auth, products, queryParams = null }: Props) {
                 </Row>
             </div>
             {/* Shop */}
-            <div
+            {productsData.length > 0 ? <div
                 className={Dimensions.pagePaddingClass}
-                style={{ marginTop: "37px", marginBottom: "37px" }}
+                style={{marginTop: "37px", marginBottom: "37px"}}
             >
-                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
                     {productsData &&
                         productsData?.map((product: Product, key) => {
                             return (
                                 <Col
                                     key={key}
                                     // span={6}
-                                    xs={{ span: 24 }}
-                                    sm={{ span: 12 }}
-                                    md={{ span: 8 }}
-                                    lg={{ span: 6 }}
-                                    xl={{ span: 6 }}
-                                    style={{ marginBottom: "23px" }}
+                                    xs={{span: 24}}
+                                    sm={{span: 12}}
+                                    md={{span: 8}}
+                                    lg={{span: 6}}
+                                    xl={{span: 6}}
+                                    style={{marginBottom: "23px"}}
                                 >
                                     <Link href={route("shop.show", product.id)}>
-                                        <ProductCard product={product} />
+                                        <ProductCard product={product}/>
                                     </Link>
                                 </Col>
                             );
                         })}
                 </Row>
 
-                <Flex justify={"center"} style={{ marginTop: "37px" }}>
+                <Flex justify={"center"} style={{marginTop: "37px"}}>
                     <PaginationDiv
                         handleChange={handlePageChange}
                         current={currentPage}
@@ -178,11 +177,15 @@ function Index({ auth, products, queryParams = null }: Props) {
                         onShowSizeChange={onShowSizeChange}
                     />
                 </Flex>
-            </div>
+            </div>:<Empty  description={
+                <Typography.Text>
+                    Looks empty in here
+                </Typography.Text>
+            } style={{ height:"200px",marginTop:"3rem"}}/>}
 
             {/* Shop Details */}
-            <ShopInfo />
-            <Footer />
+            <ShopInfo/>
+            <Footer/>
         </Authenticated>
     );
 }

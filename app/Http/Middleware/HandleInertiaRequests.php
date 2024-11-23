@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -29,6 +30,10 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $query = $request->get('query', '');
+        $prodsearched = Product::where('name', 'LIKE', "%{$query}%") // Adjust fields accordingly
+        ->orWhere('description', 'LIKE', "%{$query}%") // Optional
+        ->get();
         return [
             ...parent::share($request),
             'auth' => [
@@ -42,6 +47,8 @@ class HandleInertiaRequests extends Middleware
             // 'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
             'roles' => $request->user() ? $request->user()->roles->pluck('name') : [],
             'user.permissions' => $request->user() ? $request->user()->getPermissionsViaRoles()->pluck('name') : [],
+            'searchresults'=>$query?$prodsearched:[],
+            'query'=>$query,
 
         ];
     }

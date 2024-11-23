@@ -52,9 +52,9 @@ function ShopInfo({ }: Props) {
                             </Flex>
                         </Col>
                     </Row>
-                    
+
                 </Col>
-                
+
                 <Col sm={{ span: 24 }} md={{ span: 12 }}
                     lg={{ span: 6 }}
                     xl={{ span: 6 }}>
@@ -86,7 +86,7 @@ function ShopInfo({ }: Props) {
                 </Col>
                 <Col sm={{ span: 24 }} md={{ span: 12 }}
                     lg={{ span: 6 }}
-                    xl={{ span: 6 }}>
+                    xl={{ span: 6 }} style={{marginRight:"3rem"}}>
                     <Row align={"middle"} gutter={12} justify={"space-between"}>
                         <Col
                             sm={{ span: 24 }}

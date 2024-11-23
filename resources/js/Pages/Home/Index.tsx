@@ -9,9 +9,8 @@ interface Props {
     products: Product[];
 }
 
-const Index: React.FC<Props> = ({ auth, products,settings }) => {
+const Index: React.FC<Props> = ({ auth, products,settings}) => {
 
-    console.log(settings)
     return (
 
         <Authenticated user={auth.user}>

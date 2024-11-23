@@ -19,7 +19,6 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
 
     const handleDragStart = (e: any) => e.preventDefault();
 
-
     const handleCorChanged = (e: EventObject) => {
         // setCurrentCarouselItem(e.item);
     };

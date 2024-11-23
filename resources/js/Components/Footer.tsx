@@ -36,8 +36,8 @@ function Footer({ }: Props) {
                                                 color: Colors.textGrayColor,
                                             }}
                                         >
-                                            400 University Drive Suite 200 Coral
-                                            Gables, FL 33134 USA
+                                            400 University Drive Suite 200 Dandora
+                                            PH2, Nairobi
                                         </Typography.Paragraph>
                                     </Flex>{" "}
                                 </Col>

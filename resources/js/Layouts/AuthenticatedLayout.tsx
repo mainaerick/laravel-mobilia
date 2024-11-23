@@ -17,6 +17,7 @@ import { Avatar, Badge, ConfigProvider, Flex, message } from "antd";
 import { relative } from "path";
 import CartItems from "@/Components/CartItems";
 import { CartItem } from "@/Core/_Models";
+import SearchBar from "@/Components/SearchBar";
 export default function Authenticated({
     user,
     header,
@@ -69,6 +70,7 @@ export default function Authenticated({
                                 </div>
                             </div>
                             {/*middle div*/}
+
                             <div className="flex">
                                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                     <NavLink
@@ -103,10 +105,12 @@ export default function Authenticated({
                                     </NavLink>
                                 </div>
                             </div>
+
                             <div
                                 className="flex justify-between"
                             >
                                 <div className={"flex justify-between"}>
+                                    <SearchBar />
                                     {/*User Div*/}
                                     <div className="hidden sm:flex sm:items-center space-x-8 sm:-my-px sm:ms-10">
                                         <div className="ms-3 relative">
@@ -143,8 +147,8 @@ export default function Authenticated({
                                                     </Dropdown.Link>
                                                     <Dropdown.Link
                                                         href={route('register')}
-                                                        
-                                                        
+
+
                                                     >
                                                         Register
                                                     </Dropdown.Link>
@@ -278,6 +282,7 @@ export default function Authenticated({
                             </ResponsiveNavLink>
                         </div>
 
+
                         <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
                             {user ? <><div className="px-4">
                                 <div className="font-medium text-base text-gray-800 dark:text-gray-200">
@@ -304,6 +309,7 @@ export default function Authenticated({
 
                         </div>
                     </div>
+
                     <CartItems
                         cartItems={props.cartItems as CartItem[]}
                         open={open}

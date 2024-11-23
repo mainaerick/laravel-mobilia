@@ -8,11 +8,12 @@ use App\Http\Resources\ProductResource;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-
+$per_page = 10;
 class ProductController extends Controller
 {
 
@@ -39,7 +40,7 @@ class ProductController extends Controller
             }
         }
 
-        
+
         if ($category) {
             $query->where("room", "like", "%" . $category . "%");
         }
@@ -256,6 +257,24 @@ class ProductController extends Controller
 
         // dd($validated);
         $product->update($validated);
+    }
+    public function searchProduct(Request $request)
+    {
+        $query = $request->get('query', '');
+        $products = [];
+        $per_page = request("per_page", 10);
+
+        if ($query) {
+            $products = Product::where('name', 'LIKE', "%{$query}%") // Adjust fields accordingly
+            ->orWhere('description', 'LIKE', "%{$query}%") // Optional
+            ->paginate($per_page);
+        }
+//        return inertia('SearchResults', [
+//            'products' => $products,
+//            'query' => $query,
+//        ]);
+
+        return Inertia::render('Shop/Index', ['products' => $products, 'queryParams' => request()->query() ?: null, 'search_query' => $query,]);
     }
 
     /**

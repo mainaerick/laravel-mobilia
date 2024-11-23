@@ -4,13 +4,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -29,6 +27,8 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::resource('home', HomeController::class);
+Route::get('/shop/related/{id}', [ProductController::class, 'showRelated']);
+Route::get('/shop/search', [ProductController::class, 'searchProduct'])->name('search');
 Route::resource('shop', ProductController::class);
 Route::resource('about', ProductController::class);
 Route::resource('contact', ProductController::class);
@@ -46,7 +46,7 @@ Route::get('/images/{path}', function ($path) {
         abort(404);
     }
 })->where('path', '.*');
-Route::get('/shop/related/{id}', [ProductController::class, 'showRelated']);
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
@@ -105,6 +105,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->group(function () {
     Route::post('/admin/settings', [SettingController::class, 'update'])->name('admin.settings.update');
 
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
