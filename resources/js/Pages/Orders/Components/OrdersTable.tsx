@@ -26,7 +26,7 @@ import {
 } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 type DataIndex = keyof Order;
-export default function OrdersTable({items,pagination,setClickedOrder }: PageProps<{ items: any, pagination?: boolean,setClickedOrder:(id:number)=>void|null }>) {
+export default function OrdersTable({items,pagination,setClickedOrder }: PageProps<{ items: any, pagination?: boolean,setClickedOrder:null|((id:number)=>void )}>) {
 
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
