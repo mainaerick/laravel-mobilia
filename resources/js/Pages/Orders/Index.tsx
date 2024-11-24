@@ -55,7 +55,7 @@ function Index({ auth, orders, success }: Props) {
             >
                 <Row gutter={16}>
                     <Col span={24}>
-                         <OrdersTable items={items} pagination={false}  setClickedOrder={null}/>
+                         <OrdersTable auth={auth} items={items} pagination={false}  setClickedOrder={null}/>
                     </Col>
                 </Row>
             </div>
