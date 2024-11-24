@@ -7,6 +7,7 @@ import HomeDetails from "./HomeDetails";
 interface Props {
     auth: any;
     products: Product[];
+    settings:any
 }
 
 const Index: React.FC<Props> = ({ auth, products,settings}) => {

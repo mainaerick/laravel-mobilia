@@ -24,8 +24,9 @@ import {
     DeleteOutlined,
     EditOutlined,
 } from "@ant-design/icons";
+import Highlighter from "react-highlight-words";
 type DataIndex = keyof Order;
-export default function OrdersTable({items,pagination,setClickedOrder }: PageProps<{ items: any, pagination?: boolean,setClickedOrder:(id:number)=>void }>) {
+export default function OrdersTable({items,pagination,setClickedOrder }: PageProps<{ items: any, pagination?: boolean,setClickedOrder:(id:number)=>void|null }>) {
 
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
@@ -231,7 +232,7 @@ export default function OrdersTable({items,pagination,setClickedOrder }: PagePro
                             router.delete(route("order.destroy", item.id));
                         }}
                         editFunc={() => {
-                            setClickedOrder(item.id)
+                            setClickedOrder? setClickedOrder(item.id):router.get(route("order.edit", item.id))
                             // router.get(route("order.edit", item.id));
                         }}
                     />

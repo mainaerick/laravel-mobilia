@@ -27,7 +27,7 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
         const inspirationImages = settings.inspiration_images
             ? JSON.parse(settings.inspiration_images)
             : [];
-        const items: any =inspirationImages? inspirationImages.map((value,key) => {return <img
+        const items: any =inspirationImages? inspirationImages.map((value:any,key:number) => {return <img
             className="pr-2"
             key={key}
             src={value}

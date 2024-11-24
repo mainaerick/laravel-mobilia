@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useForm } from '@inertiajs/react';
 import {Form, Input, Upload, Button, ColorPicker, message, GetProp, ColorPickerProps} from 'antd';
 import AuthenticatedAdmin from "@/Layouts/AdminLayout";
-type Props = {}
+type Props = {auth:any,settings:any,success:string}
 type Color = GetProp<ColorPickerProps, 'value'>;
 const  Create: React.FC<Props> = ({auth,settings,success }) => {
     const [messageApi, contextHolder] = message.useMessage();
@@ -24,7 +24,7 @@ const  Create: React.FC<Props> = ({auth,settings,success }) => {
                     type: "success",
                     content: "Product Updated",
                 });
-            },onError: (e) => {
+            },onError: (e:any) => {
                 console.log(e)
                 messageApi.open({
                     type: "error",
@@ -112,7 +112,7 @@ const  Create: React.FC<Props> = ({auth,settings,success }) => {
               />
           </Form.Item>
           {settings.inspiration_images &&
-              JSON.parse(settings.inspiration_images).map((img, index) => (
+              JSON.parse(settings.inspiration_images).map((img:any, index:number) => (
                   <div key={index} style={{ marginBottom: '10px' }}>
                       <img
                           src={`${img}`}

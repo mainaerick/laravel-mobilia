@@ -7,9 +7,9 @@ const { Search } = Input;
 
 const SearchBar = () => {
     const { searchresults = [], query = "" } = usePage().props;
-    const [searchQuery, setSearchQuery] = useState(query);
+    const [searchQuery, setSearchQuery] = useState<any>(query);
 
-    const onSearch = (value) => {
+    const onSearch = (value:string) => {
         // value = value.target.value
         // if(value.length<=0){
         //     return

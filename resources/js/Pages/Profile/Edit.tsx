@@ -27,7 +27,7 @@ const navitems: MenuItem[] = [
         icon: <InboxOutlined />,
     },
 ]
-export default function Edit({ auth, mustVerifyEmail,orders, status }: PageProps<{auth:any, mustVerifyEmail: boolean, status?: string }>) {
+export default function Edit({ auth, mustVerifyEmail,orders, status }: PageProps<{auth:any, mustVerifyEmail: boolean,orders:any, status?: string }>) {
     const [current, setCurrent] = useState('account');
     const [currentOrder, setCurrentOrder] = useState<Order>();
     const [cartItems, setCartItems]: CartItem[] | any = useState();
@@ -100,7 +100,7 @@ export default function Edit({ auth, mustVerifyEmail,orders, status }: PageProps
                             <Row gutter={16}>
                                 <Col span={24}>
 
-                                     <OrdersTable items={items} pagination={false}   setClickedOrder={setClickedOrder}/>
+                                     <OrdersTable auth={auth} items={items} pagination={false}  setClickedOrder={setClickedOrder}/>
                                     {currentOrder  && <CheckoutForm form={form} orderDetails={currentOrder} items={cartItems} errors={{}} deleteOrderItems={deleteOrderItem}/>}
                                 </Col>
                             </Row>

@@ -29,7 +29,7 @@ function Index({ auth, products, queryParams = null }: Props) {
     const currentPage = products.current_page;
     const totalNumber = products.total;
     const perPage = products.per_page;
-    const productsData = products.data?products.data as Product[]:products as Product[]
+    const productsData = products.data as Product[]
     const handleChangeSort = (name: string) => {
         if (name === queryParams.sort_field) {
             if (queryParams.sort_direction === "asc") {
