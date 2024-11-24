@@ -260,15 +260,45 @@ class ProductController extends Controller
     }
     public function searchProduct(Request $request)
     {
-        $query = $request->get('query', '');
+        $searchquery = $request->get('query', '');
+
         $products = [];
         $per_page = request("per_page", 10);
 
-        if ($query) {
-            $products = Product::where('name', 'LIKE', "%{$query}%") // Adjust fields accordingly
-            ->orWhere('description', 'LIKE', "%{$query}%") // Optional
+
+        $query = Product::query();
+
+
+        $per_page = request("per_page", 10);
+        $sortField = request("sort_field", 'created_at');
+        $sortDirection = request("sort_direction", "desc");
+        $category = request("category");
+
+        if (str_contains($sortField, 'price')) {
+            $sortField = 'price';
+            if (str_contains($sortField, 'high')) {
+                $sortDirection = "asc";
+            } else {
+                $sortDirection = "desc";
+            }
+        }
+
+
+        if ($category) {
+            $query->where("room", "like", "%" . $category . "%");
+        }
+        if ($searchquery) {
+            $products = Product::where('name', 'LIKE', "%{$searchquery}%") // Adjust fields accordingly
+            ->orWhere('description', 'LIKE', "%{$searchquery}%") // Optional
             ->paginate($per_page);
         }
+        else{
+            $products = $query->orderBy($sortField, $sortDirection)->paginate($per_page)
+                ->onEachSide(1);
+        }
+
+
+
 //        return inertia('SearchResults', [
 //            'products' => $products,
 //            'query' => $query,

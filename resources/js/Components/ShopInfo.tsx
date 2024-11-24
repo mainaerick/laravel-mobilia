@@ -23,6 +23,7 @@ function ShopInfo({ }: Props) {
                     height: "370px",
                 }}
                 align={"middle"}
+                justify={"space-between"}
             >
                 <Col sm={{ span: 24 }} md={{ span: 12 }}
                     lg={{ span: 6 }}
@@ -58,7 +59,7 @@ function ShopInfo({ }: Props) {
                 <Col sm={{ span: 24 }} md={{ span: 12 }}
                     lg={{ span: 6 }}
                     xl={{ span: 6 }}>
-                    <Row align={"middle"} gutter={12} justify={"space-between"}>
+                    <Row align={"middle"} gutter={12} justify={"space-between"} >
                         <Col
                             sm={{ span: 24 }}
                             md={{ span: 12 }}
@@ -86,7 +87,7 @@ function ShopInfo({ }: Props) {
                 </Col>
                 <Col sm={{ span: 24 }} md={{ span: 12 }}
                     lg={{ span: 6 }}
-                    xl={{ span: 6 }} style={{marginRight:"3rem"}}>
+                    xl={{ span: 6 }} >
                     <Row align={"middle"} gutter={12} justify={"space-between"}>
                         <Col
                             sm={{ span: 24 }}
@@ -114,8 +115,8 @@ function ShopInfo({ }: Props) {
                     </Row>
                 </Col>
                 <Col sm={{ span: 24 }} md={{ span: 12 }}
-                    lg={{ span: 6 }}
-                    xl={{ span: 6 }}>
+                     lg={{ span: 6 }}
+                     xl={{ span: 6 }}>
                     <Row align={"middle"} gutter={12} justify={"space-between"}>
                         <Col
                             sm={{ span: 24 }}
