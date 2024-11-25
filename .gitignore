@@ -5,6 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/data/caddy
 .env
 .env.backup
 .env.production
