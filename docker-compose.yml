@@ -29,6 +29,18 @@ services:
             - mailpit
             - selenium
             - memcached
+    caddy:
+        image: caddy:latest
+        restart: unless-stopped
+        ports:
+            - '80:80'
+            - '443:443'
+        volumes:
+            - './docker/Caddyfile:/etc/caddy/Caddyfile'
+            - sailcaddy:/data
+            - sailcaddy:/config
+        networks:
+            - sail
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -116,4 +128,6 @@ volumes:
     sail-redis:
         driver: local
     sail-meilisearch:
+        driver: local
+    sailcaddy:
         driver: local
