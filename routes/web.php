@@ -46,6 +46,7 @@ Route::get('/images/{path}', function ($path) {
         abort(404);
     }
 })->where('path', '.*');
+Route::get('/caddy-check', [\App\Http\Controllers\CaddyController::class, 'check']);
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -112,7 +113,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/caddy-check', 'CaddyController@check');
 
 
 
