@@ -19,3 +19,6 @@
         health_timeout 5s
     }
 }
+:80 {
+    redir https://{host}{uri} permanent
+}
