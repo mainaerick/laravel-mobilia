@@ -1,20 +1,15 @@
 {
-    # Enable on-demand TLS (for dynamic certificate issuance)
     on_demand_tls {
         ask http://laravel.test/caddy-check
     }
-    # Use local certificates for development or testing environments
     local_certs
 }
 
-# HTTPS Configuration (Port 443)
 :443 {
-    # Enable on-demand TLS with internal certificates
     tls internal {
         on_demand
     }
 
-    # Reverse proxy to Laravel application
     reverse_proxy laravel.test {
         header_up Host {host}
         header_up X-Real-IP {remote}
@@ -24,34 +19,6 @@
         health_timeout 5s
     }
 }
-
-# HTTP Configuration (Port 80) for non-SSL traffic
 :80 {
-    # Define document root for file server
-    root * /var/www/html
-
-    # Use PHP FastCGI to handle requests with Laravel
-    php_fastcgi laravel.test:9000
-
-    # Serve static files
-    file_server
-
-    # Enable GZIP compression
-    encode gzip
-}
-
-# Production Site Configuration (HTTPS for integrictechservices.com)
-integrictechservices.com {
-    root * /var/www/html
-    php_fastcgi laravel.test:9000
-    file_server
-    encode gzip
-
-    # TLS/SSL Setup: Use email for Let's Encrypt or internal certificates if preferred
-    tls niteric@gmail.com
-}
-
-# Redirect HTTP to HTTPS for integrictechservices.com
-http://integrictechservices.com {
-    redir https://integrictechservices.com{uri} permanent
+    redir https://{host}{uri} permanent
 }
