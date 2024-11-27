@@ -20,5 +20,8 @@
     }
 }
 :80 {
-    redir https://{host}{uri} permanent
+    root * /var/www/html
+    php_fastcgi laravel.test:9000
+    file_server
+    encode gzip
 }
