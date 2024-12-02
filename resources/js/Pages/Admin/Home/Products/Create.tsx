@@ -28,19 +28,19 @@ function Create({ auth, errors }: Props) {
         }
     };
     const onFinish = (values: any) => {
-        console.log(data);
+        console.log(values)
         post(route("admin.product.store"), {
             onSuccess: () => {
                 messageApi.open({
                     type: "success",
-                    content: "Product Updated",
+                    content: "Product Created",
                 });
             },
             onProgress: () => {
                 setLoading(true);
                 messageApi.open({
                     type: "loading",
-                    content: "Product Updating..",
+                    content: "Creating Product..",
                 });
             },
             onError: () => {

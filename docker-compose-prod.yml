@@ -27,20 +27,36 @@ services:
             - meilisearch
             - mailpit
             - selenium
+            - memcached
+    caddy:
+        image: caddy:2.7-alpine
+        container_name: caddy
+        restart: unless-stopped
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - './docker/Caddyfile:/etc/caddy/Caddyfile'  # Ensure you create this file
+            - ./data:/data  # Caddy's data storage
+            - ./config:/config  # Caddy's configuration storage
+            - ./public:/var/www/html  # Laravel's public directory
+        networks:
+            - sail
+        depends_on:
+            - laravel.test  # Ensure Caddy waits for Laravel to be ready
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ROOT_HOST: '%'
+            MYSQL_ROOT_HOST: '${DB_HOST}'
             MYSQL_DATABASE: '${DB_DATABASE}'
             MYSQL_USER: '${DB_USERNAME}'
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
             - 'sail-mysql:/var/lib/mysql'
-            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
         networks:
             - sail
         healthcheck:
@@ -100,6 +116,12 @@ services:
             - '/dev/shm:/dev/shm'
         networks:
             - sail
+    memcached:
+        image: 'memcached:alpine'
+        ports:
+            - '${FORWARD_MEMCACHED_PORT:-11211}:11211'
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
@@ -110,3 +132,7 @@ volumes:
         driver: local
     sail-meilisearch:
         driver: local
+    sailcaddy:
+        driver: local
+
+

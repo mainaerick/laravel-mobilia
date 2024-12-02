@@ -1,5 +1,3 @@
-{
-    on_demand_tls {
         ask http://laravel.test/caddy-check
     }
     local_certs

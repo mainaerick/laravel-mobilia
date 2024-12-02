@@ -33,7 +33,7 @@ export const ProductData: Product = {
     price: Number.parseInt(""),
     quantity: Number.parseInt(""),
     category: "",
-    room: "",
+    room: "any",
     brand: "",
     material: "",
     color: "",

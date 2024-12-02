@@ -12,7 +12,7 @@ class CaddyController extends Controller
             'laravel.test',
             'www.laravel.test',
             'www.integrictechservices.com',
-            'integrictechservices.com'
+            'integrictechservices.com',
             // Add subdomains here
         ];
 
