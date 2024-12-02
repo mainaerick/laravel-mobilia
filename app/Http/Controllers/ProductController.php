@@ -148,10 +148,9 @@ class ProductController extends Controller
 
             }
 
-
         }
         $data["images"] = $images;
-        // dd($data);
+        $data["room"] = "any";
         Product::create($data);
     }
 
@@ -226,7 +225,7 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'quantity' => 'required|integer',
             'category' => 'required|string|max:255',
-            'room' => 'required|string|max:255',
+//            'room' => 'required|string|max:255',
             'brand' => 'required|string|max:255',
             'material' => 'required|string|max:255',
             'color' => 'required|string|max:255',
