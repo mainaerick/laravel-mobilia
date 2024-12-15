@@ -305,12 +305,12 @@ export default function AuthenticatedAdmin({
                             </div>
                         </header>
                     )}
-                    <Content style={{ height: "600px", margin: "24px 16px 0" }}>
+                    <Content style={{ height: "auto", margin: "24px 16px 0" }}>
                         <div
                             className=""
                             style={{
                                 padding: 24,
-                                minHeight: "600px",
+                                minHeight: "800px",
                                 background: colorBgContainer,
                                 borderRadius: borderRadiusLG,
                             }}
@@ -319,7 +319,7 @@ export default function AuthenticatedAdmin({
                         </div>
                     </Content>
                     <Footer style={{ textAlign: "center" }}>
-                        Ant Design ©{new Date().getFullYear()} Created by a dev
+                        Mobilia ©{new Date().getFullYear()}
                     </Footer>
                 </Layout>
             </Layout>

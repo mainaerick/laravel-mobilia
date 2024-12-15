@@ -28,11 +28,14 @@ function Show({ auth, product }: Props) {
 
     const [loading, setLoading] = useState(false);
 
-    const [fileList, setFileList] = useState<UploadFile[]>([]);
+
     const { data, setData, post, errors, reset } = useForm({
         ...productdata,
         _method: "PUT",
     });
+    const [fileList, setFileList] = useState<UploadFile[]>([
+
+    ]);
     useEffect(() => {
         const images: UploadFile[] = [];
         data.images.map((image: string, key: number) => {
@@ -50,7 +53,6 @@ function Show({ auth, product }: Props) {
     }, [data]);
 
     const onFinish = (values: any) => {
-        console.log(data);
         post(route("admin.product.update", { id: data.id }), {
             onSuccess: () => {
                 messageApi.open({
@@ -65,7 +67,8 @@ function Show({ auth, product }: Props) {
                     content: "Product Updating..",
                 });
             },
-            onError: () => {
+            onError: (e) => {
+                console .log(e)
                 messageApi.open({
                     type: "error",
                     content: "An error occurred",
@@ -76,12 +79,12 @@ function Show({ auth, product }: Props) {
             },
         });
     };
-    const handleDimensionChange = (field: string, value: any) => {
-        setData("dimensions", {
-            ...data.dimensions,
-            [field]: value,
-        });
-    };
+    // const handleDimensionChange = (field: string, value: any) => {
+    //     setData("dimensions", {
+    //         ...data.dimensions,
+    //         [field]: value,
+    //     });
+    // };
     const handleFileChange = ({ fileList }: { fileList: UploadFile[] }) => {
         const cleanImageArray = fileList
             .map((file) => file.originFileObj)
@@ -91,9 +94,12 @@ function Show({ auth, product }: Props) {
             .filter(Boolean);
 
         // setData("images",stringImagesArray)
-
         if (stringImagesArray.length > 0) {
             setData("images", stringImagesArray);
+        }
+        if (stringImagesArray.length<=0){
+            console.log("old images is 0")
+            setData("images", []);
         }
         if (cleanImageArray.length > 0) {
             setData("newimages", cleanImageArray);
@@ -109,14 +115,15 @@ function Show({ auth, product }: Props) {
             }
         >
             {contextHolder}
-            <ProductForm
+            {
+                <ProductForm
                 data={data}
                 onFinish={onFinish}
                 setData={setData}
                 fileList={fileList}
                 loading={loading}
                 handleFileChange={handleFileChange}
-            />
+            />}
         </AuthenticatedAdmin>
     );
 }

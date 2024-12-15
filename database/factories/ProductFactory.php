@@ -24,9 +24,9 @@ class ProductFactory extends Factory
         $diningimages = Storage::disk('public')->files("images/dining");
         $bedroomimages = Storage::disk('public')->files("images/bedroom");
 
-        $fakedining = [$this->faker->randomElement($diningimages),$this->faker->randomElement($diningimages),$this->faker->randomElement($diningimages),$this->faker->randomElement($diningimages)];
-        $fakebedroom = [$this->faker->randomElement($bedroomimages),$this->faker->randomElement($bedroomimages),$this->faker->randomElement($bedroomimages),$this->faker->randomElement($bedroomimages)];
-        $fakeliving = [$this->faker->randomElement($livingimages),$this->faker->randomElement($livingimages),$this->faker->randomElement($livingimages),$this->faker->randomElement($livingimages)];
+        $fakedining = [];
+        $fakebedroom = [];
+        $fakeliving = [];
         return [
             'name' => $this->faker->unique()->word,
             'description' => $this->faker->sentence,

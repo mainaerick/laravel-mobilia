@@ -84,7 +84,7 @@ function ProductCard({ product }: Props) {
 
                             src={
                                 product?.images &&
-                                (`/${product?.images[0]}` as any)
+                                (`/${product?.images[product?.images.length-1]}` as any)
                             }
                         />
                     }

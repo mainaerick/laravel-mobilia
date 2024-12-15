@@ -237,10 +237,13 @@ class ProductController extends Controller
             'reviews' => 'required|array',
             'sizes' => 'required|array',
             'colors' => 'required|array',
-            'images' => 'required|array',
+            'images' => 'array',
             'newimages.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $images = $validated['images'];
+        $images =[];
+        if( $request->has("images")){
+            $images = $validated['images'];
+        }
 
         if ($request->hasFile('newimages')) {
             foreach ($request->file('newimages') as $image) {

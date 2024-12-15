@@ -8,10 +8,10 @@ import {
     Upload,
     Button,
     Select,
-    UploadFile,
+    UploadFile, Flex,
 } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { UploadOutlined } from "@ant-design/icons";
 
 type Props = {
@@ -38,6 +38,8 @@ function ProductForm({
         });
     };
 
+
+    // fileList =fileList
     return (
         <Form
             layout="vertical"
@@ -268,7 +270,7 @@ function ProductForm({
                         <Form.Item
                             name="images"
                             label="Images"
-                            style={{ maxHeight: 300, overflow: "auto" }}
+                            style={{maxHeight: 300, overflow: "auto"}}
                             rules={[
                                 {
                                     required: true,
@@ -280,21 +282,24 @@ function ProductForm({
                                 listType="picture"
                                 beforeUpload={() => false} // Prevent automatic upload
                                 multiple
-                                defaultFileList={fileList}
+                                fileList={fileList}
                                 onChange={handleFileChange}
                             >
-                                <Button icon={<UploadOutlined />}>
+                                <Button icon={<UploadOutlined/>}>
                                     Upload Images
                                 </Button>
                             </Upload>
-                        </Form.Item>
-                    }
 
-                    <Form.Item
-                        name="rating"
-                        label="Rating"
-                        rules={[
-                            {
+
+
+                </Form.Item>
+                }
+
+                <Form.Item
+                    name="rating"
+                    label="Rating"
+                    rules={[
+                        {
                                 required: true,
                                 message: "Please input the rating!",
                             },
