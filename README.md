@@ -1,7 +1,55 @@
 # Laravel Inertia React TypeScript Project
 
 This repository contains a modern **Laravel** application integrated with **Inertia.js**, **React**, and **TypeScript**. The project leverages Laravel Sail for local development, a MySQL database, and other services such as Redis and Mailpit.
+Here are some screenshots showcasing the Mobilia project:
 
+## Home Page
+<table>
+  <tr>
+    <td align="center">
+      <img src="Mobilia/Screenshot 2024-12-15 140356.png" alt="Home Page" width="200px">
+      <br>
+    </td>
+    <td align="center">
+      <img src="Mobilia/Screenshot 2024-12-15 140447.png" alt="Features Section" width="200px">
+      <br>
+    </td>
+    <td align="center">
+      <img src="Mobilia/Screenshot 2024-12-15 140503.png" alt="Contact Page" width="200px">
+      <br>
+    </td>
+  </tr>
+</table>
+
+## Shop Page
+<table>
+  <tr>
+    <td align="center">
+      <img src="Mobilia/Screenshot 2024-12-15 140520.png" alt="Home Page" width="200px">
+      <br>
+    </td>
+  </tr>
+</table>
+
+## Product View Page
+<table>
+  <tr>
+    <td align="center">
+      <img src="Mobilia/Screenshot 2024-12-15 140553.png" alt="Home Page" width="200px">
+      <br>
+    </td>
+  </tr>
+</table>
+
+## Cart Page
+<table>
+  <tr>
+    <td align="center">
+      <img src="Mobilia/Screenshot 2024-12-15 140614.png" alt="Home Page" width="200px">
+      <br>
+    </td>
+  </tr>
+</table>
 ---
 
 ## Table of Contents
@@ -245,52 +293,4 @@ To deploy the application, follow these steps:
 ---
 
 
-Here are some screenshots showcasing the Mobilia project:
 
-## Home Page
-<table>
-  <tr>
-    <td align="center">
-      <img src="Mobilia/Screenshot 2024-12-15 140356.png" alt="Home Page" width="200px">
-      <br>
-    </td>
-    <td align="center">
-      <img src="Mobilia/Screenshot 2024-12-15 140447.png" alt="Features Section" width="200px">
-      <br>
-    </td>
-    <td align="center">
-      <img src="Mobilia/Screenshot 2024-12-15 140503.png" alt="Contact Page" width="200px">
-      <br>
-    </td>
-  </tr>
-</table>
-
-## Shop Page
-<table>
-  <tr>
-    <td align="center">
-      <img src="Mobilia/Screenshot 2024-12-15 140520.png" alt="Home Page" width="200px">
-      <br>
-    </td>
-  </tr>
-</table>
-
-## Product View Page
-<table>
-  <tr>
-    <td align="center">
-      <img src="Mobilia/Screenshot 2024-12-15 140553.png" alt="Home Page" width="200px">
-      <br>
-    </td>
-  </tr>
-</table>
-
-## Cart Page
-<table>
-  <tr>
-    <td align="center">
-      <img src="Mobilia/Screenshot 2024-12-15 140614.png" alt="Home Page" width="200px">
-      <br>
-    </td>
-  </tr>
-</table>
