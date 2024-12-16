@@ -44,30 +44,25 @@ services:
             - sail
         depends_on:
             - laravel.test  # Ensure Caddy waits for Laravel to be ready
-    mysql:
-        image: 'mysql/mysql-server:8.0'
-        ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
-        environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ROOT_HOST: '${DB_HOST}'
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 1
-        volumes:
-            - 'sail-mysql:/var/lib/mysql'
-        networks:
-            - sail
-        healthcheck:
-            test:
-                - CMD
-                - mysqladmin
-                - ping
-                - '-p${DB_PASSWORD}'
-            retries: 3
-            timeout: 5s
-        restart: unless-stopped
+    postgres:
+      image: 'postgres:13-alpine'
+      ports:
+        - '${FORWARD_DB_PORT:-5432}:5432'
+      environment:
+        POSTGRES_DB: '${DB_DATABASE}'
+        POSTGRES_USER: '${DB_USERNAME}'
+        POSTGRES_PASSWORD: '${DB_PASSWORD}'
+      volumes:
+        - 'sail-postgres:/var/lib/postgresql/data'
+      networks:
+        - sail
+      healthcheck:
+        test:
+          - CMD
+          - pg_isready
+        retries: 5
+        timeout: 15s
+      restart: unless-stopped
     redis:
         image: 'redis:alpine'
         ports:
@@ -132,13 +127,13 @@ networks:
     sail:
         driver: bridge
 volumes:
-    sail-mysql:
-        driver: local
     sail-redis:
         driver: local
     sail-meilisearch:
         driver: local
     sailcaddy:
         driver: local
+    sail-postgres:
+      driver: local
 
 
