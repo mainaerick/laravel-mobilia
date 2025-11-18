@@ -26,8 +26,6 @@ services:
         condition: service_healthy
       mobilia_redis:
         condition: service_healthy
-      mobilia_meilisearch:
-        condition: service_healthy
 
   mobilia_postgres:
     image: postgres:13-alpine
@@ -70,6 +68,4 @@ volumes:
   mobilia-postgres:
     driver: local
   mobilia-redis:
-    driver: local
-  mobilia-meilisearch:
     driver: local
