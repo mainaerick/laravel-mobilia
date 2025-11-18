@@ -26,10 +26,10 @@ class CartController extends Controller
         // ]);
 
         $user = $request->user();
-        
+
 
         $cart = $user->cart ?? Cart::create(['user_id' => $user->id]);
-        
+
         $cartItem = CartItem::where('product_id', $request->product_id)->first();
         if(!$cartItem){
             $cartItem = CartItem::create(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'quantity'=>0]);
@@ -56,7 +56,6 @@ class CartController extends Controller
                 $cartItem->delete();
             }
         }
-
         return redirect()->back()->with('success', 'Product removed from cart');
     }
 }
