@@ -29,8 +29,6 @@ services:
       QUEUE_CONNECTION: '${QUEUE_CONNECTION}'
     volumes:
       - '.:/var/www/html'
-      - 'mobilia-storage:/var/www/html/storage'
-      - 'mobilia-bootstrap-cache:/var/www/html/bootstrap/cache'
     networks:
       - mobilia_net
     depends_on:
