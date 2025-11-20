@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
+
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok'], 200);
+});
 Route::get('/', function () {
     return redirect('/home');
 //    return Inertia::render('Home/Index', [
