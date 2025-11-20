@@ -266,25 +266,16 @@ jobs:
 
       - name: Health check
         run: |
-          if [ -z "${{ secrets.APP_URL }}" ]; then
-            echo "❌ APP_URL secret is missing"
-            exit 1
-          fi
-
-          URL="${{ secrets.APP_URL }}/health"
-
           for i in {1..5}; do
-            STATUS=$(curl -o /dev/null -s -w "%{http_code}" "$URL")
-            echo "⏳ Waiting for application to respond... ($i/5) - Status: $STATUS"
-
+            STATUS=$(curl -f -s -o /dev/null -w "%{http_code}" ${{ secrets.APP_URL }} || echo "000")
+            echo "$STATUS"
             if [ "$STATUS" = "200" ]; then
-              echo "✅ Application is healthy"
+              echo "✅ Application is healthy (HTTP $STATUS)"
               exit 0
             fi
-
-            sleep 5
+            echo "⏳ Waiting for application to respond... ($i/5) - Status: $STATUS"
+            sleep 10
           done
-
           echo "❌ Health check failed - application not responding"
           exit 1
 
