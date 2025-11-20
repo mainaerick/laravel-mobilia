@@ -29,8 +29,8 @@ echo "--------------------------------------"
 echo " 🚀 Deploying to $SERVER_IP"
 echo "--------------------------------------"
 
-#rsync -avz --delete --progress public/build/ $REMOTE_USER@$SERVER_IP:$SERVER_PATH/public/build/
-#rsync -avz --delete --progress bootstrap/ssr/ $REMOTE_USER@$SERVER_IP:$SERVER_PATH/bootstrap/ssr/
+rsync -avz --delete --progress public/build/ $REMOTE_USER@$SERVER_IP:$SERVER_PATH/public/build/
+rsync -avz --delete --progress bootstrap/ssr/ $REMOTE_USER@$SERVER_IP:$SERVER_PATH/bootstrap/ssr/
 
 echo "--------------------------------------"
 echo " 🔄 Clearing Laravel caches remotely"
