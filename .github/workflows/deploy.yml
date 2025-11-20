@@ -281,6 +281,7 @@ jobs:
           echo "❌ Health check failed - application not responding"
           exit 1
 
+
       - name: Cleanup
         if: always()
         run: rm -f ~/.ssh/deploy_key
