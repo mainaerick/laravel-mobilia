@@ -276,10 +276,12 @@ jobs:
           for i in {1..5}; do
             STATUS=$(curl -o /dev/null -s -w "%{http_code}" "$URL")
             echo "⏳ Waiting for application to respond... ($i/5) - Status: $STATUS"
+
             if [ "$STATUS" = "200" ]; then
               echo "✅ Application is healthy"
               exit 0
             fi
+
             sleep 5
           done
 
