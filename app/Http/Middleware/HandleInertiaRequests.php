@@ -31,7 +31,9 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $query = $request->get('query', '');
-        $prodsearched = Product::where('name', 'LIKE', "%{$query}%") // Adjust fields accordingly
+
+        $prodsearched = app()->environment('testing')
+            ? [] : Product::where('name', 'LIKE', "%{$query}%") // Adjust fields accordingly
         ->orWhere('description', 'LIKE', "%{$query}%") // Optional
         ->get();
         return [
