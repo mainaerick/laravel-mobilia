@@ -267,13 +267,13 @@ jobs:
       - name: Health check
         run: |
           for i in {1..5}; do
-            STATUS=$(curl -f -s -o /dev/null -w "%{http_code}" ${{ secrets.APP_URL }}/health || echo "000")
+            STATUS=$(curl -o /dev/null -s -w "%{http_code}" ${{ secrets.APP_URL }}/health)
+            echo "⏳ Waiting for application to respond... ($i/5) - Status: $STATUS"
             if [ "$STATUS" = "200" ]; then
-              echo "✅ Application is healthy (HTTP $STATUS)"
+              echo "✅ Application is healthy"
               exit 0
             fi
-            echo "⏳ Waiting for application to respond... ($i/5) - Status: $STATUS"
-            sleep 10
+            sleep 5
           done
           echo "❌ Health check failed - application not responding"
           exit 1
