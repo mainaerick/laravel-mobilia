@@ -269,7 +269,7 @@ jobs:
           for i in {1..5}; do
             STATUS=$(curl -f -o /dev/null -s -w "%{http_code}" ${{ secrets.APP_URL }} || echo "000")
             echo "$STATUS"
-            if [  "$STATUS" = "200" ] || [ "$STATUS" = "301" ] || [ "$STATUS" = "302"]; then
+            if [  "$STATUS" = "200" ] || [ "$STATUS" = "301" ] || [ "$STATUS" = "302" ]; then
               echo "✅ Application is healthy (HTTP $STATUS)"
               exit 0
             fi
