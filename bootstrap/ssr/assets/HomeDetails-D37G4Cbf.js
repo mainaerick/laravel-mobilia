@@ -416,7 +416,8 @@ const HomeDetails = ({ products, settings }) => {
                         768: { items: 2 },
                         1024: { items: 3 }
                       }
-                    }
+                    },
+                    inspirationImages.length
                   ) })
                 ]
               }

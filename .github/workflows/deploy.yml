@@ -175,13 +175,9 @@ jobs:
 
       - name: Deploy assets to server
         run: |
-          rsync -avz --delete --progress \
-            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
-            public/build/ ${{ secrets.REMOTE_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_PATH }}/public/build/
+          rsync -avz --delete --progress \ -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \ public/build/ ${{ secrets.REMOTE_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_PATH }}/public/build/
 
-          rsync -avz --delete --progress \
-            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
-            bootstrap/ssr/ ${{ secrets.REMOTE_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_PATH }}/bootstrap/ssr/
+          rsync -avz --delete --progress \ -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \ bootstrap/ssr/ ${{ secrets.REMOTE_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_PATH }}/bootstrap/ssr/
 
       - name: Deploy application and restart Sail
         run: |

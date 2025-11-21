@@ -1,7 +1,7 @@
 {
   "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
   "node_modules/react-alice-carousel/lib/alice-carousel.css": [
-    "https://mobilia.fluxnerve.com/build/assets/HomeDetails-eyolCK5O.js",
+    "https://mobilia.fluxnerve.com/build/assets/HomeDetails-D37G4Cbf.js",
     "https://mobilia.fluxnerve.com/build/assets/HomeDetails-DgjqAvA-.css"
   ],
   "resources/css/app.css": [],
@@ -192,11 +192,11 @@
     "https://mobilia.fluxnerve.com/build/assets/Dashboard-B7JCLFuD.js"
   ],
   "resources/js/Pages/Home/HomeDetails.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/HomeDetails-eyolCK5O.js",
+    "https://mobilia.fluxnerve.com/build/assets/HomeDetails-D37G4Cbf.js",
     "https://mobilia.fluxnerve.com/build/assets/HomeDetails-DgjqAvA-.css"
   ],
   "resources/js/Pages/Home/Index.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Index-CWqUNyzP.js"
+    "https://mobilia.fluxnerve.com/build/assets/Index-CIeHkp4v.js"
   ],
   "resources/js/Pages/Home/components/CardOverlay.tsx": [
     "https://mobilia.fluxnerve.com/build/assets/CardOverlay-BbLtiyFC.js"
