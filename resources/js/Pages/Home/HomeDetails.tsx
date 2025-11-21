@@ -21,7 +21,7 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
     const handleDragStart = (e: any) => e.preventDefault();
 
     const handleCorChanged = (e: EventObject) => {
-        setCurrentCarouselItem(e.item);
+        // setCurrentCarouselItem(e.item);
     };
 
     useEffect(() => {
@@ -413,6 +413,7 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
                         <Col span={18} style={{height: "100%", overflow: "hidden",}}>
                             {
                                 inspirationImages && <AliceCarousel
+                                    key={inspirationImages.length}
                                     onSlideChanged={handleCorChanged}
                                     disableButtonsControls
                                     autoHeight={false}
