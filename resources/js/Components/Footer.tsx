@@ -69,16 +69,7 @@ function Footer({ }: Props) {
                                                 Shop
                                             </Typography.Text>
                                         </Link>
-                                        <Link href={"about"}>
-                                            <Typography.Text strong>
-                                                About
-                                            </Typography.Text>
-                                        </Link>
-                                        <Link href={"contact"}>
-                                            <Typography.Text strong>
-                                                Contact
-                                            </Typography.Text>
-                                        </Link>
+                                      
                                     </Flex>
                                 </Col>
 

@@ -124,10 +124,7 @@ function Index({ auth, products, queryParams = null }: Props) {
                                                     value: "price_low",
                                                     label: "Price: Low to High",
                                                 },
-                                                {
-                                                    value: "popularity",
-                                                    label: "Popularity",
-                                                },
+
                                                 {
                                                     value: "rating",
                                                     label: "Rating",

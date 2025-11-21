@@ -64,8 +64,8 @@ export default function Authenticated({
                                 </div>
                                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                     <NavLink
-                                        href={route("dashboard")}
-                                        active={route().current("dashboard")}
+                                        href={route("home.index")}
+                                        active={route().current("home")}
                                     >
                                         Mobilia
                                     </NavLink>
