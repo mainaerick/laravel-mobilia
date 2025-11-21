@@ -1,42 +1,41 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { A as AuthenticatedAdmin } from "./AdminLayout-BT-KCncJ.js";
+import { A as AuthenticatedAdmin } from "./AdminLayout-BTxGKBRd.js";
 import { useState } from "react";
 import CategoryForm from "./CategoryForm-ClUC0Hht.js";
-import { C as CategoryData } from "./_Models-D7LNJOvB.js";
 import { useForm } from "@inertiajs/react";
 import { message } from "antd";
 import "./ApplicationLogo-DwGw9LaR.js";
-import "./ResponsiveNavLink-BF_L6EzO.js";
+import "./ResponsiveNavLink-CMrbbniR.js";
 import "@headlessui/react";
 import "@ant-design/icons";
 import "../app.js";
 import "axios";
 import "react-dom/client";
-function Create({ auth }) {
+function Show({ auth, category }) {
+  const categorydata = category.data;
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
-  const { data, setData, post, reset } = useForm({
-    ...CategoryData
+  const { data, setData, post, errors, reset } = useForm({
+    ...categorydata,
+    _method: "PUT"
   });
   const onFinish = (values) => {
     console.log(data);
-    post(route("admin.category.store"), {
+    post(route("admin.category.update", { id: data.id }), {
       onSuccess: () => {
-        reset();
         messageApi.open({
           type: "success",
-          content: "Product Created"
+          content: "Category Updated"
         });
       },
       onProgress: () => {
         setLoading(true);
         messageApi.open({
           type: "loading",
-          content: "Creating Product.."
+          content: "Category Updating..."
         });
       },
-      onError: (e) => {
-        console.log(e);
+      onError: () => {
         messageApi.open({
           type: "error",
           content: "An error occurred"
@@ -51,7 +50,7 @@ function Create({ auth }) {
     AuthenticatedAdmin,
     {
       user: auth,
-      header: /* @__PURE__ */ jsx("h2", { className: "font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight", children: "Create Category" }),
+      header: /* @__PURE__ */ jsx("h2", { className: "font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight", children: "Category" }),
       children: [
         contextHolder,
         /* @__PURE__ */ jsx(
@@ -60,14 +59,13 @@ function Create({ auth }) {
             data,
             onFinish,
             setData,
-            loading
+            loading: false
           }
-        ),
-        " "
+        )
       ]
     }
   );
 }
 export {
-  Create as default
+  Show as default
 };

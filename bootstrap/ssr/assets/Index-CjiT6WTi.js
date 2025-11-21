@@ -1,16 +1,16 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { F as Footer } from "./Footer-C2GwH6yE.js";
-import { A as Authenticated } from "./AuthenticatedLayout-mRr1fAgD.js";
+import { F as Footer } from "./Footer-owlJr_0r.js";
+import { A as Authenticated } from "./AuthenticatedLayout-CnDTPPpR.js";
 import { C as Colors, D as Dimensions } from "../app.js";
 import { Pagination, Breadcrumb, Row, Col, Flex, Typography, Select, Empty } from "antd";
-import { P as ProductCard } from "./ProductCard-CAEvKeUY.js";
-import { Link, router } from "@inertiajs/react";
+import { P as ProductCard } from "./ProductCard-DeUpRL9U.js";
+import { router } from "@inertiajs/react";
 import { H as Hero } from "./Hero-BzYIx0wQ.js";
 import { S as ShopInfo } from "./ShopInfo-AaDODIbQ.js";
 import "react-alice-carousel";
 import "react";
 import "./ApplicationLogo-DwGw9LaR.js";
-import "./ResponsiveNavLink-BF_L6EzO.js";
+import "./ResponsiveNavLink-CMrbbniR.js";
 import "@headlessui/react";
 import "@ant-design/icons";
 import "axios";
@@ -119,10 +119,6 @@ function Index({ auth, products, queryParams = null }) {
                             label: "Price: Low to High"
                           },
                           {
-                            value: "popularity",
-                            label: "Popularity"
-                          },
-                          {
                             value: "rating",
                             label: "Rating"
                           }
@@ -153,7 +149,7 @@ function Index({ auth, products, queryParams = null }) {
                 lg: { span: 6 },
                 xl: { span: 6 },
                 style: { marginBottom: "23px" },
-                children: /* @__PURE__ */ jsx(Link, { href: route("shop.show", product.id), children: /* @__PURE__ */ jsx(ProductCard, { product }) })
+                children: /* @__PURE__ */ jsx(ProductCard, { product })
               },
               key
             );

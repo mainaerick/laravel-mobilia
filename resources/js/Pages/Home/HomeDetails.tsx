@@ -1,50 +1,53 @@
 import React, {useEffect, useState} from "react";
-import { Product } from "@/Core/_Models";
-import { Card, Col, Flex, Row, Typography, Button, Image } from "antd";
+import {Product} from "@/Core/_Models";
+import {Card, Col, Flex, Row, Typography, Button, Image} from "antd";
 
-import AliceCarousel, { EventObject } from "react-alice-carousel";
+import AliceCarousel, {EventObject} from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import { Link, router } from "@inertiajs/react";
-import { Colors, Dimensions } from "@/utils/Config";
+import {Link, router} from "@inertiajs/react";
+import {Colors, Dimensions} from "@/utils/Config";
 import Footer from "@/Components/Footer";
 import ProductCard from "@/Components/ProductCard";
+
 interface Props {
     products: Product[];
-    settings:any
+    settings: any
 }
 
-const HomeDetails: React.FC<Props> = ({products,settings }) => {
-    const [inspirationImages,setInspirationImages] = useState([])
+const HomeDetails: React.FC<Props> = ({products, settings}) => {
+    const [inspirationImages, setInspirationImages] = useState([])
     const pagePadding = "0 48px";
 
     const handleDragStart = (e: any) => e.preventDefault();
 
     const handleCorChanged = (e: EventObject) => {
-        // setCurrentCarouselItem(e.item);
+        setCurrentCarouselItem(e.item);
     };
 
     useEffect(() => {
         const inspirationImages = settings.inspiration_images
             ? JSON.parse(settings.inspiration_images)
             : [];
-        const items: any =inspirationImages? inspirationImages.map((value:any,key:number) => {return <img
-            className="pr-2"
-            key={key}
-            src={value}
-            style={{
-
-                maxHeight:"500px",
-
-                width: "auto",
-                margin:"auto"
-            }}
-            onDragStart={handleDragStart}
-            role="presentation"
-        />}):[]
+        const items: any = inspirationImages ? inspirationImages.map((value: any, key: number) => {
+            return <img
+                className="pr-2"
+                key={key}
+                src={value}
+                style={{
+                    maxHeight: "500px",
+                    width: "auto",
+                    margin: "auto"
+                }}
+                onDragStart={handleDragStart}
+                role="presentation"
+            />
+        }) : []
 
         console.log(items)
         setInspirationImages(items)
     }, [settings]);
+
+
     // @ts-ignore
     // @ts-ignore
     // @ts-ignore
@@ -64,13 +67,13 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
             >
                 <div
                     className="absolute sm:bottom-0 sm:right-0  lg:top-[30%] lg:left-[50%] lg:right-[5%] "
-                // style={{
-                //     // position: "absolute",
-                //     top: "30%",
-                //     left: "50%",
-                //     right: "5%",
-                //     height: "100px",
-                // }}
+                    // style={{
+                    //     // position: "absolute",
+                    //     top: "30%",
+                    //     left: "50%",
+                    //     right: "5%",
+                    //     height: "100px",
+                    // }}
                 >
                     <Card
                         style={{
@@ -87,7 +90,7 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
                                 New Arrival
                             </Typography.Text>
                             <Typography.Title
-                                style={{ color: Colors.primary, width: "80%" }}
+                                style={{color: Colors.primary, width: "80%"}}
                             >
                                 Discover Our New Collection
                             </Typography.Title>
@@ -124,13 +127,13 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
             <div
                 className={Dimensions.pagePaddingClass}
                 // bordered={false}
-                style={{ marginTop: "37px", width: "100%" }}
+                style={{marginTop: "37px", width: "100%"}}
             >
                 <Flex
                     align={"center"}
                     justify={"center"}
                     vertical={true}
-                    style={{ marginBottom: 23 }}
+                    style={{marginBottom: 23}}
                 >
                     <Typography.Title level={3}>
                         Browse The Range
@@ -145,15 +148,15 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
                         <div
                             className="overflow-hidden  cursor-pointer rounded-xl relative group"
                             onClick={() => {
-                                let queryParams = { category: "" };
+                                let queryParams = {category: ""};
                                 const category = "dining";
                                 queryParams.category = category;
                                 router.get(route("shop.index"), queryParams);
                             }}
                         >
                             <Card
-                                style={{ marginBottom: 10 }}
-                                styles={{ body: { padding: 0 } }}
+                                style={{marginBottom: 10}}
+                                styles={{body: {padding: 0}}}
                                 cover={
                                     // <img
                                     //     src={`/images/dining.jpg`}
@@ -193,15 +196,15 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
                         <div
                             className="overflow-hidden  cursor-pointer rounded-xl relative group"
                             onClick={() => {
-                                let queryParams = { category: "" };
+                                let queryParams = {category: ""};
                                 const category = "living";
                                 queryParams.category = category;
                                 router.get(route("shop.index"), queryParams);
                             }}
                         >
                             <Card
-                                style={{ marginBottom: 10 }}
-                                styles={{ body: { padding: 0 } }}
+                                style={{marginBottom: 10}}
+                                styles={{body: {padding: 0}}}
                                 cover={
                                     // <img
                                     //     alt="example"
@@ -245,15 +248,15 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
                         <div
                             className="overflow-hidden  cursor-pointer rounded-xl relative group"
                             onClick={() => {
-                                let queryParams = { category: "" };
+                                let queryParams = {category: ""};
                                 const category = "bedroom";
                                 queryParams.category = category;
                                 router.get(route("shop.index"), queryParams);
                             }}
                         >
                             <Card
-                                style={{ marginBottom: 10 }}
-                                styles={{ body: { padding: 0 } }}
+                                style={{marginBottom: 10}}
+                                styles={{body: {padding: 0}}}
                                 cover={
 
                                     // <img
@@ -300,38 +303,38 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
             {/* Products */}
             <div
                 className={Dimensions.pagePaddingClass}
-                style={{ border: 0, marginTop: "37px" }}
+                style={{border: 0, marginTop: "37px"}}
             >
                 <Flex
                     align={"center"}
                     justify={"center"}
                     vertical={true}
-                    style={{ marginBottom: 18 }}
+                    style={{marginBottom: 18}}
                 >
                     <Typography.Title level={3}>Our Products</Typography.Title>
                 </Flex>
 
-                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
                     {products &&
                         products.slice(0, 8).map((product: Product, key) => {
                             return (
                                 <Col
                                     key={key}
                                     // span={6}
-                                    xs={{ span: 24 }}
-                                    sm={{ span: 12 }}
-                                    md={{ span: 8 }}
-                                    lg={{ span: 6 }}
-                                    xl={{ span: 6 }}
-                                    style={{ marginBottom: "23px" }}
+                                    xs={{span: 24}}
+                                    sm={{span: 12}}
+                                    md={{span: 8}}
+                                    lg={{span: 6}}
+                                    xl={{span: 6}}
+                                    style={{marginBottom: "23px"}}
                                 >
-                                    <ProductCard product={product} />
+                                    <ProductCard product={product}/>
                                 </Col>
                             );
                         })}
 
                     <div
-                        style={{ width: "100%", marginTop: "27px" }}
+                        style={{width: "100%", marginTop: "27px"}}
                         className={"flex justify-center align-middle"}
                     >
                         <Link href={"shop"}>
@@ -354,6 +357,7 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
             <div
                 style={{
                     background: Colors.secondaryLightColor,
+                    paddingTop:"37px",
                     marginTop: "37px",
                     marginBottom: "37px",
                 }}
@@ -367,17 +371,17 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
                 >
                     <Row
                         // className="lg:h-600"
-                        style={{ height: "100%" }}
+                        style={{height: "100%"}}
                         justify={"center"}
                         align={"middle"}
                     >
                         <Col
                             // span={6}
-                            xs={{ span: 22 }}
-                            sm={{ span: 22 }}
-                            md={{ span: 8 }}
-                            lg={{ span: 6 }}
-                            xl={{ span: 6 }}
+                            xs={{span: 22}}
+                            sm={{span: 22}}
+                            md={{span: 8}}
+                            lg={{span: 6}}
+                            xl={{span: 6}}
                         >
                             <Flex vertical={true}>
                                 <Typography.Title level={3} style={{textAlign: "center",}}>
@@ -391,7 +395,7 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
                                     prototype of rooms that inspire you
                                 </Typography.Paragraph>
 
-                                <div style={{textAlign: "center",}}>
+                                <div style={{textAlign: "center",marginBottom:"37px"}}>
                                     <Button
                                         style={{
                                             marginTop: 13,
@@ -406,7 +410,7 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
                                 </div>
                             </Flex>
                         </Col>
-                        <Col span={18} style={{height:"100%", overflow: "hidden",}}>
+                        <Col span={18} style={{height: "100%", overflow: "hidden",}}>
                             {
                                 inspirationImages && <AliceCarousel
                                     onSlideChanged={handleCorChanged}
@@ -417,9 +421,9 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
                                     mouseTracking
                                     items={inspirationImages}
                                     responsive={{
-                                        0: { items: 1 }, // Number of items at different breakpoints
-                                        768: { items: 2 },
-                                        1024: { items: 3 },
+                                        0: {items: 1}, // Number of items at different breakpoints
+                                        768: {items: 2},
+                                        1024: {items: 3},
                                     }}
                                 />
                             }
@@ -430,7 +434,7 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
             </div>
 
             {/* footer */}
-            <Footer />
+            <Footer/>
         </>
     )
 

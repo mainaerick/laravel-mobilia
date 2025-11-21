@@ -1,27 +1,33 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { H as Hero } from "./Hero-BzYIx0wQ.js";
-import { A as Authenticated } from "./AuthenticatedLayout-mRr1fAgD.js";
+import { A as Authenticated } from "./AuthenticatedLayout-CnDTPPpR.js";
 import { D as Dimensions, C as Colors } from "../app.js";
 import { usePage, router } from "@inertiajs/react";
-import { Breadcrumb, Row, Col, ConfigProvider, Table, Flex, Typography, Button, Image, Space } from "antd";
+import { notification, Breadcrumb, Row, Col, ConfigProvider, Table, Flex, Typography, Button, Image, Space } from "antd";
 import { useState, useEffect } from "react";
 import { DeleteFilled } from "@ant-design/icons";
 import { S as ShopInfo } from "./ShopInfo-AaDODIbQ.js";
-import { F as Footer } from "./Footer-C2GwH6yE.js";
+import { F as Footer } from "./Footer-owlJr_0r.js";
 import Link from "antd/es/typography/Link.js";
 import "./ApplicationLogo-DwGw9LaR.js";
-import "./ResponsiveNavLink-BF_L6EzO.js";
+import "./ResponsiveNavLink-CMrbbniR.js";
 import "@headlessui/react";
 import "axios";
 import "react-dom/client";
 import "react-alice-carousel";
 function Index({ auth }) {
   const { props } = usePage();
+  const [api, contextHolder] = notification.useNotification();
   const items = props == null ? void 0 : props.cartItems;
   const [subTotal, setSubTotal] = useState("0");
   const handleRemoveItem = (id) => {
     router.delete(route("cart.removeItem", id), {
       onSuccess: () => {
+        api["success"]({
+          message: "Cart Item Removed",
+          description: "Item removed successfully",
+          duration: 0
+        });
         console.log("Item removed successfully");
       }
     });
@@ -84,6 +90,7 @@ function Index({ auth }) {
     }
   }, [items]);
   return /* @__PURE__ */ jsxs(Authenticated, { user: auth.user, children: [
+    contextHolder,
     /* @__PURE__ */ jsx(
       Hero,
       {

@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useForm } from "@inertiajs/react";
 import { message, Form, Upload, Button, ColorPicker } from "antd";
-import { A as AuthenticatedAdmin } from "./AdminLayout-BT-KCncJ.js";
+import { A as AuthenticatedAdmin } from "./AdminLayout-BTxGKBRd.js";
 import "react";
 import "./ApplicationLogo-DwGw9LaR.js";
-import "./ResponsiveNavLink-BF_L6EzO.js";
+import "./ResponsiveNavLink-CMrbbniR.js";
 import "@headlessui/react";
 import "@ant-design/icons";
 import "../app.js";

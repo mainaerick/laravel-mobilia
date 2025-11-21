@@ -1,11 +1,11 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { A as AuthenticatedAdmin } from "./AdminLayout-BT-KCncJ.js";
+import { A as AuthenticatedAdmin } from "./AdminLayout-BTxGKBRd.js";
 import { useState, useEffect } from "react";
 import { message } from "antd";
 import { useForm } from "@inertiajs/react";
 import ProductForm from "./ProductForm-DcOdaWXD.js";
 import "./ApplicationLogo-DwGw9LaR.js";
-import "./ResponsiveNavLink-BF_L6EzO.js";
+import "./ResponsiveNavLink-CMrbbniR.js";
 import "@headlessui/react";
 import "@ant-design/icons";
 import "../app.js";

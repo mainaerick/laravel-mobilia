@@ -1,15 +1,15 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { H as Hero } from "./Hero-BzYIx0wQ.js";
-import { A as Authenticated } from "./AuthenticatedLayout-mRr1fAgD.js";
+import { A as Authenticated } from "./AuthenticatedLayout-CnDTPPpR.js";
 import { D as Dimensions } from "../app.js";
 import { message, Row, Col } from "antd";
 import { S as ShopInfo } from "./ShopInfo-AaDODIbQ.js";
 import { useState, useEffect } from "react";
 import { usePage } from "@inertiajs/react";
-import { F as Footer } from "./Footer-C2GwH6yE.js";
-import OrdersTable from "./OrdersTable-Cu3IlSBT.js";
+import { F as Footer } from "./Footer-owlJr_0r.js";
+import OrdersTable from "./OrdersTable-BiB2QPiq.js";
 import "./ApplicationLogo-DwGw9LaR.js";
-import "./ResponsiveNavLink-BF_L6EzO.js";
+import "./ResponsiveNavLink-CMrbbniR.js";
 import "@headlessui/react";
 import "@ant-design/icons";
 import "axios";
@@ -19,10 +19,10 @@ import "./TableComponent-DTwfws4x.js";
 import "./TableAction-84W3ZDIe.js";
 import "react-highlight-words";
 function Index({ auth, orders, success }) {
-  usePage();
+  const { props } = usePage();
   orders = orders.data;
   const items = orders;
-  useState("0");
+  const [subTotal, setSubTotal] = useState("0");
   useEffect(() => {
     if (success) {
       message.success("Order created", 2.5);

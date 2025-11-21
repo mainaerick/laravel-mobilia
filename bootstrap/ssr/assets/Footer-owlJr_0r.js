@@ -62,9 +62,7 @@ function Footer({}) {
                         }
                       ),
                       /* @__PURE__ */ jsx(Link, { href: "home", children: /* @__PURE__ */ jsx(Typography.Text, { strong: true, children: "Home" }) }),
-                      /* @__PURE__ */ jsx(Link, { href: "shop", children: /* @__PURE__ */ jsx(Typography.Text, { strong: true, children: "Shop" }) }),
-                      /* @__PURE__ */ jsx(Link, { href: "about", children: /* @__PURE__ */ jsx(Typography.Text, { strong: true, children: "About" }) }),
-                      /* @__PURE__ */ jsx(Link, { href: "contact", children: /* @__PURE__ */ jsx(Typography.Text, { strong: true, children: "Contact" }) })
+                      /* @__PURE__ */ jsx(Link, { href: "shop", children: /* @__PURE__ */ jsx(Typography.Text, { strong: true, children: "Shop" }) })
                     ] }) }),
                     /* @__PURE__ */ jsx(Col, { span: 8, children: /* @__PURE__ */ jsxs(Flex, { vertical: true, gap: 20, children: [
                       /* @__PURE__ */ jsx(

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { T as TableComponent } from "./TableComponent-DTwfws4x.js";
-import { A as AuthenticatedAdmin } from "./AdminLayout-BT-KCncJ.js";
+import { A as AuthenticatedAdmin } from "./AdminLayout-BTxGKBRd.js";
 import { Badge, Input, Space, Button } from "antd";
 import { useState, useRef } from "react";
 import { SearchOutlined } from "@ant-design/icons";
@@ -11,7 +11,7 @@ import "../app.js";
 import "axios";
 import "react-dom/client";
 import "./ApplicationLogo-DwGw9LaR.js";
-import "./ResponsiveNavLink-BF_L6EzO.js";
+import "./ResponsiveNavLink-CMrbbniR.js";
 import "@headlessui/react";
 function Index({ auth, users }) {
   const [searchText, setSearchText] = useState("");

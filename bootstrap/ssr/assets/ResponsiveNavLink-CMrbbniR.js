@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { createContext, useState, useContext, Fragment as Fragment$1 } from "react";
+import { useState, createContext, useContext, Fragment as Fragment$1 } from "react";
 import { Link } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 const DropDownContext = createContext({
@@ -70,7 +70,6 @@ const DropdownLink = ({ className = "", children, ...props }) => {
 Dropdown.Trigger = Trigger;
 Dropdown.Content = Content;
 Dropdown.Link = DropdownLink;
-const Dropdown$1 = Dropdown;
 function NavLink({ active = false, className = "", children, ...props }) {
   return /* @__PURE__ */ jsx(
     Link,
@@ -92,7 +91,7 @@ function ResponsiveNavLink({ active = false, className = "", children, ...props 
   );
 }
 export {
-  Dropdown$1 as D,
+  Dropdown as D,
   NavLink as N,
   ResponsiveNavLink as R
 };

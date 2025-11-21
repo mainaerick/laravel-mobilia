@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { A as ApplicationLogo } from "./ApplicationLogo-DwGw9LaR.js";
-import { N as NavLink, D as Dropdown, R as ResponsiveNavLink } from "./ResponsiveNavLink-BF_L6EzO.js";
+import { N as NavLink, D as Dropdown, R as ResponsiveNavLink } from "./ResponsiveNavLink-CMrbbniR.js";
 import { usePage, Link } from "@inertiajs/react";
-import { UserOutlined, DesktopOutlined, FileOutlined, PieChartOutlined } from "@ant-design/icons";
+import { UserOutlined, DesktopOutlined, FileOutlined, PieChartOutlined, SettingOutlined } from "@ant-design/icons";
 import { C as Colors, D as Dimensions } from "../app.js";
 import { message, theme, ConfigProvider, Layout, Flex, Menu } from "antd";
 function getItem(label, key, icon, children) {
@@ -45,9 +45,7 @@ const items = [
     sideBarNode("#", "Customer Orders"),
     sideBarNode("#", "Shipping")
   ]),
-  sideBarNode("#", "Settings", /* @__PURE__ */ jsx(FileOutlined, {}), [
-    sideBarNode("#", "Homepage")
-  ])
+  sideBarNode("admin.settings.index", "Settings", /* @__PURE__ */ jsx(SettingOutlined, {}))
 ];
 const { Header, Content, Footer, Sider } = Layout;
 function AuthenticatedAdmin({
@@ -57,7 +55,7 @@ function AuthenticatedAdmin({
 }) {
   const [collapsed, setCollapsed] = useState(false);
   const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-  useState(false);
+  const [open, setOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const { props } = usePage();
   const {

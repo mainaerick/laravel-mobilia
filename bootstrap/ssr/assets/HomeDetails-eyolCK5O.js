@@ -4,8 +4,8 @@ import { Card, Flex, Typography, Button, Row, Col, Image } from "antd";
 import AliceCarousel from "react-alice-carousel";
 import { Link, router } from "@inertiajs/react";
 import { C as Colors, D as Dimensions } from "../app.js";
-import { F as Footer } from "./Footer-C2GwH6yE.js";
-import { P as ProductCard } from "./ProductCard-CAEvKeUY.js";
+import { F as Footer } from "./Footer-owlJr_0r.js";
+import { P as ProductCard } from "./ProductCard-DeUpRL9U.js";
 import "axios";
 import "react-dom/client";
 import "antd/es/card/Meta.js";
@@ -34,6 +34,7 @@ const HomeDetails = ({ products, settings }) => {
         key
       );
     }) : [];
+    console.log(items);
     setInspirationImages(items);
   }, [settings]);
   return /* @__PURE__ */ jsxs(Fragment, { children: [
@@ -341,6 +342,7 @@ const HomeDetails = ({ products, settings }) => {
       {
         style: {
           background: Colors.secondaryLightColor,
+          paddingTop: "37px",
           marginTop: "37px",
           marginBottom: "37px"
         },
@@ -380,7 +382,7 @@ const HomeDetails = ({ products, settings }) => {
                             children: "Our designer already made a lot of beautiful prototype of rooms that inspire you"
                           }
                         ),
-                        /* @__PURE__ */ jsxs("div", { style: { textAlign: "center" }, children: [
+                        /* @__PURE__ */ jsxs("div", { style: { textAlign: "center", marginBottom: "37px" }, children: [
                           /* @__PURE__ */ jsx(
                             Button,
                             {

@@ -1,24 +1,18 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { A as AuthenticatedAdmin } from "./AdminLayout-BT-KCncJ.js";
+import { Input, Space, Button, Typography } from "antd";
 import { router } from "@inertiajs/react";
-import { message, Typography, Input, Space, Button } from "antd";
-import { useState, useRef } from "react";
-import Highlighter from "react-highlight-words";
-import { SearchOutlined } from "@ant-design/icons";
 import { T as TableComponent } from "./TableComponent-DTwfws4x.js";
 import { T as TableAction } from "./TableAction-84W3ZDIe.js";
-import "./ApplicationLogo-DwGw9LaR.js";
-import "./ResponsiveNavLink-BF_L6EzO.js";
-import "@headlessui/react";
+import { useState, useRef } from "react";
+import { SearchOutlined } from "@ant-design/icons";
+import Highlighter from "react-highlight-words";
 import "../app.js";
 import "axios";
 import "react-dom/client";
-function Index({ auth, orders }) {
-  const ordersData = orders.data;
-  message.useMessage();
+function OrdersTable({ items, pagination, setClickedOrder }) {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
-  const searchInput = useRef();
+  const searchInput = useRef(null);
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -132,6 +126,7 @@ function Index({ auth, orders }) {
       title: "Total Amount",
       dataIndex: "total_amount",
       key: "total_amount",
+      width: "15%",
       render: (total_amount) => /* @__PURE__ */ jsx(Typography.Text, { children: total_amount })
     },
     {
@@ -145,6 +140,7 @@ function Index({ auth, orders }) {
       title: "Firstname",
       dataIndex: "firstname",
       key: "firstname",
+      responsive: ["md"],
       // width: "15%",
       ...getColumnSearchProps("firstname")
     },
@@ -152,6 +148,7 @@ function Index({ auth, orders }) {
       title: "Lastname",
       dataIndex: "lastname",
       key: "lastname",
+      responsive: ["md"],
       // width: "15%",
       ...getColumnSearchProps("lastname")
     },
@@ -159,6 +156,7 @@ function Index({ auth, orders }) {
       title: "Email",
       dataIndex: "email",
       key: "email",
+      responsive: ["md"],
       // width: "15%",
       ...getColumnSearchProps("email")
     },
@@ -166,6 +164,7 @@ function Index({ auth, orders }) {
       title: "Phone",
       dataIndex: "phone",
       key: "phone",
+      responsive: ["md"],
       // width: "15%",
       ...getColumnSearchProps("phone")
     },
@@ -173,17 +172,19 @@ function Index({ auth, orders }) {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      responsive: ["md"],
       render: (status) => /* @__PURE__ */ jsx(Typography.Text, { children: status })
     },
     {
       title: "Payment Status",
       dataIndex: "payment_status",
       key: "payment_status",
+      responsive: ["md"],
       render: (payment_status) => /* @__PURE__ */ jsx(Typography.Text, { children: payment_status })
     },
     {
       title: "Action",
-      width: "5%",
+      width: "15%",
       fixed: "right",
       render: (item) => {
         return /* @__PURE__ */ jsx(
@@ -193,29 +194,22 @@ function Index({ auth, orders }) {
               router.delete(route("order.destroy", item.id));
             },
             editFunc: () => {
-              router.get(route("order.edit", item.id));
+              setClickedOrder ? setClickedOrder(item.id) : router.get(route("order.edit", item.id));
             }
           }
         );
       }
     }
   ];
-  return /* @__PURE__ */ jsx(
-    AuthenticatedAdmin,
+  return /* @__PURE__ */ jsx("div", { style: { width: "100%" }, children: /* @__PURE__ */ jsx(
+    TableComponent,
     {
-      user: auth,
-      header: /* @__PURE__ */ jsx("h2", { className: "font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight", children: "Order Listing" }),
-      children: /* @__PURE__ */ jsx("div", { style: { width: "100%" }, children: /* @__PURE__ */ jsx(
-        TableComponent,
-        {
-          items: ordersData,
-          pagination: void 0,
-          columns
-        }
-      ) })
+      items,
+      pagination: void 0,
+      columns
     }
-  );
+  ) });
 }
 export {
-  Index as default
+  OrdersTable as default
 };

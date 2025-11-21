@@ -1,17 +1,22 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { A as ApplicationLogo } from "./ApplicationLogo-DwGw9LaR.js";
-import { N as NavLink, D as Dropdown, R as ResponsiveNavLink } from "./ResponsiveNavLink-BF_L6EzO.js";
+import { N as NavLink, D as Dropdown, R as ResponsiveNavLink } from "./ResponsiveNavLink-CMrbbniR.js";
 import { Link, router, usePage } from "@inertiajs/react";
 import { CloseCircleFilled, UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { C as Colors, D as Dimensions } from "../app.js";
-import { Drawer, Row, Col, List, Image, Flex, Typography, Divider, Button, Input, message, ConfigProvider, Badge } from "antd";
+import { notification, Drawer, Row, Col, List, Flex, Typography, Divider, Button, Input, message, ConfigProvider, Badge } from "antd";
 function CartItems({ cartItems, open, onClose }) {
   const [subTotal, setSubTotal] = useState(0);
+  const [api, contextHolder] = notification.useNotification();
   const handleRemoveItem = (id) => {
     router.delete(route("cart.removeItem", id), {
       onSuccess: () => {
-        console.log("Item removed successfully");
+        api.open({
+          message: "Cart Item Removed",
+          description: "Item removed successfully",
+          duration: 0
+        });
       }
     });
   };
@@ -36,19 +41,14 @@ function CartItems({ cartItems, open, onClose }) {
           List,
           {
             dataSource: cartItems,
-            renderItem: (item) => /* @__PURE__ */ jsxs(List.Item, { children: [
+            renderItem: (item) => /* @__PURE__ */ jsx(Link, { href: route("shop.show", item.product.id), children: /* @__PURE__ */ jsxs(List.Item, { children: [
               /* @__PURE__ */ jsx(
                 List.Item.Meta,
                 {
-                  avatar: /* @__PURE__ */ jsx(
-                    Image,
-                    {
-                      preview: false,
-                      src: item.product.images[0],
-                      width: 108
-                    }
+                  title: (
+                    // <Link href={route("shop.show", item.product.id)}>
+                    /* @__PURE__ */ jsx("span", { children: item.product.name })
                   ),
-                  title: /* @__PURE__ */ jsx("a", { href: "https://ant.design", children: item.product.name }),
                   description: `${item.quantity} x ${item.product.price}`
                 }
               ),
@@ -58,7 +58,7 @@ function CartItems({ cartItems, open, onClose }) {
                   onClick: () => handleRemoveItem(item.id)
                 }
               ) })
-            ] }, item.cart_id)
+            ] }, item.cart_id) })
           }
         ) }),
         /* @__PURE__ */ jsx(Col, { span: 24, children: /* @__PURE__ */ jsxs(
@@ -95,6 +95,7 @@ function CartItems({ cartItems, open, onClose }) {
     }
   );
 }
+const { Search } = Input;
 const SearchBar = () => {
   const { searchresults = [], query = "" } = usePage().props;
   const [searchQuery, setSearchQuery] = useState(query);
@@ -115,7 +116,6 @@ const SearchBar = () => {
     }
   ) });
 };
-const SearchBar$1 = SearchBar;
 function Authenticated({
   user,
   header,
@@ -125,9 +125,6 @@ function Authenticated({
   const [open, setOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const { props } = usePage();
-  const showDrawer = () => {
-    setOpen(true);
-  };
   const onClose = () => {
     setOpen(false);
   };
@@ -149,12 +146,17 @@ function Authenticated({
           /* @__PURE__ */ jsxs("nav", { className: "bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700", children: [
             /* @__PURE__ */ jsx("div", { className: Dimensions.pagePaddingClass, children: /* @__PURE__ */ jsxs("div", { className: "flex justify-between h-16", children: [
               /* @__PURE__ */ jsxs("div", { className: "flex", children: [
-                /* @__PURE__ */ jsx("div", { className: "shrink-0 flex items-center", children: /* @__PURE__ */ jsx(Link, { href: "/", children: /* @__PURE__ */ jsx(ApplicationLogo, { className: "block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" }) }) }),
+                /* @__PURE__ */ jsx("div", { className: "shrink-0 flex items-center", children: /* @__PURE__ */ jsx(Link, { href: "/", children: /* @__PURE__ */ jsx(
+                  ApplicationLogo,
+                  {
+                    className: "block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
+                  }
+                ) }) }),
                 /* @__PURE__ */ jsx("div", { className: "hidden space-x-8 sm:-my-px sm:ms-10 sm:flex", children: /* @__PURE__ */ jsx(
                   NavLink,
                   {
-                    href: route("dashboard"),
-                    active: route().current("dashboard"),
+                    href: route("home.index"),
+                    active: route().current("home"),
                     children: "Mobilia"
                   }
                 ) })
@@ -175,22 +177,6 @@ function Authenticated({
                     active: route().current("shop.index"),
                     children: "Shop"
                   }
-                ) }),
-                /* @__PURE__ */ jsx("div", { className: "hidden space-x-8 sm:-my-px sm:ms-10 sm:flex", children: /* @__PURE__ */ jsx(
-                  NavLink,
-                  {
-                    href: route("about.index"),
-                    active: route().current("about"),
-                    children: "About"
-                  }
-                ) }),
-                /* @__PURE__ */ jsx("div", { className: "hidden space-x-8 sm:-my-px sm:ms-10 sm:flex", children: /* @__PURE__ */ jsx(
-                  NavLink,
-                  {
-                    href: route("contact.index"),
-                    active: route().current("contact"),
-                    children: "Contact"
-                  }
                 ) })
               ] }),
               /* @__PURE__ */ jsxs(
@@ -199,7 +185,7 @@ function Authenticated({
                   className: "flex justify-between",
                   children: [
                     /* @__PURE__ */ jsxs("div", { className: "flex justify-between", children: [
-                      /* @__PURE__ */ jsx(SearchBar$1, {}),
+                      /* @__PURE__ */ jsx(SearchBar, {}),
                       /* @__PURE__ */ jsx("div", { className: "hidden sm:flex sm:items-center space-x-8 sm:-my-px sm:ms-10", children: /* @__PURE__ */ jsx("div", { className: "ms-3 relative", children: /* @__PURE__ */ jsxs(Dropdown, { children: [
                         /* @__PURE__ */ jsx(Dropdown.Trigger, { children: /* @__PURE__ */ jsx(
                           UserOutlined,
@@ -240,12 +226,12 @@ function Authenticated({
                             Dropdown.Link,
                             {
                               href: route("register"),
-                              children: "Register"
+                              children: "Signup"
                             }
                           )
                         ] })
                       ] }) }) }),
-                      /* @__PURE__ */ jsx(
+                      /* @__PURE__ */ jsx(Link, { href: route("cart.index"), children: /* @__PURE__ */ jsx(
                         Flex,
                         {
                           vertical: true,
@@ -265,8 +251,7 @@ function Authenticated({
                                   ShoppingCartOutlined,
                                   {
                                     style: { fontSize: "17px" },
-                                    className: "space-x-8 sm:-my-px sm:ms-10 sm:flex",
-                                    onClick: showDrawer
+                                    className: "space-x-8 sm:-my-px sm:ms-10 sm:flex"
                                   }
                                 ),
                                 " "
@@ -274,7 +259,7 @@ function Authenticated({
                             }
                           )
                         }
-                      )
+                      ) })
                     ] }),
                     /* @__PURE__ */ jsx("div", { className: "-me-2 flex items-center sm:hidden", children: /* @__PURE__ */ jsx(
                       "button",

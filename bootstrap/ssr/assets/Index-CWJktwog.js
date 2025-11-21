@@ -1,21 +1,21 @@
-import { jsxs, jsx } from "react/jsx-runtime";
-import { A as AuthenticatedAdmin } from "./AdminLayout-BT-KCncJ.js";
-import { message, ConfigProvider, Space, Input, Button } from "antd";
-import { useState, useRef, useEffect } from "react";
-import Highlighter from "react-highlight-words";
+import { jsx, jsxs } from "react/jsx-runtime";
+import { useState, useRef } from "react";
 import { SearchOutlined } from "@ant-design/icons";
-import { router } from "@inertiajs/react";
-import { C as Colors } from "../app.js";
+import { Input, Space, Button } from "antd";
+import Highlighter from "react-highlight-words";
+import { A as AuthenticatedAdmin } from "./AdminLayout-BTxGKBRd.js";
 import { T as TableComponent } from "./TableComponent-DTwfws4x.js";
 import { T as TableAction } from "./TableAction-84W3ZDIe.js";
+import { router } from "@inertiajs/react";
 import "./ApplicationLogo-DwGw9LaR.js";
-import "./ResponsiveNavLink-BF_L6EzO.js";
+import "./ResponsiveNavLink-CMrbbniR.js";
 import "@headlessui/react";
+import "../app.js";
 import "axios";
 import "react-dom/client";
-function Index({ auth, categories, flash }) {
-  console.log(categories);
-  const [messageApi, contextHolder] = message.useMessage();
+function Index({ auth, products }) {
+  const data = products.data;
+  console.log(data);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
@@ -132,40 +132,107 @@ function Index({ auth, categories, flash }) {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      // width: "15%",
+      width: "15%",
       ...getColumnSearchProps("name")
     },
     {
-      title: "Colors",
-      dataIndex: "colors",
-      key: "colors",
-      render: (colors) => {
-        return colors.map((color, key) => {
-          return /* @__PURE__ */ jsx("span", { children: `${color}  ${key !== colors.length - 1 ? "," : ""}` }, key);
-        });
-      },
-      responsive: ["md"]
-      // width: "15%",
-      // ...getColumnSearchProps("colors"),
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
+      width: "25%",
+      responsive: ["md"],
+      ...getColumnSearchProps("description")
     },
     {
-      title: "Materials",
-      dataIndex: "materials",
-      key: "materials",
-      render: (materials) => {
-        return materials.map((material, key) => {
-          return /* @__PURE__ */ jsx("span", { children: `${material}  ${key !== materials.length - 1 ? "," : ""}` }, key);
-        });
-      },
+      title: "Price",
+      dataIndex: "price",
+      key: "price",
+      width: "10%",
+      ...getColumnSearchProps("price"),
+      sorter: (a, b) => parseFloat(a.price) - parseFloat(b.price),
+      sortDirections: ["descend", "ascend"],
       responsive: ["md"]
-      // width: "15%",
-      // ...getColumnSearchProps("colors"),
     },
+    {
+      title: "Quantity",
+      dataIndex: "quantity",
+      key: "quantity",
+      width: "10%",
+      ...getColumnSearchProps("quantity"),
+      sorter: (a, b) => a.quantity - b.quantity,
+      sortDirections: ["descend", "ascend"],
+      responsive: ["md"]
+    },
+    {
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
+      width: "10%",
+      ...getColumnSearchProps("category"),
+      responsive: ["md"]
+    },
+    {
+      title: "Room",
+      dataIndex: "room",
+      key: "room",
+      width: "10%",
+      ...getColumnSearchProps("room"),
+      responsive: ["md"]
+    },
+    {
+      title: "Brand",
+      dataIndex: "brand",
+      key: "brand",
+      width: "10%",
+      ...getColumnSearchProps("brand"),
+      responsive: ["md"]
+    },
+    // {
+    //     title: "Material",
+    //     dataIndex: "material",
+    //     key: "material",
+    //     width: "10%",
+    //     ...getColumnSearchProps("material"),
+    // },
+    // {
+    //     title: "Color",
+    //     dataIndex: "color",
+    //     key: "color",
+    //     width: "10%",
+    //     ...getColumnSearchProps("color"),
+    // },
+    // {
+    //     title: "Dimensions (Depth x Width x Height)",
+    //     key: "dimensions",
+    //     width: "15%",
+    //     render: (_, record) =>
+    //         `${record.dimensions.depth} x ${record.dimensions.width} x ${record.dimensions.height}`,
+    //     sorter: (a, b) => a.dimensions.depth - b.dimensions.depth,
+    //     sortDirections: ["descend", "ascend"],
+    // },
+    // {
+    //     title: "Weight",
+    //     dataIndex: "weight",
+    //     key: "weight",
+    //     width: "10%",
+    //     ...getColumnSearchProps("weight"),
+    //     sorter: (a, b) => parseFloat(a.weight) - parseFloat(b.weight),
+    //     sortDirections: ["descend", "ascend"],
+    // },
+    // {
+    //     title: "Rating",
+    //     dataIndex: "rating",
+    //     key: "rating",
+    //     width: "10%",
+    //     ...getColumnSearchProps("rating"),
+    //     sorter: (a, b) => parseFloat(a.rating) - parseFloat(b.rating),
+    //     sortDirections: ["descend", "ascend"],
+    // },
     {
       title: "Created At",
       dataIndex: "created_at",
       key: "created_at",
-      // width: "15%",
+      width: "15%",
       ...getColumnSearchProps("created_at"),
       sorter: (a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
       sortDirections: ["descend", "ascend"],
@@ -175,7 +242,7 @@ function Index({ auth, categories, flash }) {
       title: "Updated At",
       dataIndex: "updated_at",
       key: "updated_at",
-      // width: "15%",
+      width: "15%",
       ...getColumnSearchProps("updated_at"),
       sorter: (a, b) => new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime(),
       sortDirections: ["descend", "ascend"],
@@ -186,60 +253,32 @@ function Index({ auth, categories, flash }) {
       width: "15%",
       fixed: "right",
       render: (item) => {
-        return /* @__PURE__ */ jsx(Space, { children: /* @__PURE__ */ jsx(
+        return /* @__PURE__ */ jsx(
           TableAction,
           {
             deleteFunc: () => {
-              router.delete(
-                route("admin.category.destroy", item.id)
-              );
             },
             editFunc: () => {
-              router.get(
-                route("admin.category.edit", item.id)
-              );
+              router.get(route("admin.product.edit", item.id));
             }
           }
-        ) });
+        );
       }
     }
   ];
-  useEffect(() => {
-    if (flash.message) {
-      messageApi.open({
-        type: "info",
-        content: "Category deleted"
-      });
-    }
-  }, [flash.message]);
-  return /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsx(
     AuthenticatedAdmin,
     {
       user: auth,
-      header: /* @__PURE__ */ jsx("h2", { className: "font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight", children: "Category Listing" }),
-      children: [
-        contextHolder,
-        /* @__PURE__ */ jsx("div", { style: { width: "100%" }, children: /* @__PURE__ */ jsx(
-          ConfigProvider,
-          {
-            theme: {
-              components: {
-                Table: {
-                  headerBg: Colors.secondary
-                }
-              }
-            },
-            children: /* @__PURE__ */ jsx(
-              TableComponent,
-              {
-                items: categories,
-                pagination: void 0,
-                columns
-              }
-            )
-          }
-        ) })
-      ]
+      header: /* @__PURE__ */ jsx("h2", { className: "font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight", children: "Products Listing" }),
+      children: /* @__PURE__ */ jsx("div", { style: { width: "100%" }, children: /* @__PURE__ */ jsx(
+        TableComponent,
+        {
+          items: data,
+          pagination: void 0,
+          columns
+        }
+      ) })
     }
   );
 }

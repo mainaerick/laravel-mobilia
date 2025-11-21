@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Head } from "@inertiajs/react";
 import UpdateProfileInformation from "./UpdateUserInformationForm-DpZiF0Bv.js";
-import { A as AuthenticatedAdmin } from "./AdminLayout-BT-KCncJ.js";
+import { A as AuthenticatedAdmin } from "./AdminLayout-BTxGKBRd.js";
 import DeleteUserForm from "./DeleteUserForm-DSmiwC1M.js";
 import "./TextInput-DQL-42yE.js";
 import "react";
@@ -9,7 +9,7 @@ import "./InputLabel-CaoVq05r.js";
 import "./PrimaryButton-C5ts3FGL.js";
 import "@headlessui/react";
 import "./ApplicationLogo-DwGw9LaR.js";
-import "./ResponsiveNavLink-BF_L6EzO.js";
+import "./ResponsiveNavLink-CMrbbniR.js";
 import "@ant-design/icons";
 import "../app.js";
 import "axios";

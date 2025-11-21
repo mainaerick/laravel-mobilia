@@ -1,18 +1,24 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { Typography, Input, Space, Button } from "antd";
+import { A as AuthenticatedAdmin } from "./AdminLayout-BTxGKBRd.js";
 import { router } from "@inertiajs/react";
+import { message, Typography, Input, Space, Button } from "antd";
+import { useState, useRef } from "react";
+import Highlighter from "react-highlight-words";
+import { SearchOutlined } from "@ant-design/icons";
 import { T as TableComponent } from "./TableComponent-DTwfws4x.js";
 import { T as TableAction } from "./TableAction-84W3ZDIe.js";
-import { useState, useRef } from "react";
-import { SearchOutlined } from "@ant-design/icons";
-import Highlighter from "react-highlight-words";
+import "./ApplicationLogo-DwGw9LaR.js";
+import "./ResponsiveNavLink-CMrbbniR.js";
+import "@headlessui/react";
 import "../app.js";
 import "axios";
 import "react-dom/client";
-function OrdersTable({ items, pagination, setClickedOrder }) {
+function Index({ auth, orders }) {
+  const ordersData = orders.data;
+  const [messageApi, contextHolder] = message.useMessage();
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
-  const searchInput = useRef(null);
+  const searchInput = useRef();
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -126,7 +132,6 @@ function OrdersTable({ items, pagination, setClickedOrder }) {
       title: "Total Amount",
       dataIndex: "total_amount",
       key: "total_amount",
-      width: "15%",
       render: (total_amount) => /* @__PURE__ */ jsx(Typography.Text, { children: total_amount })
     },
     {
@@ -140,7 +145,6 @@ function OrdersTable({ items, pagination, setClickedOrder }) {
       title: "Firstname",
       dataIndex: "firstname",
       key: "firstname",
-      responsive: ["md"],
       // width: "15%",
       ...getColumnSearchProps("firstname")
     },
@@ -148,7 +152,6 @@ function OrdersTable({ items, pagination, setClickedOrder }) {
       title: "Lastname",
       dataIndex: "lastname",
       key: "lastname",
-      responsive: ["md"],
       // width: "15%",
       ...getColumnSearchProps("lastname")
     },
@@ -156,7 +159,6 @@ function OrdersTable({ items, pagination, setClickedOrder }) {
       title: "Email",
       dataIndex: "email",
       key: "email",
-      responsive: ["md"],
       // width: "15%",
       ...getColumnSearchProps("email")
     },
@@ -164,7 +166,6 @@ function OrdersTable({ items, pagination, setClickedOrder }) {
       title: "Phone",
       dataIndex: "phone",
       key: "phone",
-      responsive: ["md"],
       // width: "15%",
       ...getColumnSearchProps("phone")
     },
@@ -172,19 +173,17 @@ function OrdersTable({ items, pagination, setClickedOrder }) {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      responsive: ["md"],
       render: (status) => /* @__PURE__ */ jsx(Typography.Text, { children: status })
     },
     {
       title: "Payment Status",
       dataIndex: "payment_status",
       key: "payment_status",
-      responsive: ["md"],
       render: (payment_status) => /* @__PURE__ */ jsx(Typography.Text, { children: payment_status })
     },
     {
       title: "Action",
-      width: "15%",
+      width: "5%",
       fixed: "right",
       render: (item) => {
         return /* @__PURE__ */ jsx(
@@ -194,22 +193,29 @@ function OrdersTable({ items, pagination, setClickedOrder }) {
               router.delete(route("order.destroy", item.id));
             },
             editFunc: () => {
-              setClickedOrder ? setClickedOrder(item.id) : router.get(route("order.edit", item.id));
+              router.get(route("order.edit", item.id));
             }
           }
         );
       }
     }
   ];
-  return /* @__PURE__ */ jsx("div", { style: { width: "100%" }, children: /* @__PURE__ */ jsx(
-    TableComponent,
+  return /* @__PURE__ */ jsx(
+    AuthenticatedAdmin,
     {
-      items,
-      pagination: void 0,
-      columns
+      user: auth,
+      header: /* @__PURE__ */ jsx("h2", { className: "font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight", children: "Order Listing" }),
+      children: /* @__PURE__ */ jsx("div", { style: { width: "100%" }, children: /* @__PURE__ */ jsx(
+        TableComponent,
+        {
+          items: ordersData,
+          pagination: void 0,
+          columns
+        }
+      ) })
     }
-  ) });
+  );
 }
 export {
-  OrdersTable as default
+  Index as default
 };

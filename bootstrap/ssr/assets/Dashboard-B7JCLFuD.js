@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { A as Authenticated } from "./AuthenticatedLayout-mRr1fAgD.js";
+import { A as Authenticated } from "./AuthenticatedLayout-CnDTPPpR.js";
 import { Head } from "@inertiajs/react";
 import "react";
 import "./ApplicationLogo-DwGw9LaR.js";
-import "./ResponsiveNavLink-BF_L6EzO.js";
+import "./ResponsiveNavLink-CMrbbniR.js";
 import "@headlessui/react";
 import "@ant-design/icons";
 import "../app.js";
