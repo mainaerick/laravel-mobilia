@@ -15,7 +15,7 @@ import {
     Col,
     ConfigProvider,
     Button,
-    Breadcrumb,
+    Breadcrumb, notification,
 } from "antd";
 import React, { useEffect, useState } from "react";
 
@@ -27,12 +27,20 @@ type Props = { auth: any };
 
 function Index({ auth }: Props) {
     const { props } = usePage();
+    const [api, contextHolder] = notification.useNotification();
+
     const items = props?.cartItems as CartItem[];
     const [subTotal, setSubTotal] = useState<string>("0");
     const handleRemoveItem = (id: number) => {
         router.delete(route("cart.removeItem", id), {
             onSuccess: () => {
                 // Optionally, you can handle success actions like showing a notification
+                api["success"]({
+                    message: 'Cart Item Removed',
+                    description:
+                        'Item removed successfully',
+                    duration: 0,
+                });
                 console.log("Item removed successfully");
             },
         });
@@ -79,6 +87,7 @@ function Index({ auth }: Props) {
             title: "Action",
             key: "action",
             render: (_, record) => (
+
                 // <Link>
                 <DeleteFilled
                     onClick={() => handleRemoveItem(record.id)}
@@ -101,6 +110,7 @@ function Index({ auth }: Props) {
     }, [items]);
     return (
         <Authenticated user={auth.user}>
+            {contextHolder}
             <Hero
                 whichRoute={
                     <Breadcrumb style={{ margin: "16px 0" }}>

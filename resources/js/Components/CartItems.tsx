@@ -6,7 +6,7 @@ import {
     Divider,
     Drawer,
     Flex,
-    List,
+    List, notification,
     Row,
     Typography,
 } from "antd";
@@ -19,12 +19,18 @@ type Props = { cartItems: CartItem[]; open: any; onClose: any };
 
 function CartItems({cartItems, open, onClose}: Props) {
     const [subTotal, setSubTotal] = useState(0);
+    const [api, contextHolder] = notification.useNotification();
 
     const handleRemoveItem = (id: number) => {
         router.delete(route("cart.removeItem", id), {
             onSuccess: () => {
                 // Optionally, you can handle success actions like showing a notification
-                console.log("Item removed successfully");
+                api.open({
+                    message: 'Cart Item Removed',
+                    description:
+                        'Item removed successfully',
+                    duration: 0,
+                });
             },
         });
     };
