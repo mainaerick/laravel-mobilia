@@ -1,10 +1,10 @@
-import { useState, PropsWithChildren, ReactNode } from "react";
+import {useState, PropsWithChildren, ReactNode} from "react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link, usePage } from "@inertiajs/react";
-import { User } from "@/types";
+import {Link, usePage} from "@inertiajs/react";
+import {User} from "@/types";
 import {
     SearchOutlined,
     HeartOutlined,
@@ -12,23 +12,24 @@ import {
     UserOutlined,
 } from "@ant-design/icons";
 import Footer from "@/Components/Footer";
-import { Colors, Dimensions } from "@/utils/Config";
-import { Avatar, Badge, ConfigProvider, Flex, message } from "antd";
-import { relative } from "path";
+import {Colors, Dimensions} from "@/utils/Config";
+import {Avatar, Badge, ConfigProvider, Flex, message} from "antd";
+import {relative} from "path";
 import CartItems from "@/Components/CartItems";
-import { CartItem } from "@/Core/_Models";
+import {CartItem} from "@/Core/_Models";
 import SearchBar from "@/Components/SearchBar";
+
 export default function Authenticated({
-    user,
-    header,
-    children,
-}: PropsWithChildren<{ user: User; header?: ReactNode }>) {
+                                          user,
+                                          header,
+                                          children,
+                                      }: PropsWithChildren<{ user: User; header?: ReactNode }>) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
     const [open, setOpen] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
 
-    const { props } = usePage();
+    const {props} = usePage();
     const showDrawer = () => {
         setOpen(true);
     };
@@ -57,7 +58,8 @@ export default function Authenticated({
                             <div className="flex">
                                 <div className="shrink-0 flex items-center">
                                     <Link href="/">
-                                        <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                                        <ApplicationLogo
+                                            className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"/>
                                     </Link>
                                 </div>
                                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -88,29 +90,29 @@ export default function Authenticated({
                                         Shop
                                     </NavLink>
                                 </div>
-                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                    <NavLink
-                                        href={route("about.index")}
-                                        active={route().current("about")}
-                                    >
-                                        About
-                                    </NavLink>
-                                </div>
-                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                    <NavLink
-                                        href={route("contact.index")}
-                                        active={route().current("contact")}
-                                    >
-                                        Contact
-                                    </NavLink>
-                                </div>
+                                {/*<div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">*/}
+                                {/*    <NavLink*/}
+                                {/*        href={route("about.index")}*/}
+                                {/*        active={route().current("about")}*/}
+                                {/*    >*/}
+                                {/*        About*/}
+                                {/*    </NavLink>*/}
+                                {/*</div>*/}
+                                {/*<div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">*/}
+                                {/*    <NavLink*/}
+                                {/*        href={route("contact.index")}*/}
+                                {/*        active={route().current("contact")}*/}
+                                {/*    >*/}
+                                {/*        Contact*/}
+                                {/*    </NavLink>*/}
+                                {/*</div>*/}
                             </div>
 
                             <div
                                 className="flex justify-between"
                             >
                                 <div className={"flex justify-between"}>
-                                    <SearchBar />
+                                    <SearchBar/>
                                     {/*User Div*/}
                                     <div className="hidden sm:flex sm:items-center space-x-8 sm:-my-px sm:ms-10">
                                         <div className="ms-3 relative">
@@ -150,7 +152,7 @@ export default function Authenticated({
 
 
                                                     >
-                                                        Register
+                                                        Signup
                                                     </Dropdown.Link>
                                                 </Dropdown.Content>}
 
@@ -170,32 +172,34 @@ export default function Authenticated({
                                         "space-x-8 sm:-my-px sm:ms-10 sm:flex"
                                     }
                                 /> */}
-                                    <Flex
-                                        vertical
-                                        align={"center"}
-                                        justify={"center"}
-                                        style={{
-                                            height: "100%",
-                                        }}
-                                        className="me-3"
-                                    >
-                                        <Badge
-                                            size="small"
-                                            count={
-                                                props.cartQuantity
-                                                    ? (props.cartQuantity as any)
-                                                    : 0
-                                            }
+                                    <Link href={route("cart.index")}>
+                                        <Flex
+                                            vertical
+                                            align={"center"}
+                                            justify={"center"}
+                                            style={{
+                                                height: "100%",
+                                            }}
+                                            className="me-3"
                                         >
-                                            <ShoppingCartOutlined
-                                                style={{ fontSize: "17px" }}
-                                                className={
-                                                    "space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                                            <Badge
+                                                size="small"
+                                                count={
+                                                    props.cartQuantity
+                                                        ? (props.cartQuantity as any)
+                                                        : 0
                                                 }
-                                                onClick={showDrawer}
-                                            />{" "}
-                                        </Badge>
-                                    </Flex>
+                                            >
+                                                <ShoppingCartOutlined
+                                                    style={{fontSize: "17px"}}
+                                                    className={
+                                                        "space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                                                    }
+                                                    // onClick={showDrawer}
+                                                />{" "}
+                                            </Badge>
+                                        </Flex>
+                                    </Link>
                                     {/* </Flex> */}
                                 </div>
                                 <div className="-me-2 flex items-center sm:hidden">
@@ -284,14 +288,15 @@ export default function Authenticated({
 
 
                         <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-                            {user ? <><div className="px-4">
-                                <div className="font-medium text-base text-gray-800 dark:text-gray-200">
-                                    {user.name}
+                            {user ? <>
+                                <div className="px-4">
+                                    <div className="font-medium text-base text-gray-800 dark:text-gray-200">
+                                        {user.name}
+                                    </div>
+                                    <div className="font-medium text-sm text-gray-500">
+                                        {user.email}
+                                    </div>
                                 </div>
-                                <div className="font-medium text-sm text-gray-500">
-                                    {user.email}
-                                </div>
-                            </div>
 
                                 <div className="mt-3 space-y-1">
                                     <ResponsiveNavLink href={route("profile.edit")}>
@@ -304,7 +309,8 @@ export default function Authenticated({
                                     >
                                         Log Out
                                     </ResponsiveNavLink>
-                                </div></> : <>
+                                </div>
+                            </> : <>
                             </>}
 
                         </div>

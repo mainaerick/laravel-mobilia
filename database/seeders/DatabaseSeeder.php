@@ -8,6 +8,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Database\Factories\CategoryFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Permission;
@@ -95,5 +96,25 @@ class DatabaseSeeder extends Seeder
         Product::factory()->count(10)->create();
         Category::factory()->count(10)->create();
 
+        $settings = [
+            ['key' => 'hero_image', 'value' => "images/settings/hero_image.png"],
+            ['key' => 'logo', 'value' => null],
+            ['key' => 'living', 'value' => "images/living.jpg"],
+            ['key' => 'dining', 'value' => "images/dining.jpg"],
+            ['key' => 'bedroom', 'value' => "images/bedroom.jpg"],
+            ['key' => 'primary_color', 'value' => '#ffffff'],
+            ['key' => 'secondary_color', 'value' => '#000000'],
+            ['key' => 'inspiration_images', 'value' => json_encode([
+                "images/settings/inspiration_image_1_.jpg",
+                "images/settings/inspiration_image_2_.jpg",
+                "images/settings/inspiration_image_3_.jpg"])],
+        ];
+
+        foreach ($settings as $setting) {
+            DB::table('settings')->updateOrInsert(
+                ['key' => $setting['key']],
+                ['value' => $setting['value']]
+            );
+        }
     }
 }

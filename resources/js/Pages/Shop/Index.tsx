@@ -160,9 +160,7 @@ function Index({ auth, products, queryParams = null }: Props) {
                                     xl={{span: 6}}
                                     style={{marginBottom: "23px"}}
                                 >
-                                    <Link href={route("shop.show", product.id)}>
                                         <ProductCard product={product}/>
-                                    </Link>
                                 </Col>
                             );
                         })}

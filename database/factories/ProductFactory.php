@@ -20,13 +20,44 @@ class ProductFactory extends Factory
         $room = $this->faker->randomElement(['living', 'bedroom', 'dining']);
         $category = $this->faker->randomElement($room == "dining" ? ['tables',] : ($room === "living" ? ['chairs', 'sofas',] : ($room === "bedroom" ? ['beds'] : null)));
 
-        $livingimages = Storage::disk('public')->files("images/living");
-        $diningimages = Storage::disk('public')->files("images/dining");
-        $bedroomimages = Storage::disk('public')->files("images/bedroom");
+        // Helper to load only allowed image types
+        $loadImages = function ($folder) {
+            $allowed = ['jpg', 'jpeg', 'png'];
 
-        $fakedining = [];
-        $fakebedroom = [];
-        $fakeliving = [];
+            return collect(Storage::disk('public')->files("images/$folder"))
+                ->filter(function ($file) use ($allowed) {
+                    return in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), $allowed);
+                })
+                ->values()
+                ->toArray();
+        };
+
+// Load images per room (filtered)
+        $livingImages  = $loadImages("living");
+        $diningImages  = $loadImages("dining");
+        $bedroomImages = $loadImages("bedroom");
+
+// Pick 1–3 random valid images
+        $pickRandomImages = function ($images) {
+            if (empty($images)) {
+                return [];
+            }
+
+            $count = rand(1, min(3, count($images)));
+
+            return collect($images)
+                ->random($count)
+                ->values()
+                ->toArray();
+        };
+
+// Decide images by room
+        $images = match ($room) {
+            'dining'  => $pickRandomImages($diningImages),
+            'bedroom' => $pickRandomImages($bedroomImages),
+            'living'  => $pickRandomImages($livingImages),
+            default   => [],
+        };
         return [
             'name' => $this->faker->unique()->word,
             'description' => $this->faker->sentence,
@@ -40,7 +71,7 @@ class ProductFactory extends Factory
             'dimensions' => ['height' => $this->faker->numberBetween(50, 200), 'width' => $this->faker->numberBetween(50, 200), 'depth' => $this->faker->numberBetween(50, 200)],
             'weight' => $this->faker->randomFloat(2, 1, 100),
             'rating' => $this->faker->randomFloat(2, 0, 5),
-            'images' => $room === "dining" ? $fakedining: ($room === "bedroom" ? $fakebedroom : ($room === "living" ? $fakeliving : null)),
+            'images'      => $images,
             'reviews' => [
                 fake()->sentence,
                 fake()->sentence,

@@ -8,12 +8,12 @@ import {
     SwapOutlined,
     ShareAltOutlined,
 } from "@ant-design/icons";
-import { router } from "@inertiajs/react";
+import {Link, router} from "@inertiajs/react";
 type Props = { product: Product };
 
 function ProductCard({ product }: Props) {
     return (
-        <div className="flex items-center justify-center ">
+        <Link href={route("shop.show", product.id)}><div className="flex items-center justify-center ">
             <div className="overflow-hidden  cursor-pointer rounded-xl relative group">
                 <div className="rounded-xl z-50 opacity-0 group-hover:opacity-100  transition duration-300 ease-in-out cursor-pointer absolute bottom-0 left-0 right-0 top-0 from-black/80 to-transparent bg-gradient-to-t inset-x-0 pt-30 text-white flex items-end">
                     <Flex
@@ -32,14 +32,19 @@ function ProductCard({ product }: Props) {
                                 color: Colors.textButtonColor,
                             }}
                             className="font-bold ps-23 pe-23"
-                            onClick={() => {
-                                console.log(product.id)
-                                router.post(route("cart.add"), {
-                                    product_id: product.id,
-                                    quantity: 1,
-                                },{
-                                        preserveScroll: true, // Keep the scroll position
-                                        preserveState: true, // Prevent state from resetting
+                            onClick={(e) => {
+                                e.preventDefault();      // stop the <Link> navigation
+                                e.stopPropagation();     // stop bubbling up to parent
+
+                                router.post(
+                                    route("cart.add"),
+                                    {
+                                        product_id: product.id,
+                                        quantity: 1,
+                                    },
+                                    {
+                                        preserveScroll: true,
+                                        preserveState: true,
                                     }
                                 );
                             }}
@@ -109,7 +114,7 @@ function ProductCard({ product }: Props) {
                 </Card>
                 {/*<img src={"/images/living.jpg"}/>*/}
             </div>
-        </div>
+        </div></Link>
     );
 }
 

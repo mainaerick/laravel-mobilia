@@ -1,4 +1,4 @@
-import { CartItem } from "@/Core/_Models";
+import {CartItem} from "@/Core/_Models";
 import {
     Avatar,
     Button,
@@ -10,13 +10,14 @@ import {
     Row,
     Typography,
 } from "antd";
-import React, { useEffect, useState } from "react";
-import { Image } from "antd";
-import { CloseCircleFilled } from "@ant-design/icons";
-import { Link, router } from "@inertiajs/react";
+import React, {useEffect, useState} from "react";
+import {Image} from "antd";
+import {CloseCircleFilled} from "@ant-design/icons";
+import {Link, router} from "@inertiajs/react";
+
 type Props = { cartItems: CartItem[]; open: any; onClose: any };
 
-function CartItems({ cartItems, open, onClose }: Props) {
+function CartItems({cartItems, open, onClose}: Props) {
     const [subTotal, setSubTotal] = useState(0);
 
     const handleRemoveItem = (id: number) => {
@@ -45,35 +46,37 @@ function CartItems({ cartItems, open, onClose }: Props) {
             onClose={onClose}
             open={open}
         >
-            <Row style={{ height: "100%" }} justify={"space-between"}>
+            <Row style={{height: "100%"}} justify={"space-between"}>
                 <Col span={24}>
                     <List
                         dataSource={cartItems}
                         renderItem={(item) => (
-                            <List.Item key={item.cart_id}>
-                                <List.Item.Meta
-                                    avatar={
-                                        <Image
-                                            preview={false}
-                                            src={item.product.images[0]}
-                                            width={108}
-                                        />
-                                    }
-                                    title={
-                                        <a href="https://ant.design">
-                                            {item.product.name}
-                                        </a>
-                                    }
-                                    description={`${item.quantity} x ${item.product.price}`}
-                                />
-                                <div>
-                                    <CloseCircleFilled
-                                        onClick={() =>
-                                            handleRemoveItem(item.id)
+                            <Link href={route("shop.show", item.product.id)}>
+                                <List.Item key={item.cart_id}>
+                                    <List.Item.Meta
+                                        // avatar={
+                                        //     <Image
+                                        //         preview={false}
+                                        //         src={item.product.images[0]}
+                                        //         width={108}
+                                        //     />
+                                        // }
+                                        title={
+                                            // <Link href={route("shop.show", item.product.id)}>
+                                            <span>{item.product.name}</span>
+                                            // </Link>
                                         }
+                                        description={`${item.quantity} x ${item.product.price}`}
                                     />
-                                </div>
-                            </List.Item>
+                                    <div>
+                                        <CloseCircleFilled
+                                            onClick={() =>
+                                                handleRemoveItem(item.id)
+                                            }
+                                        />
+                                    </div>
+                                </List.Item>
+                            </Link>
                         )}
                     />
                 </Col>
@@ -83,10 +86,10 @@ function CartItems({ cartItems, open, onClose }: Props) {
                     <Flex
                         justify={"flex-end"}
                         vertical
-                        style={{ height: "100%" }}
+                        style={{height: "100%"}}
                     >
                         <Row
-                            style={{ width: "100%" }}
+                            style={{width: "100%"}}
                             justify={"space-between"}
                         >
                             <Col>
@@ -99,7 +102,7 @@ function CartItems({ cartItems, open, onClose }: Props) {
                             </Col>
                         </Row>
 
-                        <Divider />
+                        <Divider/>
                         <Row justify={"space-between"}>
                             <Col>
                                 <Link href={"/cart"}>

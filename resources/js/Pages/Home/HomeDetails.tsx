@@ -42,6 +42,7 @@ const HomeDetails: React.FC<Props> = ({products,settings }) => {
             role="presentation"
         />}):[]
 
+        console.log(items)
         setInspirationImages(items)
     }, [settings]);
     // @ts-ignore

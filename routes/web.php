@@ -101,10 +101,6 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->group(function () {
     Route::get('admin/sales/report', [OrderController::class, 'sales_index'])->name('admin.sales.report');
 
 
-    // Admin settings
-    Route::get('admin/products/report', [ProductController::class, 'report_index'])->name('admin.products.report');
-    // Route::post('admin_/add_product', [AdminController::class, 'product_store'])->name('admin.product_store');
-
 
     Route::get('/admin/settings', [SettingController::class, 'index'])->name('admin.settings.index');
     Route::post('/admin/settings', [SettingController::class, 'update'])->name('admin.settings.update');

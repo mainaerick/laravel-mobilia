@@ -7,34 +7,22 @@ import { Link, usePage } from "@inertiajs/react";
 import { User } from "@/types";
 import {
     DesktopOutlined,
-    ShoppingCartOutlined,
     UserOutlined,
     PieChartOutlined,
-    TeamOutlined,
     FileOutlined,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
+    SettingOutlined
 } from "@ant-design/icons";
 import { Colors, Dimensions } from "@/utils/Config";
 import {
-    Avatar,
-    Badge,
-    Button,
     ConfigProvider,
     Flex,
     Layout,
     Menu,
     MenuProps,
-    Row,
     message,
     theme,
 } from "antd";
-import { relative } from "path";
-import CartItems from "@/Components/CartItems";
-import { CartItem } from "@/Core/_Models";
-// import Sider from "antd/es/layout/Sider";
 import React from "react";
-// import { Content, Footer } from "antd/es/layout/layout";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -89,9 +77,7 @@ const items: MenuItem[] = [
         sideBarNode("#", "Customer Orders"),
         sideBarNode("#", "Shipping"),
     ]),
-    sideBarNode("#", "Settings", <FileOutlined />, [
-        sideBarNode("#", "Homepage"),
-    ]),
+    sideBarNode("admin.settings.index", "Settings", <SettingOutlined />),
 ];
 const { Header, Content, Footer, Sider } = Layout;
 
