@@ -1,42 +1,152 @@
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useState, useEffect } from "react";
+import { jsxs, jsx, Fragment } from "react/jsx-runtime";
+import { useState } from "react";
 import { Card, Flex, Typography, Button, Row, Col, Image } from "antd";
-import AliceCarousel from "react-alice-carousel";
 import { Link, router } from "@inertiajs/react";
 import { C as Colors, D as Dimensions } from "../app.js";
 import { F as Footer } from "./Footer-owlJr_0r.js";
 import { P as ProductCard } from "./ProductCard-DeUpRL9U.js";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import "axios";
 import "react-dom/client";
+import "react-alice-carousel";
 import "antd/es/card/Meta.js";
 import "@ant-design/icons";
+function RoomInspirationHero({ slides }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  console.log(slides);
+  const goToPrevious = () => {
+    setActiveIndex((prev) => prev === 0 ? slides.length - 1 : prev - 1);
+  };
+  const goToNext = () => {
+    setActiveIndex((prev) => prev === slides.length - 1 ? 0 : prev + 1);
+  };
+  const goToSlide = (index) => {
+    setActiveIndex(index);
+  };
+  const nextSlide = slides[(activeIndex + 1) % slides.length];
+  return /* @__PURE__ */ jsxs("div", { className: "flex items-stretch", children: [
+    /* @__PURE__ */ jsx("div", { className: "hidden lg:flex w-full items-center justify-center relative", children: /* @__PURE__ */ jsxs("div", { className: "w-full max-w-md", children: [
+      /* @__PURE__ */ jsxs("div", { className: "relative", children: [
+        /* @__PURE__ */ jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxs(
+          motion.div,
+          {
+            initial: { opacity: 0, x: 100 },
+            animate: { opacity: 1, x: 0 },
+            exit: { opacity: 0, x: -100 },
+            transition: { duration: 0.5, ease: "easeInOut" },
+            className: "relative rounded-2xl overflow-hidden shadow-lg",
+            children: [
+              /* @__PURE__ */ jsx(
+                "img",
+                {
+                  src: slides[activeIndex] || "/placeholder.svg",
+                  className: "w-full aspect-square object-cover"
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                motion.div,
+                {
+                  initial: { opacity: 0, x: 50 },
+                  animate: { opacity: 1, x: 0 },
+                  transition: { delay: 0.1, duration: 0.5 },
+                  className: "absolute top-6 right-0 w-32 h-40 rounded-xl overflow-hidden shadow-md transform translate-x-16",
+                  children: /* @__PURE__ */ jsx(
+                    "img",
+                    {
+                      src: nextSlide || "/placeholder.svg",
+                      alt: "Next slide preview",
+                      className: "w-full h-full object-cover"
+                    }
+                  )
+                }
+              )
+            ]
+          },
+          activeIndex
+        ) }),
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            onClick: goToPrevious,
+            className: "absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-16 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-slate-700 hover:bg-slate-50 transition-colors z-10",
+            "aria-label": "Previous slide",
+            children: /* @__PURE__ */ jsx(ChevronLeft, { size: 24 })
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            onClick: goToNext,
+            className: "absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-16 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-slate-700 hover:bg-slate-50 transition-colors z-10",
+            "aria-label": "Next slide",
+            children: /* @__PURE__ */ jsx(ChevronRight, { size: 24 })
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: "flex justify-center gap-2 mt-8", children: slides.map((_, index) => /* @__PURE__ */ jsx(
+        "button",
+        {
+          onClick: () => goToSlide(index),
+          className: `transition-all duration-300 rounded-full ${index === activeIndex ? "bg-[#C8A045] w-8 h-2" : "bg-slate-300 w-2 h-2 hover:bg-slate-400"}`,
+          "aria-label": `Go to slide ${index + 1}`
+        },
+        index
+      )) })
+    ] }) }),
+    /* @__PURE__ */ jsxs("div", { className: "lg:hidden w-full", children: [
+      /* @__PURE__ */ jsxs("div", { className: "relative", children: [
+        /* @__PURE__ */ jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsx(
+          motion.div,
+          {
+            initial: { opacity: 0, y: 20 },
+            animate: { opacity: 1, y: 0 },
+            exit: { opacity: 0, y: -20 },
+            transition: { duration: 0.3 },
+            className: "relative w-full rounded-2xl overflow-hidden shadow-lg",
+            children: /* @__PURE__ */ jsx(
+              "img",
+              {
+                src: slides[activeIndex] || "/placeholder.svg",
+                className: "w-full aspect-video object-cover"
+              }
+            )
+          },
+          activeIndex
+        ) }),
+        /* @__PURE__ */ jsxs("div", { className: "absolute inset-x-0 top-1/2 transform -translate-y-1/2 flex justify-between px-4 pointer-events-none", children: [
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              onClick: goToPrevious,
+              className: "w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-slate-700 pointer-events-auto hover:bg-slate-50",
+              children: /* @__PURE__ */ jsx(ChevronLeft, { size: 20 })
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              onClick: goToNext,
+              className: "w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-slate-700 pointer-events-auto hover:bg-slate-50",
+              children: /* @__PURE__ */ jsx(ChevronRight, { size: 20 })
+            }
+          )
+        ] })
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: "flex justify-center gap-2 mt-6 px-4", children: slides.map((_, index) => /* @__PURE__ */ jsx(
+        "button",
+        {
+          onClick: () => goToSlide(index),
+          className: `transition-all duration-300 rounded-full ${index === activeIndex ? "bg-[#C8A045] w-8 h-2" : "bg-slate-300 w-2 h-2 hover:bg-slate-400"}`,
+          "aria-label": `Go to slide ${index + 1}`
+        },
+        index
+      )) })
+    ] })
+  ] });
+}
 const HomeDetails = ({ products, settings }) => {
   const [inspirationImages, setInspirationImages] = useState([]);
-  const handleDragStart = (e) => e.preventDefault();
-  const handleCorChanged = (e) => {
-  };
-  useEffect(() => {
-    const inspirationImages2 = settings.inspiration_images ? JSON.parse(settings.inspiration_images) : [];
-    const items = inspirationImages2 ? inspirationImages2.map((value, key) => {
-      return /* @__PURE__ */ jsx(
-        "img",
-        {
-          className: "pr-2",
-          src: value,
-          style: {
-            maxHeight: "500px",
-            width: "auto",
-            margin: "auto"
-          },
-          onDragStart: handleDragStart,
-          role: "presentation"
-        },
-        key
-      );
-    }) : [];
-    console.log(items);
-    setInspirationImages(items);
-  }, [settings]);
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(
       "div",
@@ -401,24 +511,7 @@ const HomeDetails = ({ products, settings }) => {
                       ] })
                     }
                   ),
-                  /* @__PURE__ */ jsx(Col, { span: 18, style: { height: "100%", overflow: "hidden" }, children: inspirationImages && /* @__PURE__ */ jsx(
-                    AliceCarousel,
-                    {
-                      onSlideChanged: handleCorChanged,
-                      disableButtonsControls: true,
-                      autoHeight: false,
-                      autoWidth: true,
-                      mouseTracking: true,
-                      items: inspirationImages,
-                      responsive: {
-                        0: { items: 1 },
-                        // Number of items at different breakpoints
-                        768: { items: 2 },
-                        1024: { items: 3 }
-                      }
-                    },
-                    inspirationImages.length
-                  ) })
+                  /* @__PURE__ */ jsx(Col, { span: 18, style: { height: "100%", overflow: "hidden" }, children: /* @__PURE__ */ jsx(RoomInspirationHero, { slides: settings.inspiration_images ? JSON.parse(settings.inspiration_images) : [] }) })
                 ]
               }
             )

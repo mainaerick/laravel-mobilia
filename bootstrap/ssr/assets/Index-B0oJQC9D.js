@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { A as Authenticated } from "./AuthenticatedLayout-CnDTPPpR.js";
-import HomeDetails from "./HomeDetails-D37G4Cbf.js";
+import HomeDetails from "./HomeDetails-Dc1F1pUJ.js";
 import "react";
 import "./ApplicationLogo-DwGw9LaR.js";
 import "./ResponsiveNavLink-CMrbbniR.js";
@@ -11,10 +11,12 @@ import "../app.js";
 import "axios";
 import "react-dom/client";
 import "antd";
-import "react-alice-carousel";
 import "./Footer-owlJr_0r.js";
+import "react-alice-carousel";
 import "./ProductCard-DeUpRL9U.js";
 import "antd/es/card/Meta.js";
+import "framer-motion";
+import "lucide-react";
 const Index = ({ auth, products, settings }) => {
   return /* @__PURE__ */ jsx(Authenticated, { user: auth.user, children: /* @__PURE__ */ jsx(HomeDetails, { products, settings }) });
 };

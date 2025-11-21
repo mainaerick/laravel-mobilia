@@ -8,6 +8,7 @@ import {Link, router} from "@inertiajs/react";
 import {Colors, Dimensions} from "@/utils/Config";
 import Footer from "@/Components/Footer";
 import ProductCard from "@/Components/ProductCard";
+import RoomInspirationHero from "../../Components/InspirationHero"
 
 interface Props {
     products: Product[];
@@ -23,29 +24,6 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
     const handleCorChanged = (e: EventObject) => {
         // setCurrentCarouselItem(e.item);
     };
-
-    useEffect(() => {
-        const inspirationImages = settings.inspiration_images
-            ? JSON.parse(settings.inspiration_images)
-            : [];
-        const items: any = inspirationImages ? inspirationImages.map((value: any, key: number) => {
-            return <img
-                className="pr-2"
-                key={key}
-                src={value}
-                style={{
-                    maxHeight: "500px",
-                    width: "auto",
-                    margin: "auto"
-                }}
-                onDragStart={handleDragStart}
-                role="presentation"
-            />
-        }) : []
-
-        console.log(items)
-        setInspirationImages(items)
-    }, [settings]);
 
 
     // @ts-ignore
@@ -367,6 +345,7 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
                     style={{
                         border: 0,
                         background: Colors.secondaryLightColor,
+                        paddingBottom:"37px"
                     }}
                 >
                     <Row
@@ -384,51 +363,41 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
                             xl={{span: 6}}
                         >
                             <Flex vertical={true}>
-                                <Typography.Title level={3} style={{textAlign: "center",}}>
-                                    50+ Beautiful rooms inspiration{" "}
-                                </Typography.Title>
-                                <Typography.Paragraph
-                                    color={Colors.textSubtitleColor}
-                                    style={{textAlign: "center",}}
-                                >
-                                    Our designer already made a lot of beautiful
-                                    prototype of rooms that inspire you
-                                </Typography.Paragraph>
 
-                                <div style={{textAlign: "center",marginBottom:"37px"}}>
-                                    <Button
-                                        style={{
-                                            marginTop: 13,
-                                            background: Colors.primary,
-                                            borderRadius: 0,
-                                            border: 0,
-                                            color: Colors.textWhiteColor,
-                                        }}
-                                    >
-                                        Explore More
-                                    </Button>{" "}
+                                <div className="w-full flex items-center justify-center">
+                                    <div className="max-w-sm">
+                                        <h1 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+                                            50+ Beautiful rooms inspiration
+                                        </h1>
+                                        <p className="text-lg text-slate-700 mb-8 leading-relaxed">
+                                            Discover stunning interior designs and get inspired to transform your living spaces into beautiful
+                                            sanctuaries.
+                                        </p>
+                                        {/*<button className="px-8 py-3 rounded-full bg-[#C8A045] text-white font-semibold hover:bg-[#B89035] transition-colors duration-300 flex items-center gap-2">*/}
+                                        {/*    Explore*/}
+                                        {/*</button>*/}
+                                        <div style={{textAlign: "start",marginBottom:"37px"}}>
+                                            <Button
+                                                style={{
+                                                    marginTop: 13,
+                                                    background: Colors.primary,
+                                                    borderRadius: 0,
+                                                    border: 0,
+                                                    color: Colors.textWhiteColor,
+                                                }}
+                                            >
+                                                Explore More
+                                            </Button>{" "}
+                                        </div>
+                                    </div>
                                 </div>
+
                             </Flex>
                         </Col>
                         <Col span={18} style={{height: "100%", overflow: "hidden",}}>
-                            {
-                                inspirationImages && <AliceCarousel
-                                    key={inspirationImages.length}
-                                    onSlideChanged={handleCorChanged}
-                                    disableButtonsControls
-                                    autoHeight={false}
-                                    autoWidth
-                                    // infinite
-                                    mouseTracking
-                                    items={inspirationImages}
-                                    responsive={{
-                                        0: {items: 1}, // Number of items at different breakpoints
-                                        768: {items: 2},
-                                        1024: {items: 3},
-                                    }}
-                                />
-                            }
-
+                            <RoomInspirationHero slides={settings.inspiration_images
+                                ? JSON.parse(settings.inspiration_images)
+                                : []} />
                         </Col>
                     </Row>
                 </div>

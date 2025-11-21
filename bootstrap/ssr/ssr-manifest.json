@@ -1,241 +1,245 @@
 {
   "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
   "node_modules/react-alice-carousel/lib/alice-carousel.css": [
-    "https://mobilia.fluxnerve.com/build/assets/HomeDetails-D37G4Cbf.js",
-    "https://mobilia.fluxnerve.com/build/assets/HomeDetails-DgjqAvA-.css"
+    "/build/assets/HomeDetails-Dc1F1pUJ.js",
+    "/build/assets/HomeDetails-DgjqAvA-.css"
   ],
   "resources/css/app.css": [],
   "resources/js/Components/ApplicationLogo.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/ApplicationLogo-DwGw9LaR.js"
+    "/build/assets/ApplicationLogo-DwGw9LaR.js"
   ],
   "resources/js/Components/CartItems.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/AuthenticatedLayout-CnDTPPpR.js"
+    "/build/assets/AuthenticatedLayout-CnDTPPpR.js"
   ],
   "resources/js/Components/Checkbox.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Login-CnUe-ApG.js"
+    "/build/assets/Login-CnUe-ApG.js"
   ],
   "resources/js/Components/DangerButton.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/SecondaryButton-DFfgLaPF.js"
+    "/build/assets/SecondaryButton-DFfgLaPF.js"
   ],
   "resources/js/Components/Dropdown.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/ResponsiveNavLink-CMrbbniR.js"
+    "/build/assets/ResponsiveNavLink-CMrbbniR.js"
   ],
   "resources/js/Components/Footer.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Footer-owlJr_0r.js"
+    "/build/assets/Footer-owlJr_0r.js"
   ],
   "resources/js/Components/Hero.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Hero-BzYIx0wQ.js"
+    "/build/assets/Hero-BzYIx0wQ.js"
   ],
   "resources/js/Components/InputError.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/TextInput-DQL-42yE.js"
+    "/build/assets/TextInput-DQL-42yE.js"
   ],
   "resources/js/Components/InputLabel.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/InputLabel-CaoVq05r.js"
+    "/build/assets/InputLabel-CaoVq05r.js"
+  ],
+  "resources/js/Components/InspirationHero.tsx": [
+    "/build/assets/HomeDetails-Dc1F1pUJ.js",
+    "/build/assets/HomeDetails-DgjqAvA-.css"
   ],
   "resources/js/Components/Modal.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/SecondaryButton-DFfgLaPF.js"
+    "/build/assets/SecondaryButton-DFfgLaPF.js"
   ],
   "resources/js/Components/NavLink.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/ResponsiveNavLink-CMrbbniR.js"
+    "/build/assets/ResponsiveNavLink-CMrbbniR.js"
   ],
   "resources/js/Components/PaginationDiv.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Index-CjiT6WTi.js"
+    "/build/assets/Index-CjiT6WTi.js"
   ],
   "resources/js/Components/PrimaryButton.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/PrimaryButton-C5ts3FGL.js"
+    "/build/assets/PrimaryButton-C5ts3FGL.js"
   ],
   "resources/js/Components/ProductCard.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/ProductCard-DeUpRL9U.js"
+    "/build/assets/ProductCard-DeUpRL9U.js"
   ],
   "resources/js/Components/ResponsiveNavLink.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/ResponsiveNavLink-CMrbbniR.js"
+    "/build/assets/ResponsiveNavLink-CMrbbniR.js"
   ],
   "resources/js/Components/SearchBar.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/AuthenticatedLayout-CnDTPPpR.js"
+    "/build/assets/AuthenticatedLayout-CnDTPPpR.js"
   ],
   "resources/js/Components/SecondaryButton.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/SecondaryButton-DFfgLaPF.js"
+    "/build/assets/SecondaryButton-DFfgLaPF.js"
   ],
   "resources/js/Components/ShopInfo.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/ShopInfo-AaDODIbQ.js"
+    "/build/assets/ShopInfo-AaDODIbQ.js"
   ],
   "resources/js/Components/TableAction.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/TableAction-84W3ZDIe.js"
+    "/build/assets/TableAction-84W3ZDIe.js"
   ],
   "resources/js/Components/TableComponent.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/TableComponent-DTwfws4x.js"
+    "/build/assets/TableComponent-DTwfws4x.js"
   ],
   "resources/js/Components/TextInput.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/TextInput-DQL-42yE.js"
+    "/build/assets/TextInput-DQL-42yE.js"
   ],
   "resources/js/Core/_Models.ts": [
-    "https://mobilia.fluxnerve.com/build/assets/_Models-D7LNJOvB.js"
+    "/build/assets/_Models-D7LNJOvB.js"
   ],
   "resources/js/Layouts/AdminLayout.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/AdminLayout-BTxGKBRd.js"
+    "/build/assets/AdminLayout-BTxGKBRd.js"
   ],
   "resources/js/Layouts/AuthenticatedLayout.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/AuthenticatedLayout-CnDTPPpR.js"
+    "/build/assets/AuthenticatedLayout-CnDTPPpR.js"
   ],
   "resources/js/Layouts/GuestLayout.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/GuestLayout-DveeYFAY.js"
+    "/build/assets/GuestLayout-DveeYFAY.js"
   ],
   "resources/js/Pages/Admin/Home/Categories/Components/CategoryForm.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/CategoryForm-ClUC0Hht.js"
+    "/build/assets/CategoryForm-ClUC0Hht.js"
   ],
   "resources/js/Pages/Admin/Home/Categories/Create.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Create-DUvpS6em.js"
+    "/build/assets/Create-DUvpS6em.js"
   ],
   "resources/js/Pages/Admin/Home/Categories/Index.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Index-c5raXnxP.js"
+    "/build/assets/Index-c5raXnxP.js"
   ],
   "resources/js/Pages/Admin/Home/Categories/Show.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Show-dmd954Pw.js"
+    "/build/assets/Show-dmd954Pw.js"
   ],
   "resources/js/Pages/Admin/Home/Index.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Index-C-bSinwA.js"
+    "/build/assets/Index-C-bSinwA.js"
   ],
   "resources/js/Pages/Admin/Home/Orders/Components/OrderForm.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/AdminSettingForm-BS76lhTM.js"
+    "/build/assets/AdminSettingForm-BS76lhTM.js"
   ],
   "resources/js/Pages/Admin/Home/Orders/Create.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Create-CrtmLxd0.js"
+    "/build/assets/Create-CrtmLxd0.js"
   ],
   "resources/js/Pages/Admin/Home/Orders/Index.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Index-DRRWlxu1.js"
+    "/build/assets/Index-DRRWlxu1.js"
   ],
   "resources/js/Pages/Admin/Home/Orders/Show.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Show-DHsnwjCo.js"
+    "/build/assets/Show-DHsnwjCo.js"
   ],
   "resources/js/Pages/Admin/Home/Products/Components/ProductForm.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/ProductForm-DcOdaWXD.js"
+    "/build/assets/ProductForm-DcOdaWXD.js"
   ],
   "resources/js/Pages/Admin/Home/Products/Create.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Create-CWgJUGfX.js"
+    "/build/assets/Create-CWgJUGfX.js"
   ],
   "resources/js/Pages/Admin/Home/Products/Edit.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Edit-CN9KZVYs.js"
+    "/build/assets/Edit-CN9KZVYs.js"
   ],
   "resources/js/Pages/Admin/Home/Products/Index.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Index-CWJktwog.js"
+    "/build/assets/Index-CWJktwog.js"
   ],
   "resources/js/Pages/Admin/Home/Products/Show.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Show-BbLamn8d.js"
+    "/build/assets/Show-BbLamn8d.js"
   ],
   "resources/js/Pages/Admin/Home/Reports/Components/ExportButton.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/ExportButton-CG6-8mGH.js"
+    "/build/assets/ExportButton-CG6-8mGH.js"
   ],
   "resources/js/Pages/Admin/Home/Reports/ProductReport.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/ProductReport-B0zx84w-.js"
+    "/build/assets/ProductReport-B0zx84w-.js"
   ],
   "resources/js/Pages/Admin/Home/Reports/SalesReport.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/SalesReport-B9Rq6SP1.js"
+    "/build/assets/SalesReport-B9Rq6SP1.js"
   ],
   "resources/js/Pages/Admin/Home/Settings/Create.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Create-CeuWhGZX.js"
+    "/build/assets/Create-CeuWhGZX.js"
   ],
   "resources/js/Pages/Admin/Home/Settings/Edit.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Edit-CA-yIVKX.js"
+    "/build/assets/Edit-CA-yIVKX.js"
   ],
   "resources/js/Pages/Admin/Home/Settings/component/AdminSettingForm.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/AdminSettingForm-BS76lhTM.js"
+    "/build/assets/AdminSettingForm-BS76lhTM.js"
   ],
   "resources/js/Pages/Admin/Home/Users/Create.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Create-DjDcREQQ.js"
+    "/build/assets/Create-DjDcREQQ.js"
   ],
   "resources/js/Pages/Admin/Home/Users/Edit.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Edit-CyaGqMis.js"
+    "/build/assets/Edit-CyaGqMis.js"
   ],
   "resources/js/Pages/Admin/Home/Users/Index.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Index-Cpshhnkf.js"
+    "/build/assets/Index-Cpshhnkf.js"
   ],
   "resources/js/Pages/Admin/Home/Users/Partials/DeleteUserForm.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/DeleteUserForm-DSmiwC1M.js"
+    "/build/assets/DeleteUserForm-DSmiwC1M.js"
   ],
   "resources/js/Pages/Admin/Home/Users/Partials/UpdatePasswordForm.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/UpdatePasswordForm-BhkgNU-V.js"
+    "/build/assets/UpdatePasswordForm-BhkgNU-V.js"
   ],
   "resources/js/Pages/Admin/Home/Users/Partials/UpdateUserInformationForm.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/UpdateUserInformationForm-DpZiF0Bv.js"
+    "/build/assets/UpdateUserInformationForm-DpZiF0Bv.js"
   ],
   "resources/js/Pages/Auth/ConfirmPassword.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/ConfirmPassword-BJq-4JRc.js"
+    "/build/assets/ConfirmPassword-BJq-4JRc.js"
   ],
   "resources/js/Pages/Auth/ForgotPassword.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/ForgotPassword-DSph7fpa.js"
+    "/build/assets/ForgotPassword-DSph7fpa.js"
   ],
   "resources/js/Pages/Auth/Login.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Login-CnUe-ApG.js"
+    "/build/assets/Login-CnUe-ApG.js"
   ],
   "resources/js/Pages/Auth/Register.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Register-CBQns03e.js"
+    "/build/assets/Register-CBQns03e.js"
   ],
   "resources/js/Pages/Auth/ResetPassword.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/ResetPassword-BZqRPclA.js"
+    "/build/assets/ResetPassword-BZqRPclA.js"
   ],
   "resources/js/Pages/Auth/VerifyEmail.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/VerifyEmail-DiMwBUpD.js"
+    "/build/assets/VerifyEmail-DiMwBUpD.js"
   ],
   "resources/js/Pages/Cart/Index.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Index-CW24jqTp.js"
+    "/build/assets/Index-CW24jqTp.js"
   ],
   "resources/js/Pages/Checkout/Components/CheckoutForm.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/CheckoutForm-6zdFu4M1.js"
+    "/build/assets/CheckoutForm-6zdFu4M1.js"
   ],
   "resources/js/Pages/Checkout/Components/FormInput.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/FormInput-tIVQ5YWv.js"
+    "/build/assets/FormInput-tIVQ5YWv.js"
   ],
   "resources/js/Pages/Checkout/Index.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Index-CW-CefVs.js"
+    "/build/assets/Index-CW-CefVs.js"
   ],
   "resources/js/Pages/Dashboard.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Dashboard-B7JCLFuD.js"
+    "/build/assets/Dashboard-B7JCLFuD.js"
   ],
   "resources/js/Pages/Home/HomeDetails.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/HomeDetails-D37G4Cbf.js",
-    "https://mobilia.fluxnerve.com/build/assets/HomeDetails-DgjqAvA-.css"
+    "/build/assets/HomeDetails-Dc1F1pUJ.js",
+    "/build/assets/HomeDetails-DgjqAvA-.css"
   ],
   "resources/js/Pages/Home/Index.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Index-CIeHkp4v.js"
+    "/build/assets/Index-B0oJQC9D.js"
   ],
   "resources/js/Pages/Home/components/CardOverlay.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/CardOverlay-BbLtiyFC.js"
+    "/build/assets/CardOverlay-BbLtiyFC.js"
   ],
   "resources/js/Pages/Orders/Components/OrdersTable.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/OrdersTable-BiB2QPiq.js"
+    "/build/assets/OrdersTable-BiB2QPiq.js"
   ],
   "resources/js/Pages/Orders/Index.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Index-D4pru-_B.js"
+    "/build/assets/Index-D4pru-_B.js"
   ],
   "resources/js/Pages/Profile/Edit.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Edit-DWEpSeKr.js"
+    "/build/assets/Edit-DWEpSeKr.js"
   ],
   "resources/js/Pages/Profile/Partials/DeleteUserForm.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/DeleteUserForm-DFfeZau2.js"
+    "/build/assets/DeleteUserForm-DFfeZau2.js"
   ],
   "resources/js/Pages/Profile/Partials/UpdatePasswordForm.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/UpdatePasswordForm-6CF9D2IB.js"
+    "/build/assets/UpdatePasswordForm-6CF9D2IB.js"
   ],
   "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/UpdateProfileInformationForm-BLc6rV1x.js"
+    "/build/assets/UpdateProfileInformationForm-BLc6rV1x.js"
   ],
   "resources/js/Pages/Shop/Components/show/AdditionalInfo.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/AdditionalInfo-1-Vw4jkk.js"
+    "/build/assets/AdditionalInfo-1-Vw4jkk.js"
   ],
   "resources/js/Pages/Shop/Components/show/Description.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Description-6rG0plfA.js"
+    "/build/assets/Description-6rG0plfA.js"
   ],
   "resources/js/Pages/Shop/Components/show/Reviews.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Reviews-B2FQPtf2.js"
+    "/build/assets/Reviews-B2FQPtf2.js"
   ],
   "resources/js/Pages/Shop/Index.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Index-CjiT6WTi.js"
+    "/build/assets/Index-CjiT6WTi.js"
   ],
   "resources/js/Pages/Shop/Show.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Show-BUeYeTKq.js"
+    "/build/assets/Show-BUeYeTKq.js"
   ],
   "resources/js/Pages/Welcome.tsx": [
-    "https://mobilia.fluxnerve.com/build/assets/Welcome-BqgMjrZj.js"
+    "/build/assets/Welcome-BqgMjrZj.js"
   ],
   "resources/js/app.tsx": [],
   "resources/js/bootstrap.ts": [],
