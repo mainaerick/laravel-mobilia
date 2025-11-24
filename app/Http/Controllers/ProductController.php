@@ -41,8 +41,10 @@ class ProductController extends Controller
 
 
         if ($category) {
-            $query->where("room", "like", "%" . $category . "%");
-        }
+            $query->where(function($q) use ($category) {
+                $q->where("category", "like", "%{$category}%")
+                    ->orWhere("room", "like", "%{$category}%");
+            });        }
         $products = $query->orderBy($sortField, $sortDirection)->paginate($per_page)
             ->onEachSide(1);
         $settings = Setting::all()->pluck('value', 'key');
