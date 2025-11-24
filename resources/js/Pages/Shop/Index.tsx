@@ -21,11 +21,16 @@ import PaginationDiv from "@/Components/PaginationDiv";
 import { Link, router } from "@inertiajs/react";
 import Hero from "@/Components/Hero";
 import ShopInfo from "@/Components/ShopInfo";
+import {Toolbar} from "@/Pages/Shop/Components/index/ToolBar";
+import {useState} from "react";
 
 type Props = { auth: any; products: Pagination;settings:any; queryParams: any };
 
 function Index({ auth, products,settings, queryParams = null }: Props) {
     queryParams = queryParams || {};
+    const [currentView, setCurrentView] = useState<"grid" | "list">("grid")
+    const [pageSize, setPageSize] = useState(16)
+    const [sortValue, setSortValue] = useState("default")
     const currentPage = products.current_page;
     const totalNumber = products.total;
     const perPage = products.per_page;
@@ -68,76 +73,88 @@ function Index({ auth, products,settings, queryParams = null }: Props) {
                 settings={settings}
             />
             {/* Tool Bar Div */}
-            <div style={{ background: Colors.secondary, height: "100px " }}>
-                <Row
-                    style={{ height: "100%" }}
-                    justify={"space-between"}
-                    align={"middle"}
-                    className={Dimensions.pagePaddingClass}
-                >
-                    <Col
-                        // span={12}
-                        sm={{ span: 24 }}
-                        md={{ span: 12 }}
-                        lg={{ span: 12 }}
-                        xl={{ span: 12 }}
-                        style={{ width: "100%" }}
-                    >
-                    </Col>
-                    <Col
-                        // span={12}
-                        sm={{ span: 24 }}
-                        md={{ span: 12 }}
-                        lg={{ span: 12 }}
-                        xl={{ span: 12 }}
-                        style={{ width: "100%" }}
-                    >
-                        <Row justify={"end"}>
-                            <Col
-                                // span={12}
-                                xs={{ span: 24 }}
-                                sm={{ span: 24 }}
-                                md={{ span: 24 }}
-                                lg={{ span: 12 }}
-                                xl={{ span: 12 }}
-                            >
-                                <Flex gap={9} justify={"end"} align={"center"}>
-                                    <div>
-                                        <Typography.Text>
-                                            Sort By
-                                        </Typography.Text>
-                                    </div>
-                                    <div style={{ width: "200px" }}>
-                                        <Select
-                                            size="middle"
-                                            defaultValue={
-                                                queryParams.sort_field
-                                            }
-                                            style={{ width: "200px" }}
-                                            onChange={handleChangeSort}
-                                            options={[
-                                                {
-                                                    value: "price_high",
-                                                    label: "Price: High to Low",
-                                                },
-                                                {
-                                                    value: "price_low",
-                                                    label: "Price: Low to High",
-                                                },
+            {/*<div style={{ background: Colors.secondary, height: "100px " }}>*/}
+            {/*    <Row*/}
+            {/*        style={{ height: "100%" }}*/}
+            {/*        justify={"space-between"}*/}
+            {/*        align={"middle"}*/}
+            {/*        className={Dimensions.pagePaddingClass}*/}
+            {/*    >*/}
+            {/*        <Col*/}
+            {/*            // span={12}*/}
+            {/*            sm={{ span: 24 }}*/}
+            {/*            md={{ span: 12 }}*/}
+            {/*            lg={{ span: 12 }}*/}
+            {/*            xl={{ span: 12 }}*/}
+            {/*            style={{ width: "100%" }}*/}
+            {/*        >*/}
+            {/*        </Col>*/}
+            {/*        <Col*/}
+            {/*            // span={12}*/}
+            {/*            sm={{ span: 24 }}*/}
+            {/*            md={{ span: 12 }}*/}
+            {/*            lg={{ span: 12 }}*/}
+            {/*            xl={{ span: 12 }}*/}
+            {/*            style={{ width: "100%" }}*/}
+            {/*        >*/}
+            {/*            <Row justify={"end"}>*/}
+            {/*                <Col*/}
+            {/*                    // span={12}*/}
+            {/*                    xs={{ span: 24 }}*/}
+            {/*                    sm={{ span: 24 }}*/}
+            {/*                    md={{ span: 24 }}*/}
+            {/*                    lg={{ span: 12 }}*/}
+            {/*                    xl={{ span: 12 }}*/}
+            {/*                >*/}
+            {/*                    <Flex gap={9} justify={"end"} align={"center"}>*/}
+            {/*                        <div>*/}
+            {/*                            <Typography.Text>*/}
+            {/*                                Sort By*/}
+            {/*                            </Typography.Text>*/}
+            {/*                        </div>*/}
+            {/*                        <div style={{ width: "200px" }}>*/}
+            {/*                            <Select*/}
+            {/*                                size="middle"*/}
+            {/*                                defaultValue={*/}
+            {/*                                    queryParams.sort_field*/}
+            {/*                                }*/}
+            {/*                                style={{ width: "200px" }}*/}
+            {/*                                onChange={handleChangeSort}*/}
+            {/*                                options={[*/}
+            {/*                                    {*/}
+            {/*                                        value: "price_high",*/}
+            {/*                                        label: "Price: High to Low",*/}
+            {/*                                    },*/}
+            {/*                                    {*/}
+            {/*                                        value: "price_low",*/}
+            {/*                                        label: "Price: Low to High",*/}
+            {/*                                    },*/}
 
-                                                {
-                                                    value: "rating",
-                                                    label: "Rating",
-                                                },
-                                            ]}
-                                        />
-                                    </div>
-                                </Flex>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-            </div>
+            {/*                                    {*/}
+            {/*                                        value: "rating",*/}
+            {/*                                        label: "Rating",*/}
+            {/*                                    },*/}
+            {/*                                ]}*/}
+            {/*                            />*/}
+            {/*                        </div>*/}
+            {/*                    </Flex>*/}
+            {/*                </Col>*/}
+            {/*            </Row>*/}
+            {/*        </Col>*/}
+            {/*    </Row>*/}
+            {/*</div>*/}
+            <Toolbar
+                currentView={currentView}
+                onViewChange={setCurrentView}
+                pageSize={pageSize}
+                onPageSizeChange={(value) => setPageSize(value)}
+                sortValue={sortValue}
+                onSortChange={(value) => setSortValue(value)}
+                totalResults={32}
+                startIndex={1}
+                endIndex={16}
+                onFilterClick={() => console.log("Filter clicked")}
+            />
             {/* Shop */}
             {productsData.length > 0 ? <div
                 className={Dimensions.pagePaddingClass}
