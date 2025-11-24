@@ -1,14 +1,15 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { F as Footer } from "./Footer-owlJr_0r.js";
-import { A as Authenticated } from "./AuthenticatedLayout-CnDTPPpR.js";
-import { C as Colors, D as Dimensions } from "../app.js";
-import { Pagination, Breadcrumb, Row, Col, Flex, Typography, Select, Empty } from "antd";
-import { P as ProductCard } from "./ProductCard-DeUpRL9U.js";
+import { A as Authenticated } from "./AuthenticatedLayout-D4ZzMmwX.js";
+import { D as Dimensions } from "../app.js";
+import { Pagination, Breadcrumb, Row, Col, Flex, Empty, Typography } from "antd";
+import { P as ProductCard } from "./ProductCard-CZ7Z_8xO.js";
 import { router } from "@inertiajs/react";
-import { H as Hero } from "./Hero-BzYIx0wQ.js";
+import { H as Hero } from "./Hero-lCtrtUiE.js";
 import { S as ShopInfo } from "./ShopInfo-AaDODIbQ.js";
+import { Toolbar } from "./ToolBar-Bh5o78m0.js";
+import { useState } from "react";
 import "react-alice-carousel";
-import "react";
 import "./ApplicationLogo-DwGw9LaR.js";
 import "./ResponsiveNavLink-CMrbbniR.js";
 import "@headlessui/react";
@@ -16,6 +17,14 @@ import "@ant-design/icons";
 import "axios";
 import "react-dom/client";
 import "antd/es/card/Meta.js";
+import "@radix-ui/react-slot";
+import "class-variance-authority";
+import "./FilterBlock-CIpEP_uI.js";
+import "@radix-ui/react-checkbox";
+import "lucide-react";
+import "clsx";
+import "tailwind-merge";
+import "@radix-ui/react-select";
 const itemRender = (_, type, originalElement) => {
   if (type === "prev") {
     return /* @__PURE__ */ jsx("a", { children: "Previous" });
@@ -28,32 +37,46 @@ const itemRender = (_, type, originalElement) => {
 const PaginationDiv = ({ current, handleChange, onShowSizeChange, total, perPage }) => {
   return /* @__PURE__ */ jsx(Pagination, { onShowSizeChange, current, pageSize: perPage, total, itemRender, onChange: handleChange });
 };
-function Index({ auth, products, queryParams = null }) {
-  queryParams = queryParams || {};
+function Index({ auth, products, settings, queryParams }) {
+  const [currentView, setCurrentView] = useState("grid");
+  const [pageSize, setPageSize] = useState(products.per_page);
+  const [sortValue, setSortValue] = useState(queryParams.sort_field || "default");
   const currentPage = products.current_page;
   const totalNumber = products.total;
+  const toPage = products.to;
   const perPage = products.per_page;
   const productsData = products.data;
   const handleChangeSort = (name) => {
+    const newQueryParams = { ...queryParams };
     if (name === queryParams.sort_field) {
       if (queryParams.sort_direction === "asc") {
-        queryParams.sort_direction = "desc";
+        newQueryParams.sort_direction = "desc";
       } else {
-        queryParams.sort_direction = "asc";
+        newQueryParams.sort_direction = "asc";
       }
     } else {
-      queryParams.sort_field = name;
-      queryParams.sort_direction = "asc";
+      newQueryParams.sort_field = name;
+      newQueryParams.sort_direction = "asc";
     }
-    router.get(route("shop.index"), queryParams);
+    setSortValue(name);
+    router.get(route("shop.index"), newQueryParams);
+  };
+  const handlePageSizeChange = (value) => {
+    const newQueryParams = { ...queryParams };
+    newQueryParams.per_page = value;
+    setPageSize(value);
+    router.get(route("shop.index"), newQueryParams);
   };
   const handlePageChange = (e) => {
     queryParams.page = e;
     router.get(route("shop.index"), queryParams);
   };
   const onShowSizeChange = (current, size) => {
-    console.log(size);
-    queryParams.per_page = size;
+    const newQueryParams = { ...queryParams };
+    newQueryParams.per_page = size;
+    newQueryParams.page = 1;
+    setPageSize(size);
+    router.get(route("shop.index"), newQueryParams);
   };
   return /* @__PURE__ */ jsxs(Authenticated, { user: auth, children: [
     /* @__PURE__ */ jsx(
@@ -63,76 +86,26 @@ function Index({ auth, products, queryParams = null }) {
           /* @__PURE__ */ jsx(Breadcrumb.Item, { children: "Home" }),
           /* @__PURE__ */ jsx(Breadcrumb.Item, { children: "Shop" })
         ] }),
-        title: "Shop"
+        title: "Shop",
+        settings
       }
     ),
-    /* @__PURE__ */ jsx("div", { style: { background: Colors.secondary, height: "100px " }, children: /* @__PURE__ */ jsxs(
-      Row,
+    /* @__PURE__ */ jsx(
+      Toolbar,
       {
-        style: { height: "100%" },
-        justify: "space-between",
-        align: "middle",
-        className: Dimensions.pagePaddingClass,
-        children: [
-          /* @__PURE__ */ jsx(
-            Col,
-            {
-              sm: { span: 24 },
-              md: { span: 12 },
-              lg: { span: 12 },
-              xl: { span: 12 },
-              style: { width: "100%" }
-            }
-          ),
-          /* @__PURE__ */ jsx(
-            Col,
-            {
-              sm: { span: 24 },
-              md: { span: 12 },
-              lg: { span: 12 },
-              xl: { span: 12 },
-              style: { width: "100%" },
-              children: /* @__PURE__ */ jsx(Row, { justify: "end", children: /* @__PURE__ */ jsx(
-                Col,
-                {
-                  xs: { span: 24 },
-                  sm: { span: 24 },
-                  md: { span: 24 },
-                  lg: { span: 12 },
-                  xl: { span: 12 },
-                  children: /* @__PURE__ */ jsxs(Flex, { gap: 9, justify: "end", align: "center", children: [
-                    /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(Typography.Text, { children: "Sort By" }) }),
-                    /* @__PURE__ */ jsx("div", { style: { width: "200px" }, children: /* @__PURE__ */ jsx(
-                      Select,
-                      {
-                        size: "middle",
-                        defaultValue: queryParams.sort_field,
-                        style: { width: "200px" },
-                        onChange: handleChangeSort,
-                        options: [
-                          {
-                            value: "price_high",
-                            label: "Price: High to Low"
-                          },
-                          {
-                            value: "price_low",
-                            label: "Price: Low to High"
-                          },
-                          {
-                            value: "rating",
-                            label: "Rating"
-                          }
-                        ]
-                      }
-                    ) })
-                  ] })
-                }
-              ) })
-            }
-          )
-        ]
+        currentView,
+        onViewChange: setCurrentView,
+        pageSize,
+        onPageSizeChange: (value) => handlePageSizeChange(value),
+        sortValue,
+        onSortChange: (value) => handleChangeSort(value),
+        totalResults: totalNumber,
+        startIndex: 1,
+        endIndex: toPage,
+        onFilterClick: () => console.log("Filter clicked"),
+        queryParams
       }
-    ) }),
+    ),
     productsData.length > 0 ? /* @__PURE__ */ jsxs(
       "div",
       {

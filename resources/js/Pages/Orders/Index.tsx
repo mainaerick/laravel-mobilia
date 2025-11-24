@@ -23,9 +23,9 @@ import { router, usePage } from "@inertiajs/react";
 import Footer from "@/Components/Footer";
 import OrdersTable from "@/Pages/Orders/Components/OrdersTable";
 
-type Props = { auth: any; orders: any; success: any };
+type Props = { auth: any; orders: any; success: any,settings:any };
 
-function Index({ auth, orders, success }: Props) {
+function Index({ auth, orders, success,settings }: Props) {
     const { props } = usePage();
 
     orders = orders.data;
@@ -47,7 +47,7 @@ function Index({ auth, orders, success }: Props) {
 
     return (
         <Authenticated user={auth.user}>
-            <Hero whichRoute={"Shop>Orders"} title={"Orders"} />
+            <Hero whichRoute={"Shop>Orders"} title={"Orders"}  settings={settings}/>
 
             <div
                 className={Dimensions.pagePaddingClass}

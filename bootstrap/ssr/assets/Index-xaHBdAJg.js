@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
-import { A as Authenticated } from "./AuthenticatedLayout-CnDTPPpR.js";
-import HomeDetails from "./HomeDetails-Dc1F1pUJ.js";
+import { A as Authenticated } from "./AuthenticatedLayout-D4ZzMmwX.js";
+import HomeDetails from "./HomeDetails-DtUo1QN5.js";
 import "react";
 import "./ApplicationLogo-DwGw9LaR.js";
 import "./ResponsiveNavLink-CMrbbniR.js";
@@ -13,7 +13,7 @@ import "react-dom/client";
 import "antd";
 import "./Footer-owlJr_0r.js";
 import "react-alice-carousel";
-import "./ProductCard-DeUpRL9U.js";
+import "./ProductCard-CZ7Z_8xO.js";
 import "antd/es/card/Meta.js";
 import "framer-motion";
 import "lucide-react";

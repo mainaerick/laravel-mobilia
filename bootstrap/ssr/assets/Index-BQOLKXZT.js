@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { H as Hero } from "./Hero-BzYIx0wQ.js";
-import { A as Authenticated } from "./AuthenticatedLayout-CnDTPPpR.js";
+import { H as Hero } from "./Hero-lCtrtUiE.js";
+import { A as Authenticated } from "./AuthenticatedLayout-D4ZzMmwX.js";
 import { D as Dimensions, C as Colors } from "../app.js";
 import { usePage, router } from "@inertiajs/react";
 import { notification, Breadcrumb, Row, Col, ConfigProvider, Table, Flex, Typography, Button, Image, Space } from "antd";
@@ -15,7 +15,7 @@ import "@headlessui/react";
 import "axios";
 import "react-dom/client";
 import "react-alice-carousel";
-function Index({ auth }) {
+function Index({ auth, settings }) {
   const { props } = usePage();
   const [api, contextHolder] = notification.useNotification();
   const items = props == null ? void 0 : props.cartItems;
@@ -98,7 +98,8 @@ function Index({ auth }) {
           /* @__PURE__ */ jsx(Breadcrumb.Item, { children: "Shop" }),
           /* @__PURE__ */ jsx(Breadcrumb.Item, { children: "Cart" })
         ] }),
-        title: "Cart"
+        title: "Cart",
+        settings
       }
     ),
     /* @__PURE__ */ jsx(

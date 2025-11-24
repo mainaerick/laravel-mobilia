@@ -23,9 +23,9 @@ import { DeleteFilled } from "@ant-design/icons";
 import ShopInfo from "@/Components/ShopInfo";
 import Footer from "@/Components/Footer";
 import Link from "antd/es/typography/Link";
-type Props = { auth: any };
+type Props = { auth: any,settings:any };
 
-function Index({ auth }: Props) {
+function Index({ auth ,settings}: Props) {
     const { props } = usePage();
     const [api, contextHolder] = notification.useNotification();
 
@@ -119,7 +119,7 @@ function Index({ auth }: Props) {
                     </Breadcrumb>
                 }
                 title={"Cart"}
-            />
+             settings={settings}/>
 
             <div
                 className={Dimensions.pagePaddingClass}

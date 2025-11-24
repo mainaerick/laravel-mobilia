@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { H as Hero } from "./Hero-BzYIx0wQ.js";
-import { A as Authenticated } from "./AuthenticatedLayout-CnDTPPpR.js";
+import { H as Hero } from "./Hero-lCtrtUiE.js";
+import { A as Authenticated } from "./AuthenticatedLayout-D4ZzMmwX.js";
 import { D as Dimensions } from "../app.js";
 import { Form, Breadcrumb, Flex, Typography } from "antd";
 import { usePage } from "@inertiajs/react";
@@ -15,7 +15,7 @@ import "axios";
 import "react-dom/client";
 import "./FormInput-tIVQ5YWv.js";
 import "./TableComponent-DTwfws4x.js";
-function Index({ auth, errors }) {
+function Index({ auth, errors, settings }) {
   const [form] = Form.useForm();
   const { props } = usePage();
   const items = props == null ? void 0 : props.cartItems;
@@ -27,7 +27,8 @@ function Index({ auth, errors }) {
           /* @__PURE__ */ jsx(Breadcrumb.Item, { children: "Shop" }),
           /* @__PURE__ */ jsx(Breadcrumb.Item, { children: "Checkout" })
         ] }),
-        title: "Checkout"
+        title: "Checkout",
+        settings
       }
     ),
     /* @__PURE__ */ jsx(

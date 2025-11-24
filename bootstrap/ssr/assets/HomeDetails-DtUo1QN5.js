@@ -4,7 +4,7 @@ import { Card, Flex, Typography, Button, Row, Col, Image } from "antd";
 import { Link, router } from "@inertiajs/react";
 import { C as Colors, D as Dimensions } from "../app.js";
 import { F as Footer } from "./Footer-owlJr_0r.js";
-import { P as ProductCard } from "./ProductCard-DeUpRL9U.js";
+import { P as ProductCard } from "./ProductCard-CZ7Z_8xO.js";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "axios";
@@ -14,7 +14,6 @@ import "antd/es/card/Meta.js";
 import "@ant-design/icons";
 function RoomInspirationHero({ slides }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  console.log(slides);
   const goToPrevious = () => {
     setActiveIndex((prev) => prev === 0 ? slides.length - 1 : prev - 1);
   };
@@ -41,7 +40,8 @@ function RoomInspirationHero({ slides }) {
                 "img",
                 {
                   src: slides[activeIndex] || "/placeholder.svg",
-                  className: "w-full aspect-square object-cover"
+                  className: "w-full aspect-square object-cover",
+                  alt: ""
                 }
               ),
               /* @__PURE__ */ jsx(
@@ -108,7 +108,8 @@ function RoomInspirationHero({ slides }) {
               "img",
               {
                 src: slides[activeIndex] || "/placeholder.svg",
-                className: "w-full aspect-video object-cover"
+                className: "w-full aspect-video object-cover",
+                alt: ""
               }
             )
           },
@@ -247,6 +248,7 @@ const HomeDetails = ({ products, settings }) => {
                     Card,
                     {
                       style: { marginBottom: 10 },
+                      hoverable: true,
                       styles: { body: { padding: 0 } },
                       cover: (
                         // <img
@@ -295,6 +297,7 @@ const HomeDetails = ({ products, settings }) => {
                   children: /* @__PURE__ */ jsx(
                     Card,
                     {
+                      hoverable: true,
                       style: { marginBottom: 10 },
                       styles: { body: { padding: 0 } },
                       cover: (
@@ -348,6 +351,7 @@ const HomeDetails = ({ products, settings }) => {
                   children: /* @__PURE__ */ jsx(
                     Card,
                     {
+                      hoverable: true,
                       style: { marginBottom: 10 },
                       styles: { body: { padding: 0 } },
                       cover: (
@@ -462,7 +466,8 @@ const HomeDetails = ({ products, settings }) => {
             className: Dimensions.pagePaddingClass,
             style: {
               border: 0,
-              background: Colors.secondaryLightColor
+              background: Colors.secondaryLightColor,
+              paddingBottom: "37px"
             },
             children: /* @__PURE__ */ jsxs(
               Row,
@@ -479,20 +484,10 @@ const HomeDetails = ({ products, settings }) => {
                       md: { span: 8 },
                       lg: { span: 6 },
                       xl: { span: 6 },
-                      children: /* @__PURE__ */ jsxs(Flex, { vertical: true, children: [
-                        /* @__PURE__ */ jsxs(Typography.Title, { level: 3, style: { textAlign: "center" }, children: [
-                          "50+ Beautiful rooms inspiration",
-                          " "
-                        ] }),
-                        /* @__PURE__ */ jsx(
-                          Typography.Paragraph,
-                          {
-                            color: Colors.textSubtitleColor,
-                            style: { textAlign: "center" },
-                            children: "Our designer already made a lot of beautiful prototype of rooms that inspire you"
-                          }
-                        ),
-                        /* @__PURE__ */ jsxs("div", { style: { textAlign: "center", marginBottom: "37px" }, children: [
+                      children: /* @__PURE__ */ jsx(Flex, { vertical: true, children: /* @__PURE__ */ jsx("div", { className: "w-full flex items-center justify-center", children: /* @__PURE__ */ jsxs("div", { className: "max-w-sm", children: [
+                        /* @__PURE__ */ jsx("h1", { className: "text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight", children: "50+ Beautiful rooms inspiration" }),
+                        /* @__PURE__ */ jsx("p", { className: "text-lg text-slate-700 mb-8 leading-relaxed", children: "Discover stunning interior designs and get inspired to transform your living spaces into beautiful sanctuaries." }),
+                        /* @__PURE__ */ jsxs("div", { style: { textAlign: "start", marginBottom: "37px" }, children: [
                           /* @__PURE__ */ jsx(
                             Button,
                             {
@@ -508,7 +503,7 @@ const HomeDetails = ({ products, settings }) => {
                           ),
                           " "
                         ] })
-                      ] })
+                      ] }) }) })
                     }
                   ),
                   /* @__PURE__ */ jsx(Col, { span: 18, style: { height: "100%", overflow: "hidden" }, children: /* @__PURE__ */ jsx(RoomInspirationHero, { slides: settings.inspiration_images ? JSON.parse(settings.inspiration_images) : [] }) })

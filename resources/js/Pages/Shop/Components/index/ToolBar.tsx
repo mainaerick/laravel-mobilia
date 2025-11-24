@@ -47,11 +47,11 @@ export const Toolbar: React.FC<ToolbarProps> = ({
     });
 
     const handleFilterChange = (filterType: string, value: string, checked: boolean) => {
-        const updatedFilters = { ...filters }
+        const updatedFilters:any = { ...filters }
         if (checked) {
             updatedFilters[filterType] = [...(updatedFilters[filterType] || []), value]
         } else {
-            updatedFilters[filterType] = (updatedFilters[filterType] || []).filter((v) => v !== value)
+            updatedFilters[filterType] = (updatedFilters[filterType] || []).filter((v:any) => v !== value)
         }
         setFilters(updatedFilters)
 

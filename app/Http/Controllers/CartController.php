@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -11,8 +12,10 @@ class CartController extends Controller
 
     public function index(): \Inertia\Response
     {
+        $settings = Setting::all()->pluck('value', 'key');
 
         return inertia('Cart/Index', [
+            'settings' => $settings
             // "products" => $products,
             // 'queryParams' => request()->query() ?: null,
         ]);

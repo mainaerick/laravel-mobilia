@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { A as Authenticated } from "./AuthenticatedLayout-CnDTPPpR.js";
+import { A as Authenticated } from "./AuthenticatedLayout-D4ZzMmwX.js";
 import DeleteUserForm from "./DeleteUserForm-DFfeZau2.js";
 import UpdatePasswordForm from "./UpdatePasswordForm-6CF9D2IB.js";
 import UpdateProfileInformation from "./UpdateProfileInformationForm-BLc6rV1x.js";

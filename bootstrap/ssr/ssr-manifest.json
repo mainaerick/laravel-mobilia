@@ -1,7 +1,7 @@
 {
   "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
   "node_modules/react-alice-carousel/lib/alice-carousel.css": [
-    "/build/assets/HomeDetails-Dc1F1pUJ.js",
+    "/build/assets/HomeDetails-DtUo1QN5.js",
     "/build/assets/HomeDetails-DgjqAvA-.css"
   ],
   "resources/css/app.css": [],
@@ -9,7 +9,7 @@
     "/build/assets/ApplicationLogo-DwGw9LaR.js"
   ],
   "resources/js/Components/CartItems.tsx": [
-    "/build/assets/AuthenticatedLayout-CnDTPPpR.js"
+    "/build/assets/AuthenticatedLayout-D4ZzMmwX.js"
   ],
   "resources/js/Components/Checkbox.tsx": [
     "/build/assets/Login-CnUe-ApG.js"
@@ -24,7 +24,7 @@
     "/build/assets/Footer-owlJr_0r.js"
   ],
   "resources/js/Components/Hero.tsx": [
-    "/build/assets/Hero-BzYIx0wQ.js"
+    "/build/assets/Hero-lCtrtUiE.js"
   ],
   "resources/js/Components/InputError.tsx": [
     "/build/assets/TextInput-DQL-42yE.js"
@@ -33,7 +33,7 @@
     "/build/assets/InputLabel-CaoVq05r.js"
   ],
   "resources/js/Components/InspirationHero.tsx": [
-    "/build/assets/HomeDetails-Dc1F1pUJ.js",
+    "/build/assets/HomeDetails-DtUo1QN5.js",
     "/build/assets/HomeDetails-DgjqAvA-.css"
   ],
   "resources/js/Components/Modal.tsx": [
@@ -43,19 +43,19 @@
     "/build/assets/ResponsiveNavLink-CMrbbniR.js"
   ],
   "resources/js/Components/PaginationDiv.tsx": [
-    "/build/assets/Index-CjiT6WTi.js"
+    "/build/assets/Index-BvQnbbmT.js"
   ],
   "resources/js/Components/PrimaryButton.tsx": [
     "/build/assets/PrimaryButton-C5ts3FGL.js"
   ],
   "resources/js/Components/ProductCard.tsx": [
-    "/build/assets/ProductCard-DeUpRL9U.js"
+    "/build/assets/ProductCard-CZ7Z_8xO.js"
   ],
   "resources/js/Components/ResponsiveNavLink.tsx": [
     "/build/assets/ResponsiveNavLink-CMrbbniR.js"
   ],
   "resources/js/Components/SearchBar.tsx": [
-    "/build/assets/AuthenticatedLayout-CnDTPPpR.js"
+    "/build/assets/AuthenticatedLayout-D4ZzMmwX.js"
   ],
   "resources/js/Components/SecondaryButton.tsx": [
     "/build/assets/SecondaryButton-DFfgLaPF.js"
@@ -79,7 +79,7 @@
     "/build/assets/AdminLayout-BTxGKBRd.js"
   ],
   "resources/js/Layouts/AuthenticatedLayout.tsx": [
-    "/build/assets/AuthenticatedLayout-CnDTPPpR.js"
+    "/build/assets/AuthenticatedLayout-D4ZzMmwX.js"
   ],
   "resources/js/Layouts/GuestLayout.tsx": [
     "/build/assets/GuestLayout-DveeYFAY.js"
@@ -181,7 +181,7 @@
     "/build/assets/VerifyEmail-DiMwBUpD.js"
   ],
   "resources/js/Pages/Cart/Index.tsx": [
-    "/build/assets/Index-CW24jqTp.js"
+    "/build/assets/Index-BQOLKXZT.js"
   ],
   "resources/js/Pages/Checkout/Components/CheckoutForm.tsx": [
     "/build/assets/CheckoutForm-6zdFu4M1.js"
@@ -190,17 +190,17 @@
     "/build/assets/FormInput-tIVQ5YWv.js"
   ],
   "resources/js/Pages/Checkout/Index.tsx": [
-    "/build/assets/Index-CW-CefVs.js"
+    "/build/assets/Index-CFL85cVO.js"
   ],
   "resources/js/Pages/Dashboard.tsx": [
-    "/build/assets/Dashboard-B7JCLFuD.js"
+    "/build/assets/Dashboard-BDpuaK8W.js"
   ],
   "resources/js/Pages/Home/HomeDetails.tsx": [
-    "/build/assets/HomeDetails-Dc1F1pUJ.js",
+    "/build/assets/HomeDetails-DtUo1QN5.js",
     "/build/assets/HomeDetails-DgjqAvA-.css"
   ],
   "resources/js/Pages/Home/Index.tsx": [
-    "/build/assets/Index-B0oJQC9D.js"
+    "/build/assets/Index-xaHBdAJg.js"
   ],
   "resources/js/Pages/Home/components/CardOverlay.tsx": [
     "/build/assets/CardOverlay-BbLtiyFC.js"
@@ -209,10 +209,10 @@
     "/build/assets/OrdersTable-BiB2QPiq.js"
   ],
   "resources/js/Pages/Orders/Index.tsx": [
-    "/build/assets/Index-D4pru-_B.js"
+    "/build/assets/Index-CmF_BMGA.js"
   ],
   "resources/js/Pages/Profile/Edit.tsx": [
-    "/build/assets/Edit-DWEpSeKr.js"
+    "/build/assets/Edit-BbM1Kc6H.js"
   ],
   "resources/js/Pages/Profile/Partials/DeleteUserForm.tsx": [
     "/build/assets/DeleteUserForm-DFfeZau2.js"
@@ -222,6 +222,12 @@
   ],
   "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.tsx": [
     "/build/assets/UpdateProfileInformationForm-BLc6rV1x.js"
+  ],
+  "resources/js/Pages/Shop/Components/index/FilterBlock.tsx": [
+    "/build/assets/FilterBlock-CIpEP_uI.js"
+  ],
+  "resources/js/Pages/Shop/Components/index/ToolBar.tsx": [
+    "/build/assets/ToolBar-Bh5o78m0.js"
   ],
   "resources/js/Pages/Shop/Components/show/AdditionalInfo.tsx": [
     "/build/assets/AdditionalInfo-1-Vw4jkk.js"
@@ -233,15 +239,27 @@
     "/build/assets/Reviews-B2FQPtf2.js"
   ],
   "resources/js/Pages/Shop/Index.tsx": [
-    "/build/assets/Index-CjiT6WTi.js"
+    "/build/assets/Index-BvQnbbmT.js"
   ],
   "resources/js/Pages/Shop/Show.tsx": [
-    "/build/assets/Show-BUeYeTKq.js"
+    "/build/assets/Show-BbEI3-Iz.js"
   ],
   "resources/js/Pages/Welcome.tsx": [
     "/build/assets/Welcome-BqgMjrZj.js"
   ],
   "resources/js/app.tsx": [],
   "resources/js/bootstrap.ts": [],
+  "resources/js/components/ui/button.tsx": [
+    "/build/assets/ToolBar-Bh5o78m0.js"
+  ],
+  "resources/js/components/ui/checkbox.tsx": [
+    "/build/assets/FilterBlock-CIpEP_uI.js"
+  ],
+  "resources/js/components/ui/select.tsx": [
+    "/build/assets/ToolBar-Bh5o78m0.js"
+  ],
+  "resources/js/lib/utils.ts": [
+    "/build/assets/FilterBlock-CIpEP_uI.js"
+  ],
   "resources/js/utils/Config.ts": []
 }

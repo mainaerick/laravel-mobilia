@@ -100,7 +100,7 @@ const SearchBar = () => {
   const { searchresults = [], query = "" } = usePage().props;
   const [searchQuery, setSearchQuery] = useState(query);
   const onSearch = (value) => {
-    router.get("/shop/search", { query: value }, { preserveState: true });
+    router.get("/shop", { query: value }, { preserveState: true });
   };
   return /* @__PURE__ */ jsx("div", { style: { margin: "20px" }, children: /* @__PURE__ */ jsx(
     Input.Search,

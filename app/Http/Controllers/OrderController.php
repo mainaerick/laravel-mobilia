@@ -9,6 +9,7 @@ use App\Http\Resources\OrderResource;
 use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,8 +25,11 @@ class OrderController extends Controller
         $user = auth()->user();
         // $orders = Order::all();
         $orders = Order::with('user')->paginate(10);
+        $settings = Setting::all()->pluck('value', 'key');
+
         return Inertia::render('Orders/Index', [
             'orders' => OrderResource::collection($orders),
+            'settings'=> $settings,
         ]);
     }
     public function admin_index()
@@ -65,7 +69,10 @@ class OrderController extends Controller
 
     public function checkout()
     {
+        $settings = Setting::all()->pluck('value', 'key');
+
         return inertia('Checkout/Index', [
+            'settings' => $settings
         ]);
     }
     /**

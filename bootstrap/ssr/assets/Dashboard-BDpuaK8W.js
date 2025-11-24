@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { A as Authenticated } from "./AuthenticatedLayout-CnDTPPpR.js";
+import { A as Authenticated } from "./AuthenticatedLayout-D4ZzMmwX.js";
 import { Head } from "@inertiajs/react";
 import "react";
 import "./ApplicationLogo-DwGw9LaR.js";

@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { A as Authenticated } from "./AuthenticatedLayout-CnDTPPpR.js";
+import { A as Authenticated } from "./AuthenticatedLayout-D4ZzMmwX.js";
 import { C as Colors, D as Dimensions } from "../app.js";
 import { Row, Col, Flex, Breadcrumb, Image, Typography, Rate, Divider, Radio, Badge, Button, Form, InputNumber, Tabs } from "antd";
 import { CheckCircleOutlined, MinusOutlined, PlusOutlined, FacebookOutlined, LinkedinOutlined, TwitterOutlined } from "@ant-design/icons";
@@ -7,7 +7,7 @@ import { useState } from "react";
 import Description from "./Description-6rG0plfA.js";
 import Reviews from "./Reviews-B2FQPtf2.js";
 import { F as Footer } from "./Footer-owlJr_0r.js";
-import { P as ProductCard } from "./ProductCard-DeUpRL9U.js";
+import { P as ProductCard } from "./ProductCard-CZ7Z_8xO.js";
 import { usePage, Link, router } from "@inertiajs/react";
 import "./ApplicationLogo-DwGw9LaR.js";
 import "./ResponsiveNavLink-CMrbbniR.js";

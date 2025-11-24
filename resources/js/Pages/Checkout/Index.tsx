@@ -21,9 +21,9 @@ import { router, useForm, usePage } from "@inertiajs/react";
 import { CartItem, InitialOrder, Order, Product } from "@/Core/_Models";
 import CheckoutForm from "./Components/CheckoutForm";
 
-type Props = { auth: any; errors: any };
+type Props = { auth: any; errors: any,settings:any };
 
-function Index({ auth, errors }: Props) {
+function Index({ auth, errors,settings }: Props) {
     const [form] = Form.useForm();
     const { props } = usePage();
     const items = props?.cartItems as CartItem[];
@@ -38,7 +38,7 @@ function Index({ auth, errors }: Props) {
                     </Breadcrumb>
                 }
                 title={"Checkout"}
-            />
+             settings={settings}/>
 
             <div
                 className={Dimensions.pagePaddingClass}

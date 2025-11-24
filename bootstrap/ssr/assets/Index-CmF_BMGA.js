@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { H as Hero } from "./Hero-BzYIx0wQ.js";
-import { A as Authenticated } from "./AuthenticatedLayout-CnDTPPpR.js";
+import { H as Hero } from "./Hero-lCtrtUiE.js";
+import { A as Authenticated } from "./AuthenticatedLayout-D4ZzMmwX.js";
 import { D as Dimensions } from "../app.js";
 import { message, Row, Col } from "antd";
 import { S as ShopInfo } from "./ShopInfo-AaDODIbQ.js";
@@ -18,7 +18,7 @@ import "react-alice-carousel";
 import "./TableComponent-DTwfws4x.js";
 import "./TableAction-84W3ZDIe.js";
 import "react-highlight-words";
-function Index({ auth, orders, success }) {
+function Index({ auth, orders, success, settings }) {
   const { props } = usePage();
   orders = orders.data;
   const items = orders;
@@ -29,7 +29,7 @@ function Index({ auth, orders, success }) {
     }
   }, [success]);
   return /* @__PURE__ */ jsxs(Authenticated, { user: auth.user, children: [
-    /* @__PURE__ */ jsx(Hero, { whichRoute: "Shop>Orders", title: "Orders" }),
+    /* @__PURE__ */ jsx(Hero, { whichRoute: "Shop>Orders", title: "Orders", settings }),
     /* @__PURE__ */ jsx(
       "div",
       {
