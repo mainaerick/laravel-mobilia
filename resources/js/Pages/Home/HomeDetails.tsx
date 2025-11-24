@@ -134,6 +134,7 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
                         >
                             <Card
                                 style={{marginBottom: 10}}
+                                hoverable
                                 styles={{body: {padding: 0}}}
                                 cover={
                                     // <img
@@ -181,6 +182,8 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
                             }}
                         >
                             <Card
+                                hoverable
+
                                 style={{marginBottom: 10}}
                                 styles={{body: {padding: 0}}}
                                 cover={
@@ -233,6 +236,8 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
                             }}
                         >
                             <Card
+                                hoverable
+
                                 style={{marginBottom: 10}}
                                 styles={{body: {padding: 0}}}
                                 cover={
