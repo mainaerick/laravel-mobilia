@@ -49,6 +49,9 @@ type AddToCartType = {
 function Show({ auth, product, relatedProducts, productCartItems }: Props) {
     const productData: Product = product.data;
     const relatedData = relatedProducts.data;
+    const [selectedImage, setSelectedImage] = useState(
+        productData?.images?.[0] ? "/" + productData.images[0] : ""
+    );
     const [selectedColor, setSelectedColor] = useState(productData.colors[0]);
     const { flash }: any = usePage().props;
 
@@ -148,32 +151,38 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
                                             overflow: "auto",
                                         }}
                                     >
-                                        {productData?.images
-                                            .map((i) => "/" + i)
-                                            .map((item, key) => {
-                                                return (
-                                                    <div key={key}>
-                                                        <Image
-                                                            height={100}
-                                                            width={100}
-                                                            preview={false}
-                                                            // style={{width:"100%",}}
-                                                            src={item}
-                                                            alt=""
-                                                        />
-                                                    </div>
-                                                );
-                                            })}
+                                        {productData?.images.map((i, key) => {
+                                            const img = "/" + i;
+                                            return (
+                                                <div
+                                                    key={key}
+                                                    onClick={() => setSelectedImage(img)}
+                                                    className="cursor-pointer"
+                                                >
+                                                    <Image
+                                                        height={100}
+                                                        width={100}
+                                                        preview={false}
+                                                        src={img}
+                                                        alt=""
+                                                        style={{
+                                                            border:
+                                                                selectedImage === img
+                                                                    ? "2px solid #000"
+                                                                    : "2px solid transparent",
+                                                            borderRadius: 6,
+                                                        }}
+                                                    />
+                                                </div>
+                                            );
+                                        })}
                                     </Flex>
-                                    <Image.PreviewGroup
-                                        items={productData?.images.map(
-                                            (i) => "/" + i,
-                                        )}
-                                    >
+                                    <Image.PreviewGroup items={productData?.images.map((i) => "/" + i)}>
                                         <Image
-                                            width={"100%"}
+                                            width="100%"
                                             height={400}
-                                            src={`/${productData?.images[0]}`}
+                                            src={selectedImage}
+                                            alt=""
                                         />
                                     </Image.PreviewGroup>
                                 </Flex>{" "}

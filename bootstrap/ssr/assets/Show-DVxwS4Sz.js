@@ -17,9 +17,12 @@ import "react-dom/client";
 import "react-alice-carousel";
 import "antd/es/card/Meta.js";
 function Show({ auth, product, relatedProducts, productCartItems }) {
-  var _a;
+  var _a, _b;
   const productData = product.data;
   const relatedData = relatedProducts.data;
+  const [selectedImage, setSelectedImage] = useState(
+    ((_a = productData == null ? void 0 : productData.images) == null ? void 0 : _a[0]) ? "/" + productData.images[0] : ""
+  );
   const [selectedColor, setSelectedColor] = useState(productData.colors[0]);
   const { flash } = usePage().props;
   const items = [
@@ -40,7 +43,7 @@ function Show({ auth, product, relatedProducts, productCartItems }) {
   };
   const showMoreRelated = (productId) => {
     const queryParams = {};
-    queryParams.category = productData.category;
+    queryParams.room = [productData.room];
     router.get(route("shop.index"), queryParams);
   };
   const addToCart = (values) => {
@@ -96,36 +99,42 @@ function Show({ auth, product, relatedProducts, productCartItems }) {
                           height: 400,
                           overflow: "auto"
                         },
-                        children: productData == null ? void 0 : productData.images.map((i) => "/" + i).map((item, key) => {
-                          return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(
-                            Image,
+                        children: productData == null ? void 0 : productData.images.map((i, key) => {
+                          const img = "/" + i;
+                          return /* @__PURE__ */ jsx(
+                            "div",
                             {
-                              height: 100,
-                              width: 100,
-                              preview: false,
-                              src: item,
-                              alt: ""
-                            }
-                          ) }, key);
+                              onClick: () => setSelectedImage(img),
+                              className: "cursor-pointer",
+                              children: /* @__PURE__ */ jsx(
+                                Image,
+                                {
+                                  height: 100,
+                                  width: 100,
+                                  preview: false,
+                                  src: img,
+                                  alt: "",
+                                  style: {
+                                    border: selectedImage === img ? "2px solid #000" : "2px solid transparent",
+                                    borderRadius: 6
+                                  }
+                                }
+                              )
+                            },
+                            key
+                          );
                         })
                       }
                     ),
-                    /* @__PURE__ */ jsx(
-                      Image.PreviewGroup,
+                    /* @__PURE__ */ jsx(Image.PreviewGroup, { items: productData == null ? void 0 : productData.images.map((i) => "/" + i), children: /* @__PURE__ */ jsx(
+                      Image,
                       {
-                        items: productData == null ? void 0 : productData.images.map(
-                          (i) => "/" + i
-                        ),
-                        children: /* @__PURE__ */ jsx(
-                          Image,
-                          {
-                            width: "100%",
-                            height: 400,
-                            src: `/${productData == null ? void 0 : productData.images[0]}`
-                          }
-                        )
+                        width: "100%",
+                        height: 400,
+                        src: selectedImage,
+                        alt: ""
                       }
-                    )
+                    ) })
                   ] }),
                   " "
                 ]
@@ -207,7 +216,7 @@ function Show({ auth, product, relatedProducts, productCartItems }) {
                           defaultValue: "a",
                           buttonStyle: "solid",
                           style: { gap: "13px" },
-                          children: /* @__PURE__ */ jsx(Flex, { gap: 13, children: (_a = productData == null ? void 0 : productData.sizes) == null ? void 0 : _a.map(
+                          children: /* @__PURE__ */ jsx(Flex, { gap: 13, children: (_b = productData == null ? void 0 : productData.sizes) == null ? void 0 : _b.map(
                             (size, key) => {
                               return /* @__PURE__ */ jsx(
                                 Radio.Button,

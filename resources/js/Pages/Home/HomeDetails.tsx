@@ -126,7 +126,7 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
                         <div
                             className="overflow-hidden  cursor-pointer rounded-xl relative group"
                             onClick={() => {
-                                let queryParams = {room: ""};
+                                let queryParams :any;
                                 const room = "dining";
 
                                 queryParams.room = [room];
@@ -176,7 +176,7 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
                         <div
                             className="overflow-hidden  cursor-pointer rounded-xl relative group"
                             onClick={() => {
-                                let queryParams = { room: [] };
+                                let queryParams :any;
                                 const room = "living";
 
                                 queryParams.room = [room];   // <-- ALWAYS an array
@@ -231,7 +231,7 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
                         <div
                             className="overflow-hidden  cursor-pointer rounded-xl relative group"
                             onClick={() => {
-                                let queryParams = {room: ""};
+                                let queryParams : any;
                                 const room = "bedroom";
 
                                 queryParams.room = [room];

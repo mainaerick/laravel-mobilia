@@ -239,9 +239,9 @@ const HomeDetails = ({ products, settings }) => {
                 {
                   className: "overflow-hidden  cursor-pointer rounded-xl relative group",
                   onClick: () => {
-                    let queryParams = { category: "" };
-                    const category = "dining";
-                    queryParams.category = category;
+                    let queryParams;
+                    const room = "dining";
+                    queryParams.room = [room];
                     router.get(route("shop.index"), queryParams);
                   },
                   children: /* @__PURE__ */ jsx(
@@ -289,9 +289,9 @@ const HomeDetails = ({ products, settings }) => {
                 {
                   className: "overflow-hidden  cursor-pointer rounded-xl relative group",
                   onClick: () => {
-                    let queryParams = { category: "" };
-                    const category = "living";
-                    queryParams.category = category;
+                    let queryParams;
+                    const room = "living";
+                    queryParams.room = [room];
                     router.get(route("shop.index"), queryParams);
                   },
                   children: /* @__PURE__ */ jsx(
@@ -343,9 +343,9 @@ const HomeDetails = ({ products, settings }) => {
                 {
                   className: "overflow-hidden  cursor-pointer rounded-xl relative group",
                   onClick: () => {
-                    let queryParams = { category: "" };
-                    const category = "bedroom";
-                    queryParams.category = category;
+                    let queryParams;
+                    const room = "bedroom";
+                    queryParams.room = [room];
                     router.get(route("shop.index"), queryParams);
                   },
                   children: /* @__PURE__ */ jsx(
