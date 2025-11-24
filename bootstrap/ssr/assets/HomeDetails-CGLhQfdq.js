@@ -239,7 +239,7 @@ const HomeDetails = ({ products, settings }) => {
                 {
                   className: "overflow-hidden  cursor-pointer rounded-xl relative group",
                   onClick: () => {
-                    let queryParams;
+                    let queryParams = { room: "" };
                     const room = "dining";
                     queryParams.room = [room];
                     router.get(route("shop.index"), queryParams);

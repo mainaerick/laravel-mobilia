@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { A as Authenticated } from "./AuthenticatedLayout-D4ZzMmwX.js";
-import HomeDetails from "./HomeDetails-Cd3H58Bm.js";
+import HomeDetails from "./HomeDetails-CGLhQfdq.js";
 import "react";
 import "./ApplicationLogo-DwGw9LaR.js";
 import "./ResponsiveNavLink-CMrbbniR.js";

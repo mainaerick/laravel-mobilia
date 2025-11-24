@@ -1,7 +1,7 @@
 {
   "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
   "node_modules/react-alice-carousel/lib/alice-carousel.css": [
-    "/build/assets/HomeDetails-Cd3H58Bm.js",
+    "/build/assets/HomeDetails-CGLhQfdq.js",
     "/build/assets/HomeDetails-DgjqAvA-.css"
   ],
   "resources/css/app.css": [],
@@ -33,7 +33,7 @@
     "/build/assets/InputLabel-CaoVq05r.js"
   ],
   "resources/js/Components/InspirationHero.tsx": [
-    "/build/assets/HomeDetails-Cd3H58Bm.js",
+    "/build/assets/HomeDetails-CGLhQfdq.js",
     "/build/assets/HomeDetails-DgjqAvA-.css"
   ],
   "resources/js/Components/Modal.tsx": [
@@ -196,11 +196,11 @@
     "/build/assets/Dashboard-BDpuaK8W.js"
   ],
   "resources/js/Pages/Home/HomeDetails.tsx": [
-    "/build/assets/HomeDetails-Cd3H58Bm.js",
+    "/build/assets/HomeDetails-CGLhQfdq.js",
     "/build/assets/HomeDetails-DgjqAvA-.css"
   ],
   "resources/js/Pages/Home/Index.tsx": [
-    "/build/assets/Index-BnhyBA5l.js"
+    "/build/assets/Index-brxPbtFL.js"
   ],
   "resources/js/Pages/Home/components/CardOverlay.tsx": [
     "/build/assets/CardOverlay-BbLtiyFC.js"
