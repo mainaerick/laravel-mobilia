@@ -22,9 +22,9 @@ import { Link, router } from "@inertiajs/react";
 import Hero from "@/Components/Hero";
 import ShopInfo from "@/Components/ShopInfo";
 
-type Props = { auth: any; products: Pagination; queryParams: any };
+type Props = { auth: any; products: Pagination;settings:any; queryParams: any };
 
-function Index({ auth, products, queryParams = null }: Props) {
+function Index({ auth, products,settings, queryParams = null }: Props) {
     queryParams = queryParams || {};
     const currentPage = products.current_page;
     const totalNumber = products.total;
@@ -65,6 +65,7 @@ function Index({ auth, products, queryParams = null }: Props) {
                     </Breadcrumb>
                 }
                 title={"Shop"}
+                settings={settings}
             />
             {/* Tool Bar Div */}
             <div style={{ background: Colors.secondary, height: "100px " }}>
@@ -82,7 +83,6 @@ function Index({ auth, products, queryParams = null }: Props) {
                         xl={{ span: 12 }}
                         style={{ width: "100%" }}
                     >
-
                     </Col>
                     <Col
                         // span={12}

@@ -22,7 +22,6 @@ class ProductController extends Controller
      */
     public function index(): \Inertia\Response
     {
-        $products = Product::all();
         $query = Product::query();
 
 
@@ -46,11 +45,12 @@ class ProductController extends Controller
         }
         $products = $query->orderBy($sortField, $sortDirection)->paginate($per_page)
             ->onEachSide(1);
-
+        $settings = Setting::all()->pluck('value', 'key');
 
         //    dd($products);
         return inertia('Shop/Index', [
             "products" => $products,
+            'settings' => $settings,
             'queryParams' => request()->query() ?: null,
         ]);
         // return Inertia::render('Shop/Index', ['products' => $products];

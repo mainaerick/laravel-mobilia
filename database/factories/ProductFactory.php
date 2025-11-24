@@ -22,7 +22,7 @@ class ProductFactory extends Factory
 
         // Helper to load only allowed image types
         $loadImages = function ($folder) {
-            $allowed = ['jpg', 'jpeg', 'png'];
+            $allowed = ['jpg', 'jpeg', 'png','webp'];
 
             return collect(Storage::disk('public')->files("images/$folder"))
                 ->filter(function ($file) use ($allowed) {

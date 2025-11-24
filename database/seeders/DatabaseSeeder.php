@@ -97,7 +97,7 @@ class DatabaseSeeder extends Seeder
         Category::factory()->count(10)->create();
 
         $settings = [
-            ['key' => 'hero_image', 'value' => "images/settings/hero_image.png"],
+            ['key' => 'hero_image', 'value' => "images/settings/hero_image.webp"],
             ['key' => 'logo', 'value' => null],
             ['key' => 'living', 'value' => "images/living.jpg"],
             ['key' => 'dining', 'value' => "images/dining.jpg"],
