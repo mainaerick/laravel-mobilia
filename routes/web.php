@@ -32,7 +32,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::resource('home', HomeController::class);
 Route::get('/shop/related/{id}', [ProductController::class, 'showRelated']);
-Route::get('/shop/search', [ProductController::class, 'searchProduct'])->name('search');
+//Route::get('/shop/search', [ProductController::class, 'searchProduct'])->name('search');
 Route::resource('shop', ProductController::class);
 Route::resource('about', ProductController::class);
 Route::resource('contact', ProductController::class);

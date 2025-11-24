@@ -29,6 +29,7 @@ class ProductController extends Controller
         $sortField = request("sort_field", 'created_at');
         $sortDirection = request("sort_direction", "desc");
         $category = request("category");
+        $searchquery = request('q', '');
 
         if (str_contains($sortField, 'price')) {
             $sortField = 'price';
@@ -44,12 +45,16 @@ class ProductController extends Controller
             $query->where(function($q) use ($category) {
                 $q->where("category", "like", "%{$category}%")
                     ->orWhere("room", "like", "%{$category}%");
-            });        }
+            });
+        }
+        if ($searchquery) {
+            $query->where('name', 'LIKE', "%{$searchquery}%") // Adjust fields accordingly
+            ->orWhere('description', 'LIKE', "%{$searchquery}%");
+        }
         $products = $query->orderBy($sortField, $sortDirection)->paginate($per_page)
             ->onEachSide(1);
         $settings = Setting::all()->pluck('value', 'key');
 
-        //    dd($products);
         return inertia('Shop/Index', [
             "products" => $products,
             'settings' => $settings,

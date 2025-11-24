@@ -14,7 +14,7 @@ const SearchBar = () => {
         // if(value.length<=0){
         //     return
         // }
-        router.get("/shop/search", { query: value }, { preserveState: true });
+        router.get("/shop", { query: value }, { preserveState: true });
     };
 
     return (
