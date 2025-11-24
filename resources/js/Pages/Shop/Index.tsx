@@ -26,38 +26,51 @@ import {useState} from "react";
 
 type Props = { auth: any; products: Pagination;settings:any; queryParams: any };
 
-function Index({ auth, products,settings, queryParams = null }: Props) {
-    queryParams = queryParams || {};
+function Index({ auth, products,settings, queryParams }: Props) {
+    // queryParams = queryParams || {};
     const [currentView, setCurrentView] = useState<"grid" | "list">("grid")
-    const [pageSize, setPageSize] = useState(16)
-    const [sortValue, setSortValue] = useState("default")
+    const [pageSize, setPageSize] = useState(products.per_page)
+    const [sortValue, setSortValue] = useState(queryParams.sort_field||"default")
     const currentPage = products.current_page;
     const totalNumber = products.total;
+    const toPage=products.to;
     const perPage = products.per_page;
     const productsData = products.data as Product[]
+
     const handleChangeSort = (name: string) => {
+        const newQueryParams = { ...queryParams };
+
         if (name === queryParams.sort_field) {
             if (queryParams.sort_direction === "asc") {
-                queryParams.sort_direction = "desc";
+                newQueryParams.sort_direction = "desc";
             } else {
-                queryParams.sort_direction = "asc";
+                newQueryParams.sort_direction = "asc";
             }
         } else {
-            queryParams.sort_field = name;
-            queryParams.sort_direction = "asc";
+            newQueryParams.sort_field = name;
+            newQueryParams.sort_direction = "asc";
         }
 
-        router.get(route("shop.index"), queryParams);
+        setSortValue(name);
+        router.get(route("shop.index"), newQueryParams);
     };
 
+    const handlePageSizeChange = (value:any)=>{
+        const newQueryParams = { ...queryParams };
+        newQueryParams.per_page = value
+        setPageSize(value)
+        router.get(route("shop.index"), newQueryParams);
+    }
     const handlePageChange = (e: any) => {
         queryParams.page = e;
         router.get(route("shop.index"), queryParams);
     };
     const onShowSizeChange = (current: any, size: any) => {
-        console.log(size);
-        // queryParams.page = current;
-        queryParams.per_page = size;
+        const newQueryParams = { ...queryParams };
+        newQueryParams.per_page = size;
+        newQueryParams.page = 1; // Reset to first page
+        setPageSize(size);
+        router.get(route("shop.index"), newQueryParams);
     };
     return (
         <Authenticated user={auth}>
@@ -73,87 +86,18 @@ function Index({ auth, products,settings, queryParams = null }: Props) {
                 settings={settings}
             />
             {/* Tool Bar Div */}
-            {/*<div style={{ background: Colors.secondary, height: "100px " }}>*/}
-            {/*    <Row*/}
-            {/*        style={{ height: "100%" }}*/}
-            {/*        justify={"space-between"}*/}
-            {/*        align={"middle"}*/}
-            {/*        className={Dimensions.pagePaddingClass}*/}
-            {/*    >*/}
-            {/*        <Col*/}
-            {/*            // span={12}*/}
-            {/*            sm={{ span: 24 }}*/}
-            {/*            md={{ span: 12 }}*/}
-            {/*            lg={{ span: 12 }}*/}
-            {/*            xl={{ span: 12 }}*/}
-            {/*            style={{ width: "100%" }}*/}
-            {/*        >*/}
-            {/*        </Col>*/}
-            {/*        <Col*/}
-            {/*            // span={12}*/}
-            {/*            sm={{ span: 24 }}*/}
-            {/*            md={{ span: 12 }}*/}
-            {/*            lg={{ span: 12 }}*/}
-            {/*            xl={{ span: 12 }}*/}
-            {/*            style={{ width: "100%" }}*/}
-            {/*        >*/}
-            {/*            <Row justify={"end"}>*/}
-            {/*                <Col*/}
-            {/*                    // span={12}*/}
-            {/*                    xs={{ span: 24 }}*/}
-            {/*                    sm={{ span: 24 }}*/}
-            {/*                    md={{ span: 24 }}*/}
-            {/*                    lg={{ span: 12 }}*/}
-            {/*                    xl={{ span: 12 }}*/}
-            {/*                >*/}
-            {/*                    <Flex gap={9} justify={"end"} align={"center"}>*/}
-            {/*                        <div>*/}
-            {/*                            <Typography.Text>*/}
-            {/*                                Sort By*/}
-            {/*                            </Typography.Text>*/}
-            {/*                        </div>*/}
-            {/*                        <div style={{ width: "200px" }}>*/}
-            {/*                            <Select*/}
-            {/*                                size="middle"*/}
-            {/*                                defaultValue={*/}
-            {/*                                    queryParams.sort_field*/}
-            {/*                                }*/}
-            {/*                                style={{ width: "200px" }}*/}
-            {/*                                onChange={handleChangeSort}*/}
-            {/*                                options={[*/}
-            {/*                                    {*/}
-            {/*                                        value: "price_high",*/}
-            {/*                                        label: "Price: High to Low",*/}
-            {/*                                    },*/}
-            {/*                                    {*/}
-            {/*                                        value: "price_low",*/}
-            {/*                                        label: "Price: Low to High",*/}
-            {/*                                    },*/}
-
-            {/*                                    {*/}
-            {/*                                        value: "rating",*/}
-            {/*                                        label: "Rating",*/}
-            {/*                                    },*/}
-            {/*                                ]}*/}
-            {/*                            />*/}
-            {/*                        </div>*/}
-            {/*                    </Flex>*/}
-            {/*                </Col>*/}
-            {/*            </Row>*/}
-            {/*        </Col>*/}
-            {/*    </Row>*/}
-            {/*</div>*/}
             <Toolbar
                 currentView={currentView}
                 onViewChange={setCurrentView}
                 pageSize={pageSize}
-                onPageSizeChange={(value) => setPageSize(value)}
-                sortValue={sortValue}
-                onSortChange={(value) => setSortValue(value)}
-                totalResults={32}
+                onPageSizeChange={(value) => handlePageSizeChange(value)}
+                sortValue={sortValue as string}
+                onSortChange={(value) => handleChangeSort(value)}
+                totalResults={totalNumber}
                 startIndex={1}
-                endIndex={16}
+                endIndex={toPage}
                 onFilterClick={() => console.log("Filter clicked")}
+                queryParams={queryParams}
             />
             {/* Shop */}
             {productsData.length > 0 ? <div

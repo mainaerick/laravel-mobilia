@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
         //     'remember_token' => Str::random(10),
         // ]);
         // Create 10 products using the ProductFactory
-        Product::factory()->count(10)->create();
+        Product::factory()->count(12)->create();
         Category::factory()->count(10)->create();
 
         $settings = [

@@ -25,42 +25,105 @@ class ProductController extends Controller
         $query = Product::query();
 
 
-        $per_page = request("per_page", 10);
-        $sortField = request("sort_field", 'created_at');
-        $sortDirection = request("sort_direction", "desc");
-        $category = request("category");
-        $searchquery = request('q', '');
+        $perPage        = request("per_page", 10);
+        $sortField      = request("sort_field", 'created_at');
+        $sortDirection  = request("sort_direction", "desc");
 
-        if (str_contains($sortField, 'price')) {
-            $sortField = 'price';
-            if (str_contains($sortField, 'high')) {
-                $sortDirection = "asc";
-            } else {
-                $sortDirection = "desc";
-            }
-        }
+        // Filters
+        $categories = request('category', []);   // array
+        $rooms      = request('room', []);       // array
+        $brands     = request('brand', []);      // array
+        $materials  = request('material', []);   // array
+        $colors     = request('color', []);      // array
+        $ratings    = request('rating', []);     // array
 
+        $priceRange = request('price', []);      // ["0-50", "50-100", "200+"] etc.
 
-        if ($category) {
-            $query->where(function($q) use ($category) {
-                $q->where("category", "like", "%{$category}%")
-                    ->orWhere("room", "like", "%{$category}%");
+        $search = request('q', '');
+
+        /* ------------------------------
+           SEARCH
+        -------------------------------*/
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('description', 'LIKE', "%{$search}%");
             });
         }
-        if ($searchquery) {
-            $query->where('name', 'LIKE', "%{$searchquery}%") // Adjust fields accordingly
-            ->orWhere('description', 'LIKE', "%{$searchquery}%");
+
+        /* ------------------------------
+           CATEGORY / ROOM
+        -------------------------------*/
+        if (!empty($categories)) {
+            $query->whereIn('category', $categories);
         }
-        $products = $query->orderBy($sortField, $sortDirection)->paginate($per_page)
+
+        if (!empty($rooms)) {
+            $query->whereIn('room', $rooms);
+        }
+
+        /* ------------------------------
+           BRAND / MATERIAL / COLOR
+        -------------------------------*/
+        if (!empty($brands)) {
+            $query->whereIn('brand', $brands);
+        }
+
+        if (!empty($materials)) {
+            $query->whereIn('material', $materials);
+        }
+
+        if (!empty($colors)) {
+            $query->whereIn('color', $colors);
+        }
+
+        /* ------------------------------
+            RATING
+        -------------------------------*/
+        if (!empty($ratings)) {
+            $query->where(function ($q) use ($ratings) {
+                foreach ($ratings as $rate) {
+                    $q->orWhere('rating', '>=', $rate);
+                }
+            });
+        }
+
+        /* ------------------------------
+           PRICE RANGES (array)
+        -------------------------------*/
+        if (!empty($priceRange)) {
+            $query->where(function ($q) use ($priceRange) {
+                foreach ($priceRange as $range) {
+                    if ($range === "200+") {
+                        $q->orWhere('price', '>=', 200);
+                    } elseif (str_contains($range, "-")) {
+                        [$min, $max] = explode("-", $range);
+                        $q->orWhereBetween('price', [(float) $min, (float) $max]);
+                    }
+                }
+            });
+        }
+
+        /* ------------------------------
+           SORTING
+        -------------------------------*/
+        if (str_contains($sortField, 'price')) {
+            $sortDirection = str_contains($sortField, 'high') ? "desc" : "asc";
+            $sortField = 'price';
+        }
+//        dd($sortField, $sortDirection);
+
+        $products = $query
+            ->orderBy($sortField, $sortDirection)
+            ->paginate($perPage)
             ->onEachSide(1);
         $settings = Setting::all()->pluck('value', 'key');
-
-        return inertia('Shop/Index', [
-            "products" => $products,
-            'settings' => $settings,
-            'queryParams' => request()->query() ?: null,
+//        dd(request()->query());
+        return inertia("Shop/Index", [
+            "products"     => $products,
+            "settings"=>$settings,
+            "queryParams"  => request()->query(),
         ]);
-        // return Inertia::render('Shop/Index', ['products' => $products];
     }
     public function admin_index()
     {
@@ -68,7 +131,7 @@ class ProductController extends Controller
         $query = Product::query();
 
 
-        $per_page = request("per_page", 10);
+        $per_page = request("per_page", 16);
         $sortField = request("sort_field", 'created_at');
         $sortDirection = request("sort_direction", "desc");
         $category = request("category");
