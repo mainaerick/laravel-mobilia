@@ -55,7 +55,8 @@ class ProductController extends Controller
            CATEGORY / ROOM
         -------------------------------*/
         if (!empty($categories)) {
-            $query->whereIn('category', $categories);
+            $query->whereIn('category', $categories)
+            ;
         }
 
         if (!empty($rooms)) {

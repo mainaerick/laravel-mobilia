@@ -27,7 +27,6 @@ import {useState} from "react";
 type Props = { auth: any; products: Pagination;settings:any; queryParams: any };
 
 function Index({ auth, products,settings, queryParams }: Props) {
-    // queryParams = queryParams || {};
     const [currentView, setCurrentView] = useState<"grid" | "list">("grid")
     const [pageSize, setPageSize] = useState(products.per_page)
     const [sortValue, setSortValue] = useState(queryParams.sort_field||"default")

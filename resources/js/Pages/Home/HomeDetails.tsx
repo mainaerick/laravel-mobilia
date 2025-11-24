@@ -127,8 +127,9 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
                             className="overflow-hidden  cursor-pointer rounded-xl relative group"
                             onClick={() => {
                                 let queryParams = {category: ""};
-                                const category = "dining";
-                                queryParams.category = category;
+                                const room = "dining";
+
+                                queryParams.room = [room];
                                 router.get(route("shop.index"), queryParams);
                             }}
                         >
@@ -175,9 +176,10 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
                         <div
                             className="overflow-hidden  cursor-pointer rounded-xl relative group"
                             onClick={() => {
-                                let queryParams = {category: ""};
-                                const category = "living";
-                                queryParams.category = category;
+                                let queryParams = { category: [] };
+                                const room = "living";
+
+                                queryParams.room = [room];   // <-- ALWAYS an array
                                 router.get(route("shop.index"), queryParams);
                             }}
                         >
@@ -230,8 +232,9 @@ const HomeDetails: React.FC<Props> = ({products, settings}) => {
                             className="overflow-hidden  cursor-pointer rounded-xl relative group"
                             onClick={() => {
                                 let queryParams = {category: ""};
-                                const category = "bedroom";
-                                queryParams.category = category;
+                                const room = "bedroom";
+
+                                queryParams.room = [room];
                                 router.get(route("shop.index"), queryParams);
                             }}
                         >

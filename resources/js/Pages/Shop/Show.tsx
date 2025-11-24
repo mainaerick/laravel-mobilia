@@ -71,14 +71,16 @@ function Show({ auth, product, relatedProducts, productCartItems }: Props) {
 
     const showMoreRelated = (productId: number) => {
         const queryParams: any = {};
-        queryParams.category = productData.category;
+
+        queryParams.room = [productData.room];
+
         router.get(route("shop.index"), queryParams);
     };
     const addToCart: FormProps<AddToCartType>["onFinish"] = (values) => {
         if (values.quantity == undefined) {
             values.quantity = 1;
         }
-        
+
         router.post(route("cart.add"), {
             product_id: productData.id,
             quantity: values.quantity,
