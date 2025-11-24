@@ -19,7 +19,7 @@ function ProductCard({product}: Props) {
             <Link href={route("shop.show", product.id)}>
                 <div className="flex items-center justify-center ">
                     <div
-                        className="rounded-xl z-50 opacity-0 group-hover:opacity-100  transition duration-300 ease-in-out cursor-pointer absolute bottom-0 left-0 right-0 top-0 from-black/80 to-transparent bg-gradient-to-t inset-x-0 pt-30 text-white flex items-end">
+                        className="rounded-xl z-20 opacity-0 group-hover:opacity-100  transition duration-300 ease-in-out cursor-pointer absolute bottom-0 left-0 right-0 top-0 from-black/80 to-transparent bg-gradient-to-t inset-x-0 pt-30 text-white flex items-end">
                         <Flex
                             style={{
                                 height: "100%",

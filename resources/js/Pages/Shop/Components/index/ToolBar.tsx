@@ -100,7 +100,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
                 <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between w-[calc(100%+8rem)]">
                     {/* Left side - Filter and View Options */}
                     <div className="flex items-center gap-3 flex-wrap">
-                        <div className="relative">
+                        <div className="relative z-[60]">
                             <Button
                                 variant="outline"
                                 size="sm"
@@ -117,7 +117,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
                             </Button>
 
                             {showFilterPanel && (
-                                <div className="absolute left-0 top-full mt-2 w-64 bg-white border rounded-lg shadow-lg z-50 p-4">
+                                <div className="absolute left-0 top-full mt-2 w-64 bg-white border rounded-lg shadow-lg z-[200] p-4">
                                     <div className="flex items-center justify-between mb-4">
                                         <h3 className="font-semibold text-sm">Filters</h3>
                                         <Button variant="ghost" size="sm" onClick={() => setShowFilterPanel(false)} className="h-6 w-6 p-0">
