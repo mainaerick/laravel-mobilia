@@ -1,7 +1,5 @@
 services:
   mobilia_app:
-    mem_limit: 512
-    mem_reservation: 256m
     build:
       context: ./vendor/laravel/sail/runtimes/8.3
       dockerfile: Dockerfile
@@ -36,6 +34,8 @@ services:
     depends_on:
       mobilia_postgres:
         condition: service_healthy
+    mem_limit: 512
+    mem_reservation: 256m
     entrypoint: ["/bin/bash", "-c"]
     command:
       - |
@@ -43,8 +43,6 @@ services:
         chown -R sail:sail /var/www/html/storage /var/www/html/bootstrap/cache
         exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
   mobilia_postgres:
-    mem_limit: 384m
-    mem_reservation: 256m
     image: postgres:13-alpine
     ports:
       - '${FORWARD_DB_PORT:-5532}:5432'    # Avoid clash with local PG
@@ -62,7 +60,8 @@ services:
       retries: 5
       timeout: 10s
     restart: unless-stopped
-
+    mem_limit: 384m
+    mem_reservation: 256m
 networks:
   mobilia_net:
     driver: bridge
