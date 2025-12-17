@@ -35,7 +35,6 @@ services:
       mobilia_postgres:
         condition: service_healthy
     mem_limit: 512
-    mem_reservation: 256m
     entrypoint: ["/bin/bash", "-c"]
     command:
       - |
@@ -61,7 +60,6 @@ services:
       timeout: 10s
     restart: unless-stopped
     mem_limit: 384m
-    mem_reservation: 256m
 networks:
   mobilia_net:
     driver: bridge
